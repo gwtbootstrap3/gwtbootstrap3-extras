@@ -22,6 +22,5 @@
 <module rename-to='datetimepicker'>
     <source path='client'/>
 
-    <inherits name='com.google.gwt.user.User'/>
     <inherits name='com.svenjacobs.gwtbootstrap3.extras.datetimepicker.client.DateTimePickerResources'/>
 </module>
