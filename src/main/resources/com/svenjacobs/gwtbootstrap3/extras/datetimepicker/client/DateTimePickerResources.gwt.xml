@@ -21,6 +21,7 @@
 <module>
     <public path="resource">
         <include name="css/bootstrap-datetimepicker.min.css"/>
+        <include name="js/moment.min.js"/>
         <include name="js/bootstrap-datetimepicker.min.js"/>
     </public>
 
