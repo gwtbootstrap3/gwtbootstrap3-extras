@@ -5,7 +5,7 @@ Add this dependency if you want to use the extras
 
 ```xml
 <dependency>
-    <groupId>com.svenjacobs.gwtbootstrap3</groupId>
+    <groupId>com.github.gwtbootstrap3</groupId>
     <artifactId>gwtbootstrap3-extras</artifactId>
     <version>VERSION</version>
     <scope>provided</scope>
