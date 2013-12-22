@@ -54,7 +54,9 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
         HasShowTimePicker, HasDownIcon, HasEndDate, HasStartDate, HasStrict, HasTimeIcon, HasUpIcon, HasFormat,
         HasPlaceholder {
 
-    /** Moment.js date format */
+    /**
+     * Moment.js date format
+     */
     private static final String DEFAULT_FORMAT = "YYYY-MM-DD HH:mm";
 
     private final TextBox textBox;
@@ -236,17 +238,23 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
 
     @Override
     public void setValue(final Date value, final boolean fireEvents) {
-        // We defer the command so that the box is setup properly
-        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+        // We schedule a fixed delay to that we can make sure the element is properly loaded
+        // so that we can set the value on it
+        Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
             @Override
-            public void execute() {
-                updateValue(textBox.getElement(), value);
+            public boolean execute() {
+                if (DateTimeBoxBase.this.isAttached()) {
+                    updateValue(textBox.getElement(), value);
 
-                if (fireEvents) {
-                    ValueChangeEvent.fire(DateTimeBoxBase.this, value);
+                    if (fireEvents) {
+                        ValueChangeEvent.fire(DateTimeBoxBase.this, value);
+                    }
+                    return false;
+                } else {
+                    return true;
                 }
             }
-        });
+        }, 1000);
     }
 
     @Override
@@ -295,15 +303,15 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
     }
 
     // @formatter:off
-    
+
     protected native JsDate parse(final String dateStr, final String format) /*-{
         return $wnd.moment(dateStr, format).toDate();
     }-*/;
-    
+
     protected native String format(final Date date, final String format) /*-{
         return $wnd.moment(date).format(format);
     }-*/;
-    
+
     protected native void updateValue(Element e, Date newDate) /*-{
         if ($wnd.jQuery(e).data('DateTimePicker')) {
             $wnd.jQuery(e).data('DateTimePicker').setDate(newDate);
@@ -352,13 +360,13 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
                 down: downIconClass
             }
         })
-        .on('change.dp', function () {
+            .on('change.dp', function () {
                 that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onChange()();
             })
-        .on("show.dp", function (e) {
+            .on("show.dp", function (e) {
                 that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onShow(Lcom/google/gwt/user/client/Event;)(e);
             })
-        .on("hide.dp", function (e) {
+            .on("hide.dp", function (e) {
                 that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onHide(Lcom/google/gwt/user/client/Event;)(e);
             });
     }-*/;
