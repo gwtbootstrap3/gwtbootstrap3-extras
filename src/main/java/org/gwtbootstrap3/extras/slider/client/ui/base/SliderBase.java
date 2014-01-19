@@ -20,112 +20,187 @@ package org.gwtbootstrap3.extras.slider.client.ui.base;
  * #L%
  */
 
-import org.gwtbootstrap3.client.shared.event.HideHandler;
-import org.gwtbootstrap3.client.shared.event.ShowHandler;
 import org.gwtbootstrap3.client.ui.HasId;
 import org.gwtbootstrap3.client.ui.HasResponsiveness;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasVisibleHandlers;
+import org.gwtbootstrap3.client.ui.TextBox;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.HasVisibility;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Grant Slender
  */
-public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, HasValueChangeHandlers<Float>,
-        HasVisibility, HasChangeHandlers, HasVisibleHandlers, HasId, HasResponsiveness {
+public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, HasValueChangeHandlers<Float>, HasVisibility,
+        HasChangeHandlers, HasId, HasResponsiveness {
 
     /**
      * Orig source from https://github.com/seiyria/bootstrap-slider
      */
-
+    private final TextBox textBox;
 
     public SliderBase() {
+        textBox = new TextBox();
+        // now remove the bootstrap styles
+        textBox.removeStyleName(UIObject.getStyleName(textBox.getElement()));
+        setElement(textBox.getElement());
     }
 
     @Override
-    public void setVisibleOn(String deviceSizeString) {
-        // TODO Auto-generated method stub
-
+    protected void onLoad() {
+        super.onLoad();
+        JavaScriptObject options = getOptions(getId(), -10F, 100F, 5F, "horizontal", 90F, "before", "always", "square", true,
+                true);
+        sliderInit(getElement(), options);
     }
 
     @Override
-    public void setHiddenOn(String deviceSizeString) {
-        // TODO Auto-generated method stub
+    protected void onUnload() {
+        super.onUnload();
+        sliderCommand(getElement(), "destroy");
+    }
 
+    public void onChange(final float value) {
+        ValueChangeEvent.fire(this, value);
     }
 
     @Override
-    public void setId(String id) {
-        // TODO Auto-generated method stub
+    public void setVisibleOn(final String deviceSizeString) {
+        textBox.setVisibleOn(deviceSizeString);
+    }
 
+    @Override
+    public void setHiddenOn(final String deviceSizeString) {
+        textBox.setHiddenOn(deviceSizeString);
+    }
+
+    @Override
+    public void setId(final String id) {
+        textBox.setId(id);
     }
 
     @Override
     public String getId() {
-        // TODO Auto-generated method stub
-        return null;
+        return textBox.getId();
     }
 
     @Override
     public HandlerRegistration addChangeHandler(ChangeHandler handler) {
-        // TODO Auto-generated method stub
-        return null;
+        return addHandler(handler, ChangeEvent.getType());
     }
 
     @Override
     public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Float> handler) {
-        // TODO Auto-generated method stub
-        return null;
+        return addHandler(handler, ValueChangeEvent.getType());
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return false;
+        return isEnabled(getElement());
     }
 
     @Override
     public void setEnabled(boolean enabled) {
-        // TODO Auto-generated method stub
-
+        if (enabled) {
+            sliderCommand(getElement(), "enable");
+        } else {
+            sliderCommand(getElement(), "disable");
+        }
     }
 
     @Override
     public Float getValue() {
-        // TODO Auto-generated method stub
-        return null;
+        return getValue(getElement());
     }
 
     @Override
     public void setValue(Float value) {
-        // TODO Auto-generated method stub
+        setValue(value, false);
 
     }
 
     @Override
-    public void setValue(Float value, boolean fireEvents) {
-        // TODO Auto-generated method stub
+    public void setValue(final Float value, final boolean fireEvents) {
+
+        Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
+            @Override
+            public boolean execute() {
+                if (SliderBase.this.isAttached()) {
+                    setValue(getElement(), value);
+
+                    if (fireEvents) {
+                        ValueChangeEvent.fire(SliderBase.this, value);
+                    }
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }, 1000);
 
     }
 
-    @Override
-    public HandlerRegistration addHideHandler(HideHandler handler) {
-        // TODO Auto-generated method stub
-        return null;
+    public String formatter(float value) {
+        return Float.toString(value);
     }
 
-    @Override
-    public HandlerRegistration addShowHandler(ShowHandler handler) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+// @formatter:off
+
+    private native float getValue(Element e) /*-{
+        return $wnd.jQuery(e).slider('getValue');
+    }-*/;
+
+    private native boolean isEnabled(Element e) /*-{
+        return $wnd.jQuery(e).slider('isEnabled');
+    }-*/;
+
+    private native void setValue(Element e, float value) /*-{
+        $wnd.jQuery(e).slider('setValue',value);
+    }-*/;
+
+    private native void sliderInit(Element e, JavaScriptObject options) /*-{
+        var me = this;
+        $wnd.jQuery(e).slider(options)
+            .on('slide', function (evt) {
+                me.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::onChange(F)(evt.value);
+            })
+    }-*/;
+
+    private native JavaScriptObject getOptions(String id, float min, float max, float step, String orient, float value,String selection, String tooltip,String handle,boolean reversed,boolean enabled) /*-{
+        var me = this;
+        var options = {
+            id: id,
+            min: min,
+            max: max,
+            step: step,
+            orientation: orient,
+            value: value,
+            selection: selection,
+            tooltip: tooltip,
+            handle: handle,
+            reversed: reversed,
+            enabled: enabled
+            };
+         options.formater = function (val) {
+            return me.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(F)(val);
+        };
+        return options;
+    }-*/;
+
+    private native void sliderCommand(Element e, String cmd) /*-{
+        $wnd.jQuery(e).slider(cmd);
+    }-*/;
 
 }
