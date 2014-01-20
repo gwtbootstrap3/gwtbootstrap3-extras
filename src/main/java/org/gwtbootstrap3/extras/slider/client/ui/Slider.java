@@ -27,6 +27,10 @@ import org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase;
  */
 public class Slider extends SliderBase {
 
+    public Slider() {
+        super();
+    }
+
     public Slider(float min, float max, float value) {
         super();
         setMin(min);
