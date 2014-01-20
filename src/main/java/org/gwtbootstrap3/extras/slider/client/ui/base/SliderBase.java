@@ -23,6 +23,10 @@ package org.gwtbootstrap3.extras.slider.client.ui.base;
 import org.gwtbootstrap3.client.ui.HasId;
 import org.gwtbootstrap3.client.ui.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.HandleType;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.OrientationType;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.SelectionType;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.TooltipType;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;
@@ -50,19 +54,28 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
      * Orig source from https://github.com/seiyria/bootstrap-slider
      */
     private final TextBox textBox;
+    private float min = 0;
+    private float max = 10;
+    private float step = 1;
+    OrientationType orient = OrientationType.HORIZONTAL;
+    SelectionType selection = SelectionType.BEFORE;
+    TooltipType tooltip = TooltipType.SHOW;
+    HandleType handle = HandleType.ROUND;
+    boolean reversed = false;
 
     public SliderBase() {
         textBox = new TextBox();
         // now remove the bootstrap styles
         textBox.removeStyleName(UIObject.getStyleName(textBox.getElement()));
         setElement(textBox.getElement());
+        setValue(5f);
     }
 
     @Override
     protected void onLoad() {
         super.onLoad();
-        JavaScriptObject options = getOptions(getId(), -10F, 100F, 5F, "horizontal", 90F, "before", "always", "square", true,
-                true);
+        JavaScriptObject options = getOptions(getId(), getMin(), getMax(), getStep(), getOrientation().getType(), getValue(),
+                getSelection().getType(), getTooltip().getType(), getHandle().getType(), isReversed(), isEnabled());
         sliderInit(getElement(), options);
     }
 
@@ -108,27 +121,97 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
 
     @Override
     public boolean isEnabled() {
-        return isEnabled(getElement());
+        return textBox.isEnabled();
+        // return isEnabled(getElement());
     }
 
     @Override
     public void setEnabled(boolean enabled) {
-        if (enabled) {
-            sliderCommand(getElement(), "enable");
-        } else {
-            sliderCommand(getElement(), "disable");
+        textBox.setEnabled(enabled);
+        if (SliderBase.this.isAttached()) {
+            if (enabled) {
+                sliderCommand(getElement(), "enable");
+            } else {
+                sliderCommand(getElement(), "disable");
+            }
         }
+    }
+
+    public float getMin() {
+        return min;
+    }
+
+    public void setMin(float min) {
+        this.min = min;
+    }
+
+    public float getMax() {
+        return max;
+    }
+
+    public void setMax(float max) {
+        this.max = max;
+    }
+
+    public float getStep() {
+        return step;
+    }
+
+    public void setStep(float step) {
+        this.step = step;
+    }
+
+    public OrientationType getOrientation() {
+        return orient;
+    }
+
+    public void setOrientation(OrientationType orient) {
+        this.orient = orient;
+    }
+
+    public SelectionType getSelection() {
+        return selection;
+    }
+
+    public void setSelection(SelectionType selection) {
+        this.selection = selection;
+    }
+
+    public TooltipType getTooltip() {
+        return tooltip;
+    }
+
+    public void setTooltip(TooltipType tooltip) {
+        this.tooltip = tooltip;
+    }
+
+    public HandleType getHandle() {
+        return handle;
+    }
+
+    public void setHandle(HandleType handle) {
+        this.handle = handle;
+    }
+
+    public boolean isReversed() {
+        return reversed;
+    }
+
+    public void setReversed(boolean reversed) {
+        this.reversed = reversed;
     }
 
     @Override
     public Float getValue() {
-        return getValue(getElement());
+        return Float.valueOf(textBox.getValue());
     }
 
     @Override
     public void setValue(Float value) {
-        setValue(value, false);
-
+        textBox.setValue(value.toString());
+        if (SliderBase.this.isAttached()) {
+            setValue(value, false);
+        }
     }
 
     @Override

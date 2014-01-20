@@ -26,4 +26,15 @@ import org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase;
  * @author Grant Slender
  */
 public class Slider extends SliderBase {
+
+    public Slider(float min, float max, float value) {
+        super();
+        setMin(min);
+        setMax(max);
+        setValue(value);
+    }
+
+    public Slider(int min, int max, int value) {
+        this((float)min,(float)max,(float)value);
+    }
 }
