@@ -47,28 +47,29 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * @author Grant Slender
  */
-public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, HasValueChangeHandlers<Float>, HasVisibility,
+public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, HasValueChangeHandlers<Double>, HasVisibility,
         HasChangeHandlers, HasId, HasResponsiveness {
 
     /**
      * Orig source from https://github.com/seiyria/bootstrap-slider
      */
     private final TextBox textBox;
-    private float min = 0;
-    private float max = 10;
-    private float step = 1;
+    private double min = 0;
+    private double max = 10;
+    private double step = 1;
     OrientationType orient = OrientationType.HORIZONTAL;
     SelectionType selection = SelectionType.BEFORE;
     TooltipType tooltip = TooltipType.SHOW;
     HandleType handle = HandleType.ROUND;
     boolean reversed = false;
+    private FormatterCallback formatterCallback;
 
     public SliderBase() {
         textBox = new TextBox();
         // now remove the bootstrap styles
         textBox.removeStyleName(UIObject.getStyleName(textBox.getElement()));
         setElement(textBox.getElement());
-        setValue(5f);
+        setValue(5.0);
     }
 
     @Override
@@ -85,7 +86,7 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
         sliderCommand(getElement(), "destroy");
     }
 
-    public void onChange(final float value) {
+    public void onChange(final double value) {
         ValueChangeEvent.fire(this, value);
     }
 
@@ -115,7 +116,7 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
     }
 
     @Override
-    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Float> handler) {
+    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Double> handler) {
         return addHandler(handler, ValueChangeEvent.getType());
     }
 
@@ -137,27 +138,27 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
         }
     }
 
-    public float getMin() {
+    public double getMin() {
         return min;
     }
 
-    public void setMin(float min) {
+    public void setMin(double min) {
         this.min = min;
     }
 
-    public float getMax() {
+    public double getMax() {
         return max;
     }
 
-    public void setMax(float max) {
+    public void setMax(double max) {
         this.max = max;
     }
 
-    public float getStep() {
+    public double getStep() {
         return step;
     }
 
-    public void setStep(float step) {
+    public void setStep(double step) {
         this.step = step;
     }
 
@@ -202,12 +203,12 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
     }
 
     @Override
-    public Float getValue() {
-        return Float.valueOf(textBox.getValue());
+    public Double getValue() {
+        return Double.valueOf(textBox.getValue());
     }
 
     @Override
-    public void setValue(Float value) {
+    public void setValue(Double value) {
         textBox.setValue(value.toString());
         if (SliderBase.this.isAttached()) {
             setValue(value, false);
@@ -215,7 +216,7 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
     }
 
     @Override
-    public void setValue(final Float value, final boolean fireEvents) {
+    public void setValue(final Double value, final boolean fireEvents) {
 
         Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
             @Override
@@ -235,13 +236,19 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
 
     }
 
-    public String formatter(float value) {
-        return Float.toString(value);
+    public void setFormatter(FormatterCallback formatterCallback) {
+        this.formatterCallback = formatterCallback;
+    }
+
+    private String formatter(double value) {
+        if (formatterCallback != null)
+            return formatterCallback.toolTipMsg(value);
+        return Double.toString(value);
     }
 
 // @formatter:off
 
-    private native float getValue(Element e) /*-{
+    private native double getValue(Element e) /*-{
         return $wnd.jQuery(e).slider('getValue');
     }-*/;
 
@@ -249,7 +256,7 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
         return $wnd.jQuery(e).slider('isEnabled');
     }-*/;
 
-    private native void setValue(Element e, float value) /*-{
+    private native void setValue(Element e, double value) /*-{
         $wnd.jQuery(e).slider('setValue',value);
     }-*/;
 
@@ -257,11 +264,11 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
         var me = this;
         $wnd.jQuery(e).slider(options)
             .on('slide', function (evt) {
-                me.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::onChange(F)(evt.value);
+                me.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::onChange(D)(evt.value);
             })
     }-*/;
 
-    private native JavaScriptObject getOptions(String id, float min, float max, float step, String orient, float value,String selection, String tooltip,String handle,boolean reversed,boolean enabled) /*-{
+    private native JavaScriptObject getOptions(String id, double min, double max, double step, String orient, double value,String selection, String tooltip,String handle,boolean reversed,boolean enabled) /*-{
         var me = this;
         var options = {
             id: id,
@@ -277,7 +284,7 @@ public class SliderBase extends Widget implements HasValue<Float>, HasEnabled, H
             enabled: enabled
             };
          options.formater = function (val) {
-            return me.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(F)(val);
+            return me.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(val);
         };
         return options;
     }-*/;
