@@ -20,14 +20,6 @@ package org.gwtbootstrap3.extras.slider.client.ui.base;
  * #L%
  */
 
-import org.gwtbootstrap3.client.ui.HasId;
-import org.gwtbootstrap3.client.ui.HasResponsiveness;
-import org.gwtbootstrap3.client.ui.TextBox;
-import org.gwtbootstrap3.extras.slider.client.ui.base.constants.HandleType;
-import org.gwtbootstrap3.extras.slider.client.ui.base.constants.OrientationType;
-import org.gwtbootstrap3.extras.slider.client.ui.base.constants.SelectionType;
-import org.gwtbootstrap3.extras.slider.client.ui.base.constants.TooltipType;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Element;
@@ -38,11 +30,14 @@ import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.HasEnabled;
-import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.HasVisibility;
-import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
+import org.gwtbootstrap3.client.ui.HasId;
+import org.gwtbootstrap3.client.ui.HasResponsiveness;
+import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.HandleType;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.OrientationType;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.SelectionType;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.TooltipType;
 
 /**
  * @author Grant Slender
@@ -233,7 +228,6 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
                 }
             }
         }, 1000);
-
     }
 
     public void setFormatter(FormatterCallback formatterCallback) {
@@ -257,7 +251,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
     }-*/;
 
     private native void setValue(Element e, double value) /*-{
-        $wnd.jQuery(e).slider('setValue',value);
+        $wnd.jQuery(e).slider('setValue', value);
     }-*/;
 
     private native void sliderInit(Element e, JavaScriptObject options) /*-{
@@ -268,7 +262,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
             })
     }-*/;
 
-    private native JavaScriptObject getOptions(String id, double min, double max, double step, String orient, double value,String selection, String tooltip,String handle,boolean reversed,boolean enabled) /*-{
+    private native JavaScriptObject getOptions(String id, double min, double max, double step, String orient, double value, String selection, String tooltip, String handle, boolean reversed, boolean enabled) /*-{
         var me = this;
         var options = {
             id: id,
@@ -282,8 +276,8 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
             handle: handle,
             reversed: reversed,
             enabled: enabled
-            };
-         options.formater = function (val) {
+        };
+        options.formater = function (val) {
             return me.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(val);
         };
         return options;
@@ -292,5 +286,4 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
     private native void sliderCommand(Element e, String cmd) /*-{
         $wnd.jQuery(e).slider(cmd);
     }-*/;
-
 }

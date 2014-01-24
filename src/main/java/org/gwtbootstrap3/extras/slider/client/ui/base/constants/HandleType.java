@@ -31,9 +31,7 @@ public enum HandleType {
         this.type = type;
     }
 
-
     public String getType() {
         return type;
     }
-
 }

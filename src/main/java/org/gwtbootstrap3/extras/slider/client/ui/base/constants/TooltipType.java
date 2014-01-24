@@ -31,9 +31,7 @@ public enum TooltipType {
         this.type = type;
     }
 
-
     public String getType() {
         return type;
     }
-
 }

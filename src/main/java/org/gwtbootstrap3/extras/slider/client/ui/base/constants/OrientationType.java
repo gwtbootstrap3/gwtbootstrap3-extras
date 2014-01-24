@@ -30,7 +30,6 @@ public enum OrientationType {
         this.type = type;
     }
 
-
     public String getType() {
         return type;
     }

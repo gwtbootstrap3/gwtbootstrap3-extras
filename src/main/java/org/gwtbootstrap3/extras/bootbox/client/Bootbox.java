@@ -41,11 +41,11 @@ public class Bootbox {
      * Displays a message in a modal dialog box.
      * With callback handler.
      *
-     * @param msg the message to be displayed.
+     * @param msg      the message to be displayed.
      * @param callback the callback handler.
      */
     public static native void alert(String msg, AlertCallback callback) /*-{
-        $wnd.bootbox.alert(msg, function() {
+        $wnd.bootbox.alert(msg, function () {
             callback.@org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback::callback()();
         });
     }-*/;
@@ -54,11 +54,11 @@ public class Bootbox {
      * Displays a message in a modal dialog box, along with the standard 'OK' and
      * 'Cancel' buttons.
      *
-     * @param msg the message to be displayed.
+     * @param msg      the message to be displayed.
      * @param callback the callback handler.
      */
     public static native void confirm(String msg, ConfirmCallback callback) /*-{
-        $wnd.bootbox.confirm(msg, function(result) {
+        $wnd.bootbox.confirm(msg, function (result) {
             callback.@org.gwtbootstrap3.extras.bootbox.client.callback.ConfirmCallback::callback(Z)(result);
         });
     }-*/;
@@ -67,11 +67,11 @@ public class Bootbox {
      * Displays a request for information in a modal dialog box, along with the
      * standard 'OK' and 'Cancel' buttons.
      *
-     * @param msg the message to be displayed.
+     * @param msg      the message to be displayed.
      * @param callback the callback handler.
      */
     public static native void prompt(String msg, PromptCallback callback) /*-{
-        $wnd.bootbox.prompt(msg, function(result) {
+        $wnd.bootbox.prompt(msg, function (result) {
             callback.@org.gwtbootstrap3.extras.bootbox.client.callback.PromptCallback::callback(Ljava/lang/String;)(result);
         });
     }-*/;

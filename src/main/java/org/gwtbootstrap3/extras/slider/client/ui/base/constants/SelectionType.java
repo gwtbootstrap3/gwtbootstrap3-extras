@@ -31,9 +31,7 @@ public enum SelectionType {
         this.type = type;
     }
 
-
     public String getType() {
         return type;
     }
-
 }

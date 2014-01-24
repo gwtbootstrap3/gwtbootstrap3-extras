@@ -39,6 +39,6 @@ public class Slider extends SliderBase {
     }
 
     public Slider(int min, int max, int value) {
-        this((double)min,(double)max,(double)value);
+        this((double) min, (double) max, (double) value);
     }
 }

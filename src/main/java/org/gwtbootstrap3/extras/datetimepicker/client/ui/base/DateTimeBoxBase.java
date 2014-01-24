@@ -347,7 +347,7 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
     }-*/;
 
     protected native void configure(Element e, boolean showTime, boolean showDate, boolean useStrict,
-            String timeIconClass, String dateIconClass, String upIconClass, String downIconClass) /*-{
+                                    String timeIconClass, String dateIconClass, String upIconClass, String downIconClass) /*-{
         var that = this;
         $wnd.jQuery(e).datetimepicker({
             pickDate: showDate,
