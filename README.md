@@ -1,7 +1,7 @@
 [![Build Status](https://buildhive.cloudbees.com/job/gwtbootstrap3/job/gwtbootstrap3-extras/badge/icon)](https://buildhive.cloudbees.com/job/gwtbootstrap3/job/gwtbootstrap3-extras/)
 
 Extra (third party) components for [GwtBootstrap3](https://github.com/gwtbootstrap3/gwtbootstrap3).
-See [demo](http://gwtbootstrap3.github.io/gwtbootstrap3/).
+See [demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/).
 
 Add this dependency if you want to use the extras
 
