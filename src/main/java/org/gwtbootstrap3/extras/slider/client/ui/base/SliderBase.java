@@ -9,9 +9,9 @@ package org.gwtbootstrap3.extras.slider.client.ui.base;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,17 +20,6 @@ package org.gwtbootstrap3.extras.slider.client.ui.base;
  * #L%
  */
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.*;
 import org.gwtbootstrap3.client.ui.HasId;
 import org.gwtbootstrap3.client.ui.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.TextBox;
@@ -39,11 +28,24 @@ import org.gwtbootstrap3.extras.slider.client.ui.base.constants.OrientationType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.SelectionType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.TooltipType;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasEnabled;
+import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.HasVisibility;
+import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
+
 /**
  * @author Grant Slender
  */
 public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, HasValueChangeHandlers<Double>, HasVisibility,
-        HasChangeHandlers, HasId, HasResponsiveness {
+        HasId, HasResponsiveness {
 
     /**
      * Orig source from https://github.com/seiyria/bootstrap-slider
@@ -106,12 +108,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
     }
 
     @Override
-    public HandlerRegistration addChangeHandler(ChangeHandler handler) {
-        return addHandler(handler, ChangeEvent.getType());
-    }
-
-    @Override
-    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Double> handler) {
+    public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<Double> handler) {
         return addHandler(handler, ValueChangeEvent.getType());
     }
 
@@ -122,7 +119,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
     }
 
     @Override
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
         textBox.setEnabled(enabled);
         if (SliderBase.this.isAttached()) {
             if (enabled) {
@@ -137,7 +134,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
         return min;
     }
 
-    public void setMin(double min) {
+    public void setMin(final double min) {
         this.min = min;
     }
 
@@ -145,7 +142,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
         return max;
     }
 
-    public void setMax(double max) {
+    public void setMax(final double max) {
         this.max = max;
     }
 
@@ -153,7 +150,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
         return step;
     }
 
-    public void setStep(double step) {
+    public void setStep(final double step) {
         this.step = step;
     }
 
@@ -161,7 +158,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
         return orient;
     }
 
-    public void setOrientation(OrientationType orient) {
+    public void setOrientation(final OrientationType orient) {
         this.orient = orient;
     }
 
@@ -169,7 +166,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
         return selection;
     }
 
-    public void setSelection(SelectionType selection) {
+    public void setSelection(final SelectionType selection) {
         this.selection = selection;
     }
 
@@ -177,7 +174,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
         return tooltip;
     }
 
-    public void setTooltip(TooltipType tooltip) {
+    public void setTooltip(final TooltipType tooltip) {
         this.tooltip = tooltip;
     }
 
@@ -185,7 +182,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
         return handle;
     }
 
-    public void setHandle(HandleType handle) {
+    public void setHandle(final HandleType handle) {
         this.handle = handle;
     }
 
@@ -193,7 +190,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
         return reversed;
     }
 
-    public void setReversed(boolean reversed) {
+    public void setReversed(final boolean reversed) {
         this.reversed = reversed;
     }
 
@@ -203,7 +200,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
     }
 
     @Override
-    public void setValue(Double value) {
+    public void setValue(final Double value) {
         textBox.setValue(value.toString());
         if (SliderBase.this.isAttached()) {
             setValue(value, false);
@@ -227,14 +224,14 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
                     return true;
                 }
             }
-        }, 1000);
+        }, 100);
     }
 
-    public void setFormatter(FormatterCallback formatterCallback) {
+    public void setFormatter(final FormatterCallback formatterCallback) {
         this.formatterCallback = formatterCallback;
     }
 
-    private String formatter(double value) {
+    private String formatter(final double value) {
         if (formatterCallback != null)
             return formatterCallback.toolTipMsg(value);
         return Double.toString(value);
