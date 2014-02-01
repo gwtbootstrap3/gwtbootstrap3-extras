@@ -21,9 +21,7 @@
 <module>
     <public path="resource">
         <include name="css/bootstrap-slider.min.css"/>
-        <include name="js/bootstrap-slider.min.js"/>
     </public>
 
     <stylesheet src="css/bootstrap-slider.min.css"/>
-    <script src="js/bootstrap-slider.min.js"/>
 </module>

@@ -20,7 +20,10 @@
   -->
 
 <module rename-to='slider'>
+    <inherits name="com.google.gwt.resources.Resources"/>
+    <inherits name='org.gwtbootstrap3.extras.slider.client.SliderResources'/>
+
     <source path='client'/>
 
-    <inherits name='org.gwtbootstrap3.extras.slider.client.SliderResources'/>
+    <entry-point class="org.gwtbootstrap3.extras.slider.client.SliderEntryPoint"/>
 </module>

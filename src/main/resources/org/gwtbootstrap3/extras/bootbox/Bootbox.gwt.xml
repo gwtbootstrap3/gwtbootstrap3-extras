@@ -20,7 +20,9 @@
   -->
 
 <module rename-to='bootbox'>
+    <inherits name="com.google.gwt.resources.Resources"/>
+
     <source path='client'/>
 
-    <inherits name='org.gwtbootstrap3.extras.bootbox.client.BootboxResources'/>
+    <entry-point class="org.gwtbootstrap3.extras.bootbox.client.BootboxEntryPoint"/>
 </module>
