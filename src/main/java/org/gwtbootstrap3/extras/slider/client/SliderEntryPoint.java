@@ -31,6 +31,6 @@ public class SliderEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(SliderClientBundle.INSTANCE.slider().getText()).inject();
+        ScriptInjector.fromString(SliderClientBundle.INSTANCE.slider().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
     }
 }

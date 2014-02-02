@@ -31,6 +31,6 @@ public class BootboxEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(BootboxClientBundle.INSTANCE.bootbox().getText()).inject();
+        ScriptInjector.fromString(BootboxClientBundle.INSTANCE.bootbox().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
     }
 }
