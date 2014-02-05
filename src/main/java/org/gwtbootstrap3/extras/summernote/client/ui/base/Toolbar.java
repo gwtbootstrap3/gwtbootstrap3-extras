@@ -38,6 +38,7 @@ public class Toolbar {
     private static final String HEIGHT = "height";
     private static final String INSERT = "insert";
     private static final String TABLE = "table";
+    private static final String VIEW = "view";
     private static final String HELP = "help";
     private static final String BOLD = "bold";
     private static final String ITALIC = "italic";
@@ -48,6 +49,9 @@ public class Toolbar {
     private static final String PARAGRAPH = "paragraph";
     private static final String PICTURE = "picture";
     private static final String LINK = "link";
+    private static final String VIDEO = "video";
+    private static final String FULL_SCREEN = "fullscreen";
+    private static final String CODE_VIEW = "codeview";
 
     private boolean showStyleButton;
     private boolean showBoldButton;
@@ -63,6 +67,9 @@ public class Toolbar {
     private boolean showInsertPictureButton;
     private boolean showInsertLinkButton;
     private boolean showInsertTableButton;
+    private boolean showInsertVideoButton;
+    private boolean showFullScreenButton;
+    private boolean showCodeViewButton;
     private boolean showHelpButton;
 
     public Toolbar setShowStyleButton(boolean showStyleButton) {
@@ -140,6 +147,21 @@ public class Toolbar {
         return this;
     }
 
+    public Toolbar setShowInsertVideoButton(boolean showInsertVideoButton) {
+        this.showInsertVideoButton = showInsertVideoButton;
+        return this;
+    }
+
+    public Toolbar setShowFullScreenButton(boolean showFullScreenButton) {
+        this.showFullScreenButton = showFullScreenButton;
+        return this;
+    }
+
+    public Toolbar setShowCodeViewButton(boolean showCodeViewButton) {
+        this.showCodeViewButton = showCodeViewButton;
+        return this;
+    }
+
     /**
      * Quick toggle to use everything or nothing
      */
@@ -158,6 +180,9 @@ public class Toolbar {
         showInsertPictureButton = visible;
         showInsertLinkButton = visible;
         showInsertTableButton = visible;
+        showInsertVideoButton = visible;
+        showCodeViewButton = visible;
+        showFullScreenButton = visible;
         showHelpButton = visible;
         return this;
     }
@@ -173,6 +198,7 @@ public class Toolbar {
         buildArray(showLineHeightButton, array, HEIGHT);
         buildInsert(array);
         buildArray(showInsertTableButton, array, TABLE);
+        buildView(array);
         buildArray(showHelpButton, array, HELP);
 
         return array;
@@ -190,11 +216,23 @@ public class Toolbar {
         }
     }
 
+    private void buildView(JsArray array) {
+        JsArray view = JavaScriptObject.createArray().cast();
+
+        addToValueArray(showFullScreenButton, view, FULL_SCREEN);
+        addToValueArray(showCodeViewButton, view, CODE_VIEW);
+
+        if (!view.toString().isEmpty()) {
+            array.push(toJSArray(VIEW, view));
+        }
+    }
+
     private void buildInsert(JsArray array) {
         JsArray insert = JavaScriptObject.createArray().cast();
 
         addToValueArray(showInsertPictureButton, insert, PICTURE);
         addToValueArray(showInsertLinkButton, insert, LINK);
+        addToValueArray(showInsertVideoButton, insert, VIDEO);
 
         if (!insert.toString().isEmpty()) {
             array.push(toJSArray(INSERT, insert));
