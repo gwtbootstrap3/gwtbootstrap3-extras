@@ -34,4 +34,7 @@ interface SliderClientBundle extends ClientBundle {
 
     @Source("resource/js/bootstrap-slider.min.js")
     TextResource slider();
+
+    @Source("resource/js/modernizr-touch.js")
+    TextResource modernizr();
 }
