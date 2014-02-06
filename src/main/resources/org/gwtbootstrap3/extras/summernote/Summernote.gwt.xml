@@ -25,5 +25,5 @@
 
     <source path='client'/>
 
-    <entry-point class="org.gwtbootstrap3.extras.summernote.client.SummernoteEntryPoint"/>
+    <entry-point class="org.gwtbootstrap3.extras.summernote.client.SummernoteEntry"/>
 </module>

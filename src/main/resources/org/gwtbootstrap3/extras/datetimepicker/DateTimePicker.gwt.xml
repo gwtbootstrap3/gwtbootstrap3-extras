@@ -25,5 +25,5 @@
 
     <source path='client'/>
 
-    <entry-point class="org.gwtbootstrap3.extras.datetimepicker.client.DateTimePickerEntryPoint"/>
+    <entry-point class="org.gwtbootstrap3.extras.datetimepicker.client.DateTimePickerEntry"/>
 </module>

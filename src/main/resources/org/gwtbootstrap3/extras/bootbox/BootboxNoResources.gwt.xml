@@ -24,5 +24,5 @@
 
     <source path='client'/>
 
-    <entry-point class="org.gwtbootstrap3.extras.bootbox.client.BootboxEntry"/>
+    <entry-point class="org.gwtbootstrap3.extras.bootbox.client.BootboxNoResourcesEntry"/>
 </module>

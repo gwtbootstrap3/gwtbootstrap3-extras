@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.datetimepicker.client;
+package org.gwtbootstrap3.extras.bootbox.client;
 
 /*
  * #%L
@@ -27,13 +27,10 @@ import com.google.gwt.core.client.ScriptInjector;
 /**
  * @author Sven Jacobs
  */
-public class DateTimePickerEntryPoint implements EntryPoint {
+public class BootboxEntry implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(DateTimePickerClientBundle.INSTANCE.moment().getText()).setWindow(ScriptInjector.TOP_WINDOW)
-                .inject();
-        ScriptInjector.fromString(DateTimePickerClientBundle.INSTANCE.dateTimePicker().getText())
-                .setWindow(ScriptInjector.TOP_WINDOW).inject();
+        ScriptInjector.fromString(BootboxClientBundle.INSTANCE.bootbox().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
     }
 }

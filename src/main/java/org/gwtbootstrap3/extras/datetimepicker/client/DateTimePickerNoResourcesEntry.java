@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.slider.client;
+package org.gwtbootstrap3.extras.datetimepicker.client;
 
 /*
  * #%L
@@ -27,12 +27,10 @@ import com.google.gwt.core.client.ScriptInjector;
 /**
  * @author Sven Jacobs
  */
-public class SliderEntryPoint implements EntryPoint {
+public class DateTimePickerNoResourcesEntry implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(SliderClientBundle.INSTANCE.slider().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
-        ScriptInjector.fromString(SliderClientBundle.INSTANCE.modernizr().getText()).setWindow(ScriptInjector.TOP_WINDOW)
-                .inject();
+        
     }
 }

@@ -19,10 +19,10 @@
   #L%
   -->
 
-<module rename-to='bootbox'>
+<module rename-to='slider'>
     <inherits name="com.google.gwt.resources.Resources"/>
 
     <source path='client'/>
 
-    <entry-point class="org.gwtbootstrap3.extras.bootbox.client.BootboxEntry"/>
+    <entry-point class="org.gwtbootstrap3.extras.slider.client.SliderNoResourcesEntry"/>
 </module>

@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.bootbox.client;
+package org.gwtbootstrap3.extras.slider.client;
 
 /*
  * #%L
@@ -27,10 +27,10 @@ import com.google.gwt.core.client.ScriptInjector;
 /**
  * @author Sven Jacobs
  */
-public class BootboxEntryPoint implements EntryPoint {
+public class SliderNoResourcesEntry implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(BootboxClientBundle.INSTANCE.bootbox().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
+        
     }
 }

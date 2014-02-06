@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.summernote.client;
+package org.gwtbootstrap3.extras.datetimepicker.client;
 
 /*
  * #%L
@@ -20,16 +20,20 @@ package org.gwtbootstrap3.extras.summernote.client;
  * #L%
  */
 
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.ScriptInjector;
 
 /**
- * @author godi
+ * @author Sven Jacobs
  */
-public class SummernoteEntryPoint implements EntryPoint {
+public class DateTimePickerEntry implements EntryPoint {
+
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(SummernoteClientBundle.INSTANCE.summernote().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
-
+        ScriptInjector.fromString(DateTimePickerClientBundle.INSTANCE.moment().getText()).setWindow(ScriptInjector.TOP_WINDOW)
+                .inject();
+        ScriptInjector.fromString(DateTimePickerClientBundle.INSTANCE.dateTimePicker().getText())
+                .setWindow(ScriptInjector.TOP_WINDOW).inject();
     }
 }
