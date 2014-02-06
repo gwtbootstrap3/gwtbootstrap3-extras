@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.bootbox.client;
+package org.gwtbootstrap3.extras.summernote.client;
 
 /*
  * #%L
@@ -20,17 +20,15 @@ package org.gwtbootstrap3.extras.bootbox.client;
  * #L%
  */
 
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.ScriptInjector;
 
 /**
- * @author Sven Jacobs
+ * @author godi
  */
-public class BootboxEntryPoint implements EntryPoint {
-
+public class SummernoteEntryPoint implements EntryPoint {
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(BootboxClientBundle.INSTANCE.bootbox().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
+      
     }
 }
