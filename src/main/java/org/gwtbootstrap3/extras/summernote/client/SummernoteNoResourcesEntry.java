@@ -26,7 +26,7 @@ import com.google.gwt.core.client.ScriptInjector;
 /**
  * @author godi
  */
-public class SummernoteEntryPoint implements EntryPoint {
+public class SummernoteNoResourcesEntry implements EntryPoint {
     @Override
     public void onModuleLoad() {
       

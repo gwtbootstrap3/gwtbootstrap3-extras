@@ -27,7 +27,7 @@ import com.google.gwt.core.client.ScriptInjector;
 /**
  * @author Sven Jacobs
  */
-public class BootboxEntryNoResources implements EntryPoint {
+public class BootboxEntryNoResourcesEntry implements EntryPoint {
 
     @Override
     public void onModuleLoad() {

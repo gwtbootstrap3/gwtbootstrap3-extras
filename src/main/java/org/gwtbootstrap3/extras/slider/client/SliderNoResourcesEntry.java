@@ -27,7 +27,7 @@ import com.google.gwt.core.client.ScriptInjector;
 /**
  * @author Sven Jacobs
  */
-public class SliderEntryNoResources implements EntryPoint {
+public class SliderNoResourcesEntry implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
