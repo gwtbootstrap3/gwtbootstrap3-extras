@@ -24,7 +24,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.web.bindery.event.shared.HandlerRegistration;
-import org.gwtbootstrap3.client.ui.Div;
+import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.extras.summernote.client.event.*;
 
 /**
@@ -34,7 +34,7 @@ import org.gwtbootstrap3.extras.summernote.client.event.*;
  *
  * @author godi
  */
-public class SummernoteBase extends Div {
+public class SummernoteBase extends TextArea {
     /**
      * Default settings
      */
@@ -103,6 +103,7 @@ public class SummernoteBase extends Div {
      * Call this when updating settings to ensure everything is up to date
      */
     public void reconfigure() {
+        destroy(getElement());
         initialize();
     }
 
