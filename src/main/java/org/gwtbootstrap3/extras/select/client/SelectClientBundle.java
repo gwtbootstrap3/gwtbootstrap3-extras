@@ -30,6 +30,6 @@ import com.google.gwt.resources.client.TextResource;
 public interface SelectClientBundle extends ClientBundle {
     static final SelectClientBundle INSTANCE = GWT.create(SelectClientBundle.class);
 
-    @Source("resource/js/bootstrap-select.js")
+    @Source("resource/js/bootstrap-select.min.js")
     TextResource selectJs();
 }

@@ -20,10 +20,10 @@
   -->
 <module>
     <public path="resource">
-        <include name="css/bootstrap-select.css"/>
-        <include name="css/bootstrap-select-fix.css"/>
+        <include name="css/bootstrap-select.min.css"/>
+        <include name="css/bootstrap-select-fix.min.css"/>
     </public>
 
-    <stylesheet src="css/bootstrap-select.css"/>
-    <stylesheet src="css/bootstrap-select-fix.css"/>
+    <stylesheet src="css/bootstrap-select.min.css"/>
+    <stylesheet src="css/bootstrap-select-fix.min.css"/>
 </module>
