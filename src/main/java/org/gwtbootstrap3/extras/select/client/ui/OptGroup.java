@@ -22,7 +22,6 @@ package org.gwtbootstrap3.extras.select.client.ui;
 
 import com.google.gwt.user.client.DOM;
 import org.gwtbootstrap3.client.ui.HasEnabled;
-import org.gwtbootstrap3.client.ui.HasIcon;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
 import org.gwtbootstrap3.client.ui.base.mixin.EnabledMixin;
@@ -33,7 +32,7 @@ import static org.gwtbootstrap3.extras.select.client.constants.DataAttributes.DA
 /**
  * @author godi
  */
-public class OptGroup extends ComplexWidget implements HasEnabled, HasIcon {
+public class OptGroup extends ComplexWidget implements HasEnabled {
     public static final String OPT_GROUP = "optgroup";
     public static final String LABEL = "label";
 
@@ -62,12 +61,10 @@ public class OptGroup extends ComplexWidget implements HasEnabled, HasIcon {
         return enabledMixin.isEnabled();
     }
 
-    @Override
     public void setIcon(final IconType iconType) {
         attributeMixin.setAttribute(DATA_ICON, "fa " + iconType.getCssName());
     }
 
-    @Override
     public IconType getIcon() {
         return IconType.fromStyleName(attributeMixin.getAttribute(DATA_ICON));
     }

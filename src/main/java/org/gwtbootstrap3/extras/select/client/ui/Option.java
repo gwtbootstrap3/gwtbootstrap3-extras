@@ -21,7 +21,6 @@ package org.gwtbootstrap3.extras.select.client.ui;
  */
 
 import com.google.gwt.user.client.DOM;
-import org.gwtbootstrap3.client.ui.HasIcon;
 import org.gwtbootstrap3.client.ui.base.AbstractTextWidget;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
 import org.gwtbootstrap3.client.ui.constants.IconType;
@@ -31,7 +30,7 @@ import static org.gwtbootstrap3.extras.select.client.constants.DataAttributes.*;
 /**
  * @author godi
  */
-public class Option extends AbstractTextWidget implements HasIcon {
+public class Option extends AbstractTextWidget {
     private final AttributeMixin<Option> attributeMixin = new AttributeMixin<Option>(this);
 
     public Option() {
@@ -74,12 +73,10 @@ public class Option extends AbstractTextWidget implements HasIcon {
         return attributeMixin.getAttribute(DISABLED) == null;
     }
 
-    @Override
     public void setIcon(final IconType iconType) {
         attributeMixin.setAttribute(DATA_ICON, iconType.getCssName());
     }
 
-    @Override
     public IconType getIcon() {
         return IconType.fromStyleName(attributeMixin.getAttribute(DATA_ICON));
     }
