@@ -28,7 +28,7 @@ import com.google.gwt.user.client.Window;
  * @author Joshua Godi
  */
 public class RespondEntryPoint implements EntryPoint {
-    private static final String MSIE = "msie";
+    private static final String MSIE = "MSIE";
     private static final String EIGHT = "8.0";
 
     @Override
