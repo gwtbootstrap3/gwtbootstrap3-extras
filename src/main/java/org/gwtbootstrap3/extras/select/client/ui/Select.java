@@ -257,7 +257,7 @@ public class Select extends ComplexWidget {
      * and {@link #getValue(int)} for getting all the values selected or {@link #getAllSelectedValues()}
      */
     public String getValue() {
-        return getSelectElement().getValue();
+        return getSelectElement().getOptions().getItem(getSelectElement().getSelectedIndex()).getValue();
     }
 
     public List<String> getAllSelectedValues() {
