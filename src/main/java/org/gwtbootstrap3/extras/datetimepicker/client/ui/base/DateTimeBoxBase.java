@@ -244,7 +244,7 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
             @Override
             public boolean execute() {
                 if (DateTimeBoxBase.this.isAttached()) {
-                    updateValue(textBox.getElement(), value);
+                    updateValue(textBox.getElement(), value.toString());
 
                     if (fireEvents) {
                         ValueChangeEvent.fire(DateTimeBoxBase.this, value);
@@ -254,7 +254,7 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
                     return true;
                 }
             }
-        }, 1000);
+        }, 200);
     }
 
     @Override
@@ -312,7 +312,7 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
         return $wnd.moment(date).format(format);
     }-*/;
 
-    protected native void updateValue(Element e, Date newDate) /*-{
+    protected native void updateValue(Element e, String newDate) /*-{
         if ($wnd.jQuery(e).data('DateTimePicker')) {
             $wnd.jQuery(e).data('DateTimePicker').setDate(newDate);
         }
