@@ -108,12 +108,10 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
     }
 
     public void show() {
-        textBox.setFocus(true);
         show(textBox.getElement());
     }
 
     public void hide() {
-        textBox.setFocus(false);
         hide(textBox.getElement());
     }
 
@@ -294,10 +292,14 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
     }
 
     public void onShow(final Event e) {
+        // On show we put focus on the textbox
+        textBox.setFocus(true);
         fireEvent(new ShowEvent(e));
     }
 
     public void onHide(final Event e) {
+        // On hide we remove focus from the textbox
+        textBox.setFocus(false);
         fireEvent(new HideEvent(e));
     }
 
