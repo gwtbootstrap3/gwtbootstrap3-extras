@@ -27,4 +27,5 @@ import java.util.Date;
  */
 public interface HasEndDate {
     void setEndDate(Date endDate);
+    void setEndDate(String endDate);
 }

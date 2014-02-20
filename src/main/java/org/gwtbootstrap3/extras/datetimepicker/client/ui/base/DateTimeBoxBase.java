@@ -108,20 +108,32 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
     }
 
     public void show() {
+        textBox.setFocus(true);
         show(textBox.getElement());
     }
 
     public void hide() {
+        textBox.setFocus(false);
         hide(textBox.getElement());
     }
 
     @Override
     public void setEndDate(final Date endDate) {
+        setEndDate(textBox.getElement(), endDate.toString());
+    }
+
+    @Override
+    public void setEndDate(final String endDate) {
         setEndDate(textBox.getElement(), endDate);
     }
 
     @Override
     public void setStartDate(final Date startDate) {
+        setStartDate(textBox.getElement(), startDate.toString());
+    }
+
+    @Override
+    public void setStartDate(final String startDate) {
         setStartDate(textBox.getElement(), startDate);
     }
 
@@ -330,15 +342,15 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
         }
     }-*/;
 
-    protected native void setStartDate(Element e, Date startDate) /*-{
+    protected native void setStartDate(Element e, String startDate) /*-{
         if ($wnd.jQuery(e).data('DateTimePicker')) {
-            $wnd.jQuery(e).data('DateTimePicker').setStartDate(startDate);
+            $wnd.jQuery(e).data('DateTimePicker').setStartDate(new Date(startDate));
         }
     }-*/;
 
-    protected native void setEndDate(Element e, Date endDate) /*-{
+    protected native void setEndDate(Element e, String endDate) /*-{
         if ($wnd.jQuery(e).data('DateTimePicker')) {
-            $wnd.jQuery(e).data('DateTimePicker').setEndDate(endDate);
+            $wnd.jQuery(e).data('DateTimePicker').setEndDate(new Date(endDate));
         }
     }-*/;
 

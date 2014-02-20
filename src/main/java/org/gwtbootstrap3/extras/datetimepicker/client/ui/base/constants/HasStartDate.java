@@ -27,4 +27,5 @@ import java.util.Date;
  */
 public interface HasStartDate {
     void setStartDate(Date startDate);
+    void setStartDate(String startDate);
 }
