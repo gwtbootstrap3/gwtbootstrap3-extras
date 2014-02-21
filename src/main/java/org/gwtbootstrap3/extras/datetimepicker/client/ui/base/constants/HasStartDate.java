@@ -23,9 +23,14 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 import java.util.Date;
 
 /**
+ * Date. Default: Beginning of time
+ * <p/>
+ * The earliest date that may be selected; all earlier dates will be disabled.
+ *
  * @author Joshua Godi
  */
 public interface HasStartDate {
     void setStartDate(Date startDate);
+
     void setStartDate(String startDate);
 }

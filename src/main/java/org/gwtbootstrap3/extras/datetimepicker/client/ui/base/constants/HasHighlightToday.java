@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,13 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import org.gwtbootstrap3.client.ui.Icon;
-
 /**
+ * Boolean. Default: false
+ * <p/>
+ * If true, highlights the current date.
+ *
  * @author Joshua Godi
  */
-public interface HasUpIcon {
-    void setUpIcon(Icon icon);
+public interface HasHighlightToday {
+    void setHighlightToday(boolean highlightToday);
 }

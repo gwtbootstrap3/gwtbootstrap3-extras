@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,29 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import java.util.Date;
-
 /**
- * Date. Default: End of time
- * <p/>
- * The latest date that may be selected; all later dates will be disabled.
+ * 0 or 'hour' for the hour view
+ * 1 or 'day' for the day view
+ * 2 or 'month' for month view (the default)
+ * 3 or 'year' for the 12-month overview
+ * 4 or 'decade' for the 10-year overview. Useful for date-of-birth datetimepickers.
  *
  * @author Joshua Godi
  */
-public interface HasEndDate {
-    void setEndDate(Date endDate);
+public enum DateTimePickerView {
+    HOUR(0),
+    DAY(1),
+    MONTH(2),
+    YEAR(3),
+    DECADE(4);
 
-    void setEndDate(String endDate);
+    private final int value;
+
+    DateTimePickerView(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }

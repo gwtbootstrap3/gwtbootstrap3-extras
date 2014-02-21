@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,15 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import org.gwtbootstrap3.client.ui.Icon;
-
 /**
+ * Enum, Array enums. Default: none
+ * <p/>
+ * Days of the week that should be disabled. Values are enum of DateTimePickerDayOfWeek.
+ * Multiple values should be comma-separated. Example: disable weekends: SUNDAY, MONDAY.
+ *
  * @author Joshua Godi
+ * @see org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerDayOfWeek
  */
-public interface HasTimeIcon {
-    void setTimeIcon(Icon icon);
+public interface HasDaysOfWeekDisabled {
+    void setDaysOfWeekDisabled(DateTimePickerDayOfWeek... daysOfWeekDisabled);
 }

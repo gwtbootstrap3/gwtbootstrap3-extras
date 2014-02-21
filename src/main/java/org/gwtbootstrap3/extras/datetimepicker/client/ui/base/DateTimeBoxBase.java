@@ -20,60 +20,62 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base;
  * #L%
  */
 
-import com.google.gwt.core.client.JsDate;
 import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HasEnabled;
-import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.HasVisibility;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 import org.gwtbootstrap3.client.shared.event.HideEvent;
 import org.gwtbootstrap3.client.shared.event.HideHandler;
 import org.gwtbootstrap3.client.shared.event.ShowEvent;
 import org.gwtbootstrap3.client.shared.event.ShowHandler;
-import org.gwtbootstrap3.client.ui.*;
+import org.gwtbootstrap3.client.ui.HasId;
+import org.gwtbootstrap3.client.ui.HasPlaceholder;
+import org.gwtbootstrap3.client.ui.HasResponsiveness;
+import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.base.ValueBoxBase;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.*;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.*;
 
 import java.util.Date;
 
 /**
  * @author Joshua Godi
  */
-public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnabled, HasValueChangeHandlers<Date>,
-        HasVisibility, HasChangeHandlers, HasVisibleHandlers, HasId, HasResponsiveness, HasDateIcon, HasShowDatePicker,
-        HasShowTimePicker, HasDownIcon, HasEndDate, HasStartDate, HasStrict, HasTimeIcon, HasUpIcon, HasFormat,
-        HasPlaceholder {
-
-    /**
-     * Moment.js date format
-     */
-    private static final String DEFAULT_FORMAT = "YYYY-MM-DD HH:mm";
+public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasResponsiveness,
+        HasVisibility, HasPlaceholder, HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse,
+        HasFormat, HasHighlightToday, HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView,
+        HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart, HasDateTimePickerHandlers {
 
     private final TextBox textBox;
-    private String format;
+    private DateTimeFormat dateTimeFormat;
+    private DateTimeFormat startEndDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
 
-    private boolean showTime = true;
-    private boolean showDate = true;
-    private boolean useStrict = false;
-    private String dateIconClass = "fa fa-calendar";
-    private String timeIconClass = "fa fa-clock-o";
-    private String upIconClass = "fa fa-arrow-up";
-    private String downIconClass = "fa fa-arrow-down";
+    /**
+     * DEFAULT values
+     */
+    private String format = "mm/dd/yyyy HH:ii";
+    private DateTimePickerDayOfWeek weekStart = DateTimePickerDayOfWeek.SUNDAY;
+    private DateTimePickerDayOfWeek[] daysOfWeekDisabled = {};
+    private boolean autoClose = false;
+    private DateTimePickerView startView = DateTimePickerView.MONTH;
+    private DateTimePickerView minView = DateTimePickerView.HOUR;
+    private DateTimePickerView maxView = DateTimePickerView.DECADE;
+    private boolean showTodayButton = false;
+    private boolean highlightToday = false;
+    private boolean keyboardNavigation = true;
+    private boolean forceParse = true;
+    private int minuteStep = 5;
+    private DateTimePickerView viewSelect = DateTimePickerView.HOUR;
+    private boolean showMeridian = false;
 
     public DateTimeBoxBase() {
         textBox = new TextBox();
         setElement(textBox.getElement());
-        setFormat(DEFAULT_FORMAT);
+        setFormat(format);
         setValue(new Date());
     }
 
@@ -101,99 +103,6 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
 
     public boolean isReadOnly() {
         return textBox.isReadOnly();
-    }
-
-    public void reload() {
-        configure();
-    }
-
-    public void show() {
-        show(textBox.getElement());
-    }
-
-    public void hide() {
-        hide(textBox.getElement());
-    }
-
-    @Override
-    public void setEndDate(final Date endDate) {
-        setEndDate(textBox.getElement(), endDate.toString());
-    }
-
-    @Override
-    public void setEndDate(final String endDate) {
-        setEndDate(textBox.getElement(), endDate);
-    }
-
-    @Override
-    public void setStartDate(final Date startDate) {
-        setStartDate(textBox.getElement(), startDate.toString());
-    }
-
-    @Override
-    public void setStartDate(final String startDate) {
-        setStartDate(textBox.getElement(), startDate);
-    }
-
-    @Override
-    public void setUseStrict(final boolean useStrict) {
-        this.useStrict = useStrict;
-    }
-
-    @Override
-    public void setDateIcon(final Icon icon) {
-        dateIconClass = icon.getStyleName();
-    }
-
-    @Override
-    public void setDownIcon(final Icon icon) {
-        downIconClass = icon.getStyleName();
-    }
-
-    @Override
-    public void setTimeIcon(final Icon icon) {
-        timeIconClass = icon.getStyleName();
-    }
-
-    @Override
-    public void setUpIcon(final Icon icon) {
-        upIconClass = icon.getStyleName();
-    }
-
-    @Override
-    public void setShowDatePicker(final boolean showDatePicker) {
-        showDate = showDatePicker;
-    }
-
-    @Override
-    public void setShowTimePicker(final boolean showTimePicker) {
-        showTime = showTimePicker;
-    }
-
-    @Override
-    public void setFormat(final String format) {
-        this.format = format;
-        // dateTimeFormat = DateTimeFormat.getFormat(format);
-
-        final Date oldValue = getValue();
-        if (oldValue != null) {
-            setValue(oldValue);
-        }
-    }
-
-    @Override
-    public HandlerRegistration addChangeHandler(final ChangeHandler handler) {
-        return addHandler(handler, ChangeEvent.getType());
-    }
-
-    @Override
-    public HandlerRegistration addHideHandler(final HideHandler handler) {
-        return addHandler(handler, HideEvent.getType());
-    }
-
-    @Override
-    public HandlerRegistration addShowHandler(final ShowHandler handler) {
-        return addHandler(handler, ShowEvent.getType());
     }
 
     @Override
@@ -226,27 +135,234 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
         textBox.setHiddenOn(deviceSizeString);
     }
 
-    @Override
-    public Date getValue() {
-        final String value = textBox.getValue();
-        if (value == null || "".equals(value)) {
-            return null;
-        }
-        try {
-            final JsDate date = parse(textBox.getValue(), format);
-            return new Date((long) date.getTime());
-        } catch (final Exception e) {
-            GWT.log("JS error", e);
-        }
-        return null;
+    /**
+     * Call this whenever changing any settings
+     */
+    public void reload() {
+        configure();
+    }
+
+    public void show() {
+        show(getElement());
+    }
+
+    public void hide() {
+        hide(getElement());
     }
 
     @Override
+    public void setAutoClose(boolean autoClose) {
+        this.autoClose = autoClose;
+    }
+
+    @Override
+    public void onShow(final Event e) {
+        // On show we put focus on the textbox
+        textBox.setFocus(true);
+
+        fireEvent(new ShowEvent(e));
+    }
+
+    @Override
+    public HandlerRegistration addShowHandler(ShowHandler showHandler) {
+        return addHandler(showHandler, ShowEvent.getType());
+    }
+
+    @Override
+    public void onHide(final Event e) {
+        // On hide we remove focus from the textbox
+        textBox.setFocus(false);
+
+        fireEvent(new HideEvent(e));
+    }
+
+    @Override
+    public HandlerRegistration addHideHandler(HideHandler hideHandler) {
+        return addHandler(hideHandler, HideEvent.getType());
+    }
+
+    @Override
+    public void onChangeDate(Event e) {
+        fireEvent(new ChangeDateEvent(e));
+    }
+
+    @Override
+    public HandlerRegistration addChangeDateHandler(ChangeDateHandler changeDateHandler) {
+        return addHandler(changeDateHandler, ChangeDateEvent.getType());
+    }
+
+    @Override
+    public void onChangeYear(Event e) {
+        fireEvent(new ChangeYearEvent(e));
+    }
+
+    @Override
+    public HandlerRegistration addChangeYearHandler(ChangeYearHandler changeYearHandler) {
+        return addHandler(changeYearHandler, ChangeYearEvent.getType());
+    }
+
+    @Override
+    public void onChangeMonth(Event e) {
+        fireEvent(new ChangeMonthEvent(e));
+    }
+
+    @Override
+    public HandlerRegistration addChangeMonthHandler(ChangeMonthHandler changeMonthHandler) {
+        return addHandler(changeMonthHandler, ChangeMonthEvent.getType());
+    }
+
+    @Override
+    public void onOutOfRange(Event e) {
+        fireEvent(new OutOfRangeEvent(e));
+    }
+
+    @Override
+    public HandlerRegistration addOutOfRangeHandler(OutOfRangeHandler outOfRangeHandler) {
+        return addHandler(outOfRangeHandler, OutOfRangeEvent.getType());
+    }
+
+    @Override
+    public void setDaysOfWeekDisabled(DateTimePickerDayOfWeek... daysOfWeekDisabled) {
+        setDaysOfWeekDisabled(getElement(), toDaysOfWeekDisabledString(daysOfWeekDisabled));
+    }
+
+    @Override
+    public void setEndDate(Date endDate) {
+        // Has to be in the format YYYY-MM-DD
+        setEndDate(startEndDateFormat.format(endDate));
+    }
+
+    @Override
+    public void setEndDate(String endDate) {
+        // Has to be in the format YYYY-MM-DD
+        setEndDate(getElement(), endDate);
+    }
+
+    @Override
+    public void setForceParse(boolean forceParse) {
+        this.forceParse = forceParse;
+    }
+
+    @Override
+    public void setHighlightToday(boolean highlightToday) {
+        this.highlightToday = highlightToday;
+    }
+
+    @Override
+    public void setHasKeyboardNavigation(boolean hasKeyboardNavigation) {
+        this.keyboardNavigation = hasKeyboardNavigation;
+    }
+
+    @Override
+    public void setMaxView(DateTimePickerView dateTimePickerView) {
+        this.maxView = dateTimePickerView;
+    }
+
+    @Override
+    public void setMinView(DateTimePickerView dateTimePickerView) {
+        this.minView = dateTimePickerView;
+
+        // We keep the view select the same as the min view
+        if (viewSelect != minView) {
+            setViewSelect(dateTimePickerView);
+        }
+    }
+
+    @Override
+    public void setMinuteStep(int minuteStep) {
+        this.minuteStep = minuteStep;
+    }
+
+    @Override
+    public void setShowMeridian(boolean showMeridian) {
+        this.showMeridian = showMeridian;
+    }
+
+    @Override
+    public void setShowTodayButton(boolean showTodayButton) {
+        this.showTodayButton = showTodayButton;
+    }
+
+    @Override
+    public void setStartDate(Date startDate) {
+        // Has to be in the format YYYY-MM-DD
+        setStartDate(startEndDateFormat.format(startDate));
+    }
+
+    @Override
+    public void setStartDate(String startDate) {
+        // Has to be in the format YYYY-MM-DD
+        setStartDate(getElement(), startDate);
+    }
+
+    @Override
+    public void setStartView(DateTimePickerView dateTimePickerView) {
+        this.startView = dateTimePickerView;
+    }
+
+    @Override
+    public void setViewSelect(DateTimePickerView dateTimePickerView) {
+        this.viewSelect = dateTimePickerView;
+
+        // We keep the min view the same as the view select
+        if (viewSelect != minView) {
+            setMinView(dateTimePickerView);
+        }
+    }
+
+    @Override
+    public void setWeekStart(DateTimePickerDayOfWeek weekStart) {
+        this.weekStart = weekStart;
+    }
+
+    @Override
+    public void setFormat(final String format) {
+        this.format = format;
+
+        // Get the old value
+        final Date oldValue = getValue();
+
+        // Make the new DateTimeFormat
+        setDateTimeFormat(format);
+
+        if (oldValue != null) {
+            setValue(oldValue);
+        }
+    }
+
+    private void setDateTimeFormat(String format) {
+        // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
+        // for more information on syntax
+
+        // Need to replace m with M for months
+        format = format.replaceAll("m", "M");
+
+        // Need to replace all i with m for minutes
+        format = format.replaceAll("i", "m");
+
+        // Need to replace P or p with a for meridian
+        format = format.replaceAll("p", "a");
+        format = format.replaceAll("P", "a");
+
+        this.dateTimeFormat = DateTimeFormat.getFormat(format);
+    }
+
+    public Date getValue() {
+        try {
+            return dateTimeFormat != null && textBox.getValue() != null ? dateTimeFormat.parse(textBox.getValue()) : null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String getBaseValue() {
+        return textBox.getValue();
+    }
+
     public void setValue(final Date value) {
         setValue(value, false);
     }
 
-    @Override
     public void setValue(final Date value, final boolean fireEvents) {
         // We schedule a fixed delay to that we can make sure the element is properly loaded
         // so that we can set the value on it
@@ -254,10 +370,11 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
             @Override
             public boolean execute() {
                 if (DateTimeBoxBase.this.isAttached()) {
-                    updateValue(textBox.getElement(), value.toString());
+                    textBox.setValue(value != null ? dateTimeFormat.format(value) : null);
+                    update(textBox.getElement());
 
                     if (fireEvents) {
-                        ValueChangeEvent.fire(DateTimeBoxBase.this, value);
+//                        ValueChangeEvent.fire(DateTimeBoxBase.this, value);
                     }
                     return false;
                 } else {
@@ -265,11 +382,6 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
                 }
             }
         }, 200);
-    }
-
-    @Override
-    public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<Date> handler) {
-        return addHandler(handler, ValueChangeEvent.getType());
     }
 
     /**
@@ -284,23 +396,7 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
     @Override
     protected void onUnload() {
         super.onUnload();
-        execute("remove");
-    }
-
-    public void onChange() {
-        ValueChangeEvent.fire(this, getValue());
-    }
-
-    public void onShow(final Event e) {
-        // On show we put focus on the textbox
-        textBox.setFocus(true);
-        fireEvent(new ShowEvent(e));
-    }
-
-    public void onHide(final Event e) {
-        // On hide we remove focus from the textbox
-        textBox.setFocus(false);
-        fireEvent(new HideEvent(e));
+        remove(getElement());
     }
 
     protected void configure() {
@@ -308,80 +404,104 @@ public class DateTimeBoxBase extends Widget implements HasValue<Date>, HasEnable
     }
 
     protected void configure(final Widget w) {
-        w.getElement().setAttribute("data-format", format);
-        configure(w.getElement(), showTime, showDate, useStrict, timeIconClass, dateIconClass, upIconClass, downIconClass);
+        w.getElement().setAttribute("data-date-format", format);
+        configure(w.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
+                startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
+                keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian);
     }
 
     protected void execute(final String cmd) {
         execute(getElement(), cmd);
     }
 
-    // @formatter:off
-
-    protected native JsDate parse(final String dateStr, final String format) /*-{
-        return $wnd.moment(dateStr, format).toDate();
-    }-*/;
-
-    protected native String format(final Date date, final String format) /*-{
-        return $wnd.moment(date).format(format);
-    }-*/;
-
-    protected native void updateValue(Element e, String newDate) /*-{
-        if ($wnd.jQuery(e).data('DateTimePicker')) {
-            $wnd.jQuery(e).data('DateTimePicker').setDate(newDate);
-        }
-    }-*/;
-
-    protected native void show(Element e) /*-{
-        if ($wnd.jQuery(e).data('DateTimePicker')) {
-            $wnd.jQuery(e).data('DateTimePicker').show();
-        }
-    }-*/;
-
-    protected native void hide(Element e) /*-{
-        if ($wnd.jQuery(e).data('DateTimePicker')) {
-            $wnd.jQuery(e).data('DateTimePicker').hide();
-        }
-    }-*/;
-
-    protected native void setStartDate(Element e, String startDate) /*-{
-        if ($wnd.jQuery(e).data('DateTimePicker')) {
-            $wnd.jQuery(e).data('DateTimePicker').setStartDate(new Date(startDate));
-        }
-    }-*/;
-
-    protected native void setEndDate(Element e, String endDate) /*-{
-        if ($wnd.jQuery(e).data('DateTimePicker')) {
-            $wnd.jQuery(e).data('DateTimePicker').setEndDate(new Date(endDate));
-        }
-    }-*/;
-
     private native void execute(Element e, String cmd) /*-{
         $wnd.jQuery(e).datetimepicker(cmd);
     }-*/;
 
-    protected native void configure(Element e, boolean showTime, boolean showDate, boolean useStrict,
-                                    String timeIconClass, String dateIconClass, String upIconClass, String downIconClass) /*-{
+    private native void remove(Element e) /*-{
+        $wnd.jQuery(e).datetimepicker('remove');
+    }-*/;
+
+    private native void show(Element e) /*-{
+        $wnd.jQuery(e).datetimepicker('show');
+    }-*/;
+
+    private native void hide(Element e) /*-{
+        $wnd.jQuery(e).datetimepicker('hide');
+    }-*/;
+
+    private native void update(Element e) /*-{
+        $wnd.jQuery(e).datetimepicker('update');
+    }-*/;
+
+    private native void setStartDate(Element e, String startDate) /*-{
+        $wnd.jQuery(e).datetimepicker('setStartDate', startDate);
+    }-*/;
+
+    private native void setEndDate(Element e, String endDate) /*-{
+        $wnd.jQuery(e).datetimepicker('setEndDate', endDate);
+    }-*/;
+
+    private native void setDaysOfWeekDisabled(Element e, String daysOfWeekDisabled) /*-{
+        $wnd.jQuery(e).datetimepicker('setDaysOfWeekDisabled', daysOfWeekDisabled);
+    }-*/;
+
+    protected native void configure(Element e, String format, int weekStart, String daysOfWeekDisabled,
+                                    boolean autoClose, int startView, int minView,
+                                    int maxView, boolean todayBtn, boolean highlightToday, boolean keyboardNavigation,
+                                    boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian) /*-{
         var that = this;
         $wnd.jQuery(e).datetimepicker({
-            pickDate: showDate,
-            pickTime: showTime,
-            useStrict: useStrict,
-            icons: {
-                time: timeIconClass,
-                date: dateIconClass,
-                up: upIconClass,
-                down: downIconClass
-            }
+            format: format,
+            weekStart: weekStart,
+            daysOfWeekDisabled: daysOfWeekDisabled,
+            autoclose: autoClose,
+            startView: startView,
+            minView: minView,
+            maxView: maxView,
+            todayBtn: todayBtn,
+            todayHighlight: highlightToday,
+            keyboardNavigation: keyboardNavigation,
+            forceParse: forceParse,
+            minuteStep: minuteStep,
+            showMeridian: showMeridian
         })
-            .on('change.dp', function () {
-                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onChange()();
-            })
-            .on("show.dp", function (e) {
+            .on('show', function (e) {
                 that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onShow(Lcom/google/gwt/user/client/Event;)(e);
             })
-            .on("hide.dp", function (e) {
+            .on("hide", function (e) {
                 that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onHide(Lcom/google/gwt/user/client/Event;)(e);
+            })
+            .on("changeDate", function (e) {
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onChangeDate(Lcom/google/gwt/user/client/Event;)(e);
+            })
+            .on("changeYear", function (e) {
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onChangeYear(Lcom/google/gwt/user/client/Event;)(e);
+            })
+            .on("changeMonth", function (e) {
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onChangeMonth(Lcom/google/gwt/user/client/Event;)(e);
+            })
+            .on("outOfRange", function (e) {
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onOutOfRange(Lcom/google/gwt/user/client/Event;)(e);
             });
     }-*/;
+
+    protected String toDaysOfWeekDisabledString(DateTimePickerDayOfWeek... dateTimePickerDayOfWeeks) {
+        this.daysOfWeekDisabled = dateTimePickerDayOfWeeks;
+
+        StringBuilder builder = new StringBuilder();
+
+        if (dateTimePickerDayOfWeeks != null) {
+            int i = 0;
+            for (DateTimePickerDayOfWeek dayOfWeek : dateTimePickerDayOfWeeks) {
+                builder.append(dayOfWeek.getValue());
+
+                i++;
+                if (i < dateTimePickerDayOfWeeks.length) {
+                    builder.append(",");
+                }
+            }
+        }
+        return builder.toString();
+    }
 }

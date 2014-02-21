@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,13 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import java.util.Date;
-
 /**
- * Date. Default: End of time
+ * Number. Default: 5
  * <p/>
- * The latest date that may be selected; all later dates will be disabled.
+ * The increment used to build the hour view. A preset is created for each minuteStep minutes.
  *
  * @author Joshua Godi
  */
-public interface HasEndDate {
-    void setEndDate(Date endDate);
-
-    void setEndDate(String endDate);
+public interface HasMinuteStep {
+    void setMinuteStep(int minuteStep);
 }

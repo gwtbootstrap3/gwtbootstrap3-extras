@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,15 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import org.gwtbootstrap3.client.ui.Icon;
-
 /**
+ * Boolean. Default: true
+ * <p/>
+ * Whether or not to force parsing of the input value when the picker is closed.
+ * That is, when an invalid date is left in the input field by the user, the picker will forcibly parse
+ * that value, and set the input's value to the new, valid date, conforming to the given format.
+ *
  * @author Joshua Godi
  */
-public interface HasDateIcon {
-    void setDateIcon(Icon icon);
+public interface HasForceParse {
+    void setForceParse(boolean forceParse);
 }

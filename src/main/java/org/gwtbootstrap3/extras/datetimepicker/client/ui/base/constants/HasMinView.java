@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,14 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import org.gwtbootstrap3.client.ui.Icon;
-
 /**
+ * Enum. Default: HOUR
+ * <p/>
+ * The lowest view that the datetimepicker should show.
+ *
  * @author Joshua Godi
+ * @see org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerView
  */
-public interface HasDownIcon {
-    void setDownIcon(Icon icon);
+public interface HasMinView {
+    void setMinView(DateTimePickerView dateTimePickerView);
 }

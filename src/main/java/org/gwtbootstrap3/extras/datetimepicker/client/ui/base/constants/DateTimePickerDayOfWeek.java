@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,26 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import java.util.Date;
-
 /**
- * Date. Default: End of time
- * <p/>
- * The latest date that may be selected; all later dates will be disabled.
- *
+ * Day of the week enum for easy access
  * @author Joshua Godi
  */
-public interface HasEndDate {
-    void setEndDate(Date endDate);
+public enum DateTimePickerDayOfWeek {
+    SUNDAY(0),
+    MONDAY(1),
+    TUESDAY(2),
+    WEDNESDAY(3),
+    THURSDAY(4),
+    FRIDAY(5),
+    SATURDAY(6);
 
-    void setEndDate(String endDate);
+    private final int value;
+
+    DateTimePickerDayOfWeek(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }

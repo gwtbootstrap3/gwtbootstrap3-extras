@@ -1,10 +1,10 @@
-package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
+package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events;
 
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,12 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
+import com.google.gwt.event.shared.EventHandler;
+
 /**
  * @author Joshua Godi
  */
-public interface HasShowTimePicker {
-    void setShowTimePicker(boolean showTimePicker);
+public interface OutOfRangeHandler extends EventHandler {
+    void onOutOfRange(final OutOfRangeEvent evt);
 }
+

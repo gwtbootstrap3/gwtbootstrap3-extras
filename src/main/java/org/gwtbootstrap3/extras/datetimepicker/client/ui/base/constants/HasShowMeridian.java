@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,15 +20,13 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import com.google.gwt.event.shared.HandlerRegistration;
-import org.gwtbootstrap3.client.shared.event.HideHandler;
-import org.gwtbootstrap3.client.shared.event.ShowHandler;
-
 /**
+ * Boolean. Default: false
+ * <p/>
+ * This option will enable meridian views for day and hour views.
+ *
  * @author Joshua Godi
  */
-public interface HasVisibleHandlers {
-    HandlerRegistration addHideHandler(HideHandler handler);
-
-    HandlerRegistration addShowHandler(ShowHandler handler);
+public interface HasShowMeridian {
+    void setShowMeridian(boolean showMeridian);
 }

@@ -21,6 +21,28 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  */
 
 /**
+ * String. Default: 'mm/dd/yyyy'
+ * <p/>
+ * The date format, combination of p, P, h, hh, i, ii, s, ss, d, dd, m, mm, M, MM, yy, yyyy.
+ * p : meridian in lower case ('am' or 'pm') - according to locale file
+ * P : meridian in upper case ('AM' or 'PM') - according to locale file
+ * s : seconds without leading zeros
+ * ss : seconds, 2 digits with leading zeros
+ * i : minutes without leading zeros
+ * ii : minutes, 2 digits with leading zeros
+ * h : hour without leading zeros - 24-hour format
+ * hh : hour, 2 digits with leading zeros - 24-hour format
+ * H : hour without leading zeros - 12-hour format
+ * HH : hour, 2 digits with leading zeros - 12-hour format
+ * d : day of the month without leading zeros
+ * dd : day of the month, 2 digits with leading zeros
+ * m : numeric representation of month without leading zeros
+ * mm : numeric representation of the month, 2 digits with leading zeros
+ * M : short textual representation of a month, three letters
+ * MM : full textual representation of a month, such as January or March
+ * yy : two digit representation of a year
+ * yyyy : full numeric representation of a year, 4 digits
+ *
  * @author Joshua Godi
  */
 public interface HasFormat {

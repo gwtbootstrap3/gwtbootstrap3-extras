@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,13 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import java.util.Date;
-
 /**
- * Date. Default: End of time
+ * Boolean. Default: true
  * <p/>
- * The latest date that may be selected; all later dates will be disabled.
+ * Whether or not to allow date navigation by arrow keys.
  *
  * @author Joshua Godi
  */
-public interface HasEndDate {
-    void setEndDate(Date endDate);
-
-    void setEndDate(String endDate);
+public interface HasKeyboardNavigation {
+    void setHasKeyboardNavigation(boolean hasKeyboardNavigation);
 }

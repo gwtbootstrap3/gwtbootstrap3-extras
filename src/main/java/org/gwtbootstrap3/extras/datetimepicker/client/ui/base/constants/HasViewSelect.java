@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,15 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-import java.util.Date;
-
 /**
- * Date. Default: End of time
+ * Default: same as minView
  * <p/>
- * The latest date that may be selected; all later dates will be disabled.
+ * With this option you can select the view from which the date will be selected. By default it's the last one,
+ * however you can choose the first one, so at each click the date will be updated.
  *
  * @author Joshua Godi
+ * @see org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerView
  */
-public interface HasEndDate {
-    void setEndDate(Date endDate);
-
-    void setEndDate(String endDate);
+public interface HasViewSelect {
+    void setViewSelect(DateTimePickerView dateTimePickerView);
 }
