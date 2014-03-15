@@ -21,7 +21,7 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants;
  */
 
 public enum ColorType {
-    PRIMARY("primary"), INFO("info"), SUCCESS("primary"), WARNING("warning"), DANGER("danger"), DEFAULT("default");
+    PRIMARY("primary"), INFO("info"), SUCCESS("success"), WARNING("warning"), DANGER("danger"), DEFAULT("default");
 
     private final String type;
 
