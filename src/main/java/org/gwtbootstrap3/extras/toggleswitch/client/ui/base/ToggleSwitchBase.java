@@ -230,6 +230,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
                                               }-*/;
 
     private native void switchDestroy(Element e) /*-{
+                                                 $wnd.jQuery(e).off('switchChange');
                                                  $wnd.jQuery(e).bootstrapSwitch('destroy');
                                                  }-*/;
 
