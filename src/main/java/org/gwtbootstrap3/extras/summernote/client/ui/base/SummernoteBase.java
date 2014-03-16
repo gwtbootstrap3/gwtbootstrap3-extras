@@ -196,6 +196,14 @@ public class SummernoteBase extends TextArea {
 
     private native void destroy(Element e) /*-{
         $wnd.jQuery(e).destroy();
+        $wnd.jQuery(e).off('oninit');
+        $wnd.jQuery(e).off('onenter');
+        $wnd.jQuery(e).off('onfocus');
+        $wnd.jQuery(e).off('onkeydown');
+        $wnd.jQuery(e).off('onblur');
+        $wnd.jQuery(e).off('onkeyup');
+        $wnd.jQuery(e).off('ononkeydowninit');
+        $wnd.jQuery(e).off('onImageUpload');
     }-*/;
 
     private native void setCode(Element e, String code) /*-{

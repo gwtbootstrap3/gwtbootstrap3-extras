@@ -76,6 +76,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
     protected void onUnload() {
         super.onUnload();
         sliderCommand(getElement(), "destroy");
+        unbindHandlers(getElement());
     }
 
     public void onChange(final double value) {
@@ -277,5 +278,9 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
 
     private native void sliderCommand(Element e, String cmd) /*-{
         $wnd.jQuery(e).slider(cmd);
+    }-*/;
+
+    private native void unbindHandlers(Element e) /*-{
+        $wnd.jQuery(e).off('slide');
     }-*/;
 }
