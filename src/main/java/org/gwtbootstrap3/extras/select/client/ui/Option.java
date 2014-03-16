@@ -37,6 +37,14 @@ public class Option extends AbstractTextWidget {
         super(DOM.createOption());
     }
 
+    public void setName(final String name) {
+        attributeMixin.setAttribute(NAME, name);
+    }
+
+    public String getName() {
+        return attributeMixin.getAttribute(NAME);
+    }
+
     public void setSubtext(final String subtext) {
         attributeMixin.setAttribute(DATA_SUBTEXT, subtext);
     }
