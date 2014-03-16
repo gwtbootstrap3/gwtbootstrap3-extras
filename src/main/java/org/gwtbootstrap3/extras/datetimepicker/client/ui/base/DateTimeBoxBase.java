@@ -400,12 +400,12 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     protected void configure() {
-        configure(this);
+        configure(this, this.getParent());
     }
 
-    protected void configure(final Widget w) {
+    protected void configure(final Widget w, final Widget widgetParent) {
         w.getElement().setAttribute("data-date-format", format);
-        configure(w.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
+        configure(w.getElement(), widgetParent.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
                 startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
                 keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian);
     }
@@ -420,6 +420,12 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
 
     private native void remove(Element e) /*-{
         $wnd.jQuery(e).datetimepicker('remove');
+        $wnd.jQuery(e).off('show');
+        $wnd.jQuery(e).off('hide');
+        $wnd.jQuery(e).off('changeDate');
+        $wnd.jQuery(e).off('changeYear');
+        $wnd.jQuery(e).off('changeMonth');
+        $wnd.jQuery(e).off('outOfRange');
     }-*/;
 
     private native void show(Element e) /*-{
@@ -446,7 +452,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         $wnd.jQuery(e).datetimepicker('setDaysOfWeekDisabled', daysOfWeekDisabled);
     }-*/;
 
-    protected native void configure(Element e, String format, int weekStart, String daysOfWeekDisabled,
+    protected native void configure(Element e, Element p, String format, int weekStart, String daysOfWeekDisabled,
                                     boolean autoClose, int startView, int minView,
                                     int maxView, boolean todayBtn, boolean highlightToday, boolean keyboardNavigation,
                                     boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian) /*-{
@@ -464,7 +470,8 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
             keyboardNavigation: keyboardNavigation,
             forceParse: forceParse,
             minuteStep: minuteStep,
-            showMeridian: showMeridian
+            showMeridian: showMeridian,
+            container: p
         })
             .on('show', function (e) {
                 that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onShow(Lcom/google/gwt/user/client/Event;)(e);
