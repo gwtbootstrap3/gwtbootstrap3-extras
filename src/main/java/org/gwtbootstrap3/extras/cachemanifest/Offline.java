@@ -68,7 +68,7 @@ import com.google.gwt.core.ext.linker.LinkerOrder.Order;
  * <pre>
  * {@code
  *  <!doctype html>
- *  <html manifest="/<modulename>.manifest">
+ *  <html manifest="/<modulename>/appcache.manifest">
  *  ....
  *  </html>
  * }
@@ -112,7 +112,7 @@ public class Offline extends AbstractLinker {
 
 		String manifestString = buildManifestContents(resources);
 		if (manifestString != null) {
-			EmittedArtifact manifest = emitString(logger, manifestString, context.getModuleName() + ".manifest");
+			EmittedArtifact manifest = emitString(logger, manifestString, "appcache.manifest");
 			artifactset.add(manifest);
 		}
 		return artifactset;
@@ -155,7 +155,7 @@ public class Offline extends AbstractLinker {
 		sb.append("\n");
 		sb.append("CACHE:\n");
 		for (String resourcePath : resources) {
-			sb.append(resourcePath + "\n");
+			sb.append("/" + resourcePath + "\n");
 		}
 
 		sb.append("\n\n");
