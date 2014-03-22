@@ -44,11 +44,13 @@ import com.google.gwt.core.ext.linker.LinkerOrder.Order;
  * Static resources that are needed (outside of the compile unit) require
  * specific inclusion. These files would typically be index.html, css files or
  * any resources not included within the GWT application. These files are
- * included through the following property added to your module.gwt.xml file:
+ * included through the cachemanifest_static_files property added to your
+ * module.gwt.xml file. The path is relative to manifest, so include a full path
+ * if you include resources outside of the apps path.
  * 
  * <pre>
  * {@code
- * <extend-configuration-property name="cachemanifest_static_files" value="index.html" />
+ * <extend-configuration-property name="cachemanifest_static_files" value="/index.html" />
  * }
  * </pre>
  * 
@@ -68,7 +70,7 @@ import com.google.gwt.core.ext.linker.LinkerOrder.Order;
  * <pre>
  * {@code
  *  <!doctype html>
- *  <html manifest="/<modulename>/appcache.manifest">
+ *  <html manifest="<modulename>/appcache.manifest">
  *  ....
  *  </html>
  * }
@@ -89,7 +91,7 @@ public class Offline extends AbstractLinker {
 
 	@Override
 	public ArtifactSet link(TreeLogger logger, LinkerContext context, ArtifactSet artifacts) throws UnableToCompleteException {
-		
+
 		ArtifactSet artifactset = new ArtifactSet(artifacts);
 
 		HashSet<String> resources = new HashSet<String>();
@@ -97,11 +99,11 @@ public class Offline extends AbstractLinker {
 
 			if (skipArtifact(emitted))
 				continue;
-			resources.add(context.getModuleName() + "/" + emitted.getPartialPath());
+			resources.add(emitted.getPartialPath());
 		}
 
-		SortedSet<ConfigurationProperty> properties = context.getConfigurationProperties();
-		for (ConfigurationProperty configurationProperty : properties) {
+		SortedSet<ConfigurationProperty> staticFileProperties = context.getConfigurationProperties();
+		for (ConfigurationProperty configurationProperty : staticFileProperties) {
 			String name = configurationProperty.getName();
 			if (CACHEMANIFEST_STATIC_FILES_PROPERTY.equals(name)) {
 				for (String value : configurationProperty.getValues()) {
@@ -155,7 +157,7 @@ public class Offline extends AbstractLinker {
 		sb.append("\n");
 		sb.append("CACHE:\n");
 		for (String resourcePath : resources) {
-			sb.append("/" + resourcePath + "\n");
+			sb.append(resourcePath + "\n");
 		}
 
 		sb.append("\n\n");
