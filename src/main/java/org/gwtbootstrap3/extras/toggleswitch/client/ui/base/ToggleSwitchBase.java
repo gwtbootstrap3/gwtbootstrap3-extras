@@ -59,6 +59,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     private ColorType offColor = ColorType.PRIMARY;
     private String onText = "ON";
     private String offText = "OFF";
+    private String labelText = "&nbsp;";
     private boolean animated = true;
     private final IdMixin<ToggleSwitchBase> idMixin = new IdMixin<ToggleSwitchBase>(this);
 
@@ -79,6 +80,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         setAnimated(animated);
         setOnText(onText);
         setOffText(offText);
+        setLabelText(labelText);
     }
 
     @Override
@@ -189,6 +191,16 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         Icon icon = new Icon(iconType);
         icon.setSize(IconSize.LARGE);
         setOffText(icon.getElement().toString());
+    }
+
+    public String getLabelText() {
+        return labelText;
+    }
+
+    public void setLabelText(final String labelText) {
+        if (ToggleSwitchBase.this.isAttached())
+            switchCmd(getElement(), "labelText", labelText);
+        this.labelText = labelText;
     }
 
     @Override
