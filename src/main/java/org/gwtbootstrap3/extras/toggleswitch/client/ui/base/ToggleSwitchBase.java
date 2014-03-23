@@ -23,8 +23,11 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
 import org.gwtbootstrap3.client.ui.HasId;
 import org.gwtbootstrap3.client.ui.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.HasSize;
+import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
 import org.gwtbootstrap3.client.ui.base.mixin.IdMixin;
+import org.gwtbootstrap3.client.ui.constants.IconSize;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.ColorType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.SizeType;
 
@@ -56,6 +59,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     private ColorType offColor = ColorType.PRIMARY;
     private String onText = "ON";
     private String offText = "OFF";
+    private String labelText = "&nbsp;";
     private boolean animated = true;
     private final IdMixin<ToggleSwitchBase> idMixin = new IdMixin<ToggleSwitchBase>(this);
 
@@ -76,6 +80,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         setAnimated(animated);
         setOnText(onText);
         setOffText(offText);
+        setLabelText(labelText);
     }
 
     @Override
@@ -166,6 +171,12 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         this.onText = onText;
     }
 
+    public void setOnIcon(final IconType iconType) {
+        Icon icon = new Icon(iconType);
+        icon.setSize(IconSize.LARGE);
+        setOnText(icon.getElement().toString());
+    }
+
     public String getOffText() {
         return offText;
     }
@@ -174,6 +185,22 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         if (ToggleSwitchBase.this.isAttached())
             switchCmd(getElement(), "offText", offText);
         this.offText = offText;
+    }
+
+    public void setOffIcon(final IconType iconType) {
+        Icon icon = new Icon(iconType);
+        icon.setSize(IconSize.LARGE);
+        setOffText(icon.getElement().toString());
+    }
+
+    public String getLabelText() {
+        return labelText;
+    }
+
+    public void setLabelText(final String labelText) {
+        if (ToggleSwitchBase.this.isAttached())
+            switchCmd(getElement(), "labelText", labelText);
+        this.labelText = labelText;
     }
 
     @Override
