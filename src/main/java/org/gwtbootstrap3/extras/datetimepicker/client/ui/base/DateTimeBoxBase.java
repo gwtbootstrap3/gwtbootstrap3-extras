@@ -71,12 +71,21 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     private int minuteStep = 5;
     private DateTimePickerView viewSelect = DateTimePickerView.HOUR;
     private boolean showMeridian = false;
+    private Widget parent = null;
 
     public DateTimeBoxBase() {
         textBox = new TextBox();
         setElement(textBox.getElement());
         setFormat(format);
         setValue(new Date());
+    }
+
+    public void setParent(final Widget parent) {
+        this.parent = parent;
+    }
+
+    public Widget getParent() {
+        return parent;
     }
 
     public TextBox getTextBox() {
@@ -400,7 +409,13 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     protected void configure() {
-        configure(this, this.getParent());
+        // If the user hasn't specified the parent, default to the widget's parent
+        // This makes sure the modal scroll with the content correctly
+        if (parent == null) {
+            configure(this, this.getParent());
+        } else {
+            configure(this, parent);
+        }
     }
 
     protected void configure(final Widget w, final Widget widgetParent) {
