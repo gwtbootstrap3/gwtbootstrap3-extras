@@ -71,7 +71,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     private int minuteStep = 5;
     private DateTimePickerView viewSelect = DateTimePickerView.HOUR;
     private boolean showMeridian = false;
-    private Widget parent = null;
+    private Widget container = null;
 
     public DateTimeBoxBase() {
         textBox = new TextBox();
@@ -80,12 +80,12 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         setValue(new Date());
     }
 
-    public void setParent(final Widget parent) {
-        this.parent = parent;
+    public void setContainer(final Widget container) {
+        this.container = container;
     }
 
-    public Widget getParent() {
-        return parent;
+    public Widget getContainer() {
+        return container;
     }
 
     public TextBox getTextBox() {
@@ -409,18 +409,18 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     protected void configure() {
-        // If the user hasn't specified the parent, default to the widget's parent
+        // If the user hasn't specified the container, default to the widget's parent
         // This makes sure the modal scroll with the content correctly
-        if (parent == null) {
+        if (container == null) {
             configure(this, this.getParent());
         } else {
-            configure(this, parent);
+            configure(this, container);
         }
     }
 
-    protected void configure(final Widget w, final Widget widgetParent) {
+    protected void configure(final Widget w, final Widget container) {
         w.getElement().setAttribute("data-date-format", format);
-        configure(w.getElement(), widgetParent.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
+        configure(w.getElement(), container.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
                 startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
                 keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian);
     }
