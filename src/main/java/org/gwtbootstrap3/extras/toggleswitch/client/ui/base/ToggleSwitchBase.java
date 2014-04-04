@@ -174,7 +174,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     public void setOnIcon(final IconType iconType) {
         Icon icon = new Icon(iconType);
         icon.setSize(IconSize.LARGE);
-        setOnText(icon.getElement().toString());
+        setOnText(icon.getElement().getString());
     }
 
     public String getOffText() {
@@ -190,7 +190,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     public void setOffIcon(final IconType iconType) {
         Icon icon = new Icon(iconType);
         icon.setSize(IconSize.LARGE);
-        setOffText(icon.getElement().toString());
+        setOffText(icon.getElement().getString());
     }
 
     public String getLabelText() {
