@@ -20,7 +20,7 @@ package org.gwtbootstrap3.extras.select.client.ui;
  * #L%
  */
 
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.dom.client.Document;
 import org.gwtbootstrap3.client.ui.HasEnabled;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
@@ -40,7 +40,7 @@ public class OptGroup extends ComplexWidget implements HasEnabled {
     private final AttributeMixin<OptGroup> attributeMixin = new AttributeMixin<OptGroup>(this);
 
     public OptGroup() {
-        setElement(DOM.createElement(OPT_GROUP));
+        setElement(Document.get().createElement(OPT_GROUP));
     }
 
     public void setLabel(final String label) {

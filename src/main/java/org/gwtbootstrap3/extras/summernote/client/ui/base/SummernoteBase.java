@@ -46,19 +46,19 @@ public class SummernoteBase extends TextArea {
     public SummernoteBase() {
     }
 
-    public void setHeight(int height) {
+    public void setHeight(final int height) {
         this.height = height;
     }
 
-    public void setHasFocus(boolean hasFocus) {
+    public void setHasFocus(final boolean hasFocus) {
         this.hasFocus = hasFocus;
     }
 
-    public void setToolbar(Toolbar toolbar) {
+    public void setToolbar(final Toolbar toolbar) {
         this.toolbar = toolbar;
     }
 
-    public void setCode(String code) {
+    public void setCode(final String code) {
         this.code = code;
     }
 

@@ -72,92 +72,92 @@ public class Toolbar {
     private boolean showCodeViewButton;
     private boolean showHelpButton;
 
-    public Toolbar setShowStyleButton(boolean showStyleButton) {
+    public Toolbar setShowStyleButton(final boolean showStyleButton) {
         this.showStyleButton = showStyleButton;
         return this;
     }
 
-    public Toolbar setShowBoldButton(boolean showBoldButton) {
+    public Toolbar setShowBoldButton(final boolean showBoldButton) {
         this.showBoldButton = showBoldButton;
         return this;
     }
 
-    public Toolbar setShowItalicButton(boolean showItalicButton) {
+    public Toolbar setShowItalicButton(final boolean showItalicButton) {
         this.showItalicButton = showItalicButton;
         return this;
     }
 
-    public Toolbar setShowUnderlineButton(boolean showUnderlineButton) {
+    public Toolbar setShowUnderlineButton(final boolean showUnderlineButton) {
         this.showUnderlineButton = showUnderlineButton;
         return this;
     }
 
-    public Toolbar setShowClearButton(boolean showClearButton) {
+    public Toolbar setShowClearButton(final boolean showClearButton) {
         this.showClearButton = showClearButton;
         return this;
     }
 
-    public Toolbar setShowFontSizeButton(boolean showFontSizeButton) {
+    public Toolbar setShowFontSizeButton(final boolean showFontSizeButton) {
         this.showFontSizeButton = showFontSizeButton;
         return this;
     }
 
-    public Toolbar setShowColorButton(boolean showColorButton) {
+    public Toolbar setShowColorButton(final boolean showColorButton) {
         this.showColorButton = showColorButton;
         return this;
     }
 
-    public Toolbar setShowUnorderedListButton(boolean showUnorderedListButton) {
+    public Toolbar setShowUnorderedListButton(final boolean showUnorderedListButton) {
         this.showUnorderedListButton = showUnorderedListButton;
         return this;
     }
 
-    public Toolbar setShowOrderedListButton(boolean showOrderedListButton) {
+    public Toolbar setShowOrderedListButton(final boolean showOrderedListButton) {
         this.showOrderedListButton = showOrderedListButton;
         return this;
     }
 
-    public Toolbar setShowParagraphButton(boolean showParagraphButton) {
+    public Toolbar setShowParagraphButton(final boolean showParagraphButton) {
         this.showParagraphButton = showParagraphButton;
         return this;
     }
 
-    public Toolbar setShowLineHeightButton(boolean showLineHeightButton) {
+    public Toolbar setShowLineHeightButton(final boolean showLineHeightButton) {
         this.showLineHeightButton = showLineHeightButton;
         return this;
     }
 
-    public Toolbar setShowInsertPictureButton(boolean showInsertPictureButton) {
+    public Toolbar setShowInsertPictureButton(final boolean showInsertPictureButton) {
         this.showInsertPictureButton = showInsertPictureButton;
         return this;
     }
 
-    public Toolbar setShowInsertLinkButton(boolean showInsertLinkButton) {
+    public Toolbar setShowInsertLinkButton(final boolean showInsertLinkButton) {
         this.showInsertLinkButton = showInsertLinkButton;
         return this;
     }
 
-    public Toolbar setShowInsertTableButton(boolean showInsertTableButton) {
+    public Toolbar setShowInsertTableButton(final boolean showInsertTableButton) {
         this.showInsertTableButton = showInsertTableButton;
         return this;
     }
 
-    public Toolbar setShowHelpButton(boolean showHelpButton) {
+    public Toolbar setShowHelpButton(final boolean showHelpButton) {
         this.showHelpButton = showHelpButton;
         return this;
     }
 
-    public Toolbar setShowInsertVideoButton(boolean showInsertVideoButton) {
+    public Toolbar setShowInsertVideoButton(final boolean showInsertVideoButton) {
         this.showInsertVideoButton = showInsertVideoButton;
         return this;
     }
 
-    public Toolbar setShowFullScreenButton(boolean showFullScreenButton) {
+    public Toolbar setShowFullScreenButton(final boolean showFullScreenButton) {
         this.showFullScreenButton = showFullScreenButton;
         return this;
     }
 
-    public Toolbar setShowCodeViewButton(boolean showCodeViewButton) {
+    public Toolbar setShowCodeViewButton(final boolean showCodeViewButton) {
         this.showCodeViewButton = showCodeViewButton;
         return this;
     }
@@ -165,7 +165,7 @@ public class Toolbar {
     /**
      * Quick toggle to use everything or nothing
      */
-    public Toolbar toggleAll(boolean visible) {
+    public Toolbar toggleAll(final boolean visible) {
         showStyleButton = visible;
         showBoldButton = visible;
         showItalicButton = visible;
@@ -188,7 +188,7 @@ public class Toolbar {
     }
 
     public JsArray build() {
-        JsArray array = JavaScriptObject.createArray().cast();
+        final JsArray array = JavaScriptObject.createArray().cast();
 
         buildArray(showStyleButton, array, STYLE);
         buildStyles(array);
@@ -204,20 +204,20 @@ public class Toolbar {
         return array;
     }
 
-    private void buildArray(boolean toggle, JsArray array, String value) {
+    private void buildArray(final boolean toggle, final JsArray array, final String value) {
         if (toggle) {
             array.push(toJSArray(value, toValueArray(value)));
         }
     }
 
-    private void addToValueArray(boolean toggle, JavaScriptObject object, String value) {
+    private void addToValueArray(final boolean toggle, final JavaScriptObject object, final String value) {
         if (toggle) {
             pushToValueArray(object, value);
         }
     }
 
-    private void buildView(JsArray array) {
-        JsArray view = JavaScriptObject.createArray().cast();
+    private void buildView(final JsArray array) {
+        final JsArray view = JavaScriptObject.createArray().cast();
 
         addToValueArray(showFullScreenButton, view, FULL_SCREEN);
         addToValueArray(showCodeViewButton, view, CODE_VIEW);
@@ -227,8 +227,8 @@ public class Toolbar {
         }
     }
 
-    private void buildInsert(JsArray array) {
-        JsArray insert = JavaScriptObject.createArray().cast();
+    private void buildInsert(final JsArray array) {
+        final JsArray insert = JavaScriptObject.createArray().cast();
 
         addToValueArray(showInsertPictureButton, insert, PICTURE);
         addToValueArray(showInsertLinkButton, insert, LINK);
@@ -239,8 +239,8 @@ public class Toolbar {
         }
     }
 
-    private void buildPara(JsArray array) {
-        JsArray para = JavaScriptObject.createArray().cast();
+    private void buildPara(final JsArray array) {
+        final JsArray para = JavaScriptObject.createArray().cast();
 
         addToValueArray(showUnorderedListButton, para, UL);
         addToValueArray(showOrderedListButton, para, OL);
@@ -251,8 +251,8 @@ public class Toolbar {
         }
     }
 
-    private void buildStyles(JsArray array) {
-        JsArray styles = JavaScriptObject.createArray().cast();
+    private void buildStyles(final JsArray array) {
+        final JsArray styles = JavaScriptObject.createArray().cast();
 
         addToValueArray(showBoldButton, styles, BOLD);
         addToValueArray(showItalicButton, styles, ITALIC);

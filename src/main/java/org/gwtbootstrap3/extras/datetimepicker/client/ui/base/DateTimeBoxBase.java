@@ -52,7 +52,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
 
     private final TextBox textBox;
     private DateTimeFormat dateTimeFormat;
-    private DateTimeFormat startEndDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
+    private final DateTimeFormat startEndDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
 
     /**
      * DEFAULT values
@@ -75,7 +75,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
 
     public DateTimeBoxBase() {
         textBox = new TextBox();
-        setElement(textBox.getElement());
+        setElement((Element) textBox.getElement());
         setFormat(format);
         setValue(new Date());
     }
@@ -160,7 +160,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     @Override
-    public void setAutoClose(boolean autoClose) {
+    public void setAutoClose(final boolean autoClose) {
         this.autoClose = autoClose;
     }
 
@@ -173,7 +173,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     @Override
-    public HandlerRegistration addShowHandler(ShowHandler showHandler) {
+    public HandlerRegistration addShowHandler(final ShowHandler showHandler) {
         return addHandler(showHandler, ShowEvent.getType());
     }
 
@@ -186,89 +186,89 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     @Override
-    public HandlerRegistration addHideHandler(HideHandler hideHandler) {
+    public HandlerRegistration addHideHandler(final HideHandler hideHandler) {
         return addHandler(hideHandler, HideEvent.getType());
     }
 
     @Override
-    public void onChangeDate(Event e) {
+    public void onChangeDate(final Event e) {
         fireEvent(new ChangeDateEvent(e));
     }
 
     @Override
-    public HandlerRegistration addChangeDateHandler(ChangeDateHandler changeDateHandler) {
+    public HandlerRegistration addChangeDateHandler(final ChangeDateHandler changeDateHandler) {
         return addHandler(changeDateHandler, ChangeDateEvent.getType());
     }
 
     @Override
-    public void onChangeYear(Event e) {
+    public void onChangeYear(final Event e) {
         fireEvent(new ChangeYearEvent(e));
     }
 
     @Override
-    public HandlerRegistration addChangeYearHandler(ChangeYearHandler changeYearHandler) {
+    public HandlerRegistration addChangeYearHandler(final ChangeYearHandler changeYearHandler) {
         return addHandler(changeYearHandler, ChangeYearEvent.getType());
     }
 
     @Override
-    public void onChangeMonth(Event e) {
+    public void onChangeMonth(final Event e) {
         fireEvent(new ChangeMonthEvent(e));
     }
 
     @Override
-    public HandlerRegistration addChangeMonthHandler(ChangeMonthHandler changeMonthHandler) {
+    public HandlerRegistration addChangeMonthHandler(final ChangeMonthHandler changeMonthHandler) {
         return addHandler(changeMonthHandler, ChangeMonthEvent.getType());
     }
 
     @Override
-    public void onOutOfRange(Event e) {
+    public void onOutOfRange(final Event e) {
         fireEvent(new OutOfRangeEvent(e));
     }
 
     @Override
-    public HandlerRegistration addOutOfRangeHandler(OutOfRangeHandler outOfRangeHandler) {
+    public HandlerRegistration addOutOfRangeHandler(final OutOfRangeHandler outOfRangeHandler) {
         return addHandler(outOfRangeHandler, OutOfRangeEvent.getType());
     }
 
     @Override
-    public void setDaysOfWeekDisabled(DateTimePickerDayOfWeek... daysOfWeekDisabled) {
+    public void setDaysOfWeekDisabled(final DateTimePickerDayOfWeek... daysOfWeekDisabled) {
         setDaysOfWeekDisabled(getElement(), toDaysOfWeekDisabledString(daysOfWeekDisabled));
     }
 
     @Override
-    public void setEndDate(Date endDate) {
+    public void setEndDate(final Date endDate) {
         // Has to be in the format YYYY-MM-DD
         setEndDate(startEndDateFormat.format(endDate));
     }
 
     @Override
-    public void setEndDate(String endDate) {
+    public void setEndDate(final String endDate) {
         // Has to be in the format YYYY-MM-DD
         setEndDate(getElement(), endDate);
     }
 
     @Override
-    public void setForceParse(boolean forceParse) {
+    public void setForceParse(final boolean forceParse) {
         this.forceParse = forceParse;
     }
 
     @Override
-    public void setHighlightToday(boolean highlightToday) {
+    public void setHighlightToday(final boolean highlightToday) {
         this.highlightToday = highlightToday;
     }
 
     @Override
-    public void setHasKeyboardNavigation(boolean hasKeyboardNavigation) {
+    public void setHasKeyboardNavigation(final boolean hasKeyboardNavigation) {
         this.keyboardNavigation = hasKeyboardNavigation;
     }
 
     @Override
-    public void setMaxView(DateTimePickerView dateTimePickerView) {
+    public void setMaxView(final DateTimePickerView dateTimePickerView) {
         this.maxView = dateTimePickerView;
     }
 
     @Override
-    public void setMinView(DateTimePickerView dateTimePickerView) {
+    public void setMinView(final DateTimePickerView dateTimePickerView) {
         this.minView = dateTimePickerView;
 
         // We keep the view select the same as the min view
@@ -278,39 +278,39 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     @Override
-    public void setMinuteStep(int minuteStep) {
+    public void setMinuteStep(final int minuteStep) {
         this.minuteStep = minuteStep;
     }
 
     @Override
-    public void setShowMeridian(boolean showMeridian) {
+    public void setShowMeridian(final boolean showMeridian) {
         this.showMeridian = showMeridian;
     }
 
     @Override
-    public void setShowTodayButton(boolean showTodayButton) {
+    public void setShowTodayButton(final boolean showTodayButton) {
         this.showTodayButton = showTodayButton;
     }
 
     @Override
-    public void setStartDate(Date startDate) {
+    public void setStartDate(final Date startDate) {
         // Has to be in the format YYYY-MM-DD
         setStartDate(startEndDateFormat.format(startDate));
     }
 
     @Override
-    public void setStartDate(String startDate) {
+    public void setStartDate(final String startDate) {
         // Has to be in the format YYYY-MM-DD
         setStartDate(getElement(), startDate);
     }
 
     @Override
-    public void setStartView(DateTimePickerView dateTimePickerView) {
+    public void setStartView(final DateTimePickerView dateTimePickerView) {
         this.startView = dateTimePickerView;
     }
 
     @Override
-    public void setViewSelect(DateTimePickerView dateTimePickerView) {
+    public void setViewSelect(final DateTimePickerView dateTimePickerView) {
         this.viewSelect = dateTimePickerView;
 
         // We keep the min view the same as the view select
@@ -320,7 +320,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     @Override
-    public void setWeekStart(DateTimePickerDayOfWeek weekStart) {
+    public void setWeekStart(final DateTimePickerDayOfWeek weekStart) {
         this.weekStart = weekStart;
     }
 
@@ -359,7 +359,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     public Date getValue() {
         try {
             return dateTimeFormat != null && textBox.getValue() != null ? dateTimeFormat.parse(textBox.getValue()) : null;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return null;
         }
     }
@@ -508,14 +508,14 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
             });
     }-*/;
 
-    protected String toDaysOfWeekDisabledString(DateTimePickerDayOfWeek... dateTimePickerDayOfWeeks) {
+    protected String toDaysOfWeekDisabledString(final DateTimePickerDayOfWeek... dateTimePickerDayOfWeeks) {
         this.daysOfWeekDisabled = dateTimePickerDayOfWeeks;
 
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
 
         if (dateTimePickerDayOfWeeks != null) {
             int i = 0;
-            for (DateTimePickerDayOfWeek dayOfWeek : dateTimePickerDayOfWeeks) {
+            for (final DateTimePickerDayOfWeek dayOfWeek : dateTimePickerDayOfWeeks) {
                 builder.append(dayOfWeek.getValue());
 
                 i++;

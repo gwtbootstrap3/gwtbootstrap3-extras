@@ -35,7 +35,7 @@ public enum DateTimePickerDayOfWeek {
 
     private final int value;
 
-    DateTimePickerDayOfWeek(int value) {
+    DateTimePickerDayOfWeek(final int value) {
         this.value = value;
     }
 

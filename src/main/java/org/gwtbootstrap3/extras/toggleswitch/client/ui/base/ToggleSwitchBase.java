@@ -9,9 +9,9 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,6 +20,13 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
  * #L%
  */
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.*;
 import org.gwtbootstrap3.client.ui.HasId;
 import org.gwtbootstrap3.client.ui.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.HasSize;
@@ -30,19 +37,6 @@ import org.gwtbootstrap3.client.ui.constants.IconSize;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.ColorType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.SizeType;
-
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.HasEnabled;
-import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.HasVisibility;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
-import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Grant Slender
@@ -67,7 +61,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         checkBox = new SimpleCheckBox();
         // remove the gwt styles
         checkBox.removeStyleName(UIObject.getStyleName(checkBox.getElement()));
-        setElement(checkBox.getElement());
+        setElement((Element) checkBox.getElement());
     }
 
     @Override
@@ -172,7 +166,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     public void setOnIcon(final IconType iconType) {
-        Icon icon = new Icon(iconType);
+        final Icon icon = new Icon(iconType);
         icon.setSize(IconSize.LARGE);
         setOnText(icon.getElement().getString());
     }
@@ -188,7 +182,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     public void setOffIcon(final IconType iconType) {
-        Icon icon = new Icon(iconType);
+        final Icon icon = new Icon(iconType);
         icon.setSize(IconSize.LARGE);
         setOffText(icon.getElement().getString());
     }

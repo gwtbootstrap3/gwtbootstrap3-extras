@@ -31,12 +31,12 @@ public class Summernote extends SummernoteBase {
         super();
     }
 
-    public Summernote(int height) {
+    public Summernote(final int height) {
         super();
         setHeight(height);
     }
 
-    public Summernote(int height, boolean hasFocus) {
+    public Summernote(final int height, final boolean hasFocus) {
         this(height);
         setHasFocus(hasFocus);
     }

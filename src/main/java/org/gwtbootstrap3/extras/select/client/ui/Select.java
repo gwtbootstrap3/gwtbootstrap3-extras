@@ -22,12 +22,12 @@ package org.gwtbootstrap3.extras.select.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DOM;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
@@ -54,7 +54,7 @@ public class Select extends ComplexWidget {
     private final AttributeMixin<Select> attributeMixin = new AttributeMixin<Select>(this);
 
     public Select() {
-        setElement(DOM.createSelect());
+        setElement(Document.get().createSelectElement());
         setStyleName(Styles.BOOTSTRAP_SELECT);
     }
 
@@ -232,9 +232,9 @@ public class Select extends ComplexWidget {
     }
 
     public void setValues(final String... values) {
-        JsArrayString array = JavaScriptObject.createArray().cast();
+        final JsArrayString array = JavaScriptObject.createArray().cast();
 
-        for(String value : values) {
+        for(final String value : values) {
             array.push(value);
         }
         setValue(getElement(), array);
@@ -245,7 +245,7 @@ public class Select extends ComplexWidget {
     }
 
     public void setValues(final Option... opts) {
-        String[] values = new String[opts.length];
+        final String[] values = new String[opts.length];
         for(int i = 0; i < opts.length; i++) {
             values[i] = opts[i].getText();
         }
@@ -261,7 +261,7 @@ public class Select extends ComplexWidget {
     }
 
     public List<String> getAllSelectedValues() {
-        List<String> allSelected = new ArrayList<String>();
+        final List<String> allSelected = new ArrayList<String>();
 
         for(int i = 0; i < getItemCount(); i++) {
             if(isItemSelected(i)) {
@@ -271,12 +271,12 @@ public class Select extends ComplexWidget {
         return allSelected;
     }
 
-    public boolean isItemSelected(int index) {
+    public boolean isItemSelected(final int index) {
         checkIndex(index);
         return getSelectElement().getOptions().getItem(index).isSelected();
     }
 
-    public String getValue(int index) {
+    public String getValue(final int index) {
         checkIndex(index);
         return getSelectElement().getOptions().getItem(index).getValue();
     }
@@ -314,7 +314,7 @@ public class Select extends ComplexWidget {
         initialize(getElement());
     }
 
-    private void checkIndex(int index) {
+    private void checkIndex(final int index) {
         if (index < 0 || index >= getItemCount()) {
             throw new IndexOutOfBoundsException();
         }

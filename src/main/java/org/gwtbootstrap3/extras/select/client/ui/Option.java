@@ -20,7 +20,7 @@ package org.gwtbootstrap3.extras.select.client.ui;
  * #L%
  */
 
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.dom.client.Document;
 import org.gwtbootstrap3.client.ui.base.AbstractTextWidget;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
 import org.gwtbootstrap3.client.ui.constants.IconType;
@@ -34,7 +34,7 @@ public class Option extends AbstractTextWidget {
     private final AttributeMixin<Option> attributeMixin = new AttributeMixin<Option>(this);
 
     public Option() {
-        super(DOM.createOption());
+        super(Document.get().createOptionElement());
     }
 
     public void setName(final String name) {

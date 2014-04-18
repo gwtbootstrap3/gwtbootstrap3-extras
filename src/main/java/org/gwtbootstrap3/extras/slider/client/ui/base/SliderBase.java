@@ -60,14 +60,14 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
         textBox = new TextBox();
         // now remove the bootstrap styles
         textBox.removeStyleName(UIObject.getStyleName(textBox.getElement()));
-        setElement(textBox.getElement());
+        setElement((Element) textBox.getElement());
         setValue(5.0);
     }
 
     @Override
     protected void onLoad() {
         super.onLoad();
-        JavaScriptObject options = getOptions(getId(), getMin(), getMax(), getStep(), getOrientation().getType(), getValue(),
+        final JavaScriptObject options = getOptions(getId(), getMin(), getMax(), getStep(), getOrientation().getType(), getValue(),
                 getSelection().getType(), getTooltip().getType(), getHandle().getType(), isReversed(), isEnabled());
         sliderInit(getElement(), options);
     }

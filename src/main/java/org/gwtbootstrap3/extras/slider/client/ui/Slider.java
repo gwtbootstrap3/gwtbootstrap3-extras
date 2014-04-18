@@ -31,14 +31,14 @@ public class Slider extends SliderBase {
         super();
     }
 
-    public Slider(double min, double max, double value) {
+    public Slider(final double min, final double max, final double value) {
         super();
         setMin(min);
         setMax(max);
         setValue(value);
     }
 
-    public Slider(int min, int max, int value) {
+    public Slider(final int min, final int max, final int value) {
         this((double) min, (double) max, (double) value);
     }
 }
