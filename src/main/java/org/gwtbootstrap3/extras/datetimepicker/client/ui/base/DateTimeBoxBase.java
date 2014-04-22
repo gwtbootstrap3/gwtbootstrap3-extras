@@ -159,8 +159,8 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         this.language = language;
 
         // Inject the JS for the language
-        if (!language.getJs().isEmpty()) {
-            ScriptInjector.fromString(language.getJs())
+        if (language.getJs() != null) {
+            ScriptInjector.fromString(language.getJs().getText())
                     .setWindow(ScriptInjector.TOP_WINDOW).inject();
         }
     }
