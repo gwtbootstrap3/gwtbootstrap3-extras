@@ -48,99 +48,138 @@ import java.util.Date;
 public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasResponsiveness,
         HasVisibility, HasPlaceholder, HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse,
         HasFormat, HasHighlightToday, HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView,
-        HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart, HasDateTimePickerHandlers {
+        HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart, HasDateTimePickerHandlers,
+        HasLanguage {
 
     private final TextBox textBox;
+
     private DateTimeFormat dateTimeFormat;
+
     private final DateTimeFormat startEndDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
 
     /**
      * DEFAULT values
      */
     private String format = "mm/dd/yyyy HH:ii";
+
     private DateTimePickerDayOfWeek weekStart = DateTimePickerDayOfWeek.SUNDAY;
+
     private DateTimePickerDayOfWeek[] daysOfWeekDisabled = {};
+
     private boolean autoClose = false;
+
     private DateTimePickerView startView = DateTimePickerView.MONTH;
+
     private DateTimePickerView minView = DateTimePickerView.HOUR;
+
     private DateTimePickerView maxView = DateTimePickerView.DECADE;
+
     private boolean showTodayButton = false;
+
     private boolean highlightToday = false;
+
     private boolean keyboardNavigation = true;
+
     private boolean forceParse = true;
+
     private int minuteStep = 5;
+
     private DateTimePickerView viewSelect = DateTimePickerView.HOUR;
+
     private boolean showMeridian = false;
+
     private Widget container = null;
 
+    private String language = "en"; // default language
+
     public DateTimeBoxBase() {
+
         textBox = new TextBox();
-        setElement((Element) textBox.getElement());
+        setElement((Element)textBox.getElement());
         setFormat(format);
         setValue(new Date());
     }
 
+    public void setLanguage(String language) {
+
+        this.language = language;
+    }
+
     public void setContainer(final Widget container) {
+
         this.container = container;
     }
 
     public Widget getContainer() {
+
         return container;
     }
 
     public TextBox getTextBox() {
+
         return textBox;
     }
 
     public void setAlignment(final ValueBoxBase.TextAlignment align) {
+
         textBox.setAlignment(align);
     }
 
     @Override
     public void setPlaceholder(final String placeHolder) {
+
         textBox.setPlaceholder(placeHolder);
     }
 
     @Override
     public String getPlaceholder() {
+
         return textBox.getPlaceholder();
     }
 
     public void setReadOnly(final boolean readOnly) {
+
         textBox.setReadOnly(readOnly);
     }
 
     public boolean isReadOnly() {
+
         return textBox.isReadOnly();
     }
 
     @Override
     public boolean isEnabled() {
+
         return textBox.isEnabled();
     }
 
     @Override
     public void setEnabled(final boolean enabled) {
+
         textBox.setEnabled(enabled);
     }
 
     @Override
     public void setId(final String id) {
+
         textBox.setId(id);
     }
 
     @Override
     public String getId() {
+
         return textBox.getId();
     }
 
     @Override
     public void setVisibleOn(final String deviceSizeString) {
+
         textBox.setVisibleOn(deviceSizeString);
     }
 
     @Override
     public void setHiddenOn(final String deviceSizeString) {
+
         textBox.setHiddenOn(deviceSizeString);
     }
 
@@ -148,19 +187,23 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
      * Call this whenever changing any settings
      */
     public void reload() {
+
         configure();
     }
 
     public void show() {
+
         show(getElement());
     }
 
     public void hide() {
+
         hide(getElement());
     }
 
     @Override
     public void setAutoClose(final boolean autoClose) {
+
         this.autoClose = autoClose;
     }
 
@@ -174,7 +217,8 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
 
     @Override
     public HandlerRegistration addShowHandler(final ShowHandler showHandler) {
-        return addHandler(showHandler, ShowEvent.getType());
+
+        return addHandler(showHandler,ShowEvent.getType());
     }
 
     @Override
@@ -187,52 +231,62 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
 
     @Override
     public HandlerRegistration addHideHandler(final HideHandler hideHandler) {
-        return addHandler(hideHandler, HideEvent.getType());
+
+        return addHandler(hideHandler,HideEvent.getType());
     }
 
     @Override
     public void onChangeDate(final Event e) {
+
         fireEvent(new ChangeDateEvent(e));
     }
 
     @Override
     public HandlerRegistration addChangeDateHandler(final ChangeDateHandler changeDateHandler) {
-        return addHandler(changeDateHandler, ChangeDateEvent.getType());
+
+        return addHandler(changeDateHandler,ChangeDateEvent.getType());
     }
 
     @Override
     public void onChangeYear(final Event e) {
+
         fireEvent(new ChangeYearEvent(e));
     }
 
     @Override
     public HandlerRegistration addChangeYearHandler(final ChangeYearHandler changeYearHandler) {
-        return addHandler(changeYearHandler, ChangeYearEvent.getType());
+
+        return addHandler(changeYearHandler,ChangeYearEvent.getType());
     }
 
     @Override
     public void onChangeMonth(final Event e) {
+
         fireEvent(new ChangeMonthEvent(e));
     }
 
     @Override
     public HandlerRegistration addChangeMonthHandler(final ChangeMonthHandler changeMonthHandler) {
-        return addHandler(changeMonthHandler, ChangeMonthEvent.getType());
+
+        return addHandler(changeMonthHandler,ChangeMonthEvent.getType());
     }
 
     @Override
     public void onOutOfRange(final Event e) {
+
         fireEvent(new OutOfRangeEvent(e));
     }
 
     @Override
     public HandlerRegistration addOutOfRangeHandler(final OutOfRangeHandler outOfRangeHandler) {
-        return addHandler(outOfRangeHandler, OutOfRangeEvent.getType());
+
+        return addHandler(outOfRangeHandler,OutOfRangeEvent.getType());
     }
 
     @Override
     public void setDaysOfWeekDisabled(final DateTimePickerDayOfWeek... daysOfWeekDisabled) {
-        setDaysOfWeekDisabled(getElement(), toDaysOfWeekDisabledString(daysOfWeekDisabled));
+
+        setDaysOfWeekDisabled(getElement(),toDaysOfWeekDisabledString(daysOfWeekDisabled));
     }
 
     @Override
@@ -244,51 +298,59 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     @Override
     public void setEndDate(final String endDate) {
         // Has to be in the format YYYY-MM-DD
-        setEndDate(getElement(), endDate);
+        setEndDate(getElement(),endDate);
     }
 
     @Override
     public void setForceParse(final boolean forceParse) {
+
         this.forceParse = forceParse;
     }
 
     @Override
     public void setHighlightToday(final boolean highlightToday) {
+
         this.highlightToday = highlightToday;
     }
 
     @Override
     public void setHasKeyboardNavigation(final boolean hasKeyboardNavigation) {
+
         this.keyboardNavigation = hasKeyboardNavigation;
     }
 
     @Override
     public void setMaxView(final DateTimePickerView dateTimePickerView) {
+
         this.maxView = dateTimePickerView;
     }
 
     @Override
     public void setMinView(final DateTimePickerView dateTimePickerView) {
+
         this.minView = dateTimePickerView;
 
         // We keep the view select the same as the min view
-        if (viewSelect != minView) {
+        if(viewSelect != minView) {
             setViewSelect(dateTimePickerView);
         }
     }
 
     @Override
     public void setMinuteStep(final int minuteStep) {
+
         this.minuteStep = minuteStep;
     }
 
     @Override
     public void setShowMeridian(final boolean showMeridian) {
+
         this.showMeridian = showMeridian;
     }
 
     @Override
     public void setShowTodayButton(final boolean showTodayButton) {
+
         this.showTodayButton = showTodayButton;
     }
 
@@ -301,31 +363,35 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     @Override
     public void setStartDate(final String startDate) {
         // Has to be in the format YYYY-MM-DD
-        setStartDate(getElement(), startDate);
+        setStartDate(getElement(),startDate);
     }
 
     @Override
     public void setStartView(final DateTimePickerView dateTimePickerView) {
+
         this.startView = dateTimePickerView;
     }
 
     @Override
     public void setViewSelect(final DateTimePickerView dateTimePickerView) {
+
         this.viewSelect = dateTimePickerView;
 
         // We keep the min view the same as the view select
-        if (viewSelect != minView) {
+        if(viewSelect != minView) {
             setMinView(dateTimePickerView);
         }
     }
 
     @Override
     public void setWeekStart(final DateTimePickerDayOfWeek weekStart) {
+
         this.weekStart = weekStart;
     }
 
     @Override
     public void setFormat(final String format) {
+
         this.format = format;
 
         // Get the old value
@@ -334,7 +400,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         // Make the new DateTimeFormat
         setDateTimeFormat(format);
 
-        if (oldValue != null) {
+        if(oldValue != null) {
             setValue(oldValue);
         }
     }
@@ -344,45 +410,50 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         // for more information on syntax
 
         // Need to replace m with M for months
-        format = format.replaceAll("m", "M");
+        format = format.replaceAll("m","M");
 
         // Need to replace all i with m for minutes
-        format = format.replaceAll("i", "m");
+        format = format.replaceAll("i","m");
 
         // Need to replace P or p with a for meridian
-        format = format.replaceAll("p", "a");
-        format = format.replaceAll("P", "a");
+        format = format.replaceAll("p","a");
+        format = format.replaceAll("P","a");
 
         this.dateTimeFormat = DateTimeFormat.getFormat(format);
     }
 
     public Date getValue() {
+
         try {
             return dateTimeFormat != null && textBox.getValue() != null ? dateTimeFormat.parse(textBox.getValue()) : null;
-        } catch (final Exception e) {
+        } catch(final Exception e) {
             return null;
         }
     }
 
     public String getBaseValue() {
+
         return textBox.getValue();
     }
 
     public void setValue(final Date value) {
-        setValue(value, false);
+
+        setValue(value,false);
     }
 
-    public void setValue(final Date value, final boolean fireEvents) {
+    public void setValue(final Date value,final boolean fireEvents) {
         // We schedule a fixed delay to that we can make sure the element is properly loaded
         // so that we can set the value on it
         Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
+
             @Override
             public boolean execute() {
-                if (DateTimeBoxBase.this.isAttached()) {
+
+                if(DateTimeBoxBase.this.isAttached()) {
                     textBox.setValue(value != null ? dateTimeFormat.format(value) : null);
                     update(textBox.getElement());
 
-                    if (fireEvents) {
+                    if(fireEvents) {
 //                        ValueChangeEvent.fire(DateTimeBoxBase.this, value);
                     }
                     return false;
@@ -390,7 +461,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
                     return true;
                 }
             }
-        }, 200);
+        },200);
     }
 
     /**
@@ -398,12 +469,14 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
      */
     @Override
     protected void onLoad() {
+
         super.onLoad();
         configure();
     }
 
     @Override
     protected void onUnload() {
+
         super.onUnload();
         remove(getElement());
     }
@@ -411,25 +484,27 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     protected void configure() {
         // If the user hasn't specified the container, default to the widget's parent
         // This makes sure the modal scroll with the content correctly
-        if (container == null) {
-            configure(this, this.getParent());
+        if(container == null) {
+            configure(this,this.getParent());
         } else {
-            configure(this, container);
+            configure(this,container);
         }
     }
 
-    protected void configure(final Widget w, final Widget container) {
-        w.getElement().setAttribute("data-date-format", format);
-        configure(w.getElement(), container.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
-                startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
-                keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian);
+    protected void configure(final Widget w,final Widget container) {
+
+        w.getElement().setAttribute("data-date-format",format);
+        configure(w.getElement(),container.getElement(),format,weekStart.getValue(),toDaysOfWeekDisabledString(daysOfWeekDisabled),autoClose,
+                startView.getValue(),minView.getValue(),maxView.getValue(),showTodayButton,highlightToday,
+                keyboardNavigation,forceParse,minuteStep,viewSelect.getValue(),showMeridian,language);
     }
 
     protected void execute(final String cmd) {
-        execute(getElement(), cmd);
+
+        execute(getElement(),cmd);
     }
 
-    private native void execute(Element e, String cmd) /*-{
+    private native void execute(Element e,String cmd) /*-{
         $wnd.jQuery(e).datetimepicker(cmd);
     }-*/;
 
@@ -455,24 +530,25 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         $wnd.jQuery(e).datetimepicker('update');
     }-*/;
 
-    private native void setStartDate(Element e, String startDate) /*-{
+    private native void setStartDate(Element e,String startDate) /*-{
         $wnd.jQuery(e).datetimepicker('setStartDate', startDate);
     }-*/;
 
-    private native void setEndDate(Element e, String endDate) /*-{
+    private native void setEndDate(Element e,String endDate) /*-{
         $wnd.jQuery(e).datetimepicker('setEndDate', endDate);
     }-*/;
 
-    private native void setDaysOfWeekDisabled(Element e, String daysOfWeekDisabled) /*-{
+    private native void setDaysOfWeekDisabled(Element e,String daysOfWeekDisabled) /*-{
         $wnd.jQuery(e).datetimepicker('setDaysOfWeekDisabled', daysOfWeekDisabled);
     }-*/;
 
-    protected native void configure(Element e, Element p, String format, int weekStart, String daysOfWeekDisabled,
-                                    boolean autoClose, int startView, int minView,
-                                    int maxView, boolean todayBtn, boolean highlightToday, boolean keyboardNavigation,
-                                    boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian) /*-{
+    protected native void configure(Element e,Element p,String format,int weekStart,String daysOfWeekDisabled,
+                                    boolean autoClose,int startView,int minView,
+                                    int maxView,boolean todayBtn,boolean highlightToday,boolean keyboardNavigation,
+                                    boolean forceParse,int minuteStep,int viewSelect,boolean showMeridian,String language ) /*-{
         var that = this;
         $wnd.jQuery(e).datetimepicker({
+
             format: format,
             weekStart: weekStart,
             daysOfWeekDisabled: daysOfWeekDisabled,
@@ -486,7 +562,9 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
             forceParse: forceParse,
             minuteStep: minuteStep,
             showMeridian: showMeridian,
-            container: p
+            container: p,
+            language:language
+
         })
             .on('show', function (e) {
                 that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onShow(Lcom/google/gwt/user/client/Event;)(e);
@@ -509,17 +587,18 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }-*/;
 
     protected String toDaysOfWeekDisabledString(final DateTimePickerDayOfWeek... dateTimePickerDayOfWeeks) {
+
         this.daysOfWeekDisabled = dateTimePickerDayOfWeeks;
 
         final StringBuilder builder = new StringBuilder();
 
-        if (dateTimePickerDayOfWeeks != null) {
+        if(dateTimePickerDayOfWeeks != null) {
             int i = 0;
-            for (final DateTimePickerDayOfWeek dayOfWeek : dateTimePickerDayOfWeeks) {
+            for(final DateTimePickerDayOfWeek dayOfWeek : dateTimePickerDayOfWeeks) {
                 builder.append(dayOfWeek.getValue());
 
                 i++;
-                if (i < dateTimePickerDayOfWeeks.length) {
+                if(i < dateTimePickerDayOfWeeks.length) {
                     builder.append(",");
                 }
             }
