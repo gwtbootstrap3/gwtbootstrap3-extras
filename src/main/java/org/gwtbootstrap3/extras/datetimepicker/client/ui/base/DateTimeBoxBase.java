@@ -21,6 +21,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base;
  */
 
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Event;
@@ -38,7 +39,14 @@ import org.gwtbootstrap3.client.ui.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.base.ValueBoxBase;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.*;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.*;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeDateEvent;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeDateHandler;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeMonthEvent;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeMonthHandler;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeYearEvent;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeYearHandler;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeEvent;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeHandler;
 
 import java.util.Date;
 
@@ -48,7 +56,8 @@ import java.util.Date;
 public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasResponsiveness,
         HasVisibility, HasPlaceholder, HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse,
         HasFormat, HasHighlightToday, HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView,
-        HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart, HasDateTimePickerHandlers {
+        HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart,
+        HasDateTimePickerHandlers, HasLanguage {
 
     private final TextBox textBox;
     private DateTimeFormat dateTimeFormat;
@@ -72,6 +81,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     private DateTimePickerView viewSelect = DateTimePickerView.HOUR;
     private boolean showMeridian = false;
     private Widget container = null;
+    private DateTimePickerLanguage language = DateTimePickerLanguage.EN;
 
     public DateTimeBoxBase() {
         textBox = new TextBox();
@@ -142,6 +152,22 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     @Override
     public void setHiddenOn(final String deviceSizeString) {
         textBox.setHiddenOn(deviceSizeString);
+    }
+
+    @Override
+    public void setLanguage(final DateTimePickerLanguage language) {
+        this.language = language;
+
+        // Inject the JS for the language
+        if (!language.getJs().isEmpty()) {
+            ScriptInjector.fromString(language.getJs())
+                    .setWindow(ScriptInjector.TOP_WINDOW).inject();
+        }
+    }
+
+    @Override
+    public DateTimePickerLanguage getLanguage() {
+        return language;
     }
 
     /**
@@ -422,7 +448,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         w.getElement().setAttribute("data-date-format", format);
         configure(w.getElement(), container.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
                 startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
-                keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian);
+                keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian, language.getCode());
     }
 
     protected void execute(final String cmd) {
@@ -470,10 +496,11 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     protected native void configure(Element e, Element p, String format, int weekStart, String daysOfWeekDisabled,
                                     boolean autoClose, int startView, int minView,
                                     int maxView, boolean todayBtn, boolean highlightToday, boolean keyboardNavigation,
-                                    boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian) /*-{
+                                    boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian, String language) /*-{
         var that = this;
         $wnd.jQuery(e).datetimepicker({
             format: format,
+            language: language,
             weekStart: weekStart,
             daysOfWeekDisabled: daysOfWeekDisabled,
             autoclose: autoClose,
