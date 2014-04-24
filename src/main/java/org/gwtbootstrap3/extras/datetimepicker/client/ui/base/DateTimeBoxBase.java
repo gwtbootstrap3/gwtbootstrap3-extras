@@ -171,7 +171,13 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     /**
-     * Call this whenever changing any settings
+     * Call this whenever changing any settings: minView, startView, format, etc. If you are changing
+     * format and date value, the updates must take in such order:
+     *
+     * 1. DateTimeBox.reload()
+     * 2. DateTimeBox.setValue(newDate); // Date newDate.
+     *
+     * Otherwise date value is not updated.
      */
     public void reload() {
         configure();
