@@ -9,9 +9,9 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -171,7 +171,13 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     /**
-     * Call this whenever changing any settings
+     * Call this whenever changing any settings: minView, startView, format, etc. If you are changing
+     * format and date value, the updates must take in such order:
+     *
+     * 1. DateTimeBox.reload()
+     * 2. DateTimeBox.setValue(newDate); // Date newDate.
+     *
+     * Otherwise date value is not updated.
      */
     public void reload() {
         configure();
@@ -446,6 +452,10 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
 
     protected void configure(final Widget w, final Widget container) {
         w.getElement().setAttribute("data-date-format", format);
+
+        // If configuring not for the first time, datetimepicker must be removed first.
+        this.remove(w.getElement());
+
         configure(w.getElement(), container.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
                 startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
                 keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian, language.getCode());
