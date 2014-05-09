@@ -21,7 +21,7 @@ package org.gwtbootstrap3.extras.card.client.ui;
  */
 
 import com.google.gwt.user.client.ui.Widget;
-import org.gwtbootstrap3.client.ui.Div;
+import org.gwtbootstrap3.client.ui.html.Div;
 
 /**
  * @author godi

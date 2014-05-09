@@ -21,10 +21,10 @@ package org.gwtbootstrap3.extras.select.client.ui;
  */
 
 import com.google.gwt.dom.client.Document;
-import org.gwtbootstrap3.client.ui.HasEnabled;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
 import org.gwtbootstrap3.client.ui.base.mixin.EnabledMixin;
+import org.gwtbootstrap3.client.ui.constants.HasEnabled;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 
 import static org.gwtbootstrap3.extras.select.client.constants.DataAttributes.DATA_ICON;
