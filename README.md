@@ -1,9 +1,7 @@
-[![Build Status](https://buildhive.cloudbees.com/job/gwtbootstrap3/job/gwtbootstrap3-extras/badge/icon)](https://buildhive.cloudbees.com/job/gwtbootstrap3/job/gwtbootstrap3-extras/)
+This is the Extra (third party) components for [GwtBootstrap3](https://github.com/gwtbootstrap3/gwtbootstrap3).
+Checkout the [demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/) for more information.
 
-Extra (third party) components for [GwtBootstrap3](https://github.com/gwtbootstrap3/gwtbootstrap3).
-See [demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/).
-
-Add this dependency if you want to use the extras
+To use the widgets defined here, you will need to add this dependency.
 
 ```xml
 <dependency>
@@ -13,3 +11,6 @@ Add this dependency if you want to use the extras
     <scope>provided</scope>
 </dependency>
 ```
+
+If you have any questions, please ask them on our [Google Group](https://groups.google.com/forum/?fromgroups#!forum/gwtbootstrap3)
+
