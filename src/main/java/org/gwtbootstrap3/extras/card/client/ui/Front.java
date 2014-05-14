@@ -20,8 +20,8 @@ package org.gwtbootstrap3.extras.card.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.client.ui.Div;
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.client.ui.html.Div;
 
 /**
  * @author godi

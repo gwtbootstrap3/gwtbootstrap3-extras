@@ -33,11 +33,11 @@ import org.gwtbootstrap3.client.shared.event.HideEvent;
 import org.gwtbootstrap3.client.shared.event.HideHandler;
 import org.gwtbootstrap3.client.shared.event.ShowEvent;
 import org.gwtbootstrap3.client.shared.event.ShowHandler;
-import org.gwtbootstrap3.client.ui.HasId;
-import org.gwtbootstrap3.client.ui.HasPlaceholder;
-import org.gwtbootstrap3.client.ui.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.base.ValueBoxBase;
+import org.gwtbootstrap3.client.ui.constants.HasId;
+import org.gwtbootstrap3.client.ui.constants.HasPlaceholder;
+import org.gwtbootstrap3.client.ui.constants.HasResponsiveness;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.*;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.*;
 
