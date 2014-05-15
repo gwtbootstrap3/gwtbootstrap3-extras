@@ -371,22 +371,27 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         }
     }
 
-    private void setDateTimeFormat(String format) {
-        // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
-        // for more information on syntax
+	private void setDateTimeFormat(String format) {
+		// Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
+		// for more information on syntax
+		Map<Character, Character> map = new HashMap<Character, Character>() {{
+				put('h', 'H'); // 12/24 hours
+				put('H', 'h'); // 12/24 hours
+				put('m', 'M'); // months
+				put('i', 'm'); // minutes
+				put('p', 'a'); // meridian
+				put('P', 'a'); // meridian
+			}};
 
-        // Need to replace m with M for months
-        format = format.replaceAll("m", "M");
+		StringBuilder fb = new StringBuilder(format);
+		for (int i=0; i < fb.length(); i++) {
+			if (map.containsKey(fb.charAt(i))) {
+				fb.setCharAt(i, map.get(fb.charAt(i)));
+			}
+		}
 
-        // Need to replace all i with m for minutes
-        format = format.replaceAll("i", "m");
-
-        // Need to replace P or p with a for meridian
-        format = format.replaceAll("p", "a");
-        format = format.replaceAll("P", "a");
-
-        this.dateTimeFormat = DateTimeFormat.getFormat(format);
-    }
+		this.dateTimeFormat = DateTimeFormat.getFormat(fb.toString());
+	}
 
     public Date getValue() {
         try {
