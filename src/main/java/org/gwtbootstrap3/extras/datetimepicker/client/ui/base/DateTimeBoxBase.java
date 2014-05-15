@@ -49,6 +49,8 @@ import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeE
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeHandler;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Joshua Godi
