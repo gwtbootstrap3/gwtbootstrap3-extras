@@ -26,6 +26,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HasEnabled;
+import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasVisibility;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
@@ -54,7 +55,8 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         HasVisibility, HasPlaceholder, HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse,
         HasFormat, HasHighlightToday, HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView,
         HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart,
-        HasDateTimePickerHandlers, HasLanguage {
+        HasDateTimePickerHandlers, HasLanguage, HasName {
+
 
     private final TextBox textBox;
     private DateTimeFormat dateTimeFormat;
@@ -139,6 +141,16 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     @Override
     public String getId() {
         return textBox.getId();
+    }
+
+    @Override
+    public void setName(final String name) {
+        textBox.setName(name);
+    }
+
+    @Override
+    public String getName() {
+        return textBox.getName();
     }
 
     @Override
