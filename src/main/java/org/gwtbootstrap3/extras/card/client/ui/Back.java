@@ -39,7 +39,7 @@ public class Back extends Div {
         super.add(trigger);
     }
 
-    public void setTrigger(IconType iconType) {
+    public void setTrigger(final IconType iconType) {
         trigger.setType(iconType);
     }
 }

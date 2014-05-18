@@ -142,12 +142,12 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     @Override
-    public void setVisibleOn(DeviceSize deviceSize) {
+    public void setVisibleOn(final DeviceSize deviceSize) {
         StyleHelper.setVisibleOn(this, deviceSize);
     }
 
     @Override
-    public void setHiddenOn(DeviceSize deviceSize) {
+    public void setHiddenOn(final DeviceSize deviceSize) {
         StyleHelper.setHiddenOn(this, deviceSize);
     }
 
@@ -368,10 +368,10 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         }
     }
 
-    private void setDateTimeFormat(String format) {
+    private void setDateTimeFormat(final String format) {
         // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
         // for more information on syntax
-        Map<Character, Character> map = new HashMap<Character, Character>() {{
+        final Map<Character, Character> map = new HashMap<Character, Character>() {{
             put('h', 'H'); // 12/24 hours
             put('H', 'h'); // 12/24 hours
             put('m', 'M'); // months
@@ -380,7 +380,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
             put('P', 'a'); // meridian
         }};
 
-        StringBuilder fb = new StringBuilder(format);
+        final StringBuilder fb = new StringBuilder(format);
         for (int i = 0; i < fb.length(); i++) {
             if (map.containsKey(fb.charAt(i))) {
                 fb.setCharAt(i, map.get(fb.charAt(i)));
