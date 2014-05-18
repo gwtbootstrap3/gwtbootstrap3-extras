@@ -23,13 +23,12 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.HasEnabled;
-import com.google.gwt.user.client.ui.HasName;
-import com.google.gwt.user.client.ui.HasVisibility;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.*;
 import org.gwtbootstrap3.client.shared.event.HideEvent;
 import org.gwtbootstrap3.client.shared.event.HideHandler;
 import org.gwtbootstrap3.client.shared.event.ShowEvent;
@@ -55,7 +54,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         HasVisibility, HasPlaceholder, HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse,
         HasFormat, HasHighlightToday, HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView,
         HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart,
-        HasDateTimePickerHandlers, HasLanguage, HasName {
+        HasDateTimePickerHandlers, HasLanguage, HasName, HasValue<Date> {
 
 
     private final TextBox textBox;
@@ -414,10 +413,17 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         return textBox.getValue();
     }
 
+    @Override
+    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Date> dateValueChangeHandler) {
+        return addHandler(dateValueChangeHandler, ValueChangeEvent.getType());
+    }
+
+    @Override
     public void setValue(final Date value) {
         setValue(value, false);
     }
 
+    @Override
     public void setValue(final Date value, final boolean fireEvents) {
         // We schedule a fixed delay to that we can make sure the element is properly loaded
         // so that we can set the value on it
