@@ -20,10 +20,10 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimePickerBase;
 
 /**
  * @author Joshua Godi
  */
-public class DateTimeBox extends DateTimeBoxBase {
+public class DateTimePicker extends DateTimePickerBase {
 }

@@ -50,7 +50,7 @@ import java.util.Map;
 /**
  * @author Joshua Godi
  */
-public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasResponsiveness,
+public class DateTimePickerBase extends Widget implements HasEnabled, HasId, HasResponsiveness,
         HasVisibility, HasPlaceholder, HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse,
         HasFormat, HasHighlightToday, HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView,
         HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart,
@@ -81,7 +81,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     private Widget container = null;
     private DateTimePickerLanguage language = DateTimePickerLanguage.EN;
 
-    public DateTimeBoxBase() {
+    public DateTimePickerBase() {
         textBox = new TextBox();
         setElement((Element) textBox.getElement());
         setFormat(format);
@@ -182,8 +182,8 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
      * Call this whenever changing any settings: minView, startView, format, etc. If you are changing
      * format and date value, the updates must take in such order:
      * <p/>
-     * 1. DateTimeBox.reload()
-     * 2. DateTimeBox.setValue(newDate); // Date newDate.
+     * 1. DateTimePicker.reload()
+     * 2. DateTimePicker.setValue(newDate); // Date newDate.
      * <p/>
      * Otherwise date value is not updated.
      */
@@ -430,12 +430,12 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
             @Override
             public boolean execute() {
-                if (DateTimeBoxBase.this.isAttached()) {
+                if (DateTimePickerBase.this.isAttached()) {
                     textBox.setValue(value != null ? dateTimeFormat.format(value) : null);
                     update(textBox.getElement());
 
                     if (fireEvents) {
-//                        ValueChangeEvent.fire(DateTimeBoxBase.this, value);
+//                        ValueChangeEvent.fire(DateTimePickerBase.this, value);
                     }
                     return false;
                 } else {
@@ -546,22 +546,22 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
             container: p
         })
             .on('show', function (e) {
-                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onShow(Lcom/google/gwt/user/client/Event;)(e);
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimePickerBase::onShow(Lcom/google/gwt/user/client/Event;)(e);
             })
             .on("hide", function (e) {
-                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onHide(Lcom/google/gwt/user/client/Event;)(e);
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimePickerBase::onHide(Lcom/google/gwt/user/client/Event;)(e);
             })
             .on("changeDate", function (e) {
-                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onChangeDate(Lcom/google/gwt/user/client/Event;)(e);
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimePickerBase::onChangeDate(Lcom/google/gwt/user/client/Event;)(e);
             })
             .on("changeYear", function (e) {
-                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onChangeYear(Lcom/google/gwt/user/client/Event;)(e);
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimePickerBase::onChangeYear(Lcom/google/gwt/user/client/Event;)(e);
             })
             .on("changeMonth", function (e) {
-                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onChangeMonth(Lcom/google/gwt/user/client/Event;)(e);
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimePickerBase::onChangeMonth(Lcom/google/gwt/user/client/Event;)(e);
             })
             .on("outOfRange", function (e) {
-                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimeBoxBase::onOutOfRange(Lcom/google/gwt/user/client/Event;)(e);
+                that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimePickerBase::onOutOfRange(Lcom/google/gwt/user/client/Event;)(e);
             });
     }-*/;
 
