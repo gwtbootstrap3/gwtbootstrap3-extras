@@ -414,7 +414,7 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     @Override
-    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Date> dateValueChangeHandler) {
+    public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<Date> dateValueChangeHandler) {
         return addHandler(dateValueChangeHandler, ValueChangeEvent.getType());
     }
 
