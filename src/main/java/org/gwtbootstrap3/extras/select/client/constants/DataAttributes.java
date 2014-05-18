@@ -38,4 +38,5 @@ public class DataAttributes {
     public static final String DISABLED = "disabled";
     public static final String MULTIPLE = "multiple";
     public static final String NAME = "name";
+    public static final String VALUE = "value";
 }

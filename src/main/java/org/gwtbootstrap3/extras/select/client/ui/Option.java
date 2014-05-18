@@ -45,6 +45,14 @@ public class Option extends AbstractTextWidget {
         return attributeMixin.getAttribute(NAME);
     }
 
+    public void setValue(final String value) {
+        attributeMixin.setAttribute(VALUE, value);
+    }
+
+    public String getValue() {
+        return attributeMixin.getAttribute(VALUE);
+    }
+
     public void setSubtext(final String subtext) {
         attributeMixin.setAttribute(DATA_SUBTEXT, subtext);
     }
