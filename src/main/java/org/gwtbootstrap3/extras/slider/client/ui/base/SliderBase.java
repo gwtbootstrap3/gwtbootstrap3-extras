@@ -27,14 +27,12 @@ import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.HasEnabled;
-import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.HasVisibility;
-import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
+import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
+import org.gwtbootstrap3.client.ui.constants.DeviceSize;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.HandleType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.OrientationType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.SelectionType;
@@ -88,13 +86,13 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
     }
 
     @Override
-    public void setVisibleOn(final String deviceSizeString) {
-        textBox.setVisibleOn(deviceSizeString);
+    public void setVisibleOn(DeviceSize deviceSize) {
+        StyleHelper.setVisibleOn(this, deviceSize);
     }
 
     @Override
-    public void setHiddenOn(final String deviceSizeString) {
-        textBox.setHiddenOn(deviceSizeString);
+    public void setHiddenOn(DeviceSize deviceSize) {
+        StyleHelper.setHiddenOn(this, deviceSize);
     }
 
     @Override

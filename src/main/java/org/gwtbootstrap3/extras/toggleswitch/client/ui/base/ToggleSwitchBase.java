@@ -26,18 +26,14 @@ import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.HasEnabled;
-import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.HasVisibility;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
-import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.base.HasSize;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
 import org.gwtbootstrap3.client.ui.base.mixin.IdMixin;
+import org.gwtbootstrap3.client.ui.constants.DeviceSize;
 import org.gwtbootstrap3.client.ui.constants.IconSize;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.ColorType;
@@ -89,13 +85,13 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     @Override
-    public void setVisibleOn(final String deviceSizeString) {
-        StyleHelper.setVisibleOn(this, deviceSizeString);
+    public void setVisibleOn(DeviceSize deviceSize) {
+        StyleHelper.setVisibleOn(this, deviceSize);
     }
 
     @Override
-    public void setHiddenOn(final String deviceSizeString) {
-        StyleHelper.setHiddenOn(this, deviceSizeString);
+    public void setHiddenOn(DeviceSize deviceSize) {
+        StyleHelper.setHiddenOn(this, deviceSize);
     }
 
     @Override
@@ -246,33 +242,33 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     private native void switchInit(Element e) /*-{
-                                              $wnd.jQuery(e).bootstrapSwitch();
+        $wnd.jQuery(e).bootstrapSwitch();
 
-                                              var me = this;
-                                              $wnd.jQuery(e).on('switchChange', function (em, data) {
-                                              me.@org.gwtbootstrap3.extras.toggleswitch.client.ui.base.ToggleSwitchBase::onChange(Z)(data.value);
-                                              });
+        var me = this;
+        $wnd.jQuery(e).on('switchChange', function (em, data) {
+            me.@org.gwtbootstrap3.extras.toggleswitch.client.ui.base.ToggleSwitchBase::onChange(Z)(data.value);
+        });
 
-                                              }-*/;
+    }-*/;
 
     private native void switchDestroy(Element e) /*-{
-                                                 $wnd.jQuery(e).off('switchChange');
-                                                 $wnd.jQuery(e).bootstrapSwitch('destroy');
-                                                 }-*/;
+        $wnd.jQuery(e).off('switchChange');
+        $wnd.jQuery(e).bootstrapSwitch('destroy');
+    }-*/;
 
     private native void switchCmd(Element e, String cmd, String value) /*-{
-                                                                         $wnd.jQuery(e).bootstrapSwitch(cmd,value);
-                                                                         }-*/;
+        $wnd.jQuery(e).bootstrapSwitch(cmd, value);
+    }-*/;
 
     private native void switchCmd(Element e, String cmd, boolean value) /*-{
-                                                                         $wnd.jQuery(e).bootstrapSwitch(cmd,value);
-                                                                         }-*/;
+        $wnd.jQuery(e).bootstrapSwitch(cmd, value);
+    }-*/;
 
     private native void switchState(Element e, boolean value) /*-{
-                                                              $wnd.jQuery(e).bootstrapSwitch('state',value);
-                                                              }-*/;
+        $wnd.jQuery(e).bootstrapSwitch('state', value);
+    }-*/;
 
     private native boolean switchState(Element e) /*-{
-                                                  return $wnd.jQuery(e).bootstrapSwitch('state');
-                                                  }-*/;
+        return $wnd.jQuery(e).bootstrapSwitch('state');
+    }-*/;
 }

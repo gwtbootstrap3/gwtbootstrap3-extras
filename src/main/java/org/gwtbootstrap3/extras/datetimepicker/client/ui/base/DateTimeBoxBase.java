@@ -38,15 +38,10 @@ import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasPlaceholder;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.base.ValueBoxBase;
+import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
+import org.gwtbootstrap3.client.ui.constants.DeviceSize;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.*;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeDateEvent;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeDateHandler;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeMonthEvent;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeMonthHandler;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeYearEvent;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeYearHandler;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeEvent;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeHandler;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -147,13 +142,13 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     }
 
     @Override
-    public void setVisibleOn(final String deviceSizeString) {
-        textBox.setVisibleOn(deviceSizeString);
+    public void setVisibleOn(DeviceSize deviceSize) {
+        StyleHelper.setVisibleOn(this, deviceSize);
     }
 
     @Override
-    public void setHiddenOn(final String deviceSizeString) {
-        textBox.setHiddenOn(deviceSizeString);
+    public void setHiddenOn(DeviceSize deviceSize) {
+        StyleHelper.setHiddenOn(this, deviceSize);
     }
 
     @Override
@@ -175,10 +170,10 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
     /**
      * Call this whenever changing any settings: minView, startView, format, etc. If you are changing
      * format and date value, the updates must take in such order:
-     *
+     * <p/>
      * 1. DateTimeBox.reload()
      * 2. DateTimeBox.setValue(newDate); // Date newDate.
-     *
+     * <p/>
      * Otherwise date value is not updated.
      */
     public void reload() {
@@ -373,27 +368,27 @@ public class DateTimeBoxBase extends Widget implements HasEnabled, HasId, HasRes
         }
     }
 
-	private void setDateTimeFormat(String format) {
-		// Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
-		// for more information on syntax
-		Map<Character, Character> map = new HashMap<Character, Character>() {{
-				put('h', 'H'); // 12/24 hours
-				put('H', 'h'); // 12/24 hours
-				put('m', 'M'); // months
-				put('i', 'm'); // minutes
-				put('p', 'a'); // meridian
-				put('P', 'a'); // meridian
-			}};
+    private void setDateTimeFormat(String format) {
+        // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
+        // for more information on syntax
+        Map<Character, Character> map = new HashMap<Character, Character>() {{
+            put('h', 'H'); // 12/24 hours
+            put('H', 'h'); // 12/24 hours
+            put('m', 'M'); // months
+            put('i', 'm'); // minutes
+            put('p', 'a'); // meridian
+            put('P', 'a'); // meridian
+        }};
 
-		StringBuilder fb = new StringBuilder(format);
-		for (int i=0; i < fb.length(); i++) {
-			if (map.containsKey(fb.charAt(i))) {
-				fb.setCharAt(i, map.get(fb.charAt(i)));
-			}
-		}
+        StringBuilder fb = new StringBuilder(format);
+        for (int i = 0; i < fb.length(); i++) {
+            if (map.containsKey(fb.charAt(i))) {
+                fb.setCharAt(i, map.get(fb.charAt(i)));
+            }
+        }
 
-		this.dateTimeFormat = DateTimeFormat.getFormat(fb.toString());
-	}
+        this.dateTimeFormat = DateTimeFormat.getFormat(fb.toString());
+    }
 
     public Date getValue() {
         try {
