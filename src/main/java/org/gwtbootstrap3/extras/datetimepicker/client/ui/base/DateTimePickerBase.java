@@ -54,7 +54,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         HasVisibility, HasPlaceholder, HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse,
         HasFormat, HasHighlightToday, HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView,
         HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart,
-        HasDateTimePickerHandlers, HasLanguage, HasName, HasValue<Date> {
+        HasDateTimePickerHandlers, HasLanguage, HasName, HasValue<Date>, HasPosition {
 
 
     private final TextBox textBox;
@@ -80,6 +80,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     private boolean showMeridian = false;
     private Widget container = null;
     private DateTimePickerLanguage language = DateTimePickerLanguage.EN;
+    private DateTimePickerPosition position = DateTimePickerPosition.BOTTOM_RIGHT;
 
     public DateTimePickerBase() {
         textBox = new TextBox();
@@ -176,6 +177,16 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     @Override
     public DateTimePickerLanguage getLanguage() {
         return language;
+    }
+
+    @Override
+    public void setPosition(DateTimePickerPosition position) {
+        this.position = position;
+    }
+
+    @Override
+    public DateTimePickerPosition getPosition() {
+        return position;
     }
 
     /**
@@ -478,7 +489,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
 
         configure(w.getElement(), container.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
                 startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
-                keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian, language.getCode());
+                keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian, language.getCode(), position.getPosition());
     }
 
     protected void execute(final String cmd) {
@@ -526,7 +537,8 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     protected native void configure(Element e, Element p, String format, int weekStart, String daysOfWeekDisabled,
                                     boolean autoClose, int startView, int minView,
                                     int maxView, boolean todayBtn, boolean highlightToday, boolean keyboardNavigation,
-                                    boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian, String language) /*-{
+                                    boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian, String language,
+                                    String position) /*-{
         var that = this;
         $wnd.jQuery(e).datetimepicker({
             format: format,
@@ -543,6 +555,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
             forceParse: forceParse,
             minuteStep: minuteStep,
             showMeridian: showMeridian,
+            pickerPosition: position,
             container: p
         })
             .on('show', function (e) {
