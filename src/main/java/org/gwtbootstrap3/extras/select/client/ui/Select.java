@@ -22,12 +22,14 @@ package org.gwtbootstrap3.extras.select.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Command;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
@@ -228,7 +230,13 @@ public class Select extends ComplexWidget {
     }
 
     public void setValue(final String value) {
-        setValue(getElement(), value);
+        // Need to defer the setValue to make sure the element is actually in the DOM to manipulate
+        Scheduler.get().scheduleDeferred(new Command() {
+            @Override
+            public void execute() {
+                setValue(getElement(), value);
+            }
+        });
     }
 
     public void setValues(final String... values) {
@@ -237,7 +245,14 @@ public class Select extends ComplexWidget {
         for(final String value : values) {
             array.push(value);
         }
-        setValue(getElement(), array);
+
+        // Need to defer the setValue to make sure the element is actually in the DOM to manipulate
+        Scheduler.get().scheduleDeferred(new Command() {
+            @Override
+            public void execute() {
+                setValue(getElement(), array);
+            }
+        });
     }
 
     public void setValue(final Option opt) {
