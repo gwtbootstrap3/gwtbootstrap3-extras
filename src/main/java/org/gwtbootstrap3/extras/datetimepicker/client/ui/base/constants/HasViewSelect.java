@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * Default: same as minView
- * <p/>
+ *
  * With this option you can select the view from which the date will be selected. By default it's the last one,
  * however you can choose the first one, so at each click the date will be updated.
  *

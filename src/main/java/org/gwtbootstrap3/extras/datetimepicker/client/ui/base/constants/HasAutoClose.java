@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * Boolean. Default: false
- * <p/>
+ *
  * Whether or not to close the datetimepicker immediately when a date is selected.
  *
  * @author Joshua Godi

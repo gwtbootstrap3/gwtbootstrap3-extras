@@ -192,10 +192,10 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     /**
      * Call this whenever changing any settings: minView, startView, format, etc. If you are changing
      * format and date value, the updates must take in such order:
-     * <p/>
+     *
      * 1. DateTimePicker.reload()
      * 2. DateTimePicker.setValue(newDate); // Date newDate.
-     * <p/>
+     *
      * Otherwise date value is not updated.
      */
     public void reload() {

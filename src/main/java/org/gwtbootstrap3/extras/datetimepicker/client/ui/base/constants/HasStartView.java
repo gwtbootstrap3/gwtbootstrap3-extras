@@ -22,9 +22,9 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * ENUM. Default: 2, 'month'
- * <p/>
+ *
  * The view that the datetimepicker should show when it is opened. Accepts values of :
- * <p/>
+ *
  * 'hour' for the hour view
  * 'day' for the day view
  * 'month' for month view (the default)

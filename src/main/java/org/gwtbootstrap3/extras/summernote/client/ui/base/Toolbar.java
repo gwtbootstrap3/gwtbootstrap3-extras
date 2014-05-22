@@ -25,7 +25,7 @@ import com.google.gwt.core.client.JsArray;
 
 /**
  * Custom toolbar builder for the summernote editor
- * <p/>
+ *
  * See: http://hackerwins.github.io/summernote/
  *
  * @author godi
@@ -164,6 +164,9 @@ public class Toolbar {
 
     /**
      * Quick toggle to use everything or nothing
+     *
+     * @param visible toggle visible
+     * @return Toolbar
      */
     public Toolbar toggleAll(final boolean visible) {
         showStyleButton = visible;

@@ -29,7 +29,7 @@ import org.gwtbootstrap3.extras.summernote.client.event.*;
 
 /**
  * Wrapper for the Summernote WYSIWYG Editor
- * <p/>
+ *
  * See: http://hackerwins.github.io/summernote/
  *
  * @author godi
@@ -93,7 +93,7 @@ public class SummernoteBase extends TextArea {
     /**
      * Gets the HTML code generated from the editor
      *
-     * @return
+     * @return generated code
      */
     public String getCode() {
         return getCode(getElement());
@@ -170,25 +170,25 @@ public class SummernoteBase extends TextArea {
             height: height,
             focus: hasFocus,
             toolbar: toolbar,
-            oninit: function(evt) {
+            oninit: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onInitialize(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onenter: function(evt) {
+            onenter: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onEnter(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onfocus: function(evt) {
+            onfocus: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onFocus(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onblur: function(evt) {
+            onblur: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onBlue(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onkeyup: function(evt) {
+            onkeyup: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onKeyUp(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onkeydown: function(evt) {
+            onkeydown: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onKeyDown(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onImageUpload: function(evt) {
+            onImageUpload: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onImageUpload(Lcom/google/gwt/user/client/Event;)(evt);
             }
         });

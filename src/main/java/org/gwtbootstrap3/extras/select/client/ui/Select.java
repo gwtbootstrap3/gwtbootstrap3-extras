@@ -71,12 +71,6 @@ public class Select extends ComplexWidget {
         return addDomHandler(handler, ChangeEvent.getType());
     }
 
-    /**
-     *
-     * WHEN CHANGING ANY SETTINGS CALL REFRESH AFTER!!
-     *
-     */
-
     public void setHeader(final String header) {
         attributeMixin.setAttribute(DATA_HEADER, header);
     }
@@ -121,6 +115,7 @@ public class Select extends ComplexWidget {
      * (1) auto - (default) shows them all
      * (2) x - shows x number of entries before scrolling
      *
+     * @param size String visible size
      */
     public void setVisibleSize(final String size) {
         attributeMixin.setAttribute(DATA_SIZE, size);
@@ -139,7 +134,6 @@ public class Select extends ComplexWidget {
      *
      * !! use 'auto' to automatically adjust the width of the select to its widest option, or just use
      * specific values (50px, 50%, etc...)
-     *
      */
     public void setWidth(final String width) {
         attributeMixin.setAttribute(DATA_WIDTH, width);
@@ -150,7 +144,7 @@ public class Select extends ComplexWidget {
     }
 
     public void setShowMenuArrow(final boolean showMenuArrow) {
-        if(showMenuArrow) {
+        if (showMenuArrow) {
             addStyleName(Styles.SHOW_MENU_ARROW);
         } else {
             removeStyleName(Styles.SHOW_MENU_ARROW);
@@ -162,7 +156,7 @@ public class Select extends ComplexWidget {
     }
 
     public void setShowTick(final boolean showTick) {
-        if(showTick) {
+        if (showTick) {
             addStyleName(Styles.SHOW_TICK);
         } else {
             removeStyleName(Styles.SHOW_TICK);
@@ -178,8 +172,9 @@ public class Select extends ComplexWidget {
      *
      * (1) values - default, comma delimited list
      * (2) count - If one item is selected, then the value is shown, if more than one is selected then the number of selected items is displayed, eg 2 of 6 selected
-     * (3) count > x - Where X is the number of items selected when the display format changes from values to count
+     * (3) count greater than x - Where X is the number of items selected when the display format changes from values to count
      *
+     * @param format selected text format
      */
     public void setSelectedTextFormat(final String format) {
         attributeMixin.setAttribute(DATA_SELECTED_TEXT_FORMAT, format);
@@ -242,7 +237,7 @@ public class Select extends ComplexWidget {
     public void setValues(final String... values) {
         final JsArrayString array = JavaScriptObject.createArray().cast();
 
-        for(final String value : values) {
+        for (final String value : values) {
             array.push(value);
         }
 
@@ -261,14 +256,14 @@ public class Select extends ComplexWidget {
 
     public void setValues(final Option... opts) {
         final String[] values = new String[opts.length];
-        for(int i = 0; i < opts.length; i++) {
+        for (int i = 0; i < opts.length; i++) {
             values[i] = opts[i].getText();
         }
         setValues(values);
     }
 
     /**
-     * Returns the selected value, if multiple it will return the first selected item see {@link #isItemSelected(int)}
+     * @return the selected value, if multiple it will return the first selected item see {@link #isItemSelected(int)}
      * and {@link #getValue(int)} for getting all the values selected or {@link #getAllSelectedValues()}
      */
     public String getValue() {
@@ -278,8 +273,8 @@ public class Select extends ComplexWidget {
     public List<String> getAllSelectedValues() {
         final List<String> allSelected = new ArrayList<String>();
 
-        for(int i = 0; i < getItemCount(); i++) {
-            if(isItemSelected(i)) {
+        for (int i = 0; i < getItemCount(); i++) {
+            if (isItemSelected(i)) {
                 allSelected.add(getValue(i));
             }
         }
@@ -309,9 +304,7 @@ public class Select extends ComplexWidget {
     }
 
     /**
-     *
      * WHEN CHANGING ANY SETTINGS CALL REFRESH AFTER!!
-     *
      */
     public void refresh() {
         command(getElement(), REFRESH);

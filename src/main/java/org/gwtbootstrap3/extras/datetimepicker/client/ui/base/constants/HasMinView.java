@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * Enum. Default: HOUR
- * <p/>
+ *
  * The lowest view that the datetimepicker should show.
  *
  * @author Joshua Godi

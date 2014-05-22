@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * Setter and getter for the language of the date time picker
- * <p/>
+ *
  * Be sure to load one language, it will use whatever is loaded last
  *
  * @author Joshua Godi
