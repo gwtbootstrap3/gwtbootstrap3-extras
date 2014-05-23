@@ -59,7 +59,6 @@ public class Growl {
                                     String message,
                                     String iconStyle,
                                     GrowlOptions options) /*-{
-        var parm1 = {title: title, message: message, icon: iconStyle};
-        $wnd.jQuery.growl(parm1, options);
+        $wnd.jQuery.growl({title: title, message: message, icon: iconStyle}, options);
     }-*/;
 }
