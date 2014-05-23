@@ -23,7 +23,6 @@
         "http://google-web-toolkit.googlecode.com/svn/tags/2.6.1/distro-source/core/src/gwt-module.dtd">
 <module>
     <inherits name="com.google.gwt.user.User"/>
-    <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
     <source path="client"/>
     <entry-point class="org.gwtbootstrap3.extras.growl.client.GrowlEntryPoint"/>
 </module>
