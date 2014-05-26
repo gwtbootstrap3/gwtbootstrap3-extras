@@ -86,7 +86,6 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         textBox = new TextBox();
         setElement((Element) textBox.getElement());
         setFormat(format);
-        setValue(new Date());
     }
 
     public void setContainer(final Widget container) {
