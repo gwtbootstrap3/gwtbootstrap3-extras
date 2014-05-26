@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base;
  * #L%
  */
 
-import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -435,24 +434,12 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
 
     @Override
     public void setValue(final Date value, final boolean fireEvents) {
-        // We schedule a fixed delay to that we can make sure the element is properly loaded
-        // so that we can set the value on it
-        Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
-            @Override
-            public boolean execute() {
-                if (DateTimePickerBase.this.isAttached()) {
-                    textBox.setValue(value != null ? dateTimeFormat.format(value) : null);
-                    update(textBox.getElement());
+        textBox.setValue(value != null ? dateTimeFormat.format(value) : null);
+        update(textBox.getElement());
 
-                    if (fireEvents) {
-//                        ValueChangeEvent.fire(DateTimePickerBase.this, value);
-                    }
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        }, 200);
+        if (fireEvents) {
+            ValueChangeEvent.fire(DateTimePickerBase.this, value);
+        }
     }
 
     /**
