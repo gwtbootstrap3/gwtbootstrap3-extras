@@ -22,12 +22,16 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base;
 
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.editor.client.IsEditor;
+import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.editor.client.adapters.TakesValueEditor;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.*;
+
 import org.gwtbootstrap3.client.shared.event.HideEvent;
 import org.gwtbootstrap3.client.shared.event.HideHandler;
 import org.gwtbootstrap3.client.shared.event.ShowEvent;
@@ -53,12 +57,13 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         HasVisibility, HasPlaceholder, HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse,
         HasFormat, HasHighlightToday, HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView,
         HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart,
-        HasDateTimePickerHandlers, HasLanguage, HasName, HasValue<Date>, HasPosition {
+        HasDateTimePickerHandlers, HasLanguage, HasName, HasValue<Date>, HasPosition, IsEditor<LeafValueEditor<Date>> {
 
 
     private final TextBox textBox;
     private DateTimeFormat dateTimeFormat;
     private final DateTimeFormat startEndDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
+    private LeafValueEditor<Date> editor;
 
     /**
      * DEFAULT values
@@ -440,6 +445,14 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         if (fireEvents) {
             ValueChangeEvent.fire(DateTimePickerBase.this, value);
         }
+    }
+    
+    @Override
+    public LeafValueEditor<Date> asEditor() {
+        if (editor == null) {
+            editor = TakesValueEditor.of(this);
+        }
+        return editor;
     }
 
     /**
