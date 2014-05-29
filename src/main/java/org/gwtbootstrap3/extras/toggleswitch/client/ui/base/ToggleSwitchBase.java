@@ -22,11 +22,15 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.editor.client.IsEditor;
+import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.editor.client.adapters.TakesValueEditor;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.*;
+
 import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
@@ -43,7 +47,7 @@ import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.SizeType;
  * @author Grant Slender
  */
 public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasValue<Boolean>, HasValueChangeHandlers<Boolean>,
-        HasEnabled, HasVisibility, HasId, HasResponsiveness {
+        HasEnabled, HasVisibility, HasId, HasResponsiveness, IsEditor<LeafValueEditor<Boolean>> {
 
     /**
      * Orig source from http://www.bootstrap-switch.org/
@@ -57,6 +61,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     private String labelText = "&nbsp;";
     private boolean animated = true;
     private final IdMixin<ToggleSwitchBase> idMixin = new IdMixin<ToggleSwitchBase>(this);
+    private LeafValueEditor<Boolean> editor;
 
     public ToggleSwitchBase() {
         checkBox = new SimpleCheckBox();
@@ -239,6 +244,14 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     public void onChange(final boolean value) {
         ValueChangeEvent.fire(this, value);
+    }
+    
+    @Override
+    public LeafValueEditor<Boolean> asEditor() {
+        if (editor == null) {
+            editor = TakesValueEditor.of(this);
+        }
+        return editor;
     }
 
     private native void switchInit(Element e) /*-{

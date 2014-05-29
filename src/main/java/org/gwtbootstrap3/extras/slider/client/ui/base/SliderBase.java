@@ -20,14 +20,6 @@ package org.gwtbootstrap3.extras.slider.client.ui.base;
  * #L%
  */
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.*;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
@@ -38,11 +30,27 @@ import org.gwtbootstrap3.extras.slider.client.ui.base.constants.OrientationType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.SelectionType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.TooltipType;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.editor.client.IsEditor;
+import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.editor.client.adapters.TakesValueEditor;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasEnabled;
+import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.HasVisibility;
+import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
+
 /**
  * @author Grant Slender
  */
 public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, HasValueChangeHandlers<Double>, HasVisibility,
-        HasId, HasResponsiveness {
+        HasId, HasResponsiveness, IsEditor<LeafValueEditor<Double>> {
 
     /**
      * Orig source from https://github.com/seiyria/bootstrap-slider
@@ -57,6 +65,7 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
     HandleType handle = HandleType.ROUND;
     boolean reversed = false;
     private FormatterCallback formatterCallback;
+    private LeafValueEditor<Double> editor;
 
     public SliderBase() {
         textBox = new TextBox();
@@ -223,6 +232,14 @@ public class SliderBase extends Widget implements HasValue<Double>, HasEnabled, 
                 }
             }
         }, 100);
+    }
+    
+    @Override
+    public LeafValueEditor<Double> asEditor() {
+        if (editor == null) {
+            editor = TakesValueEditor.of(this);
+        }
+        return editor;
     }
 
     public void setFormatter(final FormatterCallback formatterCallback) {
