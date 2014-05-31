@@ -56,7 +56,8 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 							config.getDayNames().getShortNames(),
 							config.getClickHandler(),
 							config.getRenderHandler(),
-							config.getEventLoadingHandler()
+							config.getEventLoadingHandler(),
+							config.getDragResizeHandler()
 					);
 		}
 		DomEvent.fireNativeEvent(Document.get().createLoadEvent(), this);
@@ -69,7 +70,7 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 				defaultView: currentView,
 				selectable: true,
 				selectHelper: true,
-				editable:false
+				editable:true
 				
 			}
 		);
@@ -85,7 +86,8 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 			JavaScriptObject shortDayNames,
 			EventClickHandler clickHandler,
 			EventRenderHandler renderHandler,
-			EventLoadingHandler loadingHandler
+			EventLoadingHandler loadingHandler,
+			EventDragAndResizeHandler dragResizeHandler
 			) /*-{
 		var clickFunction = function(calEvent, jsEvent, view){};
 		var renderFunction = function(calEvent, element, view) {};
@@ -120,7 +122,7 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 				defaultView: currentView,
 				selectable: true,
 				selectHelper: true,
-				editable:false,
+				editable:true,
 				buttonText:buttonText,
 				monthNames: longMonthNames,
 				monthNamesShort:shortMonthNames,
@@ -131,7 +133,59 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 				loading: loadingFunction
 				
 		};
-	
+		if( dragResizeHandler ){
+			fullCalendarParams.eventDragStart = function(event,jsEvent,ui,view){
+				if( event && jsEvent ){
+					var originalEvent = null;
+					if( jsEvent.originalEvent ){
+						originalEvent = jsEvent.originalEvent;
+					}
+					dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventDragStart(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,originalEvent);
+				}
+			}
+			fullCalendarParams.eventDragStop = function(event,jsEvent,ui,view){
+				if( event && jsEvent ){
+					var originalEvent = null;
+					if( jsEvent.originalEvent ){
+						originalEvent = jsEvent.originalEvent;
+					}
+					dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventDragStop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,originalEvent);
+				}
+			}
+			fullCalendarParams.eventDrop = function(event,dayDelta,minuteDelta,allDay,revertFunc,jsEvent,ui,view){
+				var originalEvent = null;
+				if( jsEvent && jsEvent.originalEvent ){
+					originalEvent = jsEvent.originalEvent;
+				}
+				dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventDrop(Lcom/google/gwt/core/client/JavaScriptObject;IIZLcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,dayDelta,minuteDelta,allDay,revertFunc,originalEvent);
+			}
+			
+			fullCalendarParams.eventResizeStart = function(event,jsEvent,ui,view){
+				if( event && jsEvent ){
+					var originalEvent = null;
+					if( jsEvent.originalEvent ){
+						originalEvent = jsEvent.originalEvent;
+					}
+					dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventResizeStart(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,originalEvent);
+				}
+			}
+			fullCalendarParams.eventResizeStop = function(event,jsEvent,ui,view){
+				if( event && jsEvent ){
+					var originalEvent = null;
+					if( jsEvent.originalEvent ){
+						originalEvent = jsEvent.originalEvent;
+					}
+					dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventResizeStop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,originalEvent);
+				}
+			}
+			fullCalendarParams.eventResize = function(event,dayDelta,minuteDelta,revertFunc,jsEvent,ui,view){
+				var originalEvent = null;
+				if( jsEvent && jsEvent.originalEvent ){
+					originalEvent = jsEvent.originalEvent;
+				}
+				dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventResize(Lcom/google/gwt/core/client/JavaScriptObject;IILcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,dayDelta,minuteDelta,revertFunc,originalEvent);
+			}
+		}
 		
 		$wnd.jQuery('#' + id).fullCalendar(fullCalendarParams);
 	}-*/;
@@ -254,7 +308,17 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 	}
 	
 	private native void today( String id ) /*-{
-		return $wnd.jQuery('#' + id).fullCalendar('today');
+		$wnd.jQuery('#' + id).fullCalendar('today');
+	}-*/;
+	
+	public native void excecuteFunction( JavaScriptObject revertFunction )/*-{
+		try {
+			var a = revertFunction;
+			a();
+		}
+		catch(err) {
+		    console.log(err);
+		}
 	}-*/;
 	
 

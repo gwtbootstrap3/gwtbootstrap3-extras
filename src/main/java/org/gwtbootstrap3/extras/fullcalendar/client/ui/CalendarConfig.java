@@ -11,6 +11,7 @@ public class CalendarConfig {
 	private EventClickHandler clickHandler;
 	private EventRenderHandler renderHandler;
 	private EventLoadingHandler loadingHandler;
+	private EventDragAndResizeHandler dragResizeHandler;
 
 	public void setEventLoadingHandler( EventLoadingHandler loadingHandler ){
 		this.loadingHandler = loadingHandler;
@@ -79,5 +80,13 @@ public class CalendarConfig {
 
 	public void setRenderHandler(EventRenderHandler renderHandler) {
 		this.renderHandler = renderHandler;
+	}
+
+	public EventDragAndResizeHandler getDragResizeHandler() {
+		return dragResizeHandler;
+	}
+
+	public void setDragResizeHandler(EventDragAndResizeHandler dragResizeHandler) {
+		this.dragResizeHandler = dragResizeHandler;
 	}
 }

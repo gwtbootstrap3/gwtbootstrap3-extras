@@ -12,7 +12,7 @@ public class Event {
 	private JavaScriptObject event;
 	
 	public Event( String id,String title ){
-		newEvent(id,title, false, false, false);
+		newEvent(id,title, true, true, true);
 	}
 	
 	public Event( JavaScriptObject jso ){
