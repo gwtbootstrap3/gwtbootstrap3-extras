@@ -4,6 +4,12 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.i18n.client.LocaleInfo;
 
+/**
+ * @see http://arshaw.com/fullcalendar/docs/text/dayNames/
+ * @see http://arshaw.com/fullcalendar/docs/text/dayNamesShort/
+ * @author Jeff Isenhart
+ *
+ */
 public class DayNames {
 	private JavaScriptObject longNames;
 	private JavaScriptObject shortNames;
@@ -25,6 +31,11 @@ public class DayNames {
 				LocaleInfo.getCurrentLocale().getDateTimeFormatInfo().weekdaysShort());
 	}
 	
+	/**
+	 * pass in localized names directly
+	 * @param longNames
+	 * @param shortNames
+	 */
 	public void localized(String[] longNames,String[] shortNames){
 		assert longNames != null && longNames.length == 7;
 		assert shortNames != null && shortNames.length == 7;
@@ -40,8 +51,12 @@ public class DayNames {
 		localized(longOnes, shortOnes);
 	}
 	
-	
-	private native void localized( JsArrayString longNames,JsArrayString shortNames ) /*-{
+	/**
+	 * pass in localized names directly
+	 * @param longNames
+	 * @param shortNames
+	 */
+	public native void localized( JsArrayString longNames,JsArrayString shortNames ) /*-{
 		var theInstance = this;
 		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::longNames = longNames;
 		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::shortNames = shortNames;
