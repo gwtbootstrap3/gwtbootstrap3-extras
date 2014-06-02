@@ -2,6 +2,26 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ * http://arshaw.com/fullcalendar/docs/display/header/
+ * 
+ * Setting the header options to false will display no header. 
+ * An object can be supplied with properties left, center, and right. 
+ * These properties contain strings with comma/space separated values. 
+ * Values separated by a comma will be displayed adjacently. 
+ * Values separated by a space will be displayed with a small gap in between. 
+ * Strings can contain any of the following values:
+ * <code>
+ * {
+ *   left:   'title',
+ *   center: '',
+ *   right:  'today prev,next'
+ * }
+ * </code>
+ * 
+ * @author Jeff Isenhart
+ *
+ */
 public class Header {
 
 	private JavaScriptObject header;
@@ -12,47 +32,29 @@ public class Header {
 	
 	private native void newInstance() /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header = {left:'',center:'',right:''};
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header = {left:'title',center:'',right:'today prev,next'};
 	}-*/;
 	
-	public void addLeft(HeaderPlaceHolderOption option) {
-		if( option != null ){
-			addLeft(option.name());
-		}
-	}
-
-	public native void addLeft( String prop ) /*-{
+	public native void setNoHeader() /*-{
 		var theInstance = this;
-		var arr = theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header.left.split(",");
-		arr.push(prop);
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header.left = arr.join(",");
-	}-*/;
-	
-	
-	public void addCenter(HeaderPlaceHolderOption option) {
-		if( option != null ){
-			addCenter(option.name());
-		}
-	}
-	
-	public native void addCenter( String prop ) /*-{
-		var theInstance = this;
-		var arr = theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header.center.split(",");
-		arr.push(prop);
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header.center = arr.join(",");
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header = false;
 	}-*/;
 
-	public void addRight(HeaderPlaceHolderOption option) {
-		if( option != null ){
-			addRight(option.name());
-		}
-	}
-	
-	public native void addRight( String prop ) /*-{
+	public native void setLeft( String left ) /*-{
 		var theInstance = this;
-		var arr = theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header.right.split(",");
-		arr.push(prop);
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header.right = arr.join(",");
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header.left = left;
+	}-*/;
+	
+
+	public native void setCenter( String center ) /*-{
+		var theInstance = this;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header.center = center;
+	}-*/;
+
+	
+	public native void setRight( String right ) /*-{
+		var theInstance = this;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header.right = right;
 	}-*/;
 
 	public JavaScriptObject toJavaScript(){

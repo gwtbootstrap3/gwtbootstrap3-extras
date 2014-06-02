@@ -14,14 +14,13 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 /**
- * Wrapper around FillCalendar
+ * Wrapper around FullCalendar
  * @see http://arshaw.com/fullcalendar/
  * @author Jeff Isenhart
  *
  */
 public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 
-	private Header header;//http://arshaw.com/fullcalendar/docs/display/header/
 	private ViewOption currentView;//http://arshaw.com/fullcalendar/docs/views/defaultView/
 	private CalendarConfig config;//a bunch of options and events encapsulated in one place
 	private boolean editable;//@see http://arshaw.com/fullcalendar/docs/event_ui/editable/
@@ -31,14 +30,13 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 		this(id,defaultView,null,editable);
 	}
 	
-	public FullCalendar(String id,ViewOption defaultView, Header header, boolean editable) {
-		this(id,defaultView,null,null,editable);
+	public FullCalendar(String id,ViewOption defaultView,boolean editable, Header header) {
+		this(id,defaultView,new CalendarConfig(header),editable);
 	}
 	
-	public FullCalendar(String id,ViewOption defaultView, Header header,CalendarConfig config,boolean editable) {
+	public FullCalendar(String id,ViewOption defaultView, CalendarConfig config,boolean editable) {
 		getElement().setId(id);
 		this.currentView = defaultView;
-		this.header = header;
 		this.config = config;
 		this.editable = editable;
 		loaded = false;
@@ -52,12 +50,13 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 		super.onLoad();
 		loaded = true;
 		if( config == null ){
-			addCalendar(getElement().getId(),currentView.name(),editable,header == null ? null : header.toJavaScript());
+			addCalendar(getElement().getId(),currentView.name(),editable);
 		}else{
+			
 			addCalendar(getElement().getId(),
 					currentView.name(),
 					editable,
-					header == null ? null : header.toJavaScript(),
+					config.getGeneralDisplay() == null ? null : config.getGeneralDisplay().toJavaScript(),
 							config.getButtonText().toJavaScript(),
 							config.getMonthNames().getLongNames(),
 							config.getMonthNames().getShortNames(),
@@ -77,10 +76,9 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 		DomEvent.fireNativeEvent(Document.get().createLoadEvent(), this);
 	}
 	
-	private native void addCalendar( String id, String currentView, boolean editable, JavaScriptObject defaultHeader ) /*-{
+	private native void addCalendar( String id, String currentView, boolean editable) /*-{
 		$wnd.jQuery('#' + id).fullCalendar(
 			{
-				header: defaultHeader,
 				defaultView: currentView,
 				selectable: true,
 				selectHelper: true,
@@ -93,13 +91,13 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 	private native void addCalendar( String id, 
 			String currentView, 
 			boolean editable,
-			JavaScriptObject defaultHeader,
+			JavaScriptObject generalDisplay,
 			JavaScriptObject buttonText,
 			JavaScriptObject longMonthNames,
 			JavaScriptObject shortMonthNames,
 			JavaScriptObject longDayNames,
 			JavaScriptObject shortDayNames,
-			EventClickHandler clickHandler,
+			CalendarMouseEventHandler clickHandler,
 			EventRenderHandler renderHandler,
 			EventLoadingHandler loadingHandler,
 			EventDragAndResizeHandler dragResizeHandler,
@@ -109,7 +107,6 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 			JavaScriptObject agendaOptions
 			) /*-{
 		var fullCalendarParams = {
-				header: defaultHeader,
 				defaultView: currentView,
 				selectable: true,
 				selectHelper: true,
@@ -120,9 +117,24 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 				dayNames:longDayNames,
 				dayNamesShort:shortDayNames		
 		};
+		if( generalDisplay ){
+			$wnd.jQuery.extend(fullCalendarParams,generalDisplay);
+		}
 		if( clickHandler ){
 			fullCalendarParams.eventClick = function(calEvent, jsEvent, view) {
-				clickHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventClickHandler::eventClicked(Lcom/google/gwt/core/client/JavaScriptObject;)(calEvent);
+				clickHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarMouseEventHandler::eventClick(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;Lcom/google/gwt/core/client/JavaScriptObject;)(calEvent,jsEvent,view);
+      		}
+      		
+      		fullCalendarParams.dayClick = function(moment, jsEvent, view) {
+				clickHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarMouseEventHandler::dayClick(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;Lcom/google/gwt/core/client/JavaScriptObject;)(moment,jsEvent,view);
+      		}
+      		
+      		fullCalendarParams.eventMouseover = function(calEvent, jsEvent, view) {
+				clickHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarMouseEventHandler::eventMouseover(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;Lcom/google/gwt/core/client/JavaScriptObject;)(calEvent,jsEvent,view);
+      		}
+      		
+      		fullCalendarParams.eventMouseout = function(calEvent, jsEvent, view) {
+				clickHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarMouseEventHandler::eventMouseout(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;Lcom/google/gwt/core/client/JavaScriptObject;)(calEvent,jsEvent,view);
       		}
 		}
 		if( renderHandler ){
@@ -347,6 +359,42 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 	
 	private native void destroy( String id ) /*-{
 		$wnd.jQuery('#' + id).fullCalendar('destroy');
+	}-*/;
+	
+	public void render(){
+		render(getElement().getId());
+	}
+	
+	private native void render( String id ) /*-{
+		$wnd.jQuery('#' + id).fullCalendar('render');
+	}-*/;
+	
+	public void setHeight( int height ){
+		if( height >=0 ){
+			setHeight(getElement().getId(), height);
+		}
+	}
+	private native void setHeight( String id, int height ) /*-{
+		$wnd.jQuery('#' + id).fullCalendar('option','height',height);
+	}-*/;
+	
+	public void setContentHeight( int height ){
+		if( height >=0 ){
+			setContentHeight(getElement().getId(), height);
+		}
+	}
+	private native void setContentHeight( String id, int height ) /*-{
+		$wnd.jQuery('#' + id).fullCalendar('option','contentHeight',height);
+	}-*/;
+	
+
+	public void setAspectRatio( double ratio ){
+		if( ratio > 0 ){
+			setAspectRatio(getElement().getId(), ratio);
+		}
+	}
+	private native void setAspectRatio( String id, double ratio ) /*-{
+		$wnd.jQuery('#' + id).fullCalendar('option','aspectRatio',ratio);
 	}-*/;
 	
 	/**

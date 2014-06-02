@@ -2,6 +2,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 public class CalendarConfig {
 
+	private GeneralDisplay generalDisplay;//http://arshaw.com/fullcalendar/docs/display/
 	private ButtonText buttonText;//http://arshaw.com/fullcalendar/docs/text/buttonText/
 	private MonthNames monthNames;//http://arshaw.com/fullcalendar/docs/text/monthNames/
 	private ColumnFormat columnFormat;//http://arshaw.com/fullcalendar/docs/text/columnFormat/
@@ -12,11 +13,21 @@ public class CalendarConfig {
 	private String weekNumberTitle;
 	private boolean selectable;
 	private boolean selectHelper;
-	private EventClickHandler clickHandler;//http://arshaw.com/fullcalendar/docs/mouse/eventClick/
+	private CalendarMouseEventHandler clickHandler;//http://arshaw.com/fullcalendar/docs/mouse/eventClick/
 	private EventRenderHandler renderHandler;//http://arshaw.com/fullcalendar/docs/event_rendering/eventRender/
 	private EventLoadingHandler loadingHandler;//http://arshaw.com/fullcalendar/docs/event_data/loading/
 	private EventDragAndResizeHandler dragResizeHandler;//http://arshaw.com/fullcalendar/docs/event_ui/
 
+	
+	public CalendarConfig(){
+		this(null);
+	}
+	
+	public CalendarConfig( Header header ){
+		if( header != null ){
+			setGeneralDisplay(new GeneralDisplay(header));
+		}
+	}
 	public void setEventLoadingHandler( EventLoadingHandler loadingHandler ){
 		this.loadingHandler = loadingHandler;
 	}
@@ -62,11 +73,11 @@ public class CalendarConfig {
 		return dayNames;
 	}
 
-	public EventClickHandler getClickHandler() {
+	public CalendarMouseEventHandler getClickHandler() {
 		return clickHandler;
 	}
 
-	public void setClickHandler(EventClickHandler clickHandler) {
+	public void setClickHandler(CalendarMouseEventHandler clickHandler) {
 		this.clickHandler = clickHandler;
 	}
 
@@ -123,5 +134,13 @@ public class CalendarConfig {
 
 	public void setAgendaOptions(AgendaOptions agendaOptions) {
 		this.agendaOptions = agendaOptions;
+	}
+
+	public GeneralDisplay getGeneralDisplay() {
+		return generalDisplay;
+	}
+
+	public void setGeneralDisplay(GeneralDisplay generalDisplay) {
+		this.generalDisplay = generalDisplay;
 	}
 }
