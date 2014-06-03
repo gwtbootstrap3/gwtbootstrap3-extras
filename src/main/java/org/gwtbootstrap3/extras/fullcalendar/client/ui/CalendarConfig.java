@@ -4,7 +4,7 @@ public class CalendarConfig {
 
 	private Language langauge;//http://arshaw.com/fullcalendar/docs/text/lang/
 	private ClickAndHoverConfig clickHoverConfig;//http://arshaw.com/fullcalendar/docs/mouse/
-	private DragResizeConfig dragResizeConfig;//http://arshaw.com/fullcalendar/docs/event_ui/;
+	private DragAndResizeConfig dragResizeConfig;//http://arshaw.com/fullcalendar/docs/event_ui/;
 	private EventDataConfig eventConfig;//http://arshaw.com/fullcalendar/docs/event_data/
 	private GeneralDisplay generalDisplay;//http://arshaw.com/fullcalendar/docs/display/
 	private ButtonText buttonText;//http://arshaw.com/fullcalendar/docs/text/buttonText/
@@ -131,11 +131,11 @@ public class CalendarConfig {
 		this.clickHoverConfig = clickHoverConfig;
 	}
 
-	public DragResizeConfig getDragResizeConfig() {
+	public DragAndResizeConfig getDragResizeConfig() {
 		return dragResizeConfig;
 	}
 
-	public void setDragResizeConfig(DragResizeConfig dragResizeConfig) {
+	public void setDragResizeConfig(DragAndResizeConfig dragResizeConfig) {
 		this.dragResizeConfig = dragResizeConfig;
 	}
 
