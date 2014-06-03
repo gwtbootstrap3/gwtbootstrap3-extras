@@ -25,4 +25,7 @@ public interface FullCalendarClientBundle extends ClientBundle {
     
     @Source("resource/js/jquery-ui.custom.min.js")
     TextResource getCustomDragResizeJS();
+    
+    @Source("resource/js/moment.min.js")
+    TextResource getMomentJS();
 }

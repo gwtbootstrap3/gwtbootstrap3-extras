@@ -37,7 +37,7 @@ public class Header {
 	
 	public native void setNoHeader() /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header = false;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Header::header = null;
 	}-*/;
 
 	public native void setLeft( String left ) /*-{

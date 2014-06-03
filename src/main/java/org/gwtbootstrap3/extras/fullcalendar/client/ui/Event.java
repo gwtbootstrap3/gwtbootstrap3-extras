@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.core.client.JsDate;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 
@@ -71,9 +72,28 @@ public class Event {
 		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start = start;
 	}-*/; 
 	
-	public native String getStart() /*-{
+	public native JsDate getStart() /*-{
 		var theInstance = this;
-		return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start;
+		console.log("--------");
+		console.log(theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event);
+		console.log("--------");
+		if( theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start ){
+			return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start.toDate();
+		}
+		return null;
+		
+	}-*/; 
+	
+	public native JsDate getFormatStart() /*-{
+		var theInstance = this;
+		
+		if( theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start ){
+			var d = new Date(theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start.format());
+			console.log(d);
+			return d;
+		}
+		return null;
+		
 	}-*/; 
 	
 	public void setEnd( Date d ){
@@ -83,13 +103,24 @@ public class Event {
 	}
 	private native void setEnd( String end ) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end = end;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end=end;
 	}-*/; 
 
-	public native String getEnd() /*-{
+	public native JsDate getEnd() /*-{
 		var theInstance = this;
-		return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end;
+		if( theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end ){
+			return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end.toDate();
+		}
+		return null;
 	}-*/; 
+	
+	public native JsDate getFormatEnd() /*-{
+		var theInstance = this;
+		if( theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end ){
+			return new Date(theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end.toDate());
+		}
+		return null;
+	}-*/;
 	
 	public native void setUrl( String url ) /*-{
 		var theInstance = this;

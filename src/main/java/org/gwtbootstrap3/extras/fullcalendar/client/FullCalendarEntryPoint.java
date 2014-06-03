@@ -10,14 +10,20 @@ public class FullCalendarEntryPoint implements EntryPoint {
 	public void onModuleLoad() {
 		StyleInjector.injectAtEnd(FullCalendarClientBundle.INSTANCE.fullCalendarCss().getText());
 		StyleInjector.injectAtEnd("@media print {" + FullCalendarClientBundle.INSTANCE.fullCalendarPrintCss().getText() + "}");
+		
+		if( !isMomentPresent() ){
+			ScriptInjector.fromString(FullCalendarClientBundle.INSTANCE.getMomentJS().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
+	    }
+		
 		if( !isCalendarPresent() ){
           ScriptInjector.fromString(FullCalendarClientBundle.INSTANCE.getFullCalendarJS().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
-          ScriptInjector.fromString(FullCalendarClientBundle.INSTANCE.getGoogleCalJS().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
 		}
 		
 		if( !isDragAndResizePresent() ){
 			ScriptInjector.fromString(FullCalendarClientBundle.INSTANCE.getCustomDragResizeJS().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
 	    }
+		
+	
 	}
 	
 	private native boolean isCalendarPresent() /*-{
@@ -30,6 +36,14 @@ public class FullCalendarEntryPoint implements EntryPoint {
 	
 	private native boolean isDragAndResizePresent() /*-{
 		if( $wnd.jQuery && $wnd.jQuery.draggable && $wnd.jQuery.resizable ){
+			return true;
+		}else{
+			return false;
+		}
+	}-*/; 
+	
+	private native boolean isMomentPresent() /*-{
+		if( $wnd.jQuery && $wnd.jQuery.moment ){
 			return true;
 		}else{
 			return false;

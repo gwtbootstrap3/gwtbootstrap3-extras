@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsDate;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.DomEvent;
@@ -62,10 +63,10 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 							config.getMonthNames().getShortNames(),
 							config.getDayNames().getLongNames(),
 							config.getDayNames().getShortNames(),
-							config.getClickHandler(),
 							config.getRenderHandler(),
-							config.getEventLoadingHandler(),
-							config.getDragResizeHandler(),
+							config.getDragResizeConfig() == null ? null : config.getDragResizeConfig().toJavaScript(),
+							config.getClickHoverConfig() == null ? null : config.getClickHoverConfig().toJavaScript(),
+							config.getEventConfig() == null ? null : config.getEventConfig().toJavaScript(),
 							config.getColumnFormat() == null ? null : config.getColumnFormat().toJavaScript(),
 							config.getTimeFormat() == null ? null : config.getTimeFormat().toJavaScript(),
 							config.getTitleFormat() == null ? null : config.getTitleFormat().toJavaScript(),
@@ -97,10 +98,10 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 			JavaScriptObject shortMonthNames,
 			JavaScriptObject longDayNames,
 			JavaScriptObject shortDayNames,
-			CalendarMouseEventHandler clickHandler,
 			EventRenderHandler renderHandler,
-			EventLoadingHandler loadingHandler,
-			EventDragAndResizeHandler dragResizeHandler,
+			JavaScriptObject dragResizeConfig,
+			JavaScriptObject clickHoverConfig,
+			JavaScriptObject eventConfig,
 			JavaScriptObject columnFormat,
 			JavaScriptObject timeFormat,
 			JavaScriptObject titleFormat,
@@ -115,28 +116,22 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 				monthNames: longMonthNames,
 				monthNamesShort:shortMonthNames,
 				dayNames:longDayNames,
-				dayNamesShort:shortDayNames		
+				dayNamesShort:shortDayNames,
+				timezone: 'local'	
 		};
 		if( generalDisplay ){
 			$wnd.jQuery.extend(fullCalendarParams,generalDisplay);
 		}
-		if( clickHandler ){
-			fullCalendarParams.eventClick = function(calEvent, jsEvent, view) {
-				clickHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarMouseEventHandler::eventClick(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;Lcom/google/gwt/core/client/JavaScriptObject;)(calEvent,jsEvent,view);
-      		}
-      		
-      		fullCalendarParams.dayClick = function(moment, jsEvent, view) {
-				clickHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarMouseEventHandler::dayClick(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;Lcom/google/gwt/core/client/JavaScriptObject;)(moment,jsEvent,view);
-      		}
-      		
-      		fullCalendarParams.eventMouseover = function(calEvent, jsEvent, view) {
-				clickHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarMouseEventHandler::eventMouseover(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;Lcom/google/gwt/core/client/JavaScriptObject;)(calEvent,jsEvent,view);
-      		}
-      		
-      		fullCalendarParams.eventMouseout = function(calEvent, jsEvent, view) {
-				clickHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.CalendarMouseEventHandler::eventMouseout(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;Lcom/google/gwt/core/client/JavaScriptObject;)(calEvent,jsEvent,view);
-      		}
+		if( eventConfig ){
+			$wnd.jQuery.extend(fullCalendarParams,eventConfig);
 		}
+		if( clickHoverConfig ){
+			$wnd.jQuery.extend(fullCalendarParams,clickHoverConfig);
+		}
+		if( dragResizeConfig ){
+			$wnd.jQuery.extend(fullCalendarParams,dragResizeConfig);
+		}
+		
 		if( renderHandler ){
 			fullCalendarParams.eventRender = function(calEvent, element, view) {
 				var ele = element;
@@ -146,66 +141,7 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 				renderHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventRenderHandler::render(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/Element;)(calEvent,ele);
       		}
 		}
-		if( loadingHandler ){
-			fullCalendarParams.loading = function(loading) {
-				loadingHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventLoadingHandler::isLoading(Z)(loading);
-			};
-		}
 
-		if( dragResizeHandler ){
-			fullCalendarParams.eventDragStart = function(event,jsEvent,ui,view){
-				if( event && jsEvent ){
-					var originalEvent = null;
-					if( jsEvent.originalEvent ){
-						originalEvent = jsEvent.originalEvent;
-					}
-					dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventDragStart(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,originalEvent);
-				}
-			}
-			fullCalendarParams.eventDragStop = function(event,jsEvent,ui,view){
-				if( event && jsEvent ){
-					var originalEvent = null;
-					if( jsEvent.originalEvent ){
-						originalEvent = jsEvent.originalEvent;
-					}
-					dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventDragStop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,originalEvent);
-				}
-			}
-			fullCalendarParams.eventDrop = function(event,dayDelta,minuteDelta,allDay,revertFunc,jsEvent,ui,view){
-				var originalEvent = null;
-				if( jsEvent && jsEvent.originalEvent ){
-					originalEvent = jsEvent.originalEvent;
-				}
-				dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventDrop(Lcom/google/gwt/core/client/JavaScriptObject;IIZLcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,dayDelta,minuteDelta,allDay,revertFunc,originalEvent);
-			}
-			
-			fullCalendarParams.eventResizeStart = function(event,jsEvent,ui,view){
-				if( event && jsEvent ){
-					var originalEvent = null;
-					if( jsEvent.originalEvent ){
-						originalEvent = jsEvent.originalEvent;
-					}
-					dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventResizeStart(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,originalEvent);
-				}
-			}
-			fullCalendarParams.eventResizeStop = function(event,jsEvent,ui,view){
-				if( event && jsEvent ){
-					var originalEvent = null;
-					if( jsEvent.originalEvent ){
-						originalEvent = jsEvent.originalEvent;
-					}
-					dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventResizeStop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,originalEvent);
-				}
-			}
-			fullCalendarParams.eventResize = function(event,dayDelta,minuteDelta,revertFunc,jsEvent,ui,view){
-				var originalEvent = null;
-				if( jsEvent && jsEvent.originalEvent ){
-					originalEvent = jsEvent.originalEvent;
-				}
-				dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDragAndResizeHandler::eventResize(Lcom/google/gwt/core/client/JavaScriptObject;IILcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event,dayDelta,minuteDelta,revertFunc,originalEvent);
-			}
-		}
-		
 		if( columnFormat ){
 			fullCalendarParams.columnFormat = columnFormat;
 		}
@@ -275,6 +211,17 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 		return super.addDomHandler(handler, LoadEvent.getType());
 	}
 	
+	public JsArray<JavaScriptObject> getEvent( String eventId ) {
+		if( eventId != null ){
+			return getEvent(getElement().getId(),eventId);
+		}
+		return null;
+	}
+	
+	public native JsArray<JavaScriptObject> getEvent( String id,String eventId ) /*-{
+		return $wnd.jQuery('#' + id).fullCalendar('clientEvents',eventId);
+	}-*/;
+	
 	public void removeEvent( String eventId ) {
 		if( eventId != null ){
 			removeEvent(getElement().getId(),eventId);
@@ -333,7 +280,7 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 		return new Date(time);
 	}
 	private native JsDate getDate( String id ) /*-{
-		return $wnd.jQuery('#' + id).fullCalendar('getDate');
+		return $wnd.jQuery('#' + id).fullCalendar('getDate').toDate();
 	}-*/;
 
 	public void today() {

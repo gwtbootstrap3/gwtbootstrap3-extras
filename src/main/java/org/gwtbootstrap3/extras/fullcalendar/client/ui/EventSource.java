@@ -1,10 +1,14 @@
 package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 
+import org.gwtbootstrap3.extras.fullcalendar.client.FullCalendarClientBundle;
+
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.ScriptInjector;
 
 public class EventSource {
 
+	private static boolean GCAL_ADDED = false;
 	private JavaScriptObject eventSource;
 
 	
@@ -22,8 +26,13 @@ public class EventSource {
 			boolean isStartEditable, 
 			boolean isDurationEditable, 
 			boolean allDayDefault,
-			boolean ignoreTimeZone
+			boolean ignoreTimeZone,
+			boolean isGoogle//if true include google script file
 			){
+		if( isGoogle && !GCAL_ADDED ){
+			GCAL_ADDED = true;
+			ScriptInjector.fromString(FullCalendarClientBundle.INSTANCE.getGoogleCalJS().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
+		}
 		newEvent(url,color,backgroundColor,textColor,borderColor,className,isEditable,isStartEditable,isDurationEditable,allDayDefault,ignoreTimeZone);
 	}
 	
@@ -55,11 +64,11 @@ public class EventSource {
 			};
 	}-*/;
 	
-	public native void setEventDataTransform( EventDataTransform callback ) /*-{
+	public native void setEventDataTransform( EventDataTransformCallback callback ) /*-{
 		var theInstance = this;
 		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventSource::eventSource.eventTransform = function(eventData){
 			if( callback ){
-				callback.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDataTransform::eventData(Lcom/google/gwt/core/client/JavaScriptObject;)(eventData);
+				callback.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventDataTransformCallback::eventData(Lcom/google/gwt/core/client/JavaScriptObject;)(eventData);
 			}
 		}
 	}-*/; 

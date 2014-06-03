@@ -27,26 +27,42 @@ public class View {
 	
 	public native JsDate getStart() /*-{
 		var theInstance = this;
-		return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.View::view.start;
+		var returnVal = theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.View::view.start;
+		if( returnVal ){
+			return returnVal.toDate();
+		}
+		return null;
 	}-*/; 
 	
 	
 	public native JsDate getEnd() /*-{
 		var theInstance = this;
-		return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.View::view.end;
+		var returnVal = theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.View::view.end;
+		if( returnVal ){
+			return returnVal.toDate();
+		}
+		return null;
 	}-*/; 
 	
 	
 
-	public native JsDate getVisableStart() /*-{
+	public native JsDate getIntervalStart() /*-{
 		var theInstance = this;
-		return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.View::view.visStart;
+		var returnVal = theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.View::view.intervalStart;
+		if( returnVal ){
+			return returnVal.toDate();
+		}
+		return null;
 	}-*/; 
 	
 
-	public native JsDate getVisibleEnd() /*-{
+	public native JsDate getIntervalEnd() /*-{
 		var theInstance = this;
-		return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.View::view.visEnd;
+		var returnVal = theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.View::view.intervalEnd;
+		if( returnVal ){
+			return returnVal.toDate();
+		}
+		return null;
 	}-*/; 
 	
 	

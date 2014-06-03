@@ -2,6 +2,9 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 public class CalendarConfig {
 
+	private ClickAndHoverConfig clickHoverConfig;//http://arshaw.com/fullcalendar/docs/mouse/
+	private DragResizeConfig dragResizeConfig;//http://arshaw.com/fullcalendar/docs/event_ui/;
+	private EventDataConfig eventConfig;//http://arshaw.com/fullcalendar/docs/event_data/
 	private GeneralDisplay generalDisplay;//http://arshaw.com/fullcalendar/docs/display/
 	private ButtonText buttonText;//http://arshaw.com/fullcalendar/docs/text/buttonText/
 	private MonthNames monthNames;//http://arshaw.com/fullcalendar/docs/text/monthNames/
@@ -13,10 +16,7 @@ public class CalendarConfig {
 	private String weekNumberTitle;
 	private boolean selectable;
 	private boolean selectHelper;
-	private CalendarMouseEventHandler clickHandler;//http://arshaw.com/fullcalendar/docs/mouse/eventClick/
 	private EventRenderHandler renderHandler;//http://arshaw.com/fullcalendar/docs/event_rendering/eventRender/
-	private EventLoadingHandler loadingHandler;//http://arshaw.com/fullcalendar/docs/event_data/loading/
-	private EventDragAndResizeHandler dragResizeHandler;//http://arshaw.com/fullcalendar/docs/event_ui/
 
 	
 	public CalendarConfig(){
@@ -27,13 +27,6 @@ public class CalendarConfig {
 		if( header != null ){
 			setGeneralDisplay(new GeneralDisplay(header));
 		}
-	}
-	public void setEventLoadingHandler( EventLoadingHandler loadingHandler ){
-		this.loadingHandler = loadingHandler;
-	}
-	
-	public EventLoadingHandler getEventLoadingHandler(){
-		return loadingHandler;
 	}
 	
 	public boolean isSelectable() {
@@ -73,14 +66,6 @@ public class CalendarConfig {
 		return dayNames;
 	}
 
-	public CalendarMouseEventHandler getClickHandler() {
-		return clickHandler;
-	}
-
-	public void setClickHandler(CalendarMouseEventHandler clickHandler) {
-		this.clickHandler = clickHandler;
-	}
-
 	public EventRenderHandler getRenderHandler() {
 		return renderHandler;
 	}
@@ -89,13 +74,6 @@ public class CalendarConfig {
 		this.renderHandler = renderHandler;
 	}
 
-	public EventDragAndResizeHandler getDragResizeHandler() {
-		return dragResizeHandler;
-	}
-
-	public void setDragResizeHandler(EventDragAndResizeHandler dragResizeHandler) {
-		this.dragResizeHandler = dragResizeHandler;
-	}
 	public ColumnFormat getColumnFormat() {
 		return columnFormat;
 	}
@@ -142,5 +120,29 @@ public class CalendarConfig {
 
 	public void setGeneralDisplay(GeneralDisplay generalDisplay) {
 		this.generalDisplay = generalDisplay;
+	}
+
+	public EventDataConfig getEventConfig() {
+		return eventConfig;
+	}
+
+	public void setEventConfig(EventDataConfig eventConfig) {
+		this.eventConfig = eventConfig;
+	}
+
+	public ClickAndHoverConfig getClickHoverConfig() {
+		return clickHoverConfig;
+	}
+
+	public void setClickHoverConfig(ClickAndHoverConfig clickHoverConfig) {
+		this.clickHoverConfig = clickHoverConfig;
+	}
+
+	public DragResizeConfig getDragResizeConfig() {
+		return dragResizeConfig;
+	}
+
+	public void setDragResizeConfig(DragResizeConfig dragResizeConfig) {
+		this.dragResizeConfig = dragResizeConfig;
 	}
 }
