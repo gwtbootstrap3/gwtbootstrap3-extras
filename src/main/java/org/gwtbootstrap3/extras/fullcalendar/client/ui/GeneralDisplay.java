@@ -8,7 +8,7 @@ import com.google.gwt.core.client.JsArrayInteger;
  * @author Jeff Isenhart
  *
  */
-public class GeneralDisplay {
+public class GeneralDisplay implements IsJavaScriptObject{
 	private JavaScriptObject general;
 	
 	public GeneralDisplay(){

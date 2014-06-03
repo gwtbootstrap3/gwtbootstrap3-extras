@@ -10,9 +10,9 @@ import com.google.gwt.i18n.client.LocaleInfo;
  * @author Jeff Isenhart
  *
  */
-public class MonthNames {
-	private JavaScriptObject longNames;
-	private JavaScriptObject shortNames;
+public class MonthNames implements IsJavaScriptObject{
+	
+	private JavaScriptObject names;
 	
 	public MonthNames(){
 		newInstance();
@@ -21,8 +21,9 @@ public class MonthNames {
 	private native void newInstance( ) /*-{
 		//default vals...
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::longNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September', 'October', 'November', 'December'];
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::shortNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names = {};
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September', 'October', 'November', 'December'];
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	}-*/;
 	
 	
@@ -59,15 +60,13 @@ public class MonthNames {
 	 */
 	public native void localize( JsArrayString longNames,JsArrayString shortNames ) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::longNames = longNames;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::shortNames = shortNames;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNames = longNames;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNamesShort = shortNames;
 	}-*/;
 	
-	public JavaScriptObject getLongNames(){
-		return longNames;
-	}
-	
-	public JavaScriptObject getShortNames(){
-		return shortNames;
+
+	@Override
+	public JavaScriptObject toJavaScript() {
+		return names;
 	}
 }

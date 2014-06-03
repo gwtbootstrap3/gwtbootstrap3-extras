@@ -2,7 +2,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class ClickAndHoverConfig {
+public class ClickAndHoverConfig implements IsJavaScriptObject{
 	private JavaScriptObject script;
 	
 	public ClickAndHoverConfig(CalendarMouseEventHandler handler){

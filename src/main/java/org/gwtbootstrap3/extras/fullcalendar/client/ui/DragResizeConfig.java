@@ -2,7 +2,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class DragResizeConfig {
+public class DragResizeConfig implements IsJavaScriptObject {
 	private JavaScriptObject script;
 	
 	public DragResizeConfig(EventDragAndResizeHandler handler){

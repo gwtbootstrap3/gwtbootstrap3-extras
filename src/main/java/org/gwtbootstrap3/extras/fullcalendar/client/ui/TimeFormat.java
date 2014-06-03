@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class TimeFormat extends AbstractViewOptionFormat {
+public class TimeFormat extends AbstractViewOptionFormat implements IsJavaScriptObject {
 	private JavaScriptObject format;
 	public TimeFormat(){
 		this("h(:mm)t",null);

@@ -2,7 +2,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class EventDataConfig {
+public class EventDataConfig implements IsJavaScriptObject {
 	private JavaScriptObject config;
 	
 	public EventDataConfig(){

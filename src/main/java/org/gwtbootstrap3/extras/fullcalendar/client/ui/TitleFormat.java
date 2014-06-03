@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class TitleFormat extends AbstractViewOptionFormat {
+public class TitleFormat extends AbstractViewOptionFormat implements IsJavaScriptObject {
 	private JavaScriptObject format;
 	public TitleFormat(){
 		this(null);

@@ -7,7 +7,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * @author Jeff Isenhart
  *
  */
-public class AgendaOptions {
+public class AgendaOptions implements IsJavaScriptObject{
 	private JavaScriptObject options;
 	
 	public AgendaOptions(){

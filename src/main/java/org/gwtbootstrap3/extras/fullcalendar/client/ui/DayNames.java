@@ -10,9 +10,8 @@ import com.google.gwt.i18n.client.LocaleInfo;
  * @author Jeff Isenhart
  *
  */
-public class DayNames {
-	private JavaScriptObject longNames;
-	private JavaScriptObject shortNames;
+public class DayNames implements IsJavaScriptObject{
+	private JavaScriptObject names;
 	
 	public DayNames(){
 		newInstance();
@@ -21,8 +20,9 @@ public class DayNames {
 	private native void newInstance( ) /*-{
 		//default vals...
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::longNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday', 'Friday', 'Saturday'];
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::shortNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::names = {};
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::names.dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday', 'Friday', 'Saturday'];
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::names.dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	}-*/;
 	
 	
@@ -58,15 +58,13 @@ public class DayNames {
 	 */
 	public native void localized( JsArrayString longNames,JsArrayString shortNames ) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::longNames = longNames;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::shortNames = shortNames;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::names.dayNames = longNames;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DayNames::names.dayNamesShort = shortNames;
 	}-*/;
 	
-	public JavaScriptObject getLongNames(){
-		return longNames;
-	}
-	
-	public JavaScriptObject getShortNames(){
-		return shortNames;
+
+	@Override
+	public JavaScriptObject toJavaScript() {
+		return names;
 	}
 }

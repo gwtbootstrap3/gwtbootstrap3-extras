@@ -2,6 +2,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 public class CalendarConfig {
 
+	private Language langauge;//http://arshaw.com/fullcalendar/docs/text/lang/
 	private ClickAndHoverConfig clickHoverConfig;//http://arshaw.com/fullcalendar/docs/mouse/
 	private DragResizeConfig dragResizeConfig;//http://arshaw.com/fullcalendar/docs/event_ui/;
 	private EventDataConfig eventConfig;//http://arshaw.com/fullcalendar/docs/event_data/
@@ -14,6 +15,7 @@ public class CalendarConfig {
 	private AgendaOptions agendaOptions;//http://arshaw.com/fullcalendar/docs/agenda/
 	private DayNames dayNames;//http://arshaw.com/fullcalendar/docs/text/dayNames/
 	private String weekNumberTitle;
+	private String timezone;
 	private boolean selectable;
 	private boolean selectHelper;
 	private EventRenderHandler renderHandler;//http://arshaw.com/fullcalendar/docs/event_rendering/eventRender/
@@ -46,23 +48,14 @@ public class CalendarConfig {
 	}
 
 	public ButtonText getButtonText(){
-		if( buttonText == null ){
-			buttonText = new ButtonText();
-		}
 		return buttonText;
 	}
 	
 	public MonthNames getMonthNames(){
-		if( monthNames == null ){
-			monthNames = new MonthNames();
-		}
 		return monthNames;
 	}
 	
 	public DayNames getDayNames(){
-		if( dayNames == null ){
-			dayNames = new DayNames();
-		}
 		return dayNames;
 	}
 
@@ -144,5 +137,25 @@ public class CalendarConfig {
 
 	public void setDragResizeConfig(DragResizeConfig dragResizeConfig) {
 		this.dragResizeConfig = dragResizeConfig;
+	}
+
+	public Language getLangauge() {
+		return langauge;
+	}
+
+	public void setLangauge(Language langauge) {
+		this.langauge = langauge;
+	}
+
+	public String getTimezone() {
+		return timezone;
+	}
+
+	/**
+	 * 'local', 'UTC', a timezone string ('America/Chicago')
+	 * @param timezone
+	 */
+	public void setTimezone(String timezone) {
+		this.timezone = timezone;
 	}
 }

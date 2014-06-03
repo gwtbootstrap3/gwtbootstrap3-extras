@@ -2,7 +2,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class ButtonText {
+public class ButtonText implements IsJavaScriptObject{
 
 	private JavaScriptObject text; 
 	

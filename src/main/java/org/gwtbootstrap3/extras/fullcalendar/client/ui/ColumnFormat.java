@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class ColumnFormat extends AbstractViewOptionFormat {
+public class ColumnFormat extends AbstractViewOptionFormat implements IsJavaScriptObject {
 	private JavaScriptObject format;
 	public ColumnFormat(){
 		this(null);
