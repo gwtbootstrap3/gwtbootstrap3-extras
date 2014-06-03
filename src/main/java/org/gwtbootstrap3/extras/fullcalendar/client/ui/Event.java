@@ -74,27 +74,13 @@ public class Event {
 	
 	public native JsDate getStart() /*-{
 		var theInstance = this;
-		console.log("--------");
-		console.log(theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event);
-		console.log("--------");
 		if( theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start ){
 			return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start.toDate();
 		}
 		return null;
 		
 	}-*/; 
-	
-	public native JsDate getFormatStart() /*-{
-		var theInstance = this;
-		
-		if( theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start ){
-			var d = new Date(theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start.format());
-			console.log(d);
-			return d;
-		}
-		return null;
-		
-	}-*/; 
+	 
 	
 	public void setEnd( Date d ){
 		if( d != null ){
@@ -114,13 +100,6 @@ public class Event {
 		return null;
 	}-*/; 
 	
-	public native JsDate getFormatEnd() /*-{
-		var theInstance = this;
-		if( theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end ){
-			return new Date(theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end.toDate());
-		}
-		return null;
-	}-*/;
 	
 	public native void setUrl( String url ) /*-{
 		var theInstance = this;
