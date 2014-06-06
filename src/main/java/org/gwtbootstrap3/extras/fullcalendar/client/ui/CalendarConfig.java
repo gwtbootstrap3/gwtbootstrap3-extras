@@ -58,12 +58,24 @@ public class CalendarConfig {
 		this.selectHelper = selectHelper;
 	}
 
+	public void setButtonText(ButtonText bt ){
+		this.buttonText = bt;
+	}
+	
 	public ButtonText getButtonText(){
 		return buttonText;
 	}
 	
+	public void setMonthNames( MonthNames mn ){
+		this.monthNames = mn;
+	}
+	
 	public MonthNames getMonthNames(){
 		return monthNames;
+	}
+	
+	public void setDayNames( DayNames dn ){
+		this.dayNames = dn;
 	}
 	
 	public DayNames getDayNames(){

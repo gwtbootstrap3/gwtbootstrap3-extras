@@ -33,7 +33,11 @@ public class GeneralDisplay implements IsJavaScriptObject{
 			weekNumbers:false,
 			weekNumberCalculation:'local',
 			aspectRatio:1.35,
-			handleWindowResize:true	
+			handleWindowResize:true	,
+			prev: 'left-single-arrow',
+    		next: 'right-single-arrow',
+    		prevYear: 'left-double-arrow',
+    		nextYear: 'right-double-arrow'
 		};
 	}-*/; 
 
@@ -88,7 +92,7 @@ public class GeneralDisplay implements IsJavaScriptObject{
 		if( days != null ){
 			JsArrayInteger intArr = (JsArrayInteger)JsArrayInteger.createArray(); 
 			for (int i : days) {
-				assert i <=0 && i >= 6;
+				assert i >=0 && i <= 6;
 				intArr.push(i);
 			}
 			setHiddenDays(intArr);
@@ -125,6 +129,7 @@ public class GeneralDisplay implements IsJavaScriptObject{
 		
 	}-*/;
 	
+	//to-do: make this a callback
 	public native void setWeekNumberCaculation(JavaScriptObject weekNumberFunction) /*-{
 		if( weekNumberFunction ){
 			var theInstance = this;
@@ -151,6 +156,28 @@ public class GeneralDisplay implements IsJavaScriptObject{
 	public native void setHandleWindowResize(boolean handleWindowResize) /*-{
 		var theInstance = this;
 		return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.handleWindowResize = handleWindowResize;
+	}-*/;
+	
+
+	
+	public native void setPrev( String previous ) /*-{
+		var theInstance = this;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.prev = previous;
+	}-*/;
+	
+	public native void setNext( String next ) /*-{
+		var theInstance = this;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.next = next;
+	}-*/;
+	
+	public native void setPrevYear( String previousYear ) /*-{
+		var theInstance = this;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.prevYear = previousYear;
+	}-*/;
+	
+	public native void setNextYear( String nextYear ) /*-{
+		var theInstance = this;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.nextYear = nextYear;
 	}-*/;
 	
 	public JavaScriptObject toJavaScript(){

@@ -87,11 +87,11 @@ public class Event implements IsJavaScriptObject{
 		
 	}-*/; 
 	
-	public Date getISOStartDate(){
+	public Date getStartFromYearMonthDay(){
 		Date iso = null;
 		String isoString = getISOStart();
-		if( isoString != null ){
-			iso = DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).parse(isoString);
+		if( isoString != null && isoString.length() >= 10){
+			iso = DateTimeFormat.getFormat("yyyy-MM-dd").parse(isoString.substring(0,10));
 		}
 		return iso;
 	}
@@ -132,11 +132,11 @@ public class Event implements IsJavaScriptObject{
 		return null;
 	}-*/; 
 	
-	public Date getISOEndDate(){
+	public Date getEndFromYearMonthDay(){
 		Date iso = null;
 		String isoString = getISOEnd();
-		if( isoString != null ){
-			iso = DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).parse(isoString);
+		if( isoString != null && isoString.length() >= 10){
+			iso = DateTimeFormat.getFormat("yyyy-MM-dd").parse(isoString.substring(0,10));
 		}
 		return iso;
 	}

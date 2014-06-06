@@ -23,13 +23,11 @@ public class AgendaOptions implements IsJavaScriptObject{
 		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options = {
 			allDaySlot: true,
 			allDayText: "all-day",
-			axisFormat: "h(:mm)tt",
-			slotMinutes: 30,
-			snapMinutes: 30,
-			defaultEventMinutes: 120,
-			firstHour: 6,
-			minTime: 0,
-			maxTime: 24,
+			axisFormat: "h(:mm)a",
+			slotDuration: '00:30.00',
+			scrollTime: '06:00:00',
+			minTime: '00:00:00',
+			maxTime: '24:00:00',
 			slotEventOverlap: true
 			
 		};
@@ -60,58 +58,64 @@ public class AgendaOptions implements IsJavaScriptObject{
 		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.axisFormat = format;
 	}-*/; 
 	
-	
+	public void setSlotDuration( int minutes ){
+		assert minutes >=0 && minutes <= 60;
+		if( minutes < 10 ){
+			setSlotDuration("00:0" + minutes + ":00");
+		}else{
+			setSlotDuration("00:" + minutes + ":00");
+		}
+	}
 	/**
-	 * @see http://arshaw.com/fullcalendar/docs/agenda/slotMinutes/
+	 * @see http://arshaw.com/fullcalendar/docs/agenda/slotDuration/
 	 */
-	public native void setSlotMinutes(int minutes) /*-{
+	public native void setSlotDuration(String timeString) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.slotMinutes = minutes;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.slotDuration = timeString;
 	}-*/; 
 	
+	public void setSnapDuration( int minutes ){
+		assert minutes >=0 && minutes <= 60;
+		if( minutes < 10 ){
+			setSnapDuration("00:0" + minutes + ":00");
+		}else{
+			setSnapDuration("00:" + minutes + ":00");
+		}
+	}
 	
 	/**
-	 * @see http://arshaw.com/fullcalendar/docs/agenda/snapMinutes/
+	 * @see http://arshaw.com/fullcalendar/docs/agenda/snapDuration/
 	 */
-	public native void setSnapMinutes(int minutes) /*-{
+	public native void setSnapDuration(String timeString) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.snapMinutes = minutes;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.snapDuration = timeString;
 	}-*/; 
-	
 	
 	/**
-	 * @see http://arshaw.com/fullcalendar/docs/agenda/defaultEventMinutes/
+	 * @see http://arshaw.com/fullcalendar/docs/agenda/scrollTime/
 	 */
-	public native void setDefaultEventMinutes(int minutes) /*-{
+	public native void setScrollTime(String timeString) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.defaultEventMinutes = minutes;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.scrollTime = timeString;
 	}-*/; 
 	
-	
-	/**
-	 * @see http://arshaw.com/fullcalendar/docs/agenda/firstHour/
-	 */
-	public native void setFirstHour(int hour) /*-{
-		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.firstHour = hour;
-	}-*/; 
 	
 	
 	/**
 	 * @see http://arshaw.com/fullcalendar/docs/agenda/minTime/
 	 */
-	public native void setMinTime(int min) /*-{
+	public native void setMinTime(String timeString) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.minTime = min;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.minTime = timeString;
 	}-*/; 
 	
 	
 	/**
 	 * @see http://arshaw.com/fullcalendar/docs/agenda/maxTime/
 	 */
-	public native void setMaxTime(int max) /*-{
+	public native void setMaxTime(String timeString) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.maxTime = max;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.maxTime = timeString;
 	}-*/; 
 	
 	

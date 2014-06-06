@@ -21,10 +21,6 @@ public class ButtonText implements IsJavaScriptObject{
 		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ButtonText::text = {};
 		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ButtonText::text.buttonText =
 		{
-		    prev:     '&lsaquo;', // <
-		    next:     '&rsaquo;', // >
-		    prevYear: '&laquo;',  // <<
-		    nextYear: '&raquo;',  // >>
 		    today:    'today',
 		    month:    'month',
 		    week:     'week',
@@ -32,25 +28,6 @@ public class ButtonText implements IsJavaScriptObject{
 		};
 	}-*/;
 	
-	public native void setPrev( String previous ) /*-{
-		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ButtonText::text.buttonText.prev = previous;
-	}-*/;
-	
-	public native void setNext( String next ) /*-{
-		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ButtonText::text.buttonText.next = next;
-	}-*/;
-	
-	public native void setPrevYear( String previousYear ) /*-{
-		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ButtonText::text.buttonText.prevYear = previousYear;
-	}-*/;
-	
-	public native void setNextYear( String nextYear ) /*-{
-		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ButtonText::text.buttonText.nextYear = nextYear;
-	}-*/;
 	
 	public native void setToday( String today ) /*-{
 		var theInstance = this;
