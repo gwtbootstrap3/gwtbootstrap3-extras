@@ -4,6 +4,12 @@ import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ * 
+ * @author Jeff Isenhart
+ * @see http://arshaw.com/fullcalendar/docs/text/columnFormat/
+ *
+ */
 public class ColumnFormat extends AbstractViewOptionFormat implements IsJavaScriptObject {
 	private JavaScriptObject format;
 	public ColumnFormat(){
@@ -34,14 +40,14 @@ public class ColumnFormat extends AbstractViewOptionFormat implements IsJavaScri
 	
 	private native void newInstance() /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ColumnFormat::format = {
-		};
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ColumnFormat::format = {};
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ColumnFormat::format.columnFormat = {};
 	}-*/;
 	
 	
 	private native void setFormat(String format, String viewOption) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TimeFormat::format[viewOption] = format;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TimeFormat::format.columnFormat[viewOption] = format;
 	}-*/;
 	
 	public JavaScriptObject toJavaScript(){

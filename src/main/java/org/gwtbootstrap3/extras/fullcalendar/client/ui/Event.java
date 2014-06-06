@@ -8,7 +8,13 @@ import com.google.gwt.core.client.JsDate;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 
-public class Event {
+/**
+ * Represents and event on a FullCalendar
+ * @author Jeff Isenhart
+ * @see http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
+ *
+ */
+public class Event implements IsJavaScriptObject{
 
 	private JavaScriptObject event;
 	
@@ -80,6 +86,24 @@ public class Event {
 		return null;
 		
 	}-*/; 
+	
+	public Date getISOStartDate(){
+		Date iso = null;
+		String isoString = getISOStart();
+		if( isoString != null ){
+			iso = DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).parse(isoString);
+		}
+		return iso;
+	}
+	
+	public native String getISOStart() /*-{
+		var theInstance = this;
+		if( theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start ){
+			return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start.toDate().toISOString();
+		}
+		return null;
+		
+	}-*/; 
 	 
 	
 	public void setEnd( Date d ){
@@ -100,7 +124,22 @@ public class Event {
 		return null;
 	}-*/; 
 	
+	public native String getISOEnd() /*-{
+		var theInstance = this;
+		if( theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end ){
+			return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end.toDate().toISOString();
+		}
+		return null;
+	}-*/; 
 	
+	public Date getISOEndDate(){
+		Date iso = null;
+		String isoString = getISOEnd();
+		if( isoString != null ){
+			iso = DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).parse(isoString);
+		}
+		return iso;
+	}
 	public native void setUrl( String url ) /*-{
 		var theInstance = this;
 		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.url = url;

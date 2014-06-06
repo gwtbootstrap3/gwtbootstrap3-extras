@@ -4,6 +4,11 @@ import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ * 
+ * @author Jeff Isenhart
+ * @http://arshaw.com/fullcalendar/docs/text/timeFormat/
+ */
 public class TimeFormat extends AbstractViewOptionFormat implements IsJavaScriptObject {
 	private JavaScriptObject format;
 	public TimeFormat(){
@@ -30,16 +35,18 @@ public class TimeFormat extends AbstractViewOptionFormat implements IsJavaScript
 	
 	private native void newInstance(String defaultValue) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TimeFormat::format = {
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TimeFormat::format = {};
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TimeFormat::format.timeFormat = {
 		    // for all other views
 		    '': defaultValue
 		};
+		
 	}-*/;
 	
 	
 	private native void setFormat(String format, String viewOption) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TimeFormat::format[viewOption] = format;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TimeFormat::format.timeFormat[viewOption] = format;
 	}-*/;
 	
 	public JavaScriptObject toJavaScript(){

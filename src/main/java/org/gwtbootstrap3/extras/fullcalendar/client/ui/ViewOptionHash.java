@@ -1,5 +1,10 @@
 package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
+/**
+ * 
+ * @author Jeff Isenhart
+ * @see http://arshaw.com/fullcalendar/docs/views/View_Option_Hash/
+ */
 public enum ViewOptionHash {
 	
 	

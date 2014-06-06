@@ -4,6 +4,11 @@ import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ * 
+ * @author Jeff Isenhart
+ *
+ */
 public class TitleFormat extends AbstractViewOptionFormat implements IsJavaScriptObject {
 	private JavaScriptObject format;
 	public TitleFormat(){
@@ -34,14 +39,14 @@ public class TitleFormat extends AbstractViewOptionFormat implements IsJavaScrip
 	
 	private native void newInstance() /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TitleFormat::format = {
-		};
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TitleFormat::format = {};
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TitleFormat::format.titleFormat = {};
 	}-*/;
 	
 	
 	private native void setFormat(String format, String viewOption) /*-{
 		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TitleFormat::format[viewOption] = format;
+		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TitleFormat::format.titleFormat[viewOption] = format;
 	}-*/;
 	
 	public JavaScriptObject toJavaScript(){

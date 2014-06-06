@@ -2,6 +2,11 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ * Wraps click and hover events inside a <code>JavaScriptObject</code>
+ * @author Jeff Isenhart
+ * @see http://arshaw.com/fullcalendar/docs/mouse/
+ */
 public class ClickAndHoverConfig implements IsJavaScriptObject{
 	private JavaScriptObject script;
 	

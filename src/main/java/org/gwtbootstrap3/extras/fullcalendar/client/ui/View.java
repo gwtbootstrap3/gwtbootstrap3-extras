@@ -3,12 +3,17 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsDate;
 
+/**
+ * 
+ * @author Jeff 
+ * @see http://arshaw.com/fullcalendar/docs/views/View_Object/
+ */
 public class View {
 
 	private JavaScriptObject view;
 	
 	/**
-	 * @see http://arshaw.com/fullcalendar/docs/views/View_Object/ 
+	 * 
 	 * @param jso
 	 */
 	public View( JavaScriptObject jso ){

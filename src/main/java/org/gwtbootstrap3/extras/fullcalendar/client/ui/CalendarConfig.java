@@ -1,8 +1,17 @@
 package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+
+/**
+ * Container class for all the javascript parameters to pass to <code>FullCalendar</code>
+ * @author Jeff Isenhart
+ *
+ */
 public class CalendarConfig {
 
 	private Language langauge;//http://arshaw.com/fullcalendar/docs/text/lang/
+	
 	private ClickAndHoverConfig clickHoverConfig;//http://arshaw.com/fullcalendar/docs/mouse/
 	private DragAndResizeConfig dragResizeConfig;//http://arshaw.com/fullcalendar/docs/event_ui/;
 	private EventDataConfig eventConfig;//http://arshaw.com/fullcalendar/docs/event_data/
@@ -14,11 +23,13 @@ public class CalendarConfig {
 	private TitleFormat titleFormat;//http://arshaw.com/fullcalendar/docs/text/titleFormat/
 	private AgendaOptions agendaOptions;//http://arshaw.com/fullcalendar/docs/agenda/
 	private DayNames dayNames;//http://arshaw.com/fullcalendar/docs/text/dayNames/
+	private EventRenderConfig renderConfig;//http://arshaw.com/fullcalendar/docs/event_rendering/eventRender/
+	
 	private String weekNumberTitle;
 	private String timezone;
 	private boolean selectable;
 	private boolean selectHelper;
-	private EventRenderHandler renderHandler;//http://arshaw.com/fullcalendar/docs/event_rendering/eventRender/
+	
 
 	
 	public CalendarConfig(){
@@ -59,12 +70,12 @@ public class CalendarConfig {
 		return dayNames;
 	}
 
-	public EventRenderHandler getRenderHandler() {
-		return renderHandler;
+	public EventRenderConfig getRenderConfig() {
+		return renderConfig;
 	}
 
-	public void setRenderHandler(EventRenderHandler renderHandler) {
-		this.renderHandler = renderHandler;
+	public void setRenderHandler(EventRenderConfig renderConfig) {
+		this.renderConfig = renderConfig;
 	}
 
 	public ColumnFormat getColumnFormat() {
@@ -157,5 +168,27 @@ public class CalendarConfig {
 	 */
 	public void setTimezone(String timezone) {
 		this.timezone = timezone;
+	}
+	
+	public JsArray<JavaScriptObject> getJavaScriptParameters(){
+		JsArray<JavaScriptObject> params = (JsArray<JavaScriptObject>) JsArray.createArray();
+		setParameter(params,getGeneralDisplay());
+		setParameter(params,getButtonText());
+		setParameter(params,getMonthNames());
+		setParameter(params,getDayNames());
+		setParameter(params,getDragResizeConfig());
+		setParameter(params,getClickHoverConfig());
+		setParameter(params,getEventConfig());
+		setParameter(params,getColumnFormat());
+		setParameter(params,getTimeFormat());
+		setParameter(params,getTitleFormat());
+		setParameter(params,getAgendaOptions());
+		return params;
+	}
+	
+	private void setParameter( JsArray<JavaScriptObject> params,IsJavaScriptObject isJS ){
+		if( isJS != null ){
+			params.push(isJS.toJavaScript());
+		}
 	}
 }

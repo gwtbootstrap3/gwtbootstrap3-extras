@@ -4,6 +4,11 @@ import org.gwtbootstrap3.extras.fullcalendar.client.FullCalendarClientBundle;
 
 import com.google.gwt.resources.client.TextResource;
 
+/**
+ * Convenient encapsulation of all language options for <code>FullCalendar</code> 
+ * @author Jeff Isenhart
+ * @see http://arshaw.com/fullcalendar/docs/text/lang/
+ */
 
 public enum Language {
 		ArabicMorocan("ar-ma",FullCalendarClientBundle.INSTANCE.getArabicMorocan()),

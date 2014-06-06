@@ -6,7 +6,13 @@ import org.gwtbootstrap3.extras.fullcalendar.client.FullCalendarClientBundle;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.ScriptInjector;
 
-public class EventSource {
+/**
+ * Models the Event Source Object
+ * @author Jeff Isenhart
+ * @see http://arshaw.com/fullcalendar/docs/event_data/Event_Source_Object/
+ *
+ */
+public class EventSource implements IsJavaScriptObject{
 
 	private static boolean GCAL_ADDED = false;
 	private JavaScriptObject eventSource;

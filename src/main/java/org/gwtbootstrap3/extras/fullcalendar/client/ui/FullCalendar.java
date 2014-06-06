@@ -60,39 +60,32 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 		super.onLoad();
 		loaded = true;
 		renderCalendar();
-		//Let everyone know it is ok to add events and set properties on the instance
-		DomEvent.fireNativeEvent(Document.get().createLoadEvent(), this);
 	}
 	
 	private void renderCalendar(){
-		if( config == null ){
-			addCalendar(getElement().getId(),currentView.name(),editable);
-		}else{
-			String lang = null;
+		JsArray<JavaScriptObject> javascriptParams = null;
+		String language = null;
+		String timezone = null;
+		String weekNumberTitle = null;
+		if( config != null ){
+			timezone = config.getTimezone();
+			weekNumberTitle = config.getWeekNumberTitle();
+			javascriptParams = config.getJavaScriptParameters();
 			if( config.getLangauge() != null ){
-				lang = config.getLangauge().getCode();
+				language = config.getLangauge().getCode();
 				ensureInjected(config.getLangauge());
 			}
-			addCalendar(getElement().getId(),
+		}
+		addCalendar(getElement().getId(),
 					currentView.name(),
 					editable,
-					lang,
-					config.getTimezone(),
-					config.getWeekNumberTitle(),
-					config.getRenderHandler(),
-					getParameter(config.getGeneralDisplay()),
-					getParameter(config.getButtonText()),
-					getParameter(config.getMonthNames()),
-					getParameter(config.getDayNames()),
-					getParameter(config.getDragResizeConfig()),
-					getParameter(config.getClickHoverConfig()),
-					getParameter(config.getEventConfig()),
-					getParameter(config.getColumnFormat()),
-					getParameter(config.getTimeFormat()),
-					getParameter(config.getTitleFormat()),
-					getParameter(config.getAgendaOptions())
-		  );
-		}
+					language,
+					timezone,
+					weekNumberTitle,
+					javascriptParams
+		);
+		//Let everyone know it is ok to add events and set properties on the instance
+		DomEvent.fireNativeEvent(Document.get().createLoadEvent(), this);
 	}
 	
 	public void changeLangauge( Language language ){
@@ -117,12 +110,6 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 		}
 	}
 	
-	private JavaScriptObject getParameter( IsJavaScriptObject isJS ){
-		if( isJS == null ){
-			return null;
-		}
-		return isJS.toJavaScript();
-	}
 	
 	private void ensureInjected(Language language) {
 		if( !languageScripts.isEmpty() ){
@@ -140,17 +127,6 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 		
 	}
 
-	private native void addCalendar( String id, String currentView, boolean editable) /*-{
-		$wnd.jQuery('#' + id).fullCalendar(
-			{
-				defaultView: currentView,
-				selectable: true,
-				selectHelper: true,
-				editable:editable
-				
-			}
-		);
-	}-*/;
 	
 	private native void addCalendar( String id, 
 			String currentView, 
@@ -158,18 +134,7 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 			String lang,
 			String timezone,
 			String weekNumberTitle,
-			EventRenderHandler renderHandler,
-			JavaScriptObject generalDisplay,
-			JavaScriptObject buttonText,
-			JavaScriptObject monthNames,
-			JavaScriptObject dayNames,
-			JavaScriptObject dragResizeConfig,
-			JavaScriptObject clickHoverConfig,
-			JavaScriptObject eventConfig,
-			JavaScriptObject columnFormat,
-			JavaScriptObject timeFormat,
-			JavaScriptObject titleFormat,
-			JavaScriptObject agendaOptions
+			JsArray<JavaScriptObject> options
 			) /*-{
 		var fullCalendarParams = {
 				defaultView: currentView,
@@ -187,48 +152,14 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers{
 		if( weekNumberTitle ){
 			fullCalendarParams.weekNumberTitle = weekNumberTitle;
 		}
-		if( renderHandler ){
-			fullCalendarParams.eventRender = function(calEvent, element, view) {
-				renderHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventRenderHandler::render(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/Element;)(calEvent,element[0]);
-      		}
+		if( options ){
+			for (var i = 0; i < options.length; i++) {
+			    $wnd.jQuery.extend(fullCalendarParams,options[i]);
+			}
 		}
-		
-		if( generalDisplay ){
-			$wnd.jQuery.extend(fullCalendarParams,generalDisplay);
-		}
-		if( buttonText ){
-			fullCalendarParams.buttonText = buttonText;
-		}
-		if( monthNames ){
-			$wnd.jQuery.extend(fullCalendarParams,monthNames);
-		}
-		if( dayNames ){
-			$wnd.jQuery.extend(fullCalendarParams,dayNames);
-		}
-		if( dragResizeConfig ){
-			$wnd.jQuery.extend(fullCalendarParams,dragResizeConfig);
-		}
-		if( clickHoverConfig ){
-			$wnd.jQuery.extend(fullCalendarParams,clickHoverConfig);
-		}
-		if( eventConfig ){
-			$wnd.jQuery.extend(fullCalendarParams,eventConfig);
-		}
-		if( columnFormat ){
-			fullCalendarParams.columnFormat = columnFormat;
-		}
-		if( timeFormat ){
-			fullCalendarParams.timeFormat = timeFormat;
-		}
-		if( titleFormat ){
-			fullCalendarParams.titleFormat = titleFormat;
-		}
-		if( agendaOptions ){
-			$wnd.jQuery.extend(fullCalendarParams,agendaOptions);
-		}
+		console.log(fullCalendarParams);
 		$wnd.jQuery('#' + id).fullCalendar(fullCalendarParams);
 	}-*/;
-	
 
 	public void addEvent( Event event){
 		if( loaded && event != null ){

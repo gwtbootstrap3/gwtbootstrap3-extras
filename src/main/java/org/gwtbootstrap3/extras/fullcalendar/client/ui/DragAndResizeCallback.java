@@ -3,6 +3,11 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.NativeEvent;
 
+/**
+ * Callback methods for drag and resize event
+ * @author Jeff Isenhart
+ *
+ */
 public interface DragAndResizeCallback {
 	public void eventDragStart(JavaScriptObject calendarEvent, NativeEvent nativeEvent);
 	public void eventDragStop(JavaScriptObject calendarEvent, NativeEvent nativeEvent);
