@@ -197,7 +197,7 @@ public class Select extends ComplexWidget {
     }
 
     public boolean isMultiple() {
-        return !attributeMixin.getAttribute(MULTIPLE).isEmpty() || attributeMixin.getAttribute(MULTIPLE).equals(TRUE);
+        return attributeMixin.getAttribute(MULTIPLE) != null && attributeMixin.getAttribute(MULTIPLE).equals(TRUE);
     }
 
     public void setLiveSearch(final boolean liveSearch) {
