@@ -27,10 +27,10 @@ public class GrowlOptions extends JavaScriptObject {
 
     protected GrowlOptions() {
     }
-
-    public final void setPositionObject(JavaScriptObject pos) {
-        if (pos != null && pos instanceof GrowlPosition) {
-            setPosition(pos);
+    
+    public final void setGrowlPosition(GrowlPosition pos) {
+        if (pos != null) {
+        	setPosition(pos);
         }
     }
 
@@ -62,7 +62,7 @@ public class GrowlOptions extends JavaScriptObject {
         this.delay = mDelay;
     }-*/;
 
-    public final native void pauseOnMouseOver(boolean pauseOnMouseOver) /*-{
+    public final native void setPauseOnMouseOver(boolean pauseOnMouseOver) /*-{
         this.pause_on_mouseover = pauseOnMouseOver;
     }-*/;
 
