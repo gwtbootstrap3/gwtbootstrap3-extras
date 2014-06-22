@@ -21,8 +21,8 @@ package org.gwtbootstrap3.extras.select.client.ui;
  */
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.user.client.ui.HasEnabled;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
-import org.gwtbootstrap3.client.ui.base.HasEnabled;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
 import org.gwtbootstrap3.client.ui.base.mixin.EnabledMixin;
 import org.gwtbootstrap3.client.ui.constants.IconType;

@@ -31,9 +31,11 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Focusable;
+import com.google.gwt.user.client.ui.HasEnabled;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
+import org.gwtbootstrap3.client.ui.base.mixin.EnabledMixin;
 import org.gwtbootstrap3.client.ui.base.mixin.FocusableMixin;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.extras.select.client.constants.Styles;
@@ -46,7 +48,7 @@ import static org.gwtbootstrap3.extras.select.client.constants.DataAttributes.*;
 /**
  * @author godi
  */
-public class Select extends ComplexWidget implements Focusable {
+public class Select extends ComplexWidget implements Focusable, HasEnabled {
     private static final String REFRESH = "refresh";
     private static final String RENDER = "render";
     private static final String SHOW = "show";
@@ -57,6 +59,7 @@ public class Select extends ComplexWidget implements Focusable {
 
     private final AttributeMixin<Select> attributeMixin = new AttributeMixin<Select>(this);
     private final FocusableMixin<Select> focusableMixin = new FocusableMixin<Select>(this);
+    private final EnabledMixin<Select> enabledMixin = new EnabledMixin<Select>(this);
 
     public Select() {
         setElement(Document.get().createSelectElement());
@@ -98,16 +101,20 @@ public class Select extends ComplexWidget implements Focusable {
         return attributeMixin.getAttribute(DATA_SHOW_SUBTEXT) != null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setEnabled(final boolean enabled) {
-        if (enabled) {
-            attributeMixin.removeAttribute(DISABLED);
-        } else {
-            attributeMixin.setAttribute(DISABLED, "");
-        }
+        enabledMixin.setEnabled(enabled);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isEnabled() {
-        return attributeMixin.getAttribute(DISABLED).isEmpty();
+        return enabledMixin.isEnabled();
     }
 
     /**
@@ -366,6 +373,7 @@ public class Select extends ComplexWidget implements Focusable {
     public void setTabIndex(final int i) {
         focusableMixin.setTabIndex(i);
     }
+
 
     /**
      * Gets the number of items present in the list box.
