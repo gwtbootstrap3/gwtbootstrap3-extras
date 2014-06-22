@@ -328,7 +328,7 @@ public class Select extends ComplexWidget {
         }
     }
 
-    private SelectElement getSelectElement() {
+    protected SelectElement getSelectElement() {
         return getElement().cast();
     }
 
