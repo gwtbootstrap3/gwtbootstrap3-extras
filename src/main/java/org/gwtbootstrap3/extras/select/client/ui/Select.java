@@ -30,9 +30,11 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.ui.Focusable;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
+import org.gwtbootstrap3.client.ui.base.mixin.FocusableMixin;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.extras.select.client.constants.Styles;
 
@@ -44,7 +46,7 @@ import static org.gwtbootstrap3.extras.select.client.constants.DataAttributes.*;
 /**
  * @author godi
  */
-public class Select extends ComplexWidget {
+public class Select extends ComplexWidget implements Focusable {
     private static final String REFRESH = "refresh";
     private static final String RENDER = "render";
     private static final String SHOW = "show";
@@ -54,6 +56,7 @@ public class Select extends ComplexWidget {
     private static final String TRUE = "true";
 
     private final AttributeMixin<Select> attributeMixin = new AttributeMixin<Select>(this);
+    private final FocusableMixin<Select> focusableMixin = new FocusableMixin<Select>(this);
 
     public Select() {
         setElement(Document.get().createSelectElement());
@@ -109,9 +112,9 @@ public class Select extends ComplexWidget {
 
     /**
      * Sets the number of lines to show before scrolling
-     *
+     * <p/>
      * Values:
-     *
+     * <p/>
      * (1) auto - (default) shows them all
      * (2) x - shows x number of entries before scrolling
      *
@@ -131,7 +134,7 @@ public class Select extends ComplexWidget {
 
     /**
      * Sets the width of the select
-     *
+     * <p/>
      * !! use 'auto' to automatically adjust the width of the select to its widest option, or just use
      * specific values (50px, 50%, etc...)
      */
@@ -169,7 +172,7 @@ public class Select extends ComplexWidget {
 
     /**
      * Supported Values:
-     *
+     * <p/>
      * (1) values - default, comma delimited list
      * (2) count - If one item is selected, then the value is shown, if more than one is selected then the number of selected items is displayed, eg 2 of 6 selected
      * (3) count greater than x - Where X is the number of items selected when the display format changes from values to count
@@ -330,6 +333,38 @@ public class Select extends ComplexWidget {
 
     protected SelectElement getSelectElement() {
         return getElement().cast();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getTabIndex() {
+        return focusableMixin.getTabIndex();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAccessKey(final char c) {
+        focusableMixin.setAccessKey(c);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setFocus(final boolean b) {
+        focusableMixin.setFocus(b);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTabIndex(final int i) {
+        focusableMixin.setTabIndex(i);
     }
 
     /**
