@@ -26,7 +26,7 @@ public class GrowlHelper {
 
     public static GrowlOptions getNewOptions() {
         GrowlOptions go = getNewNativeOptions();
-        go.setPositionObject(getNewPosition());
+        go.setGrowlPosition(getNewPosition());
         return go;
     }
 
