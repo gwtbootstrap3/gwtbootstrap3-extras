@@ -20,208 +20,206 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
  * #L%
  */
 
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 /**
  * Container class for all the javascript parameters to pass to <code>FullCalendar</code>
- * @author Jeff Isenhart
  *
+ * @author Jeff Isenhart
  */
 public class CalendarConfig {
 
-	private Language langauge;//http://arshaw.com/fullcalendar/docs/text/lang/
-	
-	private ClickAndHoverConfig clickHoverConfig;//http://arshaw.com/fullcalendar/docs/mouse/
-	private DragAndResizeConfig dragResizeConfig;//http://arshaw.com/fullcalendar/docs/event_ui/;
-	private EventDataConfig eventConfig;//http://arshaw.com/fullcalendar/docs/event_data/
-	private GeneralDisplay generalDisplay;//http://arshaw.com/fullcalendar/docs/display/
-	private ButtonText buttonText;//http://arshaw.com/fullcalendar/docs/text/buttonText/
-	private MonthNames monthNames;//http://arshaw.com/fullcalendar/docs/text/monthNames/
-	private ColumnFormat columnFormat;//http://arshaw.com/fullcalendar/docs/text/columnFormat/
-	private TimeFormat timeFormat;//http://arshaw.com/fullcalendar/docs/text/timeFormat/
-	private TitleFormat titleFormat;//http://arshaw.com/fullcalendar/docs/text/titleFormat/
-	private AgendaOptions agendaOptions;//http://arshaw.com/fullcalendar/docs/agenda/
-	private DayNames dayNames;//http://arshaw.com/fullcalendar/docs/text/dayNames/
-	private EventRenderConfig renderConfig;//http://arshaw.com/fullcalendar/docs/event_rendering/eventRender/
-	
-	private String weekNumberTitle;
-	private String timezone;
-	private boolean selectable;
-	private boolean selectHelper;
-	
+    private Language langauge;//http://arshaw.com/fullcalendar/docs/text/lang/
 
-	
-	public CalendarConfig(){
-		this(null);
-	}
-	
-	public CalendarConfig( Header header ){
-		if( header != null ){
-			setGeneralDisplay(new GeneralDisplay(header));
-		}
-	}
-	
-	public boolean isSelectable() {
-		return selectable;
-	}
+    private ClickAndHoverConfig clickHoverConfig;//http://arshaw.com/fullcalendar/docs/mouse/
+    private DragAndResizeConfig dragResizeConfig;//http://arshaw.com/fullcalendar/docs/event_ui/;
+    private EventDataConfig eventConfig;//http://arshaw.com/fullcalendar/docs/event_data/
+    private GeneralDisplay generalDisplay;//http://arshaw.com/fullcalendar/docs/display/
+    private ButtonText buttonText;//http://arshaw.com/fullcalendar/docs/text/buttonText/
+    private MonthNames monthNames;//http://arshaw.com/fullcalendar/docs/text/monthNames/
+    private ColumnFormat columnFormat;//http://arshaw.com/fullcalendar/docs/text/columnFormat/
+    private TimeFormat timeFormat;//http://arshaw.com/fullcalendar/docs/text/timeFormat/
+    private TitleFormat titleFormat;//http://arshaw.com/fullcalendar/docs/text/titleFormat/
+    private AgendaOptions agendaOptions;//http://arshaw.com/fullcalendar/docs/agenda/
+    private DayNames dayNames;//http://arshaw.com/fullcalendar/docs/text/dayNames/
+    private EventRenderConfig renderConfig;//http://arshaw.com/fullcalendar/docs/event_rendering/eventRender/
 
-	public void setSelectable(boolean selectable) {
-		this.selectable = selectable;
-	}
+    private String weekNumberTitle;
+    private String timezone;
+    private boolean selectable;
+    private boolean selectHelper;
 
-	public boolean isSelectHelper() {
-		return selectHelper;
-	}
+    public CalendarConfig() {
+        this(null);
+    }
 
-	public void setSelectHelper(boolean selectHelper) {
-		this.selectHelper = selectHelper;
-	}
+    public CalendarConfig(final Header header) {
+        if (header != null) {
+            setGeneralDisplay(new GeneralDisplay(header));
+        }
+    }
 
-	public void setButtonText(ButtonText bt ){
-		this.buttonText = bt;
-	}
-	
-	public ButtonText getButtonText(){
-		return buttonText;
-	}
-	
-	public void setMonthNames( MonthNames mn ){
-		this.monthNames = mn;
-	}
-	
-	public MonthNames getMonthNames(){
-		return monthNames;
-	}
-	
-	public void setDayNames( DayNames dn ){
-		this.dayNames = dn;
-	}
-	
-	public DayNames getDayNames(){
-		return dayNames;
-	}
+    public boolean isSelectable() {
+        return selectable;
+    }
 
-	public EventRenderConfig getRenderConfig() {
-		return renderConfig;
-	}
+    public void setSelectable(final boolean selectable) {
+        this.selectable = selectable;
+    }
 
-	public void setRenderHandler(EventRenderConfig renderConfig) {
-		this.renderConfig = renderConfig;
-	}
+    public boolean isSelectHelper() {
+        return selectHelper;
+    }
 
-	public ColumnFormat getColumnFormat() {
-		return columnFormat;
-	}
+    public void setSelectHelper(final boolean selectHelper) {
+        this.selectHelper = selectHelper;
+    }
 
-	public void setColumnFormat(ColumnFormat columnFormat) {
-		this.columnFormat = columnFormat;
-	}
+    public void setButtonText(final ButtonText bt) {
+        this.buttonText = bt;
+    }
 
-	public TimeFormat getTimeFormat() {
-		return timeFormat;
-	}
+    public ButtonText getButtonText() {
+        return buttonText;
+    }
 
-	public void setTimeFormat(TimeFormat timeFormat) {
-		this.timeFormat = timeFormat;
-	}
+    public void setMonthNames(final MonthNames mn) {
+        this.monthNames = mn;
+    }
 
-	public TitleFormat getTitleFormat() {
-		return titleFormat;
-	}
+    public MonthNames getMonthNames() {
+        return monthNames;
+    }
 
-	public void setTitleFormat(TitleFormat titleFormat) {
-		this.titleFormat = titleFormat;
-	}
+    public void setDayNames(final DayNames dn) {
+        this.dayNames = dn;
+    }
 
-	public String getWeekNumberTitle() {
-		return weekNumberTitle;
-	}
+    public DayNames getDayNames() {
+        return dayNames;
+    }
 
-	public void setWeekNumberTitle(String weekNumberTitle) {
-		this.weekNumberTitle = weekNumberTitle;
-	}
+    public EventRenderConfig getRenderConfig() {
+        return renderConfig;
+    }
 
-	public AgendaOptions getAgendaOptions() {
-		return agendaOptions;
-	}
+    public void setRenderHandler(final EventRenderConfig renderConfig) {
+        this.renderConfig = renderConfig;
+    }
 
-	public void setAgendaOptions(AgendaOptions agendaOptions) {
-		this.agendaOptions = agendaOptions;
-	}
+    public ColumnFormat getColumnFormat() {
+        return columnFormat;
+    }
 
-	public GeneralDisplay getGeneralDisplay() {
-		return generalDisplay;
-	}
+    public void setColumnFormat(final ColumnFormat columnFormat) {
+        this.columnFormat = columnFormat;
+    }
 
-	public void setGeneralDisplay(GeneralDisplay generalDisplay) {
-		this.generalDisplay = generalDisplay;
-	}
+    public TimeFormat getTimeFormat() {
+        return timeFormat;
+    }
 
-	public EventDataConfig getEventConfig() {
-		return eventConfig;
-	}
+    public void setTimeFormat(final TimeFormat timeFormat) {
+        this.timeFormat = timeFormat;
+    }
 
-	public void setEventConfig(EventDataConfig eventConfig) {
-		this.eventConfig = eventConfig;
-	}
+    public TitleFormat getTitleFormat() {
+        return titleFormat;
+    }
 
-	public ClickAndHoverConfig getClickHoverConfig() {
-		return clickHoverConfig;
-	}
+    public void setTitleFormat(final TitleFormat titleFormat) {
+        this.titleFormat = titleFormat;
+    }
 
-	public void setClickHoverConfig(ClickAndHoverConfig clickHoverConfig) {
-		this.clickHoverConfig = clickHoverConfig;
-	}
+    public String getWeekNumberTitle() {
+        return weekNumberTitle;
+    }
 
-	public DragAndResizeConfig getDragResizeConfig() {
-		return dragResizeConfig;
-	}
+    public void setWeekNumberTitle(final String weekNumberTitle) {
+        this.weekNumberTitle = weekNumberTitle;
+    }
 
-	public void setDragResizeConfig(DragAndResizeConfig dragResizeConfig) {
-		this.dragResizeConfig = dragResizeConfig;
-	}
+    public AgendaOptions getAgendaOptions() {
+        return agendaOptions;
+    }
 
-	public Language getLangauge() {
-		return langauge;
-	}
+    public void setAgendaOptions(final AgendaOptions agendaOptions) {
+        this.agendaOptions = agendaOptions;
+    }
 
-	public void setLangauge(Language langauge) {
-		this.langauge = langauge;
-	}
+    public GeneralDisplay getGeneralDisplay() {
+        return generalDisplay;
+    }
 
-	public String getTimezone() {
-		return timezone;
-	}
+    public void setGeneralDisplay(final GeneralDisplay generalDisplay) {
+        this.generalDisplay = generalDisplay;
+    }
 
-	/**
-	 * 'local', 'UTC', a timezone string ('America/Chicago')
-	 * @param timezone
-	 */
-	public void setTimezone(String timezone) {
-		this.timezone = timezone;
-	}
-	
-	public JsArray<JavaScriptObject> getJavaScriptParameters(){
-		JsArray<JavaScriptObject> params = (JsArray<JavaScriptObject>) JsArray.createArray();
-		setParameter(params,getGeneralDisplay());
-		setParameter(params,getButtonText());
-		setParameter(params,getMonthNames());
-		setParameter(params,getDayNames());
-		setParameter(params,getDragResizeConfig());
-		setParameter(params,getClickHoverConfig());
-		setParameter(params,getEventConfig());
-		setParameter(params,getColumnFormat());
-		setParameter(params,getTimeFormat());
-		setParameter(params,getTitleFormat());
-		setParameter(params,getAgendaOptions());
-		return params;
-	}
-	
-	private void setParameter( JsArray<JavaScriptObject> params,IsJavaScriptObject isJS ){
-		if( isJS != null ){
-			params.push(isJS.toJavaScript());
-		}
-	}
+    public EventDataConfig getEventConfig() {
+        return eventConfig;
+    }
+
+    public void setEventConfig(final EventDataConfig eventConfig) {
+        this.eventConfig = eventConfig;
+    }
+
+    public ClickAndHoverConfig getClickHoverConfig() {
+        return clickHoverConfig;
+    }
+
+    public void setClickHoverConfig(final ClickAndHoverConfig clickHoverConfig) {
+        this.clickHoverConfig = clickHoverConfig;
+    }
+
+    public DragAndResizeConfig getDragResizeConfig() {
+        return dragResizeConfig;
+    }
+
+    public void setDragResizeConfig(final DragAndResizeConfig dragResizeConfig) {
+        this.dragResizeConfig = dragResizeConfig;
+    }
+
+    public Language getLangauge() {
+        return langauge;
+    }
+
+    public void setLangauge(final Language langauge) {
+        this.langauge = langauge;
+    }
+
+    public String getTimezone() {
+        return timezone;
+    }
+
+    /**
+     * 'local', 'UTC', a timezone string ('America/Chicago')
+     *
+     * @param timezone
+     */
+    public void setTimezone(final String timezone) {
+        this.timezone = timezone;
+    }
+
+    public JsArray<JavaScriptObject> getJavaScriptParameters() {
+        final JsArray<JavaScriptObject> params = (JsArray<JavaScriptObject>) JsArray.createArray();
+        setParameter(params, getGeneralDisplay());
+        setParameter(params, getButtonText());
+        setParameter(params, getMonthNames());
+        setParameter(params, getDayNames());
+        setParameter(params, getDragResizeConfig());
+        setParameter(params, getClickHoverConfig());
+        setParameter(params, getEventConfig());
+        setParameter(params, getColumnFormat());
+        setParameter(params, getTimeFormat());
+        setParameter(params, getTitleFormat());
+        setParameter(params, getAgendaOptions());
+        return params;
+    }
+
+    private void setParameter(final JsArray<JavaScriptObject> params, final IsJavaScriptObject isJS) {
+        if (isJS != null) {
+            params.push(isJS.toJavaScript());
+        }
+    }
 }

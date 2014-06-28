@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * Enum. Default: SUNDAY
- *
+ * <p/>
  * Day of the week start. SUNDAY - SATURDAY
  *
  * @author Joshua Godi

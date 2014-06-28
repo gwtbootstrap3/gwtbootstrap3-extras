@@ -20,21 +20,20 @@ package org.gwtbootstrap3.extras.growl.client.ui;
  * #L%
  */
 
-
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class GrowlOptions extends JavaScriptObject {
 
     protected GrowlOptions() {
     }
-    
-    public final void setGrowlPosition(GrowlPosition pos) {
+
+    public final void setGrowlPosition(final GrowlPosition pos) {
         if (pos != null) {
-        	setPosition(pos);
+            setPosition(pos);
         }
     }
 
-    private final native void setPosition(JavaScriptObject pos) /*-{
+    private native void setPosition(JavaScriptObject pos) /*-{
         this.position = pos;
     }-*/;
 
@@ -66,23 +65,23 @@ public class GrowlOptions extends JavaScriptObject {
         this.pause_on_mouseover = pauseOnMouseOver;
     }-*/;
 
-    public final void setTemplateObject(JavaScriptObject temp) {
+    public final void setTemplateObject(final JavaScriptObject temp) {
         if (temp != null && temp instanceof GrowlTemplate) {
             setTemplate(temp);
         }
     }
 
-    private final native void setTemplate(JavaScriptObject temp) /*-{
+    private native void setTemplate(JavaScriptObject temp) /*-{
         this.template = temp;
     }-*/;
 
-    public final void setGrowlDefaultOptions(JavaScriptObject go) {
+    public final void setGrowlDefaultOptions(final JavaScriptObject go) {
         if (go != null && go instanceof GrowlOptions) {
             setDefaultOptions(go);
         }
     }
 
-    private final native void setDefaultOptions(JavaScriptObject go) /*-{
+    private native void setDefaultOptions(JavaScriptObject go) /*-{
         console.log(go);
         $wnd.jQuery.growl.default_options = go;
     }-*/;

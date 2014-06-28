@@ -374,7 +374,6 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled {
         focusableMixin.setTabIndex(i);
     }
 
-
     /**
      * Gets the number of items present in the list box.
      *

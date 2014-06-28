@@ -20,27 +20,25 @@ package org.gwtbootstrap3.extras.growl.client.ui;
  * #L%
  */
 
-
 public class Growl {
-    public static void growl(String message) {
+    public static void growl(final String message) {
         show(message);
     }
 
-    public static void growl(String title, String message) {
+    public static void growl(final String title, final String message) {
         show(title, message);
     }
 
-    public static void growl(String title, String message, String iconStyle) {
+    public static void growl(final String title, final String message, final String iconStyle) {
         show(title, message, iconStyle);
     }
 
-    public static void growl(String title, String message, String iconStyle, GrowlOptions options) {
+    public static void growl(final String title, final String message, final String iconStyle, final GrowlOptions options) {
         if (options == null) {
             show(title, message, iconStyle);
         } else {
             show(title, message, iconStyle, options);
         }
-
     }
 
     private static native void show(String message) /*-{

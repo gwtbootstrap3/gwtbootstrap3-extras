@@ -20,18 +20,20 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
  * #L%
  */
 
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Mouse and click callback interface
- * @author Jeff Isenhart
  *
+ * @author Jeff Isenhart
  */
 public interface ClickAndHoverEventCallback {
-	public void eventClick(JavaScriptObject calendarEvent,NativeEvent event,JavaScriptObject viewObject);
-	public void dayClick(JavaScriptObject moment,NativeEvent event,JavaScriptObject viewObject);
-	public void eventMouseover(JavaScriptObject calendarEvent,NativeEvent event,JavaScriptObject viewObject);
-	public void eventMouseout(JavaScriptObject calendarEvent,NativeEvent event,JavaScriptObject viewObject);
+    public void eventClick(JavaScriptObject calendarEvent, NativeEvent event, JavaScriptObject viewObject);
+
+    public void dayClick(JavaScriptObject moment, NativeEvent event, JavaScriptObject viewObject);
+
+    public void eventMouseover(JavaScriptObject calendarEvent, NativeEvent event, JavaScriptObject viewObject);
+
+    public void eventMouseout(JavaScriptObject calendarEvent, NativeEvent event, JavaScriptObject viewObject);
 }

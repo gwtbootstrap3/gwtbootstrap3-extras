@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * Boolean. Default: false
- *
+ * <p/>
  * This option will enable meridian views for day and hour views.
  *
  * @author Joshua Godi

@@ -25,7 +25,7 @@ import com.google.gwt.core.client.JsArray;
 
 /**
  * Custom toolbar builder for the summernote editor
- *
+ * <p/>
  * See: http://hackerwins.github.io/summernote/
  *
  * @author godi

@@ -24,7 +24,7 @@ import java.util.Date;
 
 /**
  * Date. Default: End of time
- *
+ * <p/>
  * The latest date that may be selected; all later dates will be disabled.
  *
  * @author Joshua Godi

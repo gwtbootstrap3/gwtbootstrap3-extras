@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-
 /**
  * Position to display the DateTimePicker popup
  *
@@ -34,7 +33,7 @@ public enum DateTimePickerPosition {
 
     private final String position;
 
-    DateTimePickerPosition(String position) {
+    DateTimePickerPosition(final String position) {
         this.position = position;
     }
 

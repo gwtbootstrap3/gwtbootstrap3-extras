@@ -20,12 +20,10 @@ package org.gwtbootstrap3.extras.growl.client.ui;
  * #L%
  */
 
-
 public class GrowlHelper {
 
-
     public static GrowlOptions getNewOptions() {
-        GrowlOptions go = getNewNativeOptions();
+        final GrowlOptions go = getNewNativeOptions();
         go.setGrowlPosition(getNewPosition());
         return go;
     }
@@ -43,7 +41,6 @@ public class GrowlHelper {
         go.pause_on_mouseover = false;
         return go;
     }-*/;
-
 
     public static native GrowlPosition getNewPosition() /*-{
         return {from: "top", align: "right"};

@@ -24,7 +24,7 @@ import java.util.Date;
 
 /**
  * Date. Default: Beginning of time
- *
+ * <p/>
  * The earliest date that may be selected; all earlier dates will be disabled.
  *
  * @author Joshua Godi

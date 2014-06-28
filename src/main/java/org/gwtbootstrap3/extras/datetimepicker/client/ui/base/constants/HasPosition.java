@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
-
 /**
  * Default: BOTTOM_RIGHT
  *

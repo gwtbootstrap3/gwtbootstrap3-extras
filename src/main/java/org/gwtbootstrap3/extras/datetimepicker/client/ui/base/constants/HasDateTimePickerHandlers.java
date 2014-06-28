@@ -31,6 +31,7 @@ import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeH
 
 /**
  * All handlers for the DateTimePicker
+ *
  * @author Joshua Godi
  */
 public interface HasDateTimePickerHandlers {

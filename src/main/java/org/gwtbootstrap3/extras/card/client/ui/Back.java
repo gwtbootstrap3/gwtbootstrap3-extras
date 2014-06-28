@@ -27,7 +27,7 @@ import org.gwtbootstrap3.client.ui.html.Div;
  * @author godi
  */
 public class Back extends Div {
-    private Trigger trigger;
+    private final Trigger trigger;
 
     public Back() {
         // Add required style names

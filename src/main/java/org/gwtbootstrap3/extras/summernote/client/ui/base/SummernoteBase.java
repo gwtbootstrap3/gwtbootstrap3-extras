@@ -29,7 +29,7 @@ import org.gwtbootstrap3.extras.summernote.client.event.*;
 
 /**
  * Wrapper for the Summernote WYSIWYG Editor
- *
+ * <p/>
  * See: http://hackerwins.github.io/summernote/
  *
  * @author godi

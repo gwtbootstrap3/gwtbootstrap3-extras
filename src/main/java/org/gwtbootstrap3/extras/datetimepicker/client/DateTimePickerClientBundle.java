@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.datetimepicker.client;
  * #L%
  */
 
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;

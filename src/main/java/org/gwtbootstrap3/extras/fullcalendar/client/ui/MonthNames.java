@@ -20,74 +20,71 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
  * #L%
  */
 
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.i18n.client.LocaleInfo;
 
 /**
+ * @author Jeff Isenhart
  * @see http://arshaw.com/fullcalendar/docs/text/monthNames/
  * @see http://arshaw.com/fullcalendar/docs/text/monthNamesShort/
- * @author Jeff Isenhart
- *
  */
-public class MonthNames implements IsJavaScriptObject{
-	
-	private JavaScriptObject names;
-	
-	public MonthNames(){
-		newInstance();
-	}
-	
-	private native void newInstance( ) /*-{
-		//default vals...
-		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names = {};
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September', 'October', 'November', 'December'];
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-	}-*/;
-	
-	
-	
-	public void localize(){
-		localize(LocaleInfo.getCurrentLocale().getDateTimeFormatInfo().monthsFull(),
-				LocaleInfo.getCurrentLocale().getDateTimeFormatInfo().monthsShort());
-	}
-	
-	/**
-	 * To pass in localized names directly
-	 * @param longNames
-	 * @param shortNames
-	 */
-	public void localize(String[] longNames,String[] shortNames){
-		assert longNames != null && longNames.length == 12;
-		assert shortNames != null && shortNames.length == 12;
-		JsArrayString longOnes = (JsArrayString) JsArrayString.createArray();
-		for (String name : longNames) {
-			longOnes.push(name);
-		}
-		
-		JsArrayString shortOnes = (JsArrayString) JsArrayString.createArray();
-		for (String name : shortNames) {
-			shortOnes.push(name);
-		}
-		localize(longOnes, shortOnes);
-	}
-	
-	/**
-	 * To pass in localized names directly
-	 * @param longNames
-	 * @param shortNames
-	 */
-	public native void localize( JsArrayString longNames,JsArrayString shortNames ) /*-{
-		var theInstance = this;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNames = longNames;
-		theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNamesShort = shortNames;
-	}-*/;
-	
+public class MonthNames implements IsJavaScriptObject {
 
-	@Override
-	public JavaScriptObject toJavaScript() {
-		return names;
-	}
+    private JavaScriptObject names;
+
+    public MonthNames() {
+        newInstance();
+    }
+
+    private native void newInstance() /*-{
+        //default vals...
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names = {};
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    }-*/;
+
+    public void localize() {
+        localize(LocaleInfo.getCurrentLocale().getDateTimeFormatInfo().monthsFull(),
+                LocaleInfo.getCurrentLocale().getDateTimeFormatInfo().monthsShort());
+    }
+
+    /**
+     * To pass in localized names directly
+     *
+     * @param longNames
+     * @param shortNames
+     */
+    public void localize(final String[] longNames, final String[] shortNames) {
+        assert longNames != null && longNames.length == 12;
+        assert shortNames != null && shortNames.length == 12;
+        final JsArrayString longOnes = (JsArrayString) JsArrayString.createArray();
+        for (final String name : longNames) {
+            longOnes.push(name);
+        }
+
+        final JsArrayString shortOnes = (JsArrayString) JsArrayString.createArray();
+        for (final String name : shortNames) {
+            shortOnes.push(name);
+        }
+        localize(longOnes, shortOnes);
+    }
+
+    /**
+     * To pass in localized names directly
+     *
+     * @param longNames
+     * @param shortNames
+     */
+    public native void localize(JsArrayString longNames, JsArrayString shortNames) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNames = longNames;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.MonthNames::names.monthNamesShort = shortNames;
+    }-*/;
+
+    @Override
+    public JavaScriptObject toJavaScript() {
+        return names;
+    }
 }

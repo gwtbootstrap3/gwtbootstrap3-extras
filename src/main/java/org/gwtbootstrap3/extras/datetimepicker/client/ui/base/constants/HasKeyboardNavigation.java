@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * Boolean. Default: true
- *
+ * <p/>
  * Whether or not to allow date navigation by arrow keys.
  *
  * @author Joshua Godi

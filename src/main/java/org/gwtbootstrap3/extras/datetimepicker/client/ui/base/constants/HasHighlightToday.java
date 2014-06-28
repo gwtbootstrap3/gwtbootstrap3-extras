@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * Boolean. Default: false
- *
+ * <p/>
  * If true, highlights the current date.
  *
  * @author Joshua Godi

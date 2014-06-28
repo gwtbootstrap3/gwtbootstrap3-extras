@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.growl.client.ui;
  * #L%
  */
 
-
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class GrowlPosition extends JavaScriptObject {
@@ -36,7 +35,6 @@ public class GrowlPosition extends JavaScriptObject {
         }
     }-*/;
 
-
     public final native void setLeft() /*-{
         this.align = "left";
     }-*/;
@@ -48,5 +46,4 @@ public class GrowlPosition extends JavaScriptObject {
     public final native void setRight() /*-{
         this.align = "right";
     }-*/;
-
 }

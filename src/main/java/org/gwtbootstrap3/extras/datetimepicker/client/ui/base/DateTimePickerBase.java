@@ -31,7 +31,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.*;
-
 import org.gwtbootstrap3.client.shared.event.HideEvent;
 import org.gwtbootstrap3.client.shared.event.HideHandler;
 import org.gwtbootstrap3.client.shared.event.ShowEvent;
@@ -58,7 +57,6 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         HasFormat, HasHighlightToday, HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView,
         HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart,
         HasDateTimePickerHandlers, HasLanguage, HasName, HasValue<Date>, HasPosition, IsEditor<LeafValueEditor<Date>> {
-
 
     private final TextBox textBox;
     private DateTimeFormat dateTimeFormat;
@@ -183,7 +181,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     }
 
     @Override
-    public void setPosition(DateTimePickerPosition position) {
+    public void setPosition(final DateTimePickerPosition position) {
         this.position = position;
     }
 
@@ -195,10 +193,10 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     /**
      * Call this whenever changing any settings: minView, startView, format, etc. If you are changing
      * format and date value, the updates must take in such order:
-     *
+     * <p/>
      * 1. DateTimePicker.reload()
      * 2. DateTimePicker.setValue(newDate); // Date newDate.
-     *
+     * <p/>
      * Otherwise date value is not updated.
      */
     public void reload() {
@@ -446,7 +444,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
             ValueChangeEvent.fire(DateTimePickerBase.this, value);
         }
     }
-    
+
     @Override
     public LeafValueEditor<Date> asEditor() {
         if (editor == null) {

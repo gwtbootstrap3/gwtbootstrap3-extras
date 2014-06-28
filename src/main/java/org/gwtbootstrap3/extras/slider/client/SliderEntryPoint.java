@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.slider.client;
  * #L%
  */
 
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.ScriptInjector;
 

@@ -27,7 +27,7 @@ import org.gwtbootstrap3.client.ui.html.Div;
  * @author godi
  */
 public class Card extends Div {
-    private Div card;
+    private final Div card;
 
     public Card() {
         // Add required style names

@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * Enum, Array enums. Default: none
- *
+ * <p/>
  * Days of the week that should be disabled. Values are enum of DateTimePickerDayOfWeek.
  * Multiple values should be comma-separated. Example: disable weekends: SUNDAY, MONDAY.
  *

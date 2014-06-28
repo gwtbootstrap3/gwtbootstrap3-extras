@@ -22,7 +22,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
 
 /**
  * String. Default: 'mm/dd/yyyy'
- *
+ * <p/>
  * The date format, combination of p, P, h, hh, i, ii, s, ss, d, dd, m, mm, M, MM, yy, yyyy.
  * p : meridian in lower case ('am' or 'pm') - according to locale file
  * P : meridian in upper case ('AM' or 'PM') - according to locale file

@@ -30,5 +30,4 @@ public class ToggleSwitch extends ToggleSwitchBase {
     public ToggleSwitch() {
         super();
     }
-
 }

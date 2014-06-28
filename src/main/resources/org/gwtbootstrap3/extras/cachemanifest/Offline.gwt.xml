@@ -20,7 +20,7 @@
   -->
 <module>
     <inherits name='com.google.gwt.user.User'/>
-   
-	<define-linker class="org.gwtbootstrap3.extras.cachemanifest.Offline" name="offline" />    
-	<define-configuration-property name="cachemanifest_static_files" is-multi-valued="true" />
+
+    <define-linker class="org.gwtbootstrap3.extras.cachemanifest.Offline" name="offline"/>
+    <define-configuration-property name="cachemanifest_static_files" is-multi-valued="true"/>
 </module>

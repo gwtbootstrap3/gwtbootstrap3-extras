@@ -27,7 +27,7 @@ import org.gwtbootstrap3.client.ui.html.Div;
  * @author godi
  */
 public class Front extends Div {
-    private Trigger trigger;
+    private final Trigger trigger;
 
     public Front() {
         // Add required style names

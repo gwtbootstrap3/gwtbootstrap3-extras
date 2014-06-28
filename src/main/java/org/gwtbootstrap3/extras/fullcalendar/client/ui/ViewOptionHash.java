@@ -20,16 +20,13 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
  * #L%
  */
 
-
 /**
- * 
  * @author Jeff Isenhart
  * @see http://arshaw.com/fullcalendar/docs/views/View_Option_Hash/
  */
 public enum ViewOptionHash {
-	
-	
-	month,      // month view
+
+    month,      // month view
     week,       // basicWeek & agendaWeek views
     day,        // basicDay & agendaDay views
 
@@ -39,6 +36,6 @@ public enum ViewOptionHash {
 
     basic,      // basicWeek & basicDay views
     basicWeek,  // basicWeek view
-    basicDay;   // basicDay view
+    basicDay   // basicDay view
 
 }

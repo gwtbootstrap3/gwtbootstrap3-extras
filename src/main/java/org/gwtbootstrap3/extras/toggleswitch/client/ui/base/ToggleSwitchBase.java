@@ -30,7 +30,6 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.*;
-
 import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
@@ -245,7 +244,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     public void onChange(final boolean value) {
         ValueChangeEvent.fire(this, value);
     }
-    
+
     @Override
     public LeafValueEditor<Boolean> asEditor() {
         if (editor == null) {

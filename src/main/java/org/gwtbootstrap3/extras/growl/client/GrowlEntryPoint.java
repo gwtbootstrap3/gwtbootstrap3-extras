@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.growl.client;
  * #L%
  */
 
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.ScriptInjector;
 
@@ -31,7 +30,6 @@ public class GrowlEntryPoint implements EntryPoint {
         if (!isGrowlPresent()) {
             ScriptInjector.fromString(GrowlClientBundle.INSTANCE.growlJS().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
         }
-
     }
 
     private native boolean isGrowlPresent() /*-{
@@ -41,5 +39,4 @@ public class GrowlEntryPoint implements EntryPoint {
             return false;
         }
     }-*/;
-
 }

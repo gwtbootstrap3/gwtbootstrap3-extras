@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.growl.client.ui;
  * #L%
  */
 
-
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class GrowlTemplate extends JavaScriptObject {
@@ -50,5 +49,4 @@ public class GrowlTemplate extends JavaScriptObject {
     public final native void setMessage(String messageTextOrHtml) /*-{
         this.message = messageTextOrHtml;
     }-*/;
-
 }
