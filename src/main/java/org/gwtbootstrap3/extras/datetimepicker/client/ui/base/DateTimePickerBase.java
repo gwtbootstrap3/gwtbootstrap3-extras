@@ -300,6 +300,11 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     }
 
     @Override
+    public void clearEndDate() {
+        setStartDate(getElement(), null);
+    }
+
+    @Override
     public void setForceParse(final boolean forceParse) {
         this.forceParse = forceParse;
     }
@@ -354,6 +359,11 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     public void setStartDate(final String startDate) {
         // Has to be in the format YYYY-MM-DD
         setStartDate(getElement(), startDate);
+    }
+
+    @Override
+    public void clearStartDate() {
+        setStartDate(getElement(), null);
     }
 
     @Override
