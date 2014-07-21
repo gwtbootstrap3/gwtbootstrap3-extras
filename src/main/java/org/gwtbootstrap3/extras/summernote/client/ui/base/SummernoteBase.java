@@ -129,6 +129,7 @@ public class SummernoteBase extends TextArea {
 
     @Override
     protected void onUnload() {
+        setValue(getCode()); // save value
         super.onUnload();
 
         // Destroy
