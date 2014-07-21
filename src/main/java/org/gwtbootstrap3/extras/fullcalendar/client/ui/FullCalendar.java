@@ -31,7 +31,7 @@ import com.google.gwt.event.dom.client.HasLoadHandlers;
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 import java.util.Date;
 import java.util.HashMap;
