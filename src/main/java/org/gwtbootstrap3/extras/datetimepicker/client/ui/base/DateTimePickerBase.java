@@ -329,6 +329,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     @Override
     public void setEndDate(final String endDate) {
         // Has to be in the format YYYY-MM-DD
+        getElement().setAttribute("data-date-enddate", endDate); // if this is called before configure()
         setEndDate(getElement(), endDate);
     }
 
@@ -391,6 +392,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     @Override
     public void setStartDate(final String startDate) {
         // Has to be in the format YYYY-MM-DD
+        getElement().setAttribute("data-date-startdate", startDate); // if this is called before configure()
         setStartDate(getElement(), startDate);
     }
 
