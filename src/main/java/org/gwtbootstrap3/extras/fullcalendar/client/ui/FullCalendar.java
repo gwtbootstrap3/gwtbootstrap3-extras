@@ -212,12 +212,13 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
 
     public void goToDate(final Date d) {
         if (d != null) {
-            goToDate(getElement().getId(), d.getYear(), d.getMonth(), d.getDate());
+        	JsDate date = JsDate.create((double) d.getTime());
+            goToDate(getElement().getId(), date);
         }
     }
 
-    private native void goToDate(String id, int year, int month, int date) /*-{
-        $wnd.jQuery('#' + id).fullCalendar('goToDate', year, month, date);
+    private native void goToDate(String id, JsDate date) /*-{
+        $wnd.jQuery('#' + id).fullCalendar('gotoDate',date);
     }-*/;
 
     @Override
