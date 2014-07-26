@@ -32,6 +32,9 @@ public class Growl {
     public static void growl(final String title, final String message, final String iconStyle) {
         show(title, message, iconStyle);
     }
+    public static void growl(final String customText, final GrowlOptions options) {
+        show(customText,options);
+    }
 
     public static void growl(final String title, final String message, final String iconStyle, final GrowlOptions options) {
         if (options == null) {
@@ -53,6 +56,9 @@ public class Growl {
         $wnd.jQuery.growl({title: title, message: message, icon: iconStyle});
     }-*/;
 
+    private static native void show(String customText, GrowlOptions options) /*-{
+	    $wnd.jQuery.growl(customText,options);
+	}-*/;
     private static native void show(String title,
                                     String message,
                                     String iconStyle,
