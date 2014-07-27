@@ -105,4 +105,8 @@ public class GrowlOptions extends JavaScriptObject {
     public final native void setWarningType() /*-{
         this.type = 'warning';
     }-*/;
+    
+    public final native void setCustomType(String customType) /*-{
+	    this.type = customType;
+	}-*/;
 }
