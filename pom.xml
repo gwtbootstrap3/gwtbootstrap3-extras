@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.gwtbootstrap3</groupId>
         <artifactId>gwtbootstrap3-parent</artifactId>
-        <version>0.9-SNAPSHOT</version>
+        <version>0.8.1</version>
     </parent>
 
     <artifactId>gwtbootstrap3-extras</artifactId>
-    <!-- Intentionally don't inherit parent version. Required for release process. -->
-    <version>0.9-SNAPSHOT</version>
     <name>GwtBootstrap3 Extras</name>
+    <description>Extra, third-party widgets/components for GwtBootstrap3</description>
+    <url>http://gwtbootstrap3.org</url>
 
     <scm>
         <connection>scm:git:git@github.com:gwtbootstrap3/gwtbootstrap3-extras.git</connection>
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtbootstrap3</artifactId>
-            <version>0.9-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
                 <groupId>com.google.gwt</groupId>
