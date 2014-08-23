@@ -214,6 +214,7 @@ public class CalendarConfig {
         setParameter(params, getTimeFormat());
         setParameter(params, getTitleFormat());
         setParameter(params, getAgendaOptions());
+        setParameter(params, getRenderConfig());
         return params;
     }
 

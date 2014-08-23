@@ -185,7 +185,7 @@ public class Event implements IsJavaScriptObject {
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.editable = editable;
     }-*/;
 
-    public native boolean isEditable(boolean editable) /*-{
+    public native boolean isEditable() /*-{
         var theInstance = this;
         if (theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.editable) {
             return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.editable;
