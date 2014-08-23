@@ -20,6 +20,10 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base;
  * #L%
  */
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.editor.client.IsEditor;
@@ -30,7 +34,11 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.HasEnabled;
+import com.google.gwt.user.client.ui.HasName;
+import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.HasVisibility;
+import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.shared.event.HideEvent;
 import org.gwtbootstrap3.client.shared.event.HideHandler;
 import org.gwtbootstrap3.client.shared.event.ShowEvent;
@@ -42,12 +50,37 @@ import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.base.ValueBoxBase;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
 import org.gwtbootstrap3.client.ui.constants.DeviceSize;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.*;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.*;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerDayOfWeek;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerLanguage;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerPosition;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerView;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasAutoClose;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasDateTimePickerHandlers;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasDaysOfWeekDisabled;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasEndDate;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasForceParse;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasFormat;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasHighlightToday;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasKeyboardNavigation;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasLanguage;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasMaxView;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasMinView;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasMinuteStep;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasPosition;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasShowMeridian;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasShowTodayButton;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasStartDate;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasStartView;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasViewSelect;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.HasWeekStart;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeDateEvent;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeDateHandler;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeMonthEvent;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeMonthHandler;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeYearEvent;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeYearHandler;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeEvent;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeHandler;
 
 /**
  * @author Joshua Godi
@@ -296,6 +329,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     @Override
     public void setEndDate(final String endDate) {
         // Has to be in the format YYYY-MM-DD
+        getElement().setAttribute("data-date-enddate", endDate); // if this is called before configure()
         setEndDate(getElement(), endDate);
     }
 
@@ -358,6 +392,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     @Override
     public void setStartDate(final String startDate) {
         // Has to be in the format YYYY-MM-DD
+        getElement().setAttribute("data-date-startdate", startDate); // if this is called before configure()
         setStartDate(getElement(), startDate);
     }
 
@@ -388,29 +423,28 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
 
     @Override
     public void setFormat(final String format) {
-        this.format = format;
+        this.format = convertToJsFormat(format);
 
         // Get the old value
         final Date oldValue = getValue();
 
         // Make the new DateTimeFormat
-        setDateTimeFormat(format);
+        this.dateTimeFormat = DateTimeFormat.getFormat(format);
 
         if (oldValue != null) {
             setValue(oldValue);
         }
     }
 
-    private void setDateTimeFormat(final String format) {
+    private String convertToJsFormat(final String format) {
         // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
         // for more information on syntax
         final Map<Character, Character> map = new HashMap<Character, Character>() {{
             put('h', 'H'); // 12/24 hours
             put('H', 'h'); // 12/24 hours
-            put('m', 'M'); // months
-            put('i', 'm'); // minutes
-            put('p', 'a'); // meridian
-            put('P', 'a'); // meridian
+            put('M', 'm'); // months
+            put('m', 'i'); // minutes
+            put('a', 'P'); // meridian
         }};
 
         final StringBuilder fb = new StringBuilder(format);
@@ -420,7 +454,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
             }
         }
 
-        this.dateTimeFormat = DateTimeFormat.getFormat(fb.toString());
+        return fb.toString();
     }
 
     public Date getValue() {
