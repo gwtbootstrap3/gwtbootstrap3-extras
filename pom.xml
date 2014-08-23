@@ -10,7 +10,7 @@
 
     <artifactId>gwtbootstrap3-extras</artifactId>
     <!-- Intentionally don't inherit parent version. Required for release process. -->
-    <version>0.8-vqminh</version>
+    <version>0.8-SNAPSHOT</version>
     <name>GwtBootstrap3 Extras</name>
 
     <scm>
