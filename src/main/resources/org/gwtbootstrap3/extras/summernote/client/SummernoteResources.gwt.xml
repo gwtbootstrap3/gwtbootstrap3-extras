@@ -21,9 +21,7 @@
 <module>
     <public path="resources">
         <include name="css/summernote.min.css"/>
-        <include name="css/summernote-bs3.min.css"/>
     </public>
 
     <stylesheet src="css/summernote.min.css"/>
-    <stylesheet src="css/summernote-bs3.min.css"/>
 </module>
