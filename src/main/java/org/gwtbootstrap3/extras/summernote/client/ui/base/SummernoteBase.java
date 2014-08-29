@@ -98,6 +98,16 @@ public class SummernoteBase extends TextArea {
     public String getCode() {
         return getCode(getElement());
     }
+    
+    @Override
+    public String getText() {
+        return getCode(getElement());
+    }
+    
+    @Override
+    public void setText(String text) {
+        setCode(getElement(), text);
+    }
 
     /**
      * Call this when updating settings to ensure everything is up to date
