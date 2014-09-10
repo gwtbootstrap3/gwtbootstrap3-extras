@@ -37,7 +37,7 @@ public enum Animation implements Style.HasCssName {
     BOUNCE_IN_LEFT("animated bounceInLeft"),
     BOUNCE_IN_RIGHT("animated bounceInRight"),
     BOUNCE_IN_UP("animated bounceInUp"),
-    BOUNCE_OUT("animated bounce"),
+    BOUNCE_OUT("animated bounceOut"),
     BOUNCE_OUT_DOWN("animated bounceOutDown"),
     BOUNCE_OUT_LEFT("animated bounceOutLeft"),
     BOUNCE_OUT_RIGHT("animated bounceOutRight"),

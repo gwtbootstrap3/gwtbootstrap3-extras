@@ -19,10 +19,8 @@
   #L%
   -->
 
-<module rename-to='animate'>
-    <inherits name="com.google.gwt.resources.Resources"/>
-    <inherits name='org.gwtbootstrap3.extras.animate.client.resource.AnimateResources'/>
+<module>
 
-    <source path='client'/>
+    <stylesheet src="css/animate.min.css"/>
 
 </module>
