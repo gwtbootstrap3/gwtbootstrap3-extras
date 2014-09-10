@@ -21,7 +21,7 @@
 
 <module rename-to='animate'>
     <inherits name="com.google.gwt.resources.Resources"/>
-    <inherits name='org.gwtbootstrap3.extras.animate.client.resource.AnimateResources'/>
+    <inherits name='org.gwtbootstrap3.extras.animate.client.AnimateResources'/>
 
     <source path='client'/>
 

@@ -21,6 +21,10 @@
 
 <module>
 
+    <public path="resource">
+        <include name="css/animate.min.css"/>
+    </public>
+
     <stylesheet src="css/animate.min.css"/>
 
 </module>
