@@ -423,6 +423,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         this.dateTimeFormat = DateTimeFormat.getFormat(fb.toString());
     }
 
+    @Override
     public Date getValue() {
         try {
             return dateTimeFormat != null && textBox.getValue() != null ? dateTimeFormat.parse(textBox.getValue()) : null;

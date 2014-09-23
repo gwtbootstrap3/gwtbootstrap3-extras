@@ -65,6 +65,7 @@ public class TitleFormat extends AbstractViewOptionFormat implements IsJavaScrip
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TitleFormat::format.titleFormat[viewOption] = format;
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return format;
     }

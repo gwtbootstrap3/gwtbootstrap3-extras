@@ -67,6 +67,7 @@ public class ButtonText implements IsJavaScriptObject {
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.ButtonText::text.buttonText.day = day;
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return text;
     }

@@ -198,6 +198,7 @@ public class GeneralDisplay implements IsJavaScriptObject {
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.nextYear = nextYear;
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return general;
     }

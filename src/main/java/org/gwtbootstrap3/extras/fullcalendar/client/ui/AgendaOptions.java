@@ -143,6 +143,7 @@ public class AgendaOptions implements IsJavaScriptObject {
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.AgendaOptions::options.slotEventOverlap = overlap;
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return options;
     }

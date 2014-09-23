@@ -66,6 +66,7 @@ public class ColumnFormat extends AbstractViewOptionFormat implements IsJavaScri
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TimeFormat::format.columnFormat[viewOption] = format;
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return format;
     }

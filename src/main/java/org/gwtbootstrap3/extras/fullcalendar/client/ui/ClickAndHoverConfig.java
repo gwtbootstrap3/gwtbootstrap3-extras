@@ -56,6 +56,7 @@ public class ClickAndHoverConfig implements IsJavaScriptObject {
 
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return script;
     }

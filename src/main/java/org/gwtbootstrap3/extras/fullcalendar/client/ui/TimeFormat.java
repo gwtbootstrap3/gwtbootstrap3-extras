@@ -68,6 +68,7 @@ public class TimeFormat extends AbstractViewOptionFormat implements IsJavaScript
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.TimeFormat::format.timeFormat[viewOption] = format;
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return format;
     }
