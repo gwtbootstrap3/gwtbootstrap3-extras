@@ -268,6 +268,7 @@ public class Event implements IsJavaScriptObject {
         return "" + iTimeStamp;
     }
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return this.event;
     }

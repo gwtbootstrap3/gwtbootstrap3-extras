@@ -75,6 +75,7 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
      * This method is called immediately after a widget becomes attached to the
      * browser's document.
      */
+    @Override
     protected void onLoad() {
         super.onLoad();
         loaded = true;

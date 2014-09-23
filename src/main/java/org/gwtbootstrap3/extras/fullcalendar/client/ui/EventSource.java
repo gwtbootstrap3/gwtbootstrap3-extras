@@ -154,6 +154,7 @@ public class EventSource implements IsJavaScriptObject {
         return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.EventSource::eventSource.ignoreTimeZone;
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return this.eventSource;
     }

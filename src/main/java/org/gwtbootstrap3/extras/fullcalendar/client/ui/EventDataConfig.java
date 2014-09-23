@@ -75,6 +75,7 @@ public class EventDataConfig implements IsJavaScriptObject {
         }
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return config;
     }

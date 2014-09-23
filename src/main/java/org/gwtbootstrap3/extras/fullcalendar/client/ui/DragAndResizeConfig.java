@@ -92,6 +92,7 @@ public class DragAndResizeConfig implements IsJavaScriptObject {
         };
     }-*/;
 
+    @Override
     public JavaScriptObject toJavaScript() {
         return script;
     }

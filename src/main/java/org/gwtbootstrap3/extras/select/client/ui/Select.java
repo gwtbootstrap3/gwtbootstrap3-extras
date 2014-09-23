@@ -145,6 +145,7 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled {
      * !! use 'auto' to automatically adjust the width of the select to its widest option, or just use
      * specific values (50px, 50%, etc...)
      */
+    @Override
     public void setWidth(final String width) {
         attributeMixin.setAttribute(DATA_WIDTH, width);
     }
