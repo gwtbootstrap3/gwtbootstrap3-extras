@@ -20,6 +20,7 @@ package org.gwtbootstrap3.extras.select.client.ui;
  * #L%
  */
 
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.core.client.Scheduler;
@@ -39,6 +40,9 @@ import org.gwtbootstrap3.client.ui.base.mixin.EnabledMixin;
 import org.gwtbootstrap3.client.ui.base.mixin.FocusableMixin;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.extras.select.client.constants.Styles;
+import org.gwtbootstrap3.extras.select.client.constants.SelectLanguage;
+import org.gwtbootstrap3.extras.select.client.ui.interfaces.HasLanguage;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +52,7 @@ import static org.gwtbootstrap3.extras.select.client.constants.DataAttributes.*;
 /**
  * @author godi
  */
-public class Select extends ComplexWidget implements Focusable, HasEnabled {
+public class Select extends ComplexWidget implements Focusable, HasEnabled, HasLanguage {
     private static final String REFRESH = "refresh";
     private static final String RENDER = "render";
     private static final String SHOW = "show";
@@ -56,6 +60,7 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled {
     private static final String SELECT_ALL = "selectAll";
     private static final String DESELECT_ALL = "deselectAll";
     private static final String TRUE = "true";
+    private SelectLanguage language = SelectLanguage.EN;
 
     private final AttributeMixin<Select> attributeMixin = new AttributeMixin<Select>(this);
     private final FocusableMixin<Select> focusableMixin = new FocusableMixin<Select>(this);
@@ -117,6 +122,22 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled {
         return enabledMixin.isEnabled();
     }
 
+    @Override
+    public void setLanguage(final SelectLanguage language) {
+        this.language = language;
+
+        // Inject the JS for the language
+        if (language.getJs() != null) {
+            ScriptInjector.fromString(language.getJs().getText())
+                    .setWindow(ScriptInjector.TOP_WINDOW).inject();
+        }
+    }
+
+    @Override
+    public SelectLanguage getLanguage() {
+        return language;
+    }
+
     /**
      * Sets the number of lines to show before scrolling
      * <p/>
@@ -152,6 +173,18 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled {
 
     public String getWidth() {
         return attributeMixin.getAttribute(DATA_WIDTH);
+    }
+
+        /**
+     * Sets the Max Number of selectable option of the select
+     * <p/>
+     */
+    public void setMaxOption(final String maxOption) {
+        attributeMixin.setAttribute(DATA_MAX_OPTION, maxOption);
+    }
+
+    public String getMaxOption() {
+        return attributeMixin.getAttribute(DATA_MAX_OPTION);
     }
 
     public void setShowMenuArrow(final boolean showMenuArrow) {
@@ -209,6 +242,18 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled {
 
     public boolean isMultiple() {
         return attributeMixin.hasAttribute(MULTIPLE);
+    }
+
+  public void setMobile(final boolean mobile) {
+        if (mobile) {
+            attributeMixin.setAttribute(DATA_MOBILE, Boolean.toString(true));
+        } else {
+            attributeMixin.removeAttribute(DATA_MOBILE);
+        }
+    }
+
+    public boolean isMobile() {
+        return attributeMixin.hasAttribute(DATA_MOBILE);
     }
 
     public void setLiveSearch(final boolean liveSearch) {
