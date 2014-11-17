@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.select.client;
+package org.gwtbootstrap3.extras.select.client.ui.interfaces;
 
 /*
  * #%L
@@ -19,20 +19,18 @@ package org.gwtbootstrap3.extras.select.client;
  * limitations under the License.
  * #L%
  */
-
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.ScriptInjector;
-
 /**
- * @author godi
+ * Setter and getter for the language of the date time picker
+ * <p/>
+ * Be sure to load one language, it will use whatever is loaded last
+ *
+ * @author Joshua Godi
+ * @see org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerLanguage
  */
-public class SelectEntryPoint implements EntryPoint {
+import org.gwtbootstrap3.extras.select.client.constants.SelectLanguage;
 
-    @Override
-    public void onModuleLoad() {
-    	ScriptInjector.fromString(SelectClientBundle.INSTANCE.selectMap().getText()).setWindow(ScriptInjector.TOP_WINDOW)
-                .inject();
-        ScriptInjector.fromString(SelectClientBundle.INSTANCE.selectJs().getText()).setWindow(ScriptInjector.TOP_WINDOW)
-                .inject();
-    }
+public interface HasLanguage {
+    void setLanguage(SelectLanguage language);
+
+    SelectLanguage getLanguage();
 }

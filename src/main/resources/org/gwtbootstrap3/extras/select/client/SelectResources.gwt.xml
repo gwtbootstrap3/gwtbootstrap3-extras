@@ -21,6 +21,7 @@
 <module>
     <public path="resource">
         <include name="css/bootstrap-select.min.css"/>
+	<include name="css/bootstrap-select.css.map"/>
         <include name="css/bootstrap-select-fix.min.css"/>
     </public>
 
