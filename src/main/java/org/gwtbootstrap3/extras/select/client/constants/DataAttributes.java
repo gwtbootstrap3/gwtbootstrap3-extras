@@ -36,6 +36,7 @@ public class DataAttributes {
     public static final String DATA_WIDTH = "data-width";
     public static final String DATA_MAX_OPTION = "data-max-option";
     public static final String DATA_MOBILE = "data-mobile";
+    public static final String DATA_HIDDEN = "data-hidden";
 
     public static final String DISABLED = "disabled";
     public static final String MULTIPLE = "multiple";

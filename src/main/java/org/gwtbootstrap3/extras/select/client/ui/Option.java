@@ -96,4 +96,16 @@ public class Option extends AbstractTextWidget {
     public IconType getIcon() {
         return IconType.fromStyleName(attributeMixin.getAttribute(DATA_ICON));
     }
+    
+    public void setHidden(final boolean hidden) {
+        if (hidden) {
+            attributeMixin.setAttribute(DATA_HIDDEN, Boolean.toString(true));
+        } else {
+            attributeMixin.removeAttribute(DATA_HIDDEN);
+        }
+    }
+    
+    public boolean isHidden() {
+        return attributeMixin.getAttribute(DATA_HIDDEN) != null;
+    }
 }
