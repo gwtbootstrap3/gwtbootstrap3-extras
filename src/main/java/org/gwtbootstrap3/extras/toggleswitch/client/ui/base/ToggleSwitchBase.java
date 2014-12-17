@@ -30,11 +30,13 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.*;
+
 import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.base.HasSize;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
+import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
 import org.gwtbootstrap3.client.ui.base.mixin.IdMixin;
 import org.gwtbootstrap3.client.ui.constants.DeviceSize;
 import org.gwtbootstrap3.client.ui.constants.IconSize;
@@ -43,28 +45,18 @@ import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.ColorType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.SizeType;
 
 /**
+ * Original source from http://www.bootstrap-switch.org/
  * @author Grant Slender
  */
 public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasValue<Boolean>, HasValueChangeHandlers<Boolean>,
         HasEnabled, HasVisibility, HasId, HasResponsiveness, IsEditor<LeafValueEditor<Boolean>> {
 
-    /**
-     * Orig source from http://www.bootstrap-switch.org/
-     */
     private final SimpleCheckBox checkBox;
     private SizeType size = SizeType.REGULAR;
     private ColorType onColor = ColorType.DEFAULT;
     private ColorType offColor = ColorType.PRIMARY;
-    private String onText = "ON";
-    private String offText = "OFF";
-    private String labelText = "&nbsp;";
-    private String handleWidth = "auto";
-    private String labelWidth = "auto";
-    private boolean animated = true;
-    private boolean enabled = true;
-    private boolean readOnly = false;
-    private boolean indeterminate = false;
     private final IdMixin<ToggleSwitchBase> idMixin = new IdMixin<ToggleSwitchBase>(this);
+    private final AttributeMixin<ToggleSwitchBase> attributeMixin = new AttributeMixin<ToggleSwitchBase>(this);
     private LeafValueEditor<Boolean> editor;
 
     public ToggleSwitchBase() {
@@ -81,15 +73,6 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         setSize(size);
         setOnColor(onColor);
         setOffColor(offColor);
-        setAnimated(animated);
-        setOnText(onText);
-        setOffText(offText);
-        setLabelText(labelText);
-        setEnabled(enabled);
-        setReadOnly(readOnly);
-        setIndeterminate(indeterminate);
-        setLabelWidth(labelWidth);
-        setHandleWidth(handleWidth);
     }
 
     @Override
@@ -120,15 +103,12 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return !getBooleanAttribute(Option.DISABLED);
     }
 
     @Override
     public void setEnabled(final boolean enabled) {
-        this.enabled = enabled;
-        if (isAttached()) {
-            switchCmd(getElement(), "disabled", !enabled);
-        }
+        updateSwitch(Option.DISABLED, !enabled);
     }
 
     @Override
@@ -138,9 +118,8 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     @Override
     public void setSize(final SizeType size) {
-        if (ToggleSwitchBase.this.isAttached())
-            switchCmd(getElement(), "size", size.getType());
         this.size = size;
+        updateSwitch(Option.SIZE, size.getType());
     }
 
     public ColorType getOnColor() {
@@ -148,9 +127,8 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     public void setOnColor(final ColorType onColor) {
-        if (ToggleSwitchBase.this.isAttached())
-            switchCmd(getElement(), "onColor", onColor.getType());
         this.onColor = onColor;
+        updateSwitch(Option.ON_COLOR, onColor.getType());
     }
 
     public ColorType getOffColor() {
@@ -158,29 +136,24 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     public void setOffColor(final ColorType offColor) {
-        if (ToggleSwitchBase.this.isAttached())
-            switchCmd(getElement(), "offColor", offColor.getType());
         this.offColor = offColor;
+        updateSwitch(Option.OFF_COLOR, offColor.getType());
     }
 
     public boolean isAnimated() {
-        return animated;
+        return getBooleanAttribute(Option.ANIMATE);
     }
 
     public void setAnimated(final boolean animated) {
-        if (ToggleSwitchBase.this.isAttached())
-            switchCmd(getElement(), "animate", animated);
-        this.animated = animated;
+        updateSwitch(Option.ANIMATE, animated);
     }
 
     public String getOnText() {
-        return onText;
+        return getStringAttribute(Option.ON_TEXT);
     }
 
     public void setOnText(final String onText) {
-        if (ToggleSwitchBase.this.isAttached())
-            switchCmd(getElement(), "onText", onText);
-        this.onText = onText;
+        updateSwitch(Option.ON_TEXT, onText);
     }
 
     public void setOnIcon(final IconType iconType) {
@@ -190,13 +163,11 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     public String getOffText() {
-        return offText;
+        return getStringAttribute(Option.OFF_TEXT);
     }
 
     public void setOffText(final String offText) {
-        if (ToggleSwitchBase.this.isAttached())
-            switchCmd(getElement(), "offText", offText);
-        this.offText = offText;
+        updateSwitch(Option.OFF_TEXT, offText);
     }
 
     public void setOffIcon(final IconType iconType) {
@@ -206,13 +177,11 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     public String getLabelText() {
-        return labelText;
+        return getStringAttribute(Option.LABEL_TEXT);
     }
 
     public void setLabelText(final String labelText) {
-        if (ToggleSwitchBase.this.isAttached())
-            switchCmd(getElement(), "labelText", labelText);
-        this.labelText = labelText;
+        updateSwitch(Option.LABEL_TEXT, labelText);
     }
 
     @Override
@@ -227,7 +196,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     @Override
     public void setValue(final Boolean value) {
-        if (ToggleSwitchBase.this.isAttached()) {
+        if (isAttached()) {
             setValue(value, false);
         } else {
             checkBox.setValue(value);
@@ -240,7 +209,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
             @Override
             public boolean execute() {
-                if (ToggleSwitchBase.this.isAttached()) {
+                if (isAttached()) {
                     switchState(getElement(), value);
 
                     if (fireEvents) {
@@ -266,26 +235,45 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         return editor;
     }
     
-    public boolean isReadonly() {
-        return readOnly;
+    public boolean isReadOnly() {
+        return getBooleanAttribute(Option.READONLY);
     }
 
     public void setReadOnly(boolean readOnly) {
-        this.readOnly = readOnly;
-        if (isAttached()) {
-            switchCmd(getElement(), "readonly", readOnly);
-        }
+        updateSwitch(Option.READONLY, readOnly);
     }
 
     public boolean isIndeterminate() {
-        return indeterminate;
+        return getBooleanAttribute(Option.INDETERMINATE);
     }
 
+    /**
+     * Indeterminate state.
+     */
     public void setIndeterminate(boolean indeterminate) {
-        this.indeterminate = indeterminate;
-        if (isAttached()) {
-            switchCmd(getElement(), "indeterminate", indeterminate);
-        }
+        updateSwitch(Option.INDETERMINATE, indeterminate);
+    }
+    
+    public boolean isInverse() {
+        return getBooleanAttribute(Option.INVERSE);
+    }
+    
+    /**
+     * Inverse switch direction.
+     */
+    public void setInverse(boolean inverse) {
+        updateSwitch(Option.INVERSE, inverse);
+    }
+    
+    public boolean isRadioAllOff() {
+        return getBooleanAttribute(Option.RADIO_ALL_OFF);
+    }
+    
+    /**
+     * Allow this radio button to be unchecked by the user.
+     */
+    public void setRadioAllOff(boolean radioAllOff) {
+        updateSwitch(Option.RADIO_ALL_OFF, radioAllOff);
     }
 
     /**
@@ -293,10 +281,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
      * @param labelWidth - set to "auto" (default) for automatic sizing, integer otherwise
      */
     public void setHandleWidth(String handleWidth) {
-        this.handleWidth = handleWidth;
-        if (isAttached()) {
-            switchCmd(getElement(), "handleWidth", handleWidth);
-        }
+        updateSwitch(Option.HANDLE_WIDTH, handleWidth);
     }
 
     /**
@@ -304,9 +289,43 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
      * @param labelWidth - set to "auto" (default) for automatic sizing, integer otherwise
      */
     public void setLabelWidth(String labelWidth) {
-        this.labelWidth = labelWidth;
+        updateSwitch(Option.LABEL_WIDTH, labelWidth);
+    }
+    
+    private void updateSwitch(Option option, String value) {
         if (isAttached()) {
-            switchCmd(getElement(), "labelWidth", labelWidth);
+            switchCmd(getElement(), option.getCommand(), value);
+        } else {
+            attributeMixin.setAttribute(option.getAttribute(), value);
+        }
+    }
+    
+    private void updateSwitch(Option option, boolean value) {
+        if (isAttached()) {
+            switchCmd(getElement(), option.getCommand(), value);
+        } else {
+            attributeMixin.setAttribute(option.getAttribute(), Boolean.toString(value));
+        }
+    }
+    
+    private String getStringAttribute(Option option) {
+        if (isAttached()) {
+            return getCommandStringValue(getElement(), option.getCommand());
+        } else {
+            return attributeMixin.getAttribute(option.getAttribute());
+        }
+    }
+    
+    private boolean getBooleanAttribute(Option option) {
+        if (isAttached()) {
+            return getCommandBooleanValue(getElement(), option.getCommand());
+        } else {
+            String value = attributeMixin.getAttribute(option.getAttribute());
+            if (value != null && !value.isEmpty()) {
+                return Boolean.valueOf(value);
+            } else {
+                return false;
+            }
         }
     }
 
@@ -331,6 +350,14 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     private native void switchCmd(Element e, String cmd, boolean value) /*-{
         $wnd.jQuery(e).bootstrapSwitch(cmd, value);
+    }-*/;
+    
+    private native String getCommandStringValue(Element e, String cmd) /*-{
+        return $wnd.jQuery(e).bootstrapSwitch(cmd);
+    }-*/;
+    
+    private native boolean getCommandBooleanValue(Element e, String cmd) /*-{
+        return $wnd.jQuery(e).bootstrapSwitch(cmd);
     }-*/;
 
     private native void switchState(Element e, boolean value) /*-{
