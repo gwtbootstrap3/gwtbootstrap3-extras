@@ -59,6 +59,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     private String offText = "OFF";
     private String labelText = "&nbsp;";
     private boolean animated = true;
+    private boolean enabled = true;
     private final IdMixin<ToggleSwitchBase> idMixin = new IdMixin<ToggleSwitchBase>(this);
     private LeafValueEditor<Boolean> editor;
 
@@ -80,6 +81,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         setOnText(onText);
         setOffText(offText);
         setLabelText(labelText);
+        setEnabled(enabled);
     }
 
     @Override
@@ -110,12 +112,15 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     @Override
     public boolean isEnabled() {
-        return checkBox.isEnabled();
+        return enabled;
     }
 
     @Override
     public void setEnabled(final boolean enabled) {
-        checkBox.setEnabled(enabled);
+        this.enabled = enabled;
+        if (isAttached()) {
+            switchCmd(getElement(), "disabled", !enabled);
+        }
     }
 
     @Override
