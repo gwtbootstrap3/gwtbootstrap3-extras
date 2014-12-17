@@ -49,7 +49,7 @@ import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.SizeType;
  * @author Grant Slender
  */
 public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasValue<Boolean>, HasValueChangeHandlers<Boolean>,
-        HasEnabled, HasVisibility, HasId, HasResponsiveness, IsEditor<LeafValueEditor<Boolean>> {
+        HasEnabled, HasVisibility, HasId, HasName, HasResponsiveness, IsEditor<LeafValueEditor<Boolean>> {
 
     private final SimpleCheckBox checkBox;
     private SizeType size = SizeType.REGULAR;
@@ -96,6 +96,16 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     @Override
     public String getId() {
         return idMixin.getId();
+    }
+    
+    @Override
+    public void setName(String name) {
+        checkBox.setName(name);
+    }
+
+    @Override
+    public String getName() {
+        return checkBox.getName();
     }
 
     @Override
