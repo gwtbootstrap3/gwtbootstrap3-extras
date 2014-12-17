@@ -34,9 +34,6 @@ public interface SelectClientBundle extends ClientBundle {
     @Source("resource/js/bootstrap-select.min.js")
     TextResource selectJs();
 	
-	@Source("resource/js/bootstrap-select.js.map")
-    TextResource selectMap();
-
     @Source("resource/js/locales/defaults-cs_CZ.min.js")
     TextResource cs();
 
