@@ -164,9 +164,8 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     public void setOnIcon(final IconType iconType) {
-        final Icon icon = new Icon(iconType);
-        icon.setSize(IconSize.LARGE);
-        setOnText(icon.getElement().getString());
+        String text = createIconHtml(iconType);
+        setOnText(text);
     }
 
     public String getOffText() {
@@ -178,9 +177,8 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     }
 
     public void setOffIcon(final IconType iconType) {
-        final Icon icon = new Icon(iconType);
-        icon.setSize(IconSize.LARGE);
-        setOffText(icon.getElement().getString());
+        String text = createIconHtml(iconType);
+        setOffText(text);
     }
 
     public String getLabelText() {
@@ -297,6 +295,14 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
      */
     public void setLabelWidth(String labelWidth) {
         updateSwitch(Option.LABEL_WIDTH, labelWidth);
+    }
+    
+    private String createIconHtml(IconType iconType) {
+        // Fix incorrect handle width when using icons
+        setHandleWidth("30");
+        final Icon icon = new Icon(iconType);
+        icon.setSize(IconSize.LARGE);
+        return icon.getElement().getString();
     }
     
     private void updateSwitch(Option option, String value) {
