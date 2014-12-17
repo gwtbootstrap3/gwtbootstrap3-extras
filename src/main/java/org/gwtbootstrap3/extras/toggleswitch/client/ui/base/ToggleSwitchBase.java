@@ -59,10 +59,10 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     private final AttributeMixin<ToggleSwitchBase> attributeMixin = new AttributeMixin<ToggleSwitchBase>(this);
     private LeafValueEditor<Boolean> editor;
 
-    public ToggleSwitchBase() {
-        checkBox = new SimpleCheckBox();
+    protected ToggleSwitchBase(SimpleCheckBox checkBox) {
+        this.checkBox = checkBox;
         // remove the gwt styles
-        checkBox.removeStyleName(UIObject.getStyleName(checkBox.getElement()));
+        checkBox.setStyleName("");
         setElement((Element) checkBox.getElement());
     }
 
