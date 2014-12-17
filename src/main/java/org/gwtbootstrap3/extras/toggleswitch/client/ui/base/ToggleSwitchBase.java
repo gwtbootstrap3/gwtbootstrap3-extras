@@ -147,12 +147,12 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         updateSwitch(Option.OFF_COLOR, offColor.getType());
     }
 
-    public boolean isAnimated() {
+    public boolean isAnimate() {
         return getBooleanAttribute(Option.ANIMATE);
     }
 
-    public void setAnimated(final boolean animated) {
-        updateSwitch(Option.ANIMATE, animated);
+    public void setAnimate(final boolean animate) {
+        updateSwitch(Option.ANIMATE, animate);
     }
 
     public String getOnText() {
