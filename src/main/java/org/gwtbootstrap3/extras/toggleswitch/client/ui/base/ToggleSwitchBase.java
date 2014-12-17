@@ -58,8 +58,12 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     private String onText = "ON";
     private String offText = "OFF";
     private String labelText = "&nbsp;";
+    private String handleWidth = "auto";
+    private String labelWidth = "auto";
     private boolean animated = true;
     private boolean enabled = true;
+    private boolean readOnly = false;
+    private boolean indeterminate = false;
     private final IdMixin<ToggleSwitchBase> idMixin = new IdMixin<ToggleSwitchBase>(this);
     private LeafValueEditor<Boolean> editor;
 
@@ -82,6 +86,10 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         setOffText(offText);
         setLabelText(labelText);
         setEnabled(enabled);
+        setReadOnly(readOnly);
+        setIndeterminate(indeterminate);
+        setLabelWidth(labelWidth);
+        setHandleWidth(handleWidth);
     }
 
     @Override
@@ -256,6 +264,50 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
             editor = TakesValueEditor.of(this);
         }
         return editor;
+    }
+    
+    public boolean isReadonly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(boolean readOnly) {
+        this.readOnly = readOnly;
+        if (isAttached()) {
+            switchCmd(getElement(), "readonly", readOnly);
+        }
+    }
+
+    public boolean isIndeterminate() {
+        return indeterminate;
+    }
+
+    public void setIndeterminate(boolean indeterminate) {
+        this.indeterminate = indeterminate;
+        if (isAttached()) {
+            switchCmd(getElement(), "indeterminate", indeterminate);
+        }
+    }
+
+    /**
+     * Sets the handle's width.
+     * @param labelWidth - set to "auto" (default) for automatic sizing, integer otherwise
+     */
+    public void setHandleWidth(String handleWidth) {
+        this.handleWidth = handleWidth;
+        if (isAttached()) {
+            switchCmd(getElement(), "handleWidth", handleWidth);
+        }
+    }
+
+    /**
+     * Sets the label's width (the space between handles).
+     * @param labelWidth - set to "auto" (default) for automatic sizing, integer otherwise
+     */
+    public void setLabelWidth(String labelWidth) {
+        this.labelWidth = labelWidth;
+        if (isAttached()) {
+            switchCmd(getElement(), "labelWidth", labelWidth);
+        }
     }
 
     private native void switchInit(Element e) /*-{
