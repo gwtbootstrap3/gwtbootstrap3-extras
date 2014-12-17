@@ -70,9 +70,6 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     protected void onLoad() {
         super.onLoad();
         switchInit(getElement());
-        setSize(size);
-        setOnColor(onColor);
-        setOffColor(offColor);
     }
 
     @Override
