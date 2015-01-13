@@ -33,6 +33,8 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasEnabled;
+import com.google.gwt.user.client.ui.HasName;
+
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
@@ -43,7 +45,6 @@ import org.gwtbootstrap3.extras.select.client.constants.Styles;
 import org.gwtbootstrap3.extras.select.client.constants.SelectLanguage;
 import org.gwtbootstrap3.extras.select.client.ui.interfaces.HasLanguage;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ import static org.gwtbootstrap3.extras.select.client.constants.DataAttributes.*;
 /**
  * @author godi
  */
-public class Select extends ComplexWidget implements Focusable, HasEnabled, HasLanguage {
+public class Select extends ComplexWidget implements Focusable, HasEnabled, HasLanguage, HasName {
     private static final String REFRESH = "refresh";
     private static final String RENDER = "render";
     private static final String SHOW = "show";
@@ -62,12 +63,14 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
     private static final String TRUE = "true";
     private SelectLanguage language = SelectLanguage.EN;
 
+    private final SelectElement selectElement;
     private final AttributeMixin<Select> attributeMixin = new AttributeMixin<Select>(this);
     private final FocusableMixin<Select> focusableMixin = new FocusableMixin<Select>(this);
     private final EnabledMixin<Select> enabledMixin = new EnabledMixin<Select>(this);
 
     public Select() {
-        setElement(Document.get().createSelectElement());
+        selectElement = Document.get().createSelectElement();
+        setElement(selectElement);
         setStyleName(Styles.BOOTSTRAP_SELECT);
     }
 
@@ -418,6 +421,16 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
     @Override
     public void setTabIndex(final int i) {
         focusableMixin.setTabIndex(i);
+    }
+
+    @Override
+    public void setName(String name) {
+        selectElement.setName(name);
+    }
+
+    @Override
+    public String getName() {
+        return selectElement.getName();
     }
 
     /**
