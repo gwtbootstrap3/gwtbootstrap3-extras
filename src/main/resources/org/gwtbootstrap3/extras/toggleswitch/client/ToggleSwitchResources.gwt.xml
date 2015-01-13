@@ -20,8 +20,8 @@
   -->
 <module>
     <public path="resource">
-        <include name="css/bootstrap-switch.min.css"/>
+        <include name="css/bootstrap-switch-3.2.2.min.cache.css"/>
     </public>
 
-    <stylesheet src="css/bootstrap-switch.min.css"/>
+    <stylesheet src="css/bootstrap-switch-3.2.2.min.cache.css"/>
 </module>
