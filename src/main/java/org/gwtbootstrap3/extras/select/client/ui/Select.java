@@ -72,6 +72,7 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
         selectElement = Document.get().createSelectElement();
         setElement(selectElement);
         setStyleName(Styles.BOOTSTRAP_SELECT);
+        addStyleName(org.gwtbootstrap3.client.ui.constants.Styles.FORM_CONTROL);
     }
 
     @Override
