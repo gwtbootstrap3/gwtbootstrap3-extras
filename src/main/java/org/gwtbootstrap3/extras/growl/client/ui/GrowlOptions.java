@@ -107,6 +107,6 @@ public class GrowlOptions extends JavaScriptObject {
     }-*/;
     
     public final native void setCustomType(String customType) /*-{
-	    this.type = customType;
-	}-*/;
+        this.type = customType;
+    }-*/;
 }

@@ -33,7 +33,7 @@ public interface SelectClientBundle extends ClientBundle {
 
     @Source("resource/js/bootstrap-select-1.6.3.min.cache.js")
     TextResource selectJs();
-	
+
     @Source("resource/js/locales.cache.1.6.3/defaults-cs_CZ.min.js")
     TextResource cs();
 

@@ -213,7 +213,7 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
 
     public void goToDate(final Date d) {
         if (d != null) {
-        	JsDate date = JsDate.create((double) d.getTime());
+            JsDate date = JsDate.create((double) d.getTime());
             goToDate(getElement().getId(), date);
         }
     }
