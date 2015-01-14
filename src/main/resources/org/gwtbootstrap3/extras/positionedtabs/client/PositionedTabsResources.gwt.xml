@@ -19,8 +19,8 @@
   -->
 <module>
     <public path="resource">
-        <include name="css/positioned-tabs.min.css"/>
+        <include name="css/positioned-tabs-1.0.0.min.cache.css"/>
     </public>
 
-    <stylesheet src="css/positioned-tabs.min.css"/>
+    <stylesheet src="css/positioned-tabs-1.0.0.min.cache.css"/>
 </module>

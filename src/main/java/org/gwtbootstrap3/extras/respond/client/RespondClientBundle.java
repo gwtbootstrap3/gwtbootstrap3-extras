@@ -30,9 +30,9 @@ import com.google.gwt.resources.client.TextResource;
 public interface RespondClientBundle extends ClientBundle {
     static final RespondClientBundle INSTANCE = GWT.create(RespondClientBundle.class);
 
-    @Source("resource/js/html5shiv.min.js")
+    @Source("resource/js/html5shiv-3.7.0.min.cache.js")
     TextResource html5Shiv();
 
-    @Source("resource/js/respond.min.js")
+    @Source("resource/js/respond-1.4.2.min.cache.js")
     TextResource respond();
 }

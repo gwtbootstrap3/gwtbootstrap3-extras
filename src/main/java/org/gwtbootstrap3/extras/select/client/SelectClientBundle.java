@@ -31,48 +31,48 @@ public interface SelectClientBundle extends ClientBundle {
     
     static final SelectClientBundle INSTANCE = GWT.create(SelectClientBundle.class);
 
-    @Source("resource/js/bootstrap-select.min.js")
+    @Source("resource/js/bootstrap-select-1.6.3.min.cache.js")
     TextResource selectJs();
 	
-    @Source("resource/js/locales/defaults-cs_CZ.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-cs_CZ.min.js")
     TextResource cs();
 
-    @Source("resource/js/locales/defaults-de_DE.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-de_DE.min.js")
     TextResource de();
 
-    @Source("resource/js/locales/defaults-en_US.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-en_US.min.js")
     TextResource en();
 
-    @Source("resource/js/locales/defaults-es_CL.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-es_CL.min.js")
     TextResource es();
 
-    @Source("resource/js/locales/defaults-eu.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-eu.min.js")
     TextResource eu();
 
-    @Source("resource/js/locales/defaults-fr_FR.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-fr_FR.min.js")
     TextResource fr();
 
-    @Source("resource/js/locales/defaults-it_IT.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-it_IT.min.js")
     TextResource it();
 
-    @Source("resource/js/locales/defaults-nl_NL.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-nl_NL.min.js")
     TextResource nl();
 
-    @Source("resource/js/locales/defaults-pl_PL.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-pl_PL.min.js")
     TextResource pl();
 
-    @Source("resource/js/locales/defaults-pt_BR.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-pt_BR.min.js")
     TextResource pt_BR();
 
-    @Source("resource/js/locales/defaults-ro_RO.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-ro_RO.min.js")
     TextResource ro();
 
-    @Source("resource/js/locales/defaults-ua_UA.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-ua_UA.min.js")
     TextResource ua();
 
-    @Source("resource/js/locales/defaults-zh_CN.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-zh_CN.min.js")
     TextResource zh_CN();
 
-    @Source("resource/js/locales/defaults-zh_TW.min.js")
+    @Source("resource/js/locales.cache.1.6.3/defaults-zh_TW.min.js")
     TextResource zh_TW();
 }
