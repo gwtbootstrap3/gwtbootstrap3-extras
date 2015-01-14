@@ -57,8 +57,8 @@ public class Growl {
     }-*/;
 
     private static native void show(String customText, GrowlOptions options) /*-{
-	    $wnd.jQuery.growl(customText,options);
-	}-*/;
+        $wnd.jQuery.growl(customText,options);
+    }-*/;
     private static native void show(String title,
                                     String message,
                                     String iconStyle,
