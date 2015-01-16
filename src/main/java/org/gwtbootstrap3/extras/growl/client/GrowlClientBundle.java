@@ -28,6 +28,6 @@ public interface GrowlClientBundle extends ClientBundle {
 
     static final GrowlClientBundle INSTANCE = GWT.create(GrowlClientBundle.class);
 
-    @Source("resource/js/bootstrap-growl-1.0.6.min.cache.js")
+    @Source("resource/js/bootstrap-growl-2.0.1.min.cache.js")
     TextResource growlJS();
 }
