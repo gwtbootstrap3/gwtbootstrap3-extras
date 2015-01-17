@@ -82,7 +82,6 @@ public class GrowlOptions extends JavaScriptObject {
     }
 
     private native void setDefaultOptions(JavaScriptObject go) /*-{
-        console.log(go);
         $wnd.jQuery.growl.default_options = go;
     }-*/;
 

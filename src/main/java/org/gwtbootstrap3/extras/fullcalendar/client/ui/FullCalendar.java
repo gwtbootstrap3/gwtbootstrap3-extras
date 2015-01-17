@@ -174,7 +174,6 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
                 $wnd.jQuery.extend(fullCalendarParams, options[i]);
             }
         }
-        console.log(fullCalendarParams);
         $wnd.jQuery('#' + id).fullCalendar(fullCalendarParams);
     }-*/;
 
