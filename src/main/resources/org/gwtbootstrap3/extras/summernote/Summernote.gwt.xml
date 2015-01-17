@@ -20,6 +20,7 @@
   -->
 
 <module rename-to='summernote'>
+    <inherits name="org.gwtbootstrap3.GwtBootstrap3Base"/>
     <inherits name="com.google.gwt.resources.Resources"/>
     <inherits name='org.gwtbootstrap3.extras.summernote.client.SummernoteResources'/>
 
