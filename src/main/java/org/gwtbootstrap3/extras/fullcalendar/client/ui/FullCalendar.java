@@ -371,12 +371,7 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
      * @param revertFunction
      */
     public native void excecuteFunction(JavaScriptObject revertFunction)/*-{
-        try {
-            var a = revertFunction;
-            a();
-        }
-        catch (err) {
-            console.log(err);
-        }
+        var a = revertFunction;
+        a();
     }-*/;
 }
