@@ -20,30 +20,33 @@ package org.gwtbootstrap3.extras.growl.client.ui;
  * #L%
  */
 
-import com.google.gwt.core.client.JavaScriptObject;
+/**
+ * Enumeration of possible Growl`s screen locations.
+ *
+ * @author Pavel Zlámal
+ */
+public enum GrowlPosition {
 
-public class GrowlPosition extends JavaScriptObject {
+    TOP_LEFT("top-left"),
+    TOP_CENTER("top-center"),
+    TOP_RIGHT("top-right"),
+    BOTTOM_LEFT("bottom-left"),
+    BOTTOM_CENTER("bottom-center"),
+    BOTTOM_RIGHT("bottom-right");
 
-    protected GrowlPosition() {
+    private final String position;
+
+    private GrowlPosition(final String position) {
+        this.position = position;
     }
 
-    public final native void setTop(boolean top) /*-{
-        if (top) {
-            this.from = "top";
-        } else {
-            this.from = "bottom";
-        }
-    }-*/;
+    /**
+     * Get String representation of position.
+     *
+     * @return String representation of position
+     */
+    public String getPosition() {
+        return this.position;
+    }
 
-    public final native void setLeft() /*-{
-        this.align = "left";
-    }-*/;
-
-    public final native void setCenter() /*-{
-        this.align = "center";
-    }-*/;
-
-    public final native void setRight() /*-{
-        this.align = "right";
-    }-*/;
 }
