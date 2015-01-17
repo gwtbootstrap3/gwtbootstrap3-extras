@@ -30,6 +30,6 @@ import com.google.gwt.resources.client.TextResource;
 public interface SummernoteClientBundle extends ClientBundle {
     public static final SummernoteClientBundle INSTANCE = GWT.create(SummernoteClientBundle.class);
 
-    @Source("resources/js/summernote-0.5.0.min.cache.js")
+    @Source("resources/js/summernote-0.6.0.min.cache.js")
     TextResource summernote();
 }
