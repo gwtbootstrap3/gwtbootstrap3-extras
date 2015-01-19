@@ -24,7 +24,7 @@
 <module>
     <inherits name="com.google.gwt.user.User"/>
     <inherits name="org.gwtbootstrap3.extras.animate.Animate"/>
-    <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
+    <inherits name="org.gwtbootstrap3.GwtBootstrap3Base"/>
     <source path="client"/>
     <entry-point class="org.gwtbootstrap3.extras.growl.client.GrowlEntryPoint"/>
 </module>
