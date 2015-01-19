@@ -27,11 +27,13 @@ import org.gwtbootstrap3.extras.datetimepicker.client.DateTimePickerClientBundle
  * @author Joshua Godi
  */
 public enum DateTimePickerLanguage {
+    AR("ar", DateTimePickerClientBundle.INSTANCE.ar()),
     BG("bg", DateTimePickerClientBundle.INSTANCE.bg()),
     CA("ca", DateTimePickerClientBundle.INSTANCE.ca()),
     CS("cs", DateTimePickerClientBundle.INSTANCE.cs()),
     DA("da", DateTimePickerClientBundle.INSTANCE.da()),
     DE("de", DateTimePickerClientBundle.INSTANCE.de()),
+    EE("ee", DateTimePickerClientBundle.INSTANCE.ee()),
     EL("el", DateTimePickerClientBundle.INSTANCE.el()),
     ES("es", DateTimePickerClientBundle.INSTANCE.es()),
     FI("fi", DateTimePickerClientBundle.INSTANCE.fi()),
@@ -43,6 +45,7 @@ public enum DateTimePickerLanguage {
     IS("is", DateTimePickerClientBundle.INSTANCE.is()),
     IT("it", DateTimePickerClientBundle.INSTANCE.it()),
     JA("ja", DateTimePickerClientBundle.INSTANCE.ja()),
+    KO("ko", DateTimePickerClientBundle.INSTANCE.ko()),
     KR("kr", DateTimePickerClientBundle.INSTANCE.kr()),
     LT("lt", DateTimePickerClientBundle.INSTANCE.lt()),
     LV("lv", DateTimePickerClientBundle.INSTANCE.lv()),
