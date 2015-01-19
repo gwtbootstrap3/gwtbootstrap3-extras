@@ -346,14 +346,13 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         $wnd.jQuery(e).bootstrapSwitch();
 
         var me = this;
-        $wnd.jQuery(e).on('switchChange', function (em, data) {
-            me.@org.gwtbootstrap3.extras.toggleswitch.client.ui.base.ToggleSwitchBase::onChange(Z)(data.value);
+        $wnd.jQuery(e).on('switchChange.bootstrapSwitch', function (em, state) {
+            me.@org.gwtbootstrap3.extras.toggleswitch.client.ui.base.ToggleSwitchBase::onChange(Z)(state);
         });
-
     }-*/;
 
     private native void switchDestroy(Element e) /*-{
-        $wnd.jQuery(e).off('switchChange');
+        $wnd.jQuery(e).off('switchChange.bootstrapSwitch');
         $wnd.jQuery(e).bootstrapSwitch('destroy');
     }-*/;
 
