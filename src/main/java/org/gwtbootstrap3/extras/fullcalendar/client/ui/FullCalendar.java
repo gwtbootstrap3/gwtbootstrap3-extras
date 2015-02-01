@@ -174,7 +174,6 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
                 $wnd.jQuery.extend(fullCalendarParams, options[i]);
             }
         }
-        console.log(fullCalendarParams);
         $wnd.jQuery('#' + id).fullCalendar(fullCalendarParams);
     }-*/;
 
@@ -372,12 +371,6 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
      * @param revertFunction
      */
     public native void excecuteFunction(JavaScriptObject revertFunction)/*-{
-        try {
-            var a = revertFunction;
-            a();
-        }
-        catch (err) {
-            console.log(err);
-        }
+        revertFunction();
     }-*/;
 }
