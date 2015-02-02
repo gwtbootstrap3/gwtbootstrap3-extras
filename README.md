@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gwtbootstrap3/gwtbootstrap3-extras.svg?branch=master)](https://travis-ci.org/gwtbootstrap3/gwtbootstrap3-extras)
+
 This is the Extra (third party) components for [GwtBootstrap3](https://github.com/gwtbootstrap3/gwtbootstrap3).
 Checkout the [demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/) for more information.
 
