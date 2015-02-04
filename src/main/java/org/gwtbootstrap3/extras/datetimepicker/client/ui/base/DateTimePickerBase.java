@@ -92,6 +92,18 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart,
         HasDateTimePickerHandlers, HasLanguage, HasName, HasValue<Date>, HasPosition, IsEditor<LeafValueEditor<Date>> {
 
+    // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
+    // for more information on syntax
+    private static final Map<Character, Character> DATE_TIME_FORMAT_MAP = new HashMap<Character, Character>();
+    static {
+        DATE_TIME_FORMAT_MAP.put('h', 'H'); // 12/24 hours
+        DATE_TIME_FORMAT_MAP.put('H', 'h'); // 12/24 hours
+        DATE_TIME_FORMAT_MAP.put('m', 'M'); // months
+        DATE_TIME_FORMAT_MAP.put('i', 'm'); // minutes
+        DATE_TIME_FORMAT_MAP.put('p', 'a'); // meridian
+        DATE_TIME_FORMAT_MAP.put('P', 'a'); // meridian
+    }   
+
     private final TextBox textBox;
     private DateTimeFormat dateTimeFormat;
     private final DateTimeFormat startEndDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
@@ -436,20 +448,10 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     }
 
     private void setDateTimeFormat(final String format) {
-        // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
-        // for more information on syntax
-        final Map<Character, Character> map = new HashMap<Character, Character>();
-        map.put('h', 'H'); // 12/24 hours
-        map.put('H', 'h'); // 12/24 hours
-        map.put('m', 'M'); // months
-        map.put('i', 'm'); // minutes
-        map.put('p', 'a'); // meridian
-        map.put('P', 'a'); // meridian
-
         final StringBuilder fb = new StringBuilder(format);
         for (int i = 0; i < fb.length(); i++) {
-            if (map.containsKey(fb.charAt(i))) {
-                fb.setCharAt(i, map.get(fb.charAt(i)));
+            if (DATE_TIME_FORMAT_MAP.containsKey(fb.charAt(i))) {
+                fb.setCharAt(i, DATE_TIME_FORMAT_MAP.get(fb.charAt(i)));
             }
         }
 
