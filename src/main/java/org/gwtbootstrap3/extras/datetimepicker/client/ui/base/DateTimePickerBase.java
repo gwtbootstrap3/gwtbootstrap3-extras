@@ -438,14 +438,13 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     private void setDateTimeFormat(final String format) {
         // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
         // for more information on syntax
-        final Map<Character, Character> map = new HashMap<Character, Character>() {{
-            put('h', 'H'); // 12/24 hours
-            put('H', 'h'); // 12/24 hours
-            put('m', 'M'); // months
-            put('i', 'm'); // minutes
-            put('p', 'a'); // meridian
-            put('P', 'a'); // meridian
-        }};
+        final Map<Character, Character> map = new HashMap<Character, Character>();
+        map.put('h', 'H'); // 12/24 hours
+        map.put('H', 'h'); // 12/24 hours
+        map.put('m', 'M'); // months
+        map.put('i', 'm'); // minutes
+        map.put('p', 'a'); // meridian
+        map.put('P', 'a'); // meridian
 
         final StringBuilder fb = new StringBuilder(format);
         for (int i = 0; i < fb.length(); i++) {
