@@ -5,5 +5,8 @@ jdk:
   - oraclejdk8
   - oraclejdk7
 
+install:
+  - mvn install -DskipTests=true -DdryRun=true
+
 script:
   - mvn clean install -DdryRun=true -Dlicense.failOnMissingHeader=true -Dlicense.failOnNotUptodateHeader=true
