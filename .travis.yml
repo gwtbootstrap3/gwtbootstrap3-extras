@@ -1,9 +1,21 @@
 sudo: false
+
 language: java
 
 jdk:
   - oraclejdk8
   - oraclejdk7
+
+cache:
+  directories:
+    - $HOME/.m2
+
+before_install:
+  # install android sdk dependencies in local repo
+  - git clone https://github.com/gwtbootstrap3/gwtbootstrap3.git
+  - cd gwtbootstrap3
+  - mvn install -DskipTests=true -DdryRun=true
+  - cd ..
 
 install:
   - mvn install -DskipTests=true -DdryRun=true
