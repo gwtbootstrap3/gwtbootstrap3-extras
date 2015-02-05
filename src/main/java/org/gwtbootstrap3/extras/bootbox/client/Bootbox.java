@@ -20,6 +20,7 @@ package org.gwtbootstrap3.extras.bootbox.client;
  * #L%
  */
 
+import com.google.gwt.core.client.JavaScriptObject;
 import org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback;
 import org.gwtbootstrap3.extras.bootbox.client.callback.ConfirmCallback;
 import org.gwtbootstrap3.extras.bootbox.client.callback.PromptCallback;
@@ -75,4 +76,69 @@ public class Bootbox {
             callback.@org.gwtbootstrap3.extras.bootbox.client.callback.PromptCallback::callback(Ljava/lang/String;)(result);
         });
     }-*/;
+
+    /**
+     * Hide all currently active bootbox dialogs. 
+     * <p>Individual dialogs can be closed as per normal Bootstrap dialogs: dialog.modal('hide').
+     */
+    public static native void hideAll() /*-{
+        $wnd.bootbox.hideAll();
+    }-*/;
+
+    /**
+     * Creates a Defaults object.
+     */
+    public static Defaults createDefaults() {
+        return JavaScriptObject.createObject().cast();
+    }
+
+    /**
+     * Used to provide defaults configurations to Bootbox.
+     *
+     * @author Tercio Gaudencio Filho (terciofilho [at] gmail.com)
+     */
+    public static class Defaults extends JavaScriptObject {
+
+        protected Defaults() {
+        }
+
+        public final native Defaults setLocale(final String locale) /*-{
+            this.locale = locale;
+            return this;
+        }-*/;
+
+        public final native Defaults setShow(final boolean show) /*-{
+            this.show = show;
+            return this;
+        }-*/;
+
+        public final native Defaults setBackdrop(final boolean backdrop) /*-{
+            this.backdrop = backdrop;
+            return this;
+        }-*/;
+
+        public final native Defaults setCloseButton(final boolean closeButton) /*-{
+            this.closeButton = closeButton;
+            return this;
+        }-*/;
+
+        public final native Defaults setAnimate(final boolean animate) /*-{
+            this.animate = animate;
+            return this;
+        }-*/;
+
+        public final native Defaults setClassName(final String className) /*-{
+            this.className = className;
+            return this;
+        }-*/;
+        
+        /**
+         * Define Bootbox defaults. Call this method to set the defaults in Bootbox. 
+         */
+        public final native void setDefaults() /*-{
+            $wnd.bootbox.setDefaults(this);
+        }-*/;
+
+    }
+
 }
