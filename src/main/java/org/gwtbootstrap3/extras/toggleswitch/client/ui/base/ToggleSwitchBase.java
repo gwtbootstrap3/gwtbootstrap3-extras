@@ -215,7 +215,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
             @Override
             public boolean execute() {
                 if (isAttached()) {
-                    switchState(getElement(), value);
+                    switchState(getElement(), value, true);
 
                     if (fireEvents) {
                         ValueChangeEvent.fire(ToggleSwitchBase.this, value);
@@ -372,8 +372,8 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         return $wnd.jQuery(e).bootstrapSwitch(cmd);
     }-*/;
 
-    private native void switchState(Element e, boolean value) /*-{
-        $wnd.jQuery(e).bootstrapSwitch('state', value);
+    private native void switchState(Element e, boolean value, boolean skip) /*-{
+        $wnd.jQuery(e).bootstrapSwitch('state', value, skip);
     }-*/;
 
     private native boolean switchState(Element e) /*-{
