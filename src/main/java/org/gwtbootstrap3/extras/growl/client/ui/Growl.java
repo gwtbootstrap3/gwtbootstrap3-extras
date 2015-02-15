@@ -20,9 +20,10 @@ package org.gwtbootstrap3.extras.growl.client.ui;
  * #L%
  */
 
-import com.google.gwt.core.client.JavaScriptObject;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.Styles;
+
+import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * This class represent instance of displayed Growl.
@@ -219,7 +220,6 @@ public class Growl extends JavaScriptObject {
      * @see org.gwtbootstrap3.extras.growl.client.ui.GrowlOptions
      */
     public static final native Growl growl(final String message, final GrowlOptions options) /*-{
-        console.log(options);
         return $wnd.jQuery.growl({ message: message }, options);
     }-*/;
 
