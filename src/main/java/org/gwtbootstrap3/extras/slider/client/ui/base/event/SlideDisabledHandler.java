@@ -1,6 +1,4 @@
-package org.gwtbootstrap3.extras.slider.client.ui.base.constants;
-
-import org.gwtbootstrap3.client.ui.constants.Type;
+package org.gwtbootstrap3.extras.slider.client.ui.base.event;
 
 /*
  * #%L
@@ -22,19 +20,17 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  * #L%
  */
 
-public enum SelectionType implements Type {
+import com.google.gwt.event.shared.EventHandler;
 
-    BEFORE("before"),
-    AFTER("after"),
-    NONE("none");
+/**
+ * Handler interface for {@link SlideDisabledEvent} events.
+ */
+public interface SlideDisabledHandler extends EventHandler {
 
-    private final String type;
-
-    private SelectionType(final String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
+    /**
+     * Called when {@link SlideDisabledEvent} is fired.
+     *
+     * @param event the {@link SlideDisabledEvent} that was fired
+     */
+    void onSlideDisabled(SlideDisabledEvent event);
 }

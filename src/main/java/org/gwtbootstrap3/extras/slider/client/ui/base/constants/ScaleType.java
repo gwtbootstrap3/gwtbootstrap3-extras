@@ -22,15 +22,15 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  * #L%
  */
 
-public enum SelectionType implements Type {
+public enum ScaleType implements Type {
 
-    BEFORE("before"),
-    AFTER("after"),
-    NONE("none");
+    LINEAR("linear"),
+    LOGARITHMIC("logarithmic"),
+    ;
 
     private final String type;
 
-    private SelectionType(final String type) {
+    private ScaleType(final String type) {
         this.type = type;
     }
 

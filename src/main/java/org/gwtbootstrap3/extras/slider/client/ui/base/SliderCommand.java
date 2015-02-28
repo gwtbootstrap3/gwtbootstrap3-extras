@@ -21,18 +21,24 @@ package org.gwtbootstrap3.extras.slider.client.ui.base;
  */
 
 /**
- * Formatter callback to display the tool-tip text. Defaults to the slider
- * numeric value.
+ * Boostrap slider commands.
  *
  * @author Xiaodong SUN
+ * @see https://github.com/seiyria/bootstrap-slider#functions
  */
-public interface FormatterCallback {
+public interface SliderCommand {
 
-    /**
-     * Returns the formatted tool-tip text to be displayed.
-     *
-     * @param value the slider numeric value
-     * @return the formatted tool-tip text to be displayed.
-     */
-    String formatTooltip(float value);
+    static final String GET_VALUE = "getValue";
+    static final String SET_VALUE = "setValue";
+    static final String DESTROY = "destroy";
+    static final String DISABLE = "disable";
+    static final String ENABLE = "enable";
+    static final String TOGGLE = "toggle";
+    static final String IS_ENABLED = "isEnabled";
+    static final String SET_ATTRIBUTE = "setAttribute";
+    static final String GET_ATTRIBUTE = "getAttribute";
+    static final String REFEESH = "refresh";
+    static final String ON = "on";
+    static final String RELAYOUT = "relayout";
+
 }
