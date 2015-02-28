@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.slider.client;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,23 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.ScriptInjector;
 
 /**
- * @author Sven Jacobs
+ * @author Xiaodong SUN
  */
 public class SliderEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(SliderClientBundle.INSTANCE.slider().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
-        ScriptInjector.fromString(SliderClientBundle.INSTANCE.modernizr().getText()).setWindow(ScriptInjector.TOP_WINDOW)
-                .inject();
+        if (!isSliderLoaded()) {
+            ScriptInjector.fromString(SliderClientBundle.INSTANCE.slider().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
+        }
     }
+
+    /**
+     * Check if slider is already loaded.
+     *
+     * @return <code>true</code> is slider is loaded, <code>false</code> otherwise
+     */
+    private native boolean isSliderLoaded() /*-{
+        return (typeof $wnd['Slider'] !== 'undefined');
+    }-*/;
 }
