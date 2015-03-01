@@ -22,11 +22,19 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  * #L%
  */
 
+/**
+ * Selection placement.<br>
+ * <br>
+ * In case of a range slider, the selection will be placed between the handles.
+ *
+ * @author Xiaodong SUN
+ */
 public enum SelectionType implements Type {
 
     BEFORE("before"),
     AFTER("after"),
-    NONE("none");
+    NONE("none"),
+    ;
 
     private final String type;
 

@@ -22,6 +22,11 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  * #L%
  */
 
+/**
+ * Slider handle shape.
+ *
+ * @author Xiaodong SUN
+ */
 public enum HandleType implements Type {
 
     ROUND("round"),

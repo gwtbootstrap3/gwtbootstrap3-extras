@@ -22,10 +22,16 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  * #L%
  */
 
+/**
+ * Slider orientation : horizontal or vertical.
+ *
+ * @author Xiaodong SUN
+ */
 public enum OrientationType implements Type {
 
     HORIZONTAL("horizontal"),
-    VERTICAL("vertical");
+    VERTICAL("vertical"),
+    ;
 
     private final String type;
 

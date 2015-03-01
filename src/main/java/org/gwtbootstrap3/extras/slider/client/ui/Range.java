@@ -53,7 +53,7 @@ public class Range {
      * @param array
      */
     public Range(final JsArrayNumber array) {
-        this(new Double(array.get(0)), new Double(array.get(1)));
+        this(array.get(0), array.get(1));
     }
 
     /**

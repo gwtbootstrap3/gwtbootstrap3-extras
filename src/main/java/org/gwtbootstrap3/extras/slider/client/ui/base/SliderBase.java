@@ -107,6 +107,9 @@ public abstract class SliderBase<T> extends Widget implements
         sliderCommand(getElement(), SliderCommand.DESTROY);
     }
 
+    /**
+     * Sets the id of the slider element when it's created.
+     */
     @Override
     public void setId(final String id) {
         updateSlider(SliderOption.ID, id);
@@ -118,25 +121,40 @@ public abstract class SliderBase<T> extends Widget implements
     }
 
     public double getMin() {
-        return getDoubleAttribute(SliderOption.MIN, 0F);
+        return getDoubleAttribute(SliderOption.MIN, 0);
     }
 
+    /**
+     * Sets the minimum possible value.
+     *
+     * @param min
+     */
     public void setMin(final double min) {
         updateSlider(SliderOption.MIN, min);
     }
 
     public double getMax() {
-        return getDoubleAttribute(SliderOption.MAX, 10F);
+        return getDoubleAttribute(SliderOption.MAX, 10);
     }
 
+    /**
+     * Sets the maximum possible value.
+     *
+     * @param max
+     */
     public void setMax(final double max) {
         updateSlider(SliderOption.MAX, max);
     }
 
     public double getStep() {
-        return getDoubleAttribute(SliderOption.STEP, 1F);
+        return getDoubleAttribute(SliderOption.STEP, 1);
     }
 
+    /**
+     * Sets the increment step.
+     *
+     * @param step
+     */
     public void setStep(final double step) {
         updateSlider(SliderOption.STEP, step);
     }
@@ -145,6 +163,13 @@ public abstract class SliderBase<T> extends Widget implements
         return getDoubleAttribute(SliderOption.PRECISION, 0);
     }
 
+    /**
+     * Sets the number of digits shown after the decimal.<br>
+     * <br>
+     * Defaults to the number of digits after the decimal of step value.
+     *
+     * @param precision
+     */
     public void setPrecision(final double precision) {
         updateSlider(SliderOption.PRECISION, precision);
     }
@@ -153,6 +178,12 @@ public abstract class SliderBase<T> extends Widget implements
         return getEnumAttribute(SliderOption.ORIENTATION, OrientationType.class, OrientationType.HORIZONTAL);
     }
 
+    /**
+     * Sets the orientation.
+     *
+     * @param orientation
+     * @see OrientationType
+     */
     public void setOrientation(final OrientationType orientation) {
         updateSlider(SliderOption.ORIENTATION, orientation.getType());
     }
@@ -161,6 +192,12 @@ public abstract class SliderBase<T> extends Widget implements
         return getBooleanAttribute(SliderOption.RANGE, false);
     }
 
+    /**
+     * Make range slider if set to <code>true</code>. If initial value is scalar,
+     * max will be used for second value.
+     *
+     * @param range
+     */
     protected void setRange(final boolean range) {
         updateSlider(SliderOption.RANGE, range);
     }
@@ -169,6 +206,12 @@ public abstract class SliderBase<T> extends Widget implements
         return getEnumAttribute(SliderOption.SELECTION, SelectionType.class, SelectionType.BEFORE);
     }
 
+    /**
+     * Sets the selection type.
+     *
+     * @param selection
+     * @see SelectionType
+     */
     public void setSelection(final SelectionType selection) {
         updateSlider(SliderOption.SELECTION, selection.getType());
     }
@@ -177,6 +220,12 @@ public abstract class SliderBase<T> extends Widget implements
         return getEnumAttribute(SliderOption.TOOLTIP, TooltipType.class, TooltipType.SHOW);
     }
 
+    /**
+     * Sets the tool-tip type.
+     *
+     * @param tooltip
+     * @see TooltipType
+     */
     public void setTooltip(final TooltipType tooltip) {
         updateSlider(SliderOption.TOOLTIP, tooltip.getType());
     }
@@ -185,6 +234,12 @@ public abstract class SliderBase<T> extends Widget implements
         return getBooleanAttribute(SliderOption.TOOLTIP_SPLIT, false);
     }
 
+    /**
+     * Show one too-tip if set to <code>false</code>, otherwise
+     * show two tool-tips one for each handler.
+     *
+     * @param tooltipSplit
+     */
     public void setTooltipSplit(final boolean tooltipSplit) {
         updateSlider(SliderOption.TOOLTIP_SPLIT, tooltipSplit);
     }
@@ -193,6 +248,12 @@ public abstract class SliderBase<T> extends Widget implements
         return getEnumAttribute(SliderOption.HANDLE, HandleType.class, HandleType.ROUND);
     }
 
+    /**
+     * Sets the handle shape.
+     *
+     * @param handle
+     * @see HandleType
+     */
     public void setHandle(final HandleType handle) {
         updateSlider(SliderOption.HANDLE, handle.getType());
     }
@@ -201,6 +262,11 @@ public abstract class SliderBase<T> extends Widget implements
         return getBooleanAttribute(SliderOption.REVERSED, false);
     }
 
+    /**
+     * Sets whether or not the slider should be reversed.
+     *
+     * @param reversed
+     */
     public void setReversed(final boolean reversed) {
         updateSlider(SliderOption.REVERSED, reversed);
     }
@@ -249,6 +315,17 @@ public abstract class SliderBase<T> extends Widget implements
         return getBooleanAttribute(SliderOption.NATURAL_ARROW_KEYS, false);
     }
 
+    /**
+     * The natural order is used for the arrow keys. Arrow up select the
+     * upper slider value for vertical sliders, arrow right the righter
+     * slider value for a horizontal slider ; no matter if the slider
+     * was reversed or not.<br>
+     * <br>
+     * By default the arrow keys are oriented by arrow up/right to the
+     * higher slider value, arrow down/left to the lower slider value.
+     *
+     * @param naturalArrowKeys
+     */
     public void setNaturalArrowKeys(final boolean naturalArrowKeys) {
         updateSlider(SliderOption.NATURAL_ARROW_KEYS, naturalArrowKeys);
     }
@@ -257,6 +334,14 @@ public abstract class SliderBase<T> extends Widget implements
         return getNumberArrayAttribute(SliderOption.TICKS, Collections.<Double>emptyList());
     }
 
+    /**
+     * Sets the values of ticks. Tick marks are indicators to denote
+     * special values in the range.<br>
+     * <br>
+     * This option overwrites min and max options.
+     *
+     * @param ticks
+     */
     public void setTicks(final List<Double> ticks) {
         updateSliderForNumberArray(SliderOption.TICKS, ticks);
     }
@@ -265,14 +350,27 @@ public abstract class SliderBase<T> extends Widget implements
         return getStringArrayAttribute(SliderOption.TICKS_LABELS, Collections.<String>emptyList());
     }
 
+    /**
+     * Sets the labels below the tick marks.<br>
+     * <br>
+     * Accepts HTML input.
+     *
+     * @param ticksLabels
+     */
     public void setTicksLabels(final List<String> ticksLabels) {
         updateSliderForStringArray(SliderOption.TICKS_LABELS, ticksLabels);
     }
 
     public double getTicksSnapBounds() {
-        return getDoubleAttribute(SliderOption.TICKS_SNAP_BOUNDS, 0F);
+        return getDoubleAttribute(SliderOption.TICKS_SNAP_BOUNDS, 0);
     }
 
+    /**
+     * Sets the snap bounds of a tick. Snaps to the tick if value
+     * is within these bounds.
+     *
+     * @param ticksSnapBounds
+     */
     public void setTicksSnapBounds(final double ticksSnapBounds) {
         updateSlider(SliderOption.TICKS_SNAP_BOUNDS, ticksSnapBounds);
     }
@@ -281,6 +379,12 @@ public abstract class SliderBase<T> extends Widget implements
         return getEnumAttribute(SliderOption.SCALE, ScaleType.class, ScaleType.LINEAR);
     }
 
+    /**
+     * Sets the slider scale type.
+     *
+     * @param scale
+     * @see ScaleType
+     */
     public void setScale(final ScaleType scale) {
         updateSlider(SliderOption.SCALE, scale.getType());
     }

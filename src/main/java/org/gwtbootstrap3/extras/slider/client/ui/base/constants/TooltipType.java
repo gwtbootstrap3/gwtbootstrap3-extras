@@ -22,11 +22,18 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  * #L%
  */
 
+/**
+ * Whether to show the tool-tip on drag, hide the tool-tip,
+ * or always show the tool-tip.
+ *
+ * @author Xiaodong SUN
+ */
 public enum TooltipType implements Type {
 
     SHOW("show"),
     HIDE("hide"),
-    ALWAYS("always");
+    ALWAYS("always"),
+    ;
 
     private final String type;
 

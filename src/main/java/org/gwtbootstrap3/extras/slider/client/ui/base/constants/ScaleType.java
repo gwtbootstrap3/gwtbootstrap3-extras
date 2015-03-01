@@ -22,6 +22,11 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  * #L%
  */
 
+/**
+ * Slider scale type: linear or logarithmic.
+ *
+ * @author Xiaodong SUN
+ */
 public enum ScaleType implements Type {
 
     LINEAR("linear"),
