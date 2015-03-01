@@ -34,5 +34,5 @@ public interface FormatterCallback {
      * @param value the slider numeric value
      * @return the formatted tool-tip text to be displayed.
      */
-    String formatTooltip(float value);
+    String formatTooltip(double value);
 }

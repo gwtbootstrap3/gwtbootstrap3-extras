@@ -28,8 +28,8 @@ import com.google.gwt.core.client.JsArrayNumber;
  */
 public class Range {
 
-    private float minValue;
-    private float maxValue;
+    private double minValue;
+    private double maxValue;
 
     protected Range() {
     }
@@ -40,7 +40,7 @@ public class Range {
      * @param minValue
      * @param maxValue
      */
-    public Range(final float minValue, final float maxValue) {
+    public Range(final double minValue, final double maxValue) {
         this.minValue = minValue;
         this.maxValue = maxValue;
     }
@@ -53,7 +53,7 @@ public class Range {
      * @param array
      */
     public Range(final JsArrayNumber array) {
-        this(new Float(array.get(0)), new Float(array.get(1)));
+        this(new Double(array.get(0)), new Double(array.get(1)));
     }
 
     /**
@@ -61,7 +61,7 @@ public class Range {
      *
      * @return the min value
      */
-    public float getMinValue() {
+    public double getMinValue() {
         return minValue;
     }
 
@@ -70,7 +70,7 @@ public class Range {
      *
      * @return the max value
      */
-    public float getMaxValue() {
+    public double getMaxValue() {
         return maxValue;
     }
 

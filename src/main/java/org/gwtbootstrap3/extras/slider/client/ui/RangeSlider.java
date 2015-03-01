@@ -48,7 +48,7 @@ public class RangeSlider extends SliderBase<Range> {
      * @param max
      * @param value
      */
-    public RangeSlider(final float min, final float max, final Range value) {
+    public RangeSlider(final double min, final double max, final Range value) {
         this();
         setMin(min);
         setMax(max);

@@ -117,35 +117,35 @@ public abstract class SliderBase<T> extends Widget implements
         return getStringAttribute(SliderOption.ID);
     }
 
-    public float getMin() {
-        return getFloatAttribute(SliderOption.MIN, 0F);
+    public double getMin() {
+        return getDoubleAttribute(SliderOption.MIN, 0F);
     }
 
-    public void setMin(final float min) {
+    public void setMin(final double min) {
         updateSlider(SliderOption.MIN, min);
     }
 
-    public float getMax() {
-        return getFloatAttribute(SliderOption.MAX, 10F);
+    public double getMax() {
+        return getDoubleAttribute(SliderOption.MAX, 10F);
     }
 
-    public void setMax(final float max) {
+    public void setMax(final double max) {
         updateSlider(SliderOption.MAX, max);
     }
 
-    public float getStep() {
-        return getFloatAttribute(SliderOption.STEP, 1F);
+    public double getStep() {
+        return getDoubleAttribute(SliderOption.STEP, 1F);
     }
 
-    public void setStep(final float step) {
+    public void setStep(final double step) {
         updateSlider(SliderOption.STEP, step);
     }
 
-    public float getPrecision() {
-        return getFloatAttribute(SliderOption.PRECISION, 0);
+    public double getPrecision() {
+        return getDoubleAttribute(SliderOption.PRECISION, 0);
     }
 
-    public void setPrecision(final float precision) {
+    public void setPrecision(final double precision) {
         updateSlider(SliderOption.PRECISION, precision);
     }
 
@@ -239,10 +239,10 @@ public abstract class SliderBase<T> extends Widget implements
         }
     }
 
-    private String formatter(final float value) {
+    private String formatter(final double value) {
         if (formatterCallback != null)
             return formatterCallback.formatTooltip(value);
-        return Float.toString(value);
+        return Double.toString(value);
     }
 
     public boolean isNaturalArrowKeys() {
@@ -253,11 +253,11 @@ public abstract class SliderBase<T> extends Widget implements
         updateSlider(SliderOption.NATURAL_ARROW_KEYS, naturalArrowKeys);
     }
 
-    public List<Float> getTicks() {
-        return getNumberArrayAttribute(SliderOption.TICKS, Collections.<Float>emptyList());
+    public List<Double> getTicks() {
+        return getNumberArrayAttribute(SliderOption.TICKS, Collections.<Double>emptyList());
     }
 
-    public void setTicks(final List<Float> ticks) {
+    public void setTicks(final List<Double> ticks) {
         updateSliderForNumberArray(SliderOption.TICKS, ticks);
     }
 
@@ -269,11 +269,11 @@ public abstract class SliderBase<T> extends Widget implements
         updateSliderForStringArray(SliderOption.TICKS_LABELS, ticksLabels);
     }
 
-    public float getTicksSnapBounds() {
-        return getFloatAttribute(SliderOption.TICKS_SNAP_BOUNDS, 0F);
+    public double getTicksSnapBounds() {
+        return getDoubleAttribute(SliderOption.TICKS_SNAP_BOUNDS, 0F);
     }
 
-    public void setTicksSnapBounds(final float ticksSnapBounds) {
+    public void setTicksSnapBounds(final double ticksSnapBounds) {
         updateSlider(SliderOption.TICKS_SNAP_BOUNDS, ticksSnapBounds);
     }
 
@@ -464,18 +464,18 @@ public abstract class SliderBase<T> extends Widget implements
         }
     }
 
-    private void updateSlider(SliderOption option, float value) {
+    private void updateSlider(SliderOption option, double value) {
         if (isAttached()) {
             setAttribute(getElement(), option.getName(), value);
             refresh();
         } else {
-            attributeMixin.setAttribute(option.getDataAttribute(), Float.toString(value));
+            attributeMixin.setAttribute(option.getDataAttribute(), Double.toString(value));
         }
     }
 
-    private void updateSliderForNumberArray(SliderOption option, List<Float> value) {
+    private void updateSliderForNumberArray(SliderOption option, List<Double> value) {
         JsArrayNumber array = JavaScriptObject.createArray().cast();
-        for (Float val : value) {
+        for (Double val : value) {
             array.push(val);
         }
         if (isAttached()) {
@@ -519,13 +519,13 @@ public abstract class SliderBase<T> extends Widget implements
         return defaultValue;
     }
 
-    private float getFloatAttribute(SliderOption option, float defaultValue) {
+    private double getDoubleAttribute(SliderOption option, double defaultValue) {
         if (isAttached()) {
-            return getFloatAttribute(getElement(), option.getName());
+            return getDoubleAttribute(getElement(), option.getName());
         }
         String value = attributeMixin.getAttribute(option.getDataAttribute());
         if (value != null && !value.isEmpty()) {
-            return Float.valueOf(value);
+            return Double.valueOf(value);
         }
         return defaultValue;
     }
@@ -544,7 +544,7 @@ public abstract class SliderBase<T> extends Widget implements
         }
     }
 
-    private List<Float> getNumberArrayAttribute(SliderOption option, List<Float> defaultValue) {
+    private List<Double> getNumberArrayAttribute(SliderOption option, List<Double> defaultValue) {
 
         // Get array attribute
         JsArrayNumber array = null;
@@ -563,9 +563,9 @@ public abstract class SliderBase<T> extends Widget implements
         }
 
         // Put array to list
-        List<Float> list = new ArrayList<Float>(array.length());
+        List<Double> list = new ArrayList<Double>(array.length());
         for (int i = 0; i < array.length(); i++) {
-            list.add((float) array.get(i));
+            list.add(array.get(i));
         }
         return list;
     }
@@ -712,7 +712,7 @@ public abstract class SliderBase<T> extends Widget implements
     private native void setFormatterOption(JavaScriptObject options) /*-{
         var slider = this;
         options.formatter = function(value) {
-            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(F)(value);
+            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(value);
         };
     }-*/;
 
@@ -720,7 +720,7 @@ public abstract class SliderBase<T> extends Widget implements
         var slider = this;
         var attr = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::FORMATTER;
         $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, function(value) {
-            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(F)(value);
+            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(value);
         });
     }-*/;
 
@@ -752,7 +752,7 @@ public abstract class SliderBase<T> extends Widget implements
         $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
     }-*/;
 
-    private native void setAttribute(Element e, String attr, float value) /*-{
+    private native void setAttribute(Element e, String attr, double value) /*-{
         $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
     }-*/;
 
@@ -772,7 +772,7 @@ public abstract class SliderBase<T> extends Widget implements
         return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
     }-*/;
 
-    private native float getFloatAttribute(Element e, String attr) /*-{
+    private native double getDoubleAttribute(Element e, String attr) /*-{
         return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
     }-*/;
 

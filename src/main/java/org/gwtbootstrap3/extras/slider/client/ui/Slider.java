@@ -30,7 +30,7 @@ import com.google.gwt.user.client.Event;
  *
  * @author Xiaodong SUN
  */
-public class Slider extends SliderBase<Float> {
+public class Slider extends SliderBase<Double> {
 
     /**
      * Creates a numerical slider.
@@ -46,7 +46,7 @@ public class Slider extends SliderBase<Float> {
      * @param max
      * @param value
      */
-    public Slider(final float min, final float max, final float value) {
+    public Slider(final double min, final double max, final double value) {
         this();
         setMin(min);
         setMax(max);
@@ -54,41 +54,41 @@ public class Slider extends SliderBase<Float> {
     }
 
     @Override
-    protected native void setValue(Element e, Float value) /*-{
-        var floatValue = value.@java.lang.Float::floatValue()();
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_VALUE, floatValue);
+    protected native void setValue(Element e, Double value) /*-{
+        var doubleValue = value.@java.lang.Double::doubleValue()();
+        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_VALUE, doubleValue);
     }-*/;
 
     @Override
-    protected native Float getValue(Element e) /*-{
+    protected native Double getValue(Element e) /*-{
         return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
     }-*/;
 
     @Override
-    protected Float convertValue(String value) {
+    protected Double convertValue(String value) {
         if (value == null || value.isEmpty())
             return null;
-        return Float.valueOf(value);
+        return Double.valueOf(value);
     }
 
     @Override
     protected native void onSlide(Event event) /*-{
-        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideEvent(Ljava/lang/Float;)(event.value);
+        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideEvent(Ljava/lang/Double;)(event.value);
     }-*/;
 
     @Override
     protected native void onSlideStart(Event event) /*-{
-        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideStartEvent(Ljava/lang/Float;)(event.value);
+        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideStartEvent(Ljava/lang/Double;)(event.value);
     }-*/;
 
     @Override
     protected native void onSlideStop(Event event) /*-{
-        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideStopEvent(Ljava/lang/Float;)(event.value);
+        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideStopEvent(Ljava/lang/Double;)(event.value);
     }-*/;
 
     @Override
     protected native void onSlideChange(Event event) /*-{
-        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireChangeEvent(Ljava/lang/Float;)(event.value.newValue);
+        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireChangeEvent(Ljava/lang/Double;)(event.value.newValue);
     }-*/;
 
 }
