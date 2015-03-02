@@ -65,7 +65,7 @@ public class RangeSlider extends SliderBase<Range> {
      */
     @UiConstructor
     public RangeSlider(final double min, final double max, final String value) {
-		this(min, max, Range.fromString(value));
+        this(min, max, Range.fromString(value));
     }
 
     @Override
