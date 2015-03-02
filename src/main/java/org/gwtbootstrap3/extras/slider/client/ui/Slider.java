@@ -23,6 +23,7 @@ package org.gwtbootstrap3.extras.slider.client.ui;
 import org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.Event;
 
 /**
@@ -46,6 +47,7 @@ public class Slider extends SliderBase<Double> {
      * @param max
      * @param value
      */
+    @UiConstructor
     public Slider(final double min, final double max, final double value) {
         this();
         setMin(min);

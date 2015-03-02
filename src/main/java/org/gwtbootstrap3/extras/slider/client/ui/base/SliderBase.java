@@ -436,7 +436,7 @@ public abstract class SliderBase<T> extends Widget implements
             setValue(getElement(), value);
         } else {
             String attrVal = (value == null) ? null : value.toString();
-            attributeMixin.setAttribute(SliderOption.VALUE.getName(), attrVal);
+            attributeMixin.setAttribute(SliderOption.VALUE.getDataAttribute(), attrVal);
         }
 
         if (fireEvents) {

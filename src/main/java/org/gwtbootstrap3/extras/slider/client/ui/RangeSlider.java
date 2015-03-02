@@ -22,9 +22,8 @@ package org.gwtbootstrap3.extras.slider.client.ui;
 
 import org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase;
 
-import com.google.gwt.core.client.JsArrayNumber;
-import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.Event;
 
 /**
@@ -42,17 +41,31 @@ public class RangeSlider extends SliderBase<Range> {
     }
 
     /**
-     * Creates a range slider with with min, max, and value.
+     * Creates a range slider with min, max, and range value.
+     *
+     * @param min
+     * @param max
+     * @param range
+     */
+    public RangeSlider(final double min, final double max, final Range range) {
+        this();
+        setMin(min);
+        setMax(max);
+        setValue(range);
+    }
+
+    /**
+     * Creates a range slider with min, max, and range value.<br>
+     * <br>
+     * Useful for UiBinder.
      *
      * @param min
      * @param max
      * @param value
      */
-    public RangeSlider(final double min, final double max, final Range value) {
-        this();
-        setMin(min);
-        setMax(max);
-        setValue(value);
+    @UiConstructor
+    public RangeSlider(final double min, final double max, final String value) {
+		this(min, max, Range.fromString(value));
     }
 
     @Override
@@ -69,10 +82,7 @@ public class RangeSlider extends SliderBase<Range> {
 
     @Override
     protected Range convertValue(String value) {
-        if (value == null || value.isEmpty())
-            return null;
-        JsArrayNumber array = JsonUtils.safeEval(value);
-        return new Range(array);
+        return Range.fromString(value);
     }
 
     @Override

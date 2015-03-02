@@ -22,6 +22,7 @@ package org.gwtbootstrap3.extras.slider.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayNumber;
+import com.google.gwt.core.client.JsonUtils;
 
 /**
  * Slider range with a min value and a max value.
@@ -86,11 +87,26 @@ public class Range {
         return array;
     }
 
+    /**
+     * Converts the given string to a range instance.<br>
+     * <br>
+     * Useful when using UiBinder.
+     *
+     * @param value
+     * @return
+     */
+    public static Range fromString(String value) {
+        if (value == null || value.isEmpty())
+            return null;
+        JsArrayNumber array = JsonUtils.safeEval(value);
+        return new Range(array);
+    }
+
     @Override
     public String toString() {
-        return new StringBuilder("Range [")
-            .append("minValue=").append(getMinValue()).append(", ")
-            .append("maxValue=").append(getMaxValue())
+        return new StringBuilder("[")
+            .append(getMinValue()).append(", ")
+            .append(getMaxValue())
             .append("]").toString();
     }
 
