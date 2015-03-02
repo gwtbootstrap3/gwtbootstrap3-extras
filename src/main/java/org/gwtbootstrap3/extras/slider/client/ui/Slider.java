@@ -63,7 +63,8 @@ public class Slider extends SliderBase<Double> {
 
     @Override
     protected native Double getValue(Element e) /*-{
-        return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
+        var value = $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
+        return @java.lang.Double::new(D)(value);
     }-*/;
 
     @Override
