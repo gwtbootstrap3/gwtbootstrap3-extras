@@ -840,7 +840,8 @@ public abstract class SliderBase<T> extends Widget implements
      */
     private native void refreshWorkaround(Element e) /*-{
         var value = $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
-        var attr = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::VALUE;
+        var option = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::VALUE;
+        var attr = option.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::getName()();
         $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
     }-*/;
 
