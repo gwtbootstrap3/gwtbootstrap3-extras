@@ -1,10 +1,12 @@
 package org.gwtbootstrap3.extras.slider.client.ui.base.constants;
 
+import org.gwtbootstrap3.client.ui.constants.Type;
+
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +22,18 @@ package org.gwtbootstrap3.extras.slider.client.ui.base.constants;
  * #L%
  */
 
-public enum TooltipType {
+/**
+ * Whether to show the tool-tip on drag, hide the tool-tip,
+ * or always show the tool-tip.
+ *
+ * @author Xiaodong SUN
+ */
+public enum TooltipType implements Type {
+
     SHOW("show"),
     HIDE("hide"),
-    ALWAYS("always");
+    ALWAYS("always"),
+    ;
 
     private final String type;
 

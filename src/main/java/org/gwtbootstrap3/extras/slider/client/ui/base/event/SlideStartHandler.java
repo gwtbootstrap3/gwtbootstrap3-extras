@@ -1,6 +1,4 @@
-package org.gwtbootstrap3.extras.slider.client.ui.base.constants;
-
-import org.gwtbootstrap3.client.ui.constants.Type;
+package org.gwtbootstrap3.extras.slider.client.ui.base.event;
 
 /*
  * #%L
@@ -22,26 +20,19 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  * #L%
  */
 
+import com.google.gwt.event.shared.EventHandler;
+
 /**
- * Slider handle shape.
+ * Handler interface for {@link SlideStartEvent} events.
  *
- * @author Xiaodong SUN
+ * @param <T> slider value type
  */
-public enum HandleType implements Type {
+public interface SlideStartHandler<T> extends EventHandler {
 
-    ROUND("round"),
-    SQUARE("square"),
-    TRIANGLE("triangle"),
-    CUSTOM("custom"),
-    ;
-
-    private final String type;
-
-    private HandleType(final String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
+    /**
+     * Called when {@link SlideStartEvent} is fired.
+     *
+     * @param event the {@link SlideStartEvent} that was fired
+     */
+    void onSlideStart(SlideStartEvent<T> event);
 }

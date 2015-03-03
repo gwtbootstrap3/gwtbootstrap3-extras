@@ -1,10 +1,12 @@
 package org.gwtbootstrap3.extras.slider.client.ui.base.constants;
 
+import org.gwtbootstrap3.client.ui.constants.Type;
+
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +22,16 @@ package org.gwtbootstrap3.extras.slider.client.ui.base.constants;
  * #L%
  */
 
-public enum OrientationType {
+/**
+ * Slider orientation : horizontal or vertical.
+ *
+ * @author Xiaodong SUN
+ */
+public enum OrientationType implements Type {
+
     HORIZONTAL("horizontal"),
-    VERTICAL("vertical");
+    VERTICAL("vertical"),
+    ;
 
     private final String type;
 

@@ -23,21 +23,19 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  */
 
 /**
- * Slider handle shape.
+ * Slider scale type: linear or logarithmic.
  *
  * @author Xiaodong SUN
  */
-public enum HandleType implements Type {
+public enum ScaleType implements Type {
 
-    ROUND("round"),
-    SQUARE("square"),
-    TRIANGLE("triangle"),
-    CUSTOM("custom"),
+    LINEAR("linear"),
+    LOGARITHMIC("logarithmic"),
     ;
 
     private final String type;
 
-    private HandleType(final String type) {
+    private ScaleType(final String type) {
         this.type = type;
     }
 

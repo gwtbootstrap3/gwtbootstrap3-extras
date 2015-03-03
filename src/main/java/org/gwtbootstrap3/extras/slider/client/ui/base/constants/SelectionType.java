@@ -1,10 +1,12 @@
 package org.gwtbootstrap3.extras.slider.client.ui.base.constants;
 
+import org.gwtbootstrap3.client.ui.constants.Type;
+
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +22,19 @@ package org.gwtbootstrap3.extras.slider.client.ui.base.constants;
  * #L%
  */
 
-public enum SelectionType {
+/**
+ * Selection placement.<br>
+ * <br>
+ * In case of a range slider, the selection will be placed between the handles.
+ *
+ * @author Xiaodong SUN
+ */
+public enum SelectionType implements Type {
+
     BEFORE("before"),
     AFTER("after"),
-    NONE("none");
+    NONE("none"),
+    ;
 
     private final String type;
 
