@@ -20,11 +20,11 @@
   -->
 <module>
     <public path="resource">
-        <include name="css/bootstrap-select-1.6.3.min.cache.css"/>
-        <include name="css/bootstrap-select-1.6.3.css.cache.map"/>
-        <include name="css/bootstrap-select-fix-1.6.3.min.cache.css"/>
+        <include name="css/bootstrap-select-1.6.4.min.cache.css"/>
+        <include name="css/bootstrap-select-1.6.4.css.cache.map"/>
+        <include name="css/bootstrap-select-fix-1.6.4.min.cache.css"/>
     </public>
 
-    <stylesheet src="css/bootstrap-select-1.6.3.min.cache.css"/>
-    <stylesheet src="css/bootstrap-select-fix-1.6.3.min.cache.css"/>
+    <stylesheet src="css/bootstrap-select-1.6.4.min.cache.css"/>
+    <stylesheet src="css/bootstrap-select-fix-1.6.4.min.cache.css"/>
 </module>
