@@ -38,7 +38,7 @@ public class SliderEntryPoint implements EntryPoint {
     /**
      * Check if slider is already loaded.
      *
-     * @return <code>true</code> is slider is loaded, <code>false</code> otherwise
+     * @return <code>true</code> if slider is loaded, <code>false</code> otherwise
      */
     private native boolean isSliderLoaded() /*-{
         return (typeof $wnd['Slider'] !== 'undefined');
