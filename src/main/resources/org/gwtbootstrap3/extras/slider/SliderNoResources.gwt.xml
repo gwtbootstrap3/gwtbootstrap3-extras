@@ -3,7 +3,7 @@
   #%L
   GwtBootstrap3
   %%
-  Copyright (C) 2013 - 2014 GwtBootstrap3
+  Copyright (C) 2013 - 2015 GwtBootstrap3
   %%
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -19,9 +19,8 @@
   #L%
   -->
 
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.6.1//EN"
-        "http://google-web-toolkit.googlecode.com/svn/tags/2.6.1/distro-source/core/src/gwt-module.dtd">
-<module>
-    <inherits name="com.google.gwt.user.User"/>
-    <source path="client"/>
+<module rename-to='slider'>
+    <inherits name="org.gwtbootstrap3.GwtBootstrap3Base"/>
+
+    <source path='client'/>
 </module>
