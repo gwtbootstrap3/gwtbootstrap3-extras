@@ -1,5 +1,7 @@
 package org.gwtbootstrap3.extras.notify.client.constants;
 
+import org.gwtbootstrap3.client.ui.constants.Type;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -20,34 +22,32 @@ package org.gwtbootstrap3.extras.notify.client.constants;
  * #L%
  */
 
-import org.gwtbootstrap3.client.ui.constants.Type;
-
 /**
- * Enumeration of Notify's URL target types.
+ * Enumeration of possible Notify's position to the container element.
  *
  * @author Xiaodong SUN
  */
-public enum NotifyUrlTarget implements Type {
+public enum NotifyPosition implements Type {
 
-    BLANK("_blank"),
-    SELF("_self"),
-    PARENT("_parent"),
-    TOP("_top"),
+    STATIC("static"),
+    FIXED("fixed"),
+    RELATIVE("relative"),
+    ABSOLUTE("absolute"),
     ;
 
-    private final String target;
+    private final String position;
 
-    private NotifyUrlTarget(final String target) {
-        this.target = target;
+    private NotifyPosition(final String position) {
+        this.position = position;
     }
 
     /**
-     * Returns the string representation of URL target.
+     * Returns the string representation of position.
      *
-     * @return the string representation of URL target
+     * @return the string representation of position
      */
-    public String getTarget() {
-        return target;
+    public String getPosition() {
+        return position;
     }
 
 }

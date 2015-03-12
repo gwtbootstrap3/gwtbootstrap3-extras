@@ -23,8 +23,11 @@ package org.gwtbootstrap3.extras.notify.client.ui;
 import org.gwtbootstrap3.extras.animate.client.ui.constants.Animation;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyIconType;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement;
+import org.gwtbootstrap3.extras.notify.client.constants.NotifyPosition;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyType;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyUrlTarget;
+import org.gwtbootstrap3.extras.notify.client.event.NotifyShowHandler;
+import org.gwtbootstrap3.extras.notify.client.event.NotifyShownHandler;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -51,18 +54,32 @@ public class NotifySettings extends JavaScriptObject {
         this.element = element;
     }-*/;
 
-    //FIXME setPosition
+    /**
+     * Set custom position to the Notify container element. Default is null.
+     *
+     * @param position one of STATIC, FIXED, RELATIVE, ABSOLUTE, or null
+     */
+    public final void setPosition(final NotifyPosition position) {
+    	setPosition((position != null) ? position.getPosition() : null);
+    }
+
+    /**
+     * Set native property of Notify's position.
+     *
+     * @param position Notify's position to the container element
+     */
+    private final native void setPosition(String position) /*-{
+        this.position = position;
+    }-*/;
 
     /**
      * Set type of Notify (CSS style class name). Default is INFO.
      *
      * @param type one of INFO, WARNING, DANGER, SUCCESS
-     * @see org.gwtbootstrap3.extras.notify.client.constants.NotifyType
+     * @see NotifyType
      */
     public final void setType(final NotifyType type) {
-        if (type != null) {
-            setType(type.getCssName());
-        }
+    	setType((type != null) ? type.getCssName() : NotifyType.INFO.getCssName());
     }
 
     /**
@@ -75,17 +92,13 @@ public class NotifySettings extends JavaScriptObject {
     }-*/;
 
     /**
-     * Set placement of Notify on screen. Defaults placement is {@link NotifyPlacement#TOP_RIGHT}.
+     * Set placement of Notify on screen. Default placement is {@link NotifyPlacement#TOP_RIGHT}.
      *
      * @param placement Notify's placement on screen
-     * @see org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement
+     * @see NotifyPlacement
      */
     public final void setPlacement(final NotifyPlacement placement) {
-        if (placement != null) {
-            setNotifyPlacement(placement);
-        } else {
-            setNotifyPlacement(NotifyPlacement.TOP_RIGHT);
-        }
+    	setNotifyPlacement((placement != null) ? placement : NotifyPlacement.TOP_RIGHT);
     }
 
     /**
@@ -156,20 +169,19 @@ public class NotifySettings extends JavaScriptObject {
      *
      * @param urlTarget URL target
      */
-    public final native void setUrlTarget(NotifyUrlTarget urlTarget) /*-{
-    	if (urlTarget !== null)
-            this.url_target = urlTarget.@org.gwtbootstrap3.extras.notify.client.constants.NotifyUrlTarget::getTarget()();
-    }-*/;
+    public final void setUrlTarget(NotifyUrlTarget urlTarget) {
+    	setUrlTarget((urlTarget != null) ? urlTarget.getTarget() : NotifyUrlTarget.BLANK.getTarget());
+    }
 
     /**
      * Set custom URL target. Default is "_blank".
      * <p/>
      * See http://www.w3schools.com/tags/att_a_target.asp for possible values.
      *
-     * @param urlTarget URL target
+     * @param customUrlTarget URL target
      */
-    public final native void setUrlTarget(String urlTarget) /*-{
-        this.url_target = urlTarget;
+    public final native void setUrlTarget(String customUrlTarget) /*-{
+        this.url_target = customUrlTarget;
     }-*/;
 
     /**
@@ -209,6 +221,37 @@ public class NotifySettings extends JavaScriptObject {
     }-*/;
 
     /**
+     * Set the Notify's show event handler. The show event fires immediately when
+     * the show instance method is called.
+     *
+     * @param handler
+     */
+    public final void setShowHandler(final NotifyShowHandler handler) {
+    	onShow((handler != null) ? handler : NotifyShowHandler.NOOP_SHOW_HANDLER);
+    }
+
+    private final native void onShow(NotifyShowHandler handler) /*-{
+	    this.onShow = function() {
+	    	handler.@org.gwtbootstrap3.extras.notify.client.event.NotifyShowHandler::onShow()();
+	    };
+	}-*/;
+
+    /**
+     * This event is fired when the modal has been made visible to the user (will wait for CSS transitions to complete)
+     *
+     * @param handler
+     */
+    public final void setShownHandler(final NotifyShownHandler handler) {
+    	onShown((handler != null) ? handler : NotifyShownHandler.DEFAULT_SHOWN_HANDLER);
+    }
+
+    private final native void onShown(NotifyShownHandler handler) /*-{
+	    this.onShow = function() {
+	    	handler.@org.gwtbootstrap3.extras.notify.client.event.NotifyShownHandler::onClosed()();
+	    };
+	}-*/;
+
+    /**
      * Set icon type you will use for Notify. Default is 'class', which
      * allows to use iconic fonts like FontAwesome.
      * If you want to use images instead of class, set value to "image".<br>
@@ -218,10 +261,18 @@ public class NotifySettings extends JavaScriptObject {
      * @param iconType the icon type
      * @see NotifyIconType
      */
-    public final native void setIconType(NotifyIconType iconType) /*-{
-    	if (iconType !== null)
-            this.icon_type = iconType.@org.gwtbootstrap3.extras.notify.client.constants.NotifyIconType::getType()();
-    }-*/;
+    public final void setIconType(NotifyIconType iconType) {
+    	setIconType((iconType != null) ? iconType.getType() : NotifyIconType.CLASS.getType());
+    }
+
+    /**
+     * Set native property of Notify's icon type.
+     *
+     * @param iconType Notify's icon type.
+     */
+    private final native void setIconType(String iconType) /*-{
+		this.icon_type = iconType;
+	}-*/;
 
     /**
      * Set custom HTML Template of Notify. Default value is:

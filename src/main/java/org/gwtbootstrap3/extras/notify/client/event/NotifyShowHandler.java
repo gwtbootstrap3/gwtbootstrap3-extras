@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.notify.client.constants;
+package org.gwtbootstrap3.extras.notify.client.event;
 
 /*
  * #%L
@@ -20,34 +20,22 @@ package org.gwtbootstrap3.extras.notify.client.constants;
  * #L%
  */
 
-import org.gwtbootstrap3.client.ui.constants.Type;
 
 /**
- * Enumeration of Notify's URL target types.
- *
- * @author Xiaodong SUN
+ * Handler interface for Notify show events.
  */
-public enum NotifyUrlTarget implements Type {
-
-    BLANK("_blank"),
-    SELF("_self"),
-    PARENT("_parent"),
-    TOP("_top"),
-    ;
-
-    private final String target;
-
-    private NotifyUrlTarget(final String target) {
-        this.target = target;
-    }
+public interface NotifyShowHandler {
 
     /**
-     * Returns the string representation of URL target.
-     *
-     * @return the string representation of URL target
+     * Called when Notify show event is fired.
      */
-    public String getTarget() {
-        return target;
-    }
+    void onShow();
 
+    /**
+     * Default Notify's show handler
+     */
+    static NotifyShowHandler NOOP_SHOW_HANDLER = new NotifyShowHandler() {
+		@Override
+		public void onShow() {}
+	};
 }
