@@ -9,9 +9,9 @@ package org.gwtbootstrap3.extras.notify.client.ui;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -100,6 +100,16 @@ public class NotifySettings extends JavaScriptObject {
     public final void setPlacement(final NotifyPlacement placement) {
     	setNotifyPlacement((placement != null) ? placement : NotifyPlacement.TOP_RIGHT);
     }
+
+    /**
+     * If <code>true</code> the <code>data-grow="dismiss"</code> element in the template
+     * will be hidden.
+     *
+     * @param customType Style name to set
+     */
+    public final native void setAllowDismiss(boolean allowDismiss) /*-{
+        this.allow_dismiss = allowDismiss;
+    }-*/;
 
     /**
      * Set native property of Notify's placement.
