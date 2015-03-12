@@ -26,5 +26,5 @@
     <inherits name="org.gwtbootstrap3.extras.animate.Animate"/>
     <inherits name="org.gwtbootstrap3.GwtBootstrap3Base"/>
     <source path="client"/>
-    <entry-point class="org.gwtbootstrap3.extras.growl.client.GrowlEntryPoint"/>
+    <entry-point class="org.gwtbootstrap3.extras.notify.client.NotifyEntryPoint"/>
 </module>
