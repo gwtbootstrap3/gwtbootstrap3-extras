@@ -23,10 +23,7 @@
         "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
 <module>
     <inherits name="com.google.gwt.user.User"/>
-    <inherits name="org.gwtbootstrap3.extras.animate.Animate"/>
+    <inherits name="org.gwtbootstrap3.extras.animate.AnimateNoResources"/>
     <inherits name="org.gwtbootstrap3.GwtBootstrap3Base"/>
-    <inherits name="com.google.gwt.resources.Resources"/>
-    <inherits name='org.gwtbootstrap3.extras.notify.client.NotifyResources'/>
     <source path="client"/>
-    <entry-point class="org.gwtbootstrap3.extras.notify.client.NotifyEntryPoint"/>
 </module>

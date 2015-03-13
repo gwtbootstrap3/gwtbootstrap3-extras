@@ -26,10 +26,10 @@ import org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyPosition;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyType;
 import org.gwtbootstrap3.extras.notify.client.constants.NotifyUrlTarget;
+import org.gwtbootstrap3.extras.notify.client.event.NotifyCloseHandler;
+import org.gwtbootstrap3.extras.notify.client.event.NotifyClosedHandler;
 import org.gwtbootstrap3.extras.notify.client.event.NotifyShowHandler;
 import org.gwtbootstrap3.extras.notify.client.event.NotifyShownHandler;
-
-import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * This class represent basic Notify's settings, that you can use to customize display of each Notify.
@@ -43,7 +43,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * @author Xiaodong SUN
  * @see #makeDefault()
  */
-public class NotifySettings extends JavaScriptObject {
+public class NotifySettings {
 
     /**
      * Set element name or class or ID to append Notify to. Default is 'body'.
@@ -60,7 +60,7 @@ public class NotifySettings extends JavaScriptObject {
      * @param position one of STATIC, FIXED, RELATIVE, ABSOLUTE, or null
      */
     public final void setPosition(final NotifyPosition position) {
-    	setPosition((position != null) ? position.getPosition() : null);
+        setPosition((position != null) ? position.getPosition() : null);
     }
 
     /**
@@ -79,7 +79,7 @@ public class NotifySettings extends JavaScriptObject {
      * @see NotifyType
      */
     public final void setType(final NotifyType type) {
-    	setType((type != null) ? type.getCssName() : NotifyType.INFO.getCssName());
+        setType((type != null) ? type.getCssName() : NotifyType.INFO.getCssName());
     }
 
     /**
@@ -98,7 +98,7 @@ public class NotifySettings extends JavaScriptObject {
      * @see NotifyPlacement
      */
     public final void setPlacement(final NotifyPlacement placement) {
-    	setNotifyPlacement((placement != null) ? placement : NotifyPlacement.TOP_RIGHT);
+        setNotifyPlacement((placement != null) ? placement : NotifyPlacement.TOP_RIGHT);
     }
 
     /**
@@ -180,7 +180,7 @@ public class NotifySettings extends JavaScriptObject {
      * @param urlTarget URL target
      */
     public final void setUrlTarget(NotifyUrlTarget urlTarget) {
-    	setUrlTarget((urlTarget != null) ? urlTarget.getTarget() : NotifyUrlTarget.BLANK.getTarget());
+        setUrlTarget((urlTarget != null) ? urlTarget.getTarget() : NotifyUrlTarget.BLANK.getTarget());
     }
 
     /**
@@ -237,29 +237,63 @@ public class NotifySettings extends JavaScriptObject {
      * @param handler
      */
     public final void setShowHandler(final NotifyShowHandler handler) {
-    	onShow((handler != null) ? handler : NotifyShowHandler.NOOP_SHOW_HANDLER);
+        onShow((handler != null) ? handler : NotifyShowHandler.DEFAULT_SHOW_HANDLER);
     }
 
     private final native void onShow(NotifyShowHandler handler) /*-{
-	    this.onShow = function() {
-	    	handler.@org.gwtbootstrap3.extras.notify.client.event.NotifyShowHandler::onShow()();
-	    };
-	}-*/;
+        this.onShow = function() {
+            handler.@org.gwtbootstrap3.extras.notify.client.event.NotifyShowHandler::onShow()();
+        };
+    }-*/;
 
     /**
-     * This event is fired when the modal has been made visible to the user (will wait for CSS transitions to complete)
+     * Set the Notify's shown event handler. This event is fired when the modal has
+     * been made visible to the user (will wait for CSS transitions to complete).
      *
      * @param handler
      */
     public final void setShownHandler(final NotifyShownHandler handler) {
-    	onShown((handler != null) ? handler : NotifyShownHandler.DEFAULT_SHOWN_HANDLER);
+        onShown((handler != null) ? handler : NotifyShownHandler.DEFAULT_SHOWN_HANDLER);
     }
 
     private final native void onShown(NotifyShownHandler handler) /*-{
-	    this.onShow = function() {
-	    	handler.@org.gwtbootstrap3.extras.notify.client.event.NotifyShownHandler::onClosed()();
-	    };
-	}-*/;
+        this.onShow = function() {
+            handler.@org.gwtbootstrap3.extras.notify.client.event.NotifyShownHandler::onShown()();
+        };
+    }-*/;
+
+    /**
+     * Set the Notify's close event handler. This event is fired immediately when
+     * the notification is closing.
+     *
+     * @param handler
+     */
+    public final void setCloseHandler(final NotifyCloseHandler handler) {
+        onClose((handler != null) ? handler : NotifyCloseHandler.DEFAULT_CLOSE_HANDLER);
+    }
+
+    private final native void onClose(NotifyCloseHandler handler) /*-{
+        this.onClose = function() {
+            handler.@org.gwtbootstrap3.extras.notify.client.event.NotifyCloseHandler::onClose()();
+        };
+    }-*/;
+
+    /**
+     * Set the Notify's closed event handler. This event is fired when the modal
+     * has finished closing and is removed from the document (will wait for CSS
+     * transitions to complete).
+     *
+     * @param handler
+     */
+    public final void setClosedHandler(final NotifyClosedHandler handler) {
+        onClosed((handler != null) ? handler : NotifyClosedHandler.DEFAULT_CLOSED_HANDLER);
+    }
+
+    private final native void onClosed(NotifyClosedHandler handler) /*-{
+        this.onClosed = function() {
+            handler.@org.gwtbootstrap3.extras.notify.client.event.NotifyClosedHandler::onClosed()();
+        };
+    }-*/;
 
     /**
      * Set icon type you will use for Notify. Default is 'class', which
@@ -272,7 +306,7 @@ public class NotifySettings extends JavaScriptObject {
      * @see NotifyIconType
      */
     public final void setIconType(NotifyIconType iconType) {
-    	setIconType((iconType != null) ? iconType.getType() : NotifyIconType.CLASS.getType());
+        setIconType((iconType != null) ? iconType.getType() : NotifyIconType.CLASS.getType());
     }
 
     /**
@@ -281,8 +315,8 @@ public class NotifySettings extends JavaScriptObject {
      * @param iconType Notify's icon type.
      */
     private final native void setIconType(String iconType) /*-{
-		this.icon_type = iconType;
-	}-*/;
+        this.icon_type = iconType;
+    }-*/;
 
     /**
      * Set custom HTML Template of Notify. Default value is:

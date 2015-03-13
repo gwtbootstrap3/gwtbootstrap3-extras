@@ -20,22 +20,21 @@ package org.gwtbootstrap3.extras.notify.client.event;
  * #L%
  */
 
-
 /**
- * Handler interface for Notify show events.
+ * Handler interface for Notify closed events.
  */
 public interface NotifyClosedHandler {
 
     /**
-     * Called when Notify show event is fired.
+     * Called when Notify closed event is fired.
      */
-    void onShow();
+    void onClosed();
 
     /**
-     * Default Notify's show handler
+     * Default Notify's closed handler
      */
-    static NotifyClosedHandler NOOP_SHOW_HANDLER = new NotifyClosedHandler() {
-		@Override
-		public void onShow() {}
-	};
+    static NotifyClosedHandler DEFAULT_CLOSED_HANDLER = new NotifyClosedHandler() {
+        @Override
+        public void onClosed() {}
+    };
 }

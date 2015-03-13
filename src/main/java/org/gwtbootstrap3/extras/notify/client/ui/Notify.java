@@ -310,9 +310,9 @@ public class Notify extends JavaScriptObject {
      * @see org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement
      */
     public static final native void hideAll(NotifyPlacement placement) /*-{
-    	if (plamenet !== null) {
+        if (plamenet !== null) {
             $wnd.jQuery.notifyClose(placement.@org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement::getPlacement()());
-    	}
+        }
     }-*/;
 
     /**

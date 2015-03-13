@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.notify.client.event;
  * #L%
  */
 
-
 /**
  * Handler interface for Notify show events.
  */
@@ -34,8 +33,8 @@ public interface NotifyShowHandler {
     /**
      * Default Notify's show handler
      */
-    static NotifyShowHandler NOOP_SHOW_HANDLER = new NotifyShowHandler() {
-		@Override
-		public void onShow() {}
-	};
+    static NotifyShowHandler DEFAULT_SHOW_HANDLER = new NotifyShowHandler() {
+        @Override
+        public void onShow() {}
+    };
 }
