@@ -90,6 +90,10 @@ public class SummernoteBase extends TextArea {
         return addHandler(handler, SummernoteOnKeyUpEvent.getType());
     }
 
+    public HandlerRegistration addPasteHandler(final SummernoteOnPasteHandler handler) {
+        return addHandler(handler, SummernoteOnPasteEvent.getType());
+    }
+
     /**
      * Gets the HTML code generated from the editor
      *
@@ -173,6 +177,10 @@ public class SummernoteBase extends TextArea {
         fireEvent(new SummernoteOnKeyDownEvent(this, evt));
     }
 
+    protected void onPaste(final Event evt) {
+        fireEvent(new SummernoteOnPasteEvent(this, evt));
+    }
+
     private native void initialize(Element e, int height, boolean hasFocus, JavaScriptObject toolbar) /*-{
         var target = this;
 
@@ -200,6 +208,9 @@ public class SummernoteBase extends TextArea {
             },
             onImageUpload: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onImageUpload(Lcom/google/gwt/user/client/Event;)(evt);
+            },
+            onpaste: function (evt) {
+                target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onPaste(Lcom/google/gwt/user/client/Event;)(evt);
             }
         });
     }-*/;
@@ -214,6 +225,7 @@ public class SummernoteBase extends TextArea {
         $wnd.jQuery(e).off('onkeyup');
         $wnd.jQuery(e).off('ononkeydowninit');
         $wnd.jQuery(e).off('onImageUpload');
+        $wnd.jQuery(e).off('onpaste');
     }-*/;
 
     private native void setCode(Element e, String code) /*-{
