@@ -119,7 +119,7 @@ public class NotifySettings {
     private final native void setNotifyPlacement(final NotifyPlacement placement) /*-{
         var from = placement.@org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement::getFrom()();
         var align = placement.@org.gwtbootstrap3.extras.notify.client.constants.NotifyPlacement::getAlign()();
-        this.placement = { from: from, align: horizontal };
+        this.placement = { from: from, align: align };
     }-*/;
 
     /**
