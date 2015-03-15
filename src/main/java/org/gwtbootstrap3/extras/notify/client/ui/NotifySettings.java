@@ -47,19 +47,19 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public class NotifySettings extends JavaScriptObject {
 
-	/**
-	 * Default constructor
-	 */
-	protected NotifySettings() {}
+    /**
+     * Default constructor
+     */
+    protected NotifySettings() {}
 
-	/**
-	 * Creates a new instance of {@link NotifySettings}.
-	 *
-	 * @return a new instance of {@link NotifySettings}.
-	 */
-	public static NotifySettings newSettings() {
-		return JavaScriptObject.createObject().cast();
-	}
+    /**
+     * Creates a new instance of {@link NotifySettings}.
+     *
+     * @return a new instance of {@link NotifySettings}.
+     */
+    public static NotifySettings newSettings() {
+        return JavaScriptObject.createObject().cast();
+    }
 
     /**
      * Set element name or class or ID to append Notify to. Default is 'body'.
