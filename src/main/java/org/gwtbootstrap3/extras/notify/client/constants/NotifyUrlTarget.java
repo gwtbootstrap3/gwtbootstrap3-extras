@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.slider.client;
+package org.gwtbootstrap3.extras.notify.client.constants;
 
 /*
  * #%L
@@ -20,17 +20,34 @@ package org.gwtbootstrap3.extras.slider.client;
  * #L%
  */
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
+import org.gwtbootstrap3.client.ui.constants.Type;
 
 /**
+ * Enumeration of Notify's URL target types.
+ *
  * @author Xiaodong SUN
  */
-interface SliderClientBundle extends ClientBundle {
+public enum NotifyUrlTarget implements Type {
 
-    static final SliderClientBundle INSTANCE = GWT.create(SliderClientBundle.class);
+    BLANK("_blank"),
+    SELF("_self"),
+    PARENT("_parent"),
+    TOP("_top"),
+    ;
 
-    @Source("resource/js/bootstrap-slider-4.5.6.min.cache.js")
-    TextResource slider();
+    private final String target;
+
+    private NotifyUrlTarget(final String target) {
+        this.target = target;
+    }
+
+    /**
+     * Returns the string representation of URL target.
+     *
+     * @return the string representation of URL target
+     */
+    public String getTarget() {
+        return target;
+    }
+
 }

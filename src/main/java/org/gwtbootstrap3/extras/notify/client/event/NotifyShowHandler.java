@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.slider.client;
+package org.gwtbootstrap3.extras.notify.client.event;
 
 /*
  * #%L
@@ -20,17 +20,21 @@ package org.gwtbootstrap3.extras.slider.client;
  * #L%
  */
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
-
 /**
- * @author Xiaodong SUN
+ * Handler interface for Notify show events.
  */
-interface SliderClientBundle extends ClientBundle {
+public interface NotifyShowHandler {
 
-    static final SliderClientBundle INSTANCE = GWT.create(SliderClientBundle.class);
+    /**
+     * Called when Notify show event is fired.
+     */
+    void onShow();
 
-    @Source("resource/js/bootstrap-slider-4.5.6.min.cache.js")
-    TextResource slider();
+    /**
+     * Default Notify's show handler
+     */
+    static NotifyShowHandler DEFAULT_SHOW_HANDLER = new NotifyShowHandler() {
+        @Override
+        public void onShow() {}
+    };
 }

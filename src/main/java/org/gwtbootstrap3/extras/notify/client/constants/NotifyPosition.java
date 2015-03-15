@@ -1,4 +1,6 @@
-package org.gwtbootstrap3.extras.slider.client;
+package org.gwtbootstrap3.extras.notify.client.constants;
+
+import org.gwtbootstrap3.client.ui.constants.Type;
 
 /*
  * #%L
@@ -20,17 +22,32 @@ package org.gwtbootstrap3.extras.slider.client;
  * #L%
  */
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
-
 /**
+ * Enumeration of possible Notify's position to the container element.
+ *
  * @author Xiaodong SUN
  */
-interface SliderClientBundle extends ClientBundle {
+public enum NotifyPosition implements Type {
 
-    static final SliderClientBundle INSTANCE = GWT.create(SliderClientBundle.class);
+    STATIC("static"),
+    FIXED("fixed"),
+    RELATIVE("relative"),
+    ABSOLUTE("absolute"),
+    ;
 
-    @Source("resource/js/bootstrap-slider-4.5.6.min.cache.js")
-    TextResource slider();
+    private final String position;
+
+    private NotifyPosition(final String position) {
+        this.position = position;
+    }
+
+    /**
+     * Returns the string representation of position.
+     *
+     * @return the string representation of position
+     */
+    public String getPosition() {
+        return position;
+    }
+
 }

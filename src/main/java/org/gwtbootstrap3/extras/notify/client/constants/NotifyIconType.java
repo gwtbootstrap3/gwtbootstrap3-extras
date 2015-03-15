@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.slider.client;
+package org.gwtbootstrap3.extras.notify.client.constants;
 
 /*
  * #%L
@@ -20,17 +20,32 @@ package org.gwtbootstrap3.extras.slider.client;
  * #L%
  */
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
+import org.gwtbootstrap3.client.ui.constants.Type;
 
 /**
+ * Enumeration of Notify's icon types.
+ *
  * @author Xiaodong SUN
  */
-interface SliderClientBundle extends ClientBundle {
+public enum NotifyIconType implements Type {
 
-    static final SliderClientBundle INSTANCE = GWT.create(SliderClientBundle.class);
+    CLASS("class"),
+    IMAGE("img"),
+    ;
 
-    @Source("resource/js/bootstrap-slider-4.5.6.min.cache.js")
-    TextResource slider();
+    private final String type;
+
+    private NotifyIconType(final String type) {
+        this.type = type;
+    }
+
+    /**
+     * Returns the string representation of icon type.
+     *
+     * @return the string representation of icon type
+     */
+    public String getType() {
+        return type;
+    }
+
 }
