@@ -78,6 +78,15 @@ public class Bootbox {
     }-*/;
 
     /**
+     * Displays a completely customisable dialog in a modal dialog box.
+     *
+     * @param dialog      the dialog configuration.
+     */
+    public static native void dialog(Dialog dialog) /*-{
+        $wnd.bootbox.dialog(dialog);
+    }-*/;
+
+    /**
      * Hide all currently active bootbox dialogs. 
      * <p>Individual dialogs can be closed as per normal Bootstrap dialogs: dialog.modal('hide').
      */
@@ -89,7 +98,7 @@ public class Bootbox {
      * Creates a Defaults object.
      */
     public static Defaults createDefaults() {
-        return JavaScriptObject.createObject().cast();
+        return Defaults.create();
     }
 
     /**
@@ -100,6 +109,10 @@ public class Bootbox {
     public static class Defaults extends JavaScriptObject {
 
         protected Defaults() {
+        }
+
+        public static final Defaults create() {
+            return JavaScriptObject.createObject().cast();
         }
 
         public final native Defaults setLocale(final String locale) /*-{
@@ -140,5 +153,88 @@ public class Bootbox {
         }-*/;
 
     }
+    
+    /**
+     * Used to provide a Dialog configuration.
+     * 
+     * @author Tercio Gaudencio Filho (terciofilho [at] gmail.com)
+     */
+    public static class Dialog extends JavaScriptObject {
+
+        protected Dialog() {
+        }
+
+        public static final Dialog create() {
+            return JavaScriptObject.createObject().cast();
+        }
+
+        public final native Dialog setMessage(final String message) /*-{
+            this.message = message;
+            return this;
+        }-*/;
+
+        public final native Dialog setTitle(final String title) /*-{
+            this.title = title;
+            return this;
+        }-*/;
+
+        public final native Dialog setOnEscape(final AlertCallback callback) /*-{
+            this.onEscape = function() {
+                callback.@org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback::callback()();
+            };
+            return this;
+        }-*/;
+
+        public final native Dialog setBackdrop(final boolean backdrop) /*-{
+            this.backdrop = backdrop;
+            return this;
+        }-*/;
+
+        public final native Dialog setCloseButton(final boolean closeButton) /*-{
+            this.closeButton = closeButton;
+            return this;
+        }-*/;
+
+        public final native Dialog setAnimate(final boolean animate) /*-{
+            this.animate = animate;
+            return this;
+        }-*/;
+
+        public final native Dialog set(final String className) /*-{
+            this.className = className;
+            return this;
+        }-*/;
+
+        public final native Dialog addButton(String label , String className, AlertCallback callback) /*-{
+            this.buttons = this.buttons || {};
+            this.buttons[label] = {
+                className: className,
+                callback: function() {
+                    callback.@org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback::callback()();
+                }
+            };
+            return this;
+        }-*/;
+        
+        public final native Dialog addButton(String label , String className) /*-{
+            this.buttons = this.buttons || {};
+            this.buttons[label] = {
+                className: className
+            };
+            return this;
+        }-*/;
+        
+        public final native Dialog addButton(String label) /*-{
+            this.buttons = this.buttons || {};
+            this.buttons[label] = {};
+            return this;
+        }-*/;
+
+        public final void show() {
+            Bootbox.dialog(this);
+        }
+
+    }
+
 
 }
