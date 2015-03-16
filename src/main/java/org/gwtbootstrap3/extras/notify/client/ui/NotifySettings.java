@@ -118,13 +118,30 @@ public class NotifySettings extends JavaScriptObject {
     }
 
     /**
-     * If <code>true</code> the <code>data-notify="dismiss"</code> element in the template
-     * will be hidden.
+     * If <code>false</code>, the <code>data-notify="dismiss"</code> element in
+     * the template will be hidden. Default is <code>true</code>.
      *
-     * @param customType Style name to set
+     * @param allowDismiss if <code>false</code>, the close icon will be hidden
      */
     public final native void setAllowDismiss(boolean allowDismiss) /*-{
         this.allow_dismiss = allowDismiss;
+    }-*/;
+
+    /**
+     * If <code>true</code>, newer notifications push down older ones. Default
+     * is <code>false</code>.<br>
+     * <br>
+     * <strong>WARNING: </strong> Be careful when setting
+     * <code>newestOnTop</code> to <code>true</code> when a placement that
+     * already contains a notification has <code>newest_on_top</code> to
+     * <code>false</code>. It may cause issues with the plug-ins ability to
+     * place the notification in the correct location.
+     *
+     * @param newestOnTop if <code>true</code>, newer notifications push down older ones
+     * @since 3.0.0
+     */
+    public final native void setNewestOnTop(boolean newestOnTop) /*-{
+        this.newest_on_top = newestOnTop;
     }-*/;
 
     /**
