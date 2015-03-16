@@ -31,6 +31,8 @@ import org.gwtbootstrap3.extras.notify.client.event.NotifyClosedHandler;
 import org.gwtbootstrap3.extras.notify.client.event.NotifyShowHandler;
 import org.gwtbootstrap3.extras.notify.client.event.NotifyShownHandler;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 /**
  * This class represent basic Notify's settings, that you can use to customize display of each Notify.
  * <p/>
@@ -43,7 +45,21 @@ import org.gwtbootstrap3.extras.notify.client.event.NotifyShownHandler;
  * @author Xiaodong SUN
  * @see #makeDefault()
  */
-public class NotifySettings {
+public class NotifySettings extends JavaScriptObject {
+
+    /**
+     * Default constructor
+     */
+    protected NotifySettings() {}
+
+    /**
+     * Creates a new instance of {@link NotifySettings}.
+     *
+     * @return a new instance of {@link NotifySettings}.
+     */
+    public static NotifySettings newSettings() {
+        return JavaScriptObject.createObject().cast();
+    }
 
     /**
      * Set element name or class or ID to append Notify to. Default is 'body'.
@@ -102,7 +118,7 @@ public class NotifySettings {
     }
 
     /**
-     * If <code>true</code> the <code>data-grow="dismiss"</code> element in the template
+     * If <code>true</code> the <code>data-notify="dismiss"</code> element in the template
      * will be hidden.
      *
      * @param customType Style name to set
