@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,13 +21,20 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  */
 
 /**
- * Enum. Default: HOUR
- * <p/>
- * The lowest view that the datetimepicker should show.
- *
- * @author Joshua Godi
- * @see DateTimePickerMinView
+ * @author Matt Davis
  */
-public interface HasMinView {
-    void setMinView(DateTimePickerMinView dateTimePickerMinView);
+public enum DateTimePickerMinView {
+    DAY(0),
+    MONTH(1),
+    YEAR(2);
+
+    private final int value;
+
+    DateTimePickerMinView(final int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }

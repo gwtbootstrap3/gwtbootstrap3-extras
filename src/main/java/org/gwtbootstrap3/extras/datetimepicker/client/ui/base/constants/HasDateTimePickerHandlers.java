@@ -27,7 +27,7 @@ import org.gwtbootstrap3.client.shared.event.ShowHandler;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeDateHandler;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeMonthHandler;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ChangeYearHandler;
-import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeHandler;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.ClearDateHandler;
 
 /**
  * All handlers for the DateTimePicker
@@ -55,7 +55,7 @@ public interface HasDateTimePickerHandlers {
 
     HandlerRegistration addChangeMonthHandler(ChangeMonthHandler changeMonthHandler);
 
-    void onOutOfRange(Event e);
+    void onClearDate(Event e);
 
-    HandlerRegistration addOutOfRangeHandler(OutOfRangeHandler outOfRangeHandler);
+    HandlerRegistration addClearDateHandler(ClearDateHandler outOfRangeHandler);
 }
