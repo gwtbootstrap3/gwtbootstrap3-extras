@@ -200,7 +200,7 @@ public class Bootbox {
             return this;
         }-*/;
 
-        public final native Dialog set(final String className) /*-{
+        public final native Dialog setClassName(final String className) /*-{
             this.className = className;
             return this;
         }-*/;
