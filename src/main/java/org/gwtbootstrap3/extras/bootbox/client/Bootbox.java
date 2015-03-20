@@ -215,7 +215,7 @@ public class Bootbox {
             };
             return this;
         }-*/;
-        
+
         public final native Dialog addButton(String label , String className) /*-{
             this.buttons = this.buttons || {};
             this.buttons[label] = {
@@ -223,7 +223,17 @@ public class Bootbox {
             };
             return this;
         }-*/;
-        
+
+        public final native Dialog addButton(String label , AlertCallback callback) /*-{
+            this.buttons = this.buttons || {};
+            this.buttons[label] = {
+                callback: function() {
+                    callback.@org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback::callback()();
+                }
+            };
+            return this;
+        }-*/;
+
         public final native Dialog addButton(String label) /*-{
             this.buttons = this.buttons || {};
             this.buttons[label] = {};
@@ -235,6 +245,5 @@ public class Bootbox {
         }
 
     }
-
 
 }
