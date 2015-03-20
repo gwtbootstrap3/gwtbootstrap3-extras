@@ -24,6 +24,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback;
 import org.gwtbootstrap3.extras.bootbox.client.callback.ConfirmCallback;
 import org.gwtbootstrap3.extras.bootbox.client.callback.PromptCallback;
+import org.gwtbootstrap3.extras.bootbox.client.constants.BootboxSize;
 
 /**
  * Created by kyle on 2013/12/11.
@@ -202,6 +203,11 @@ public class Bootbox {
 
         public final native Dialog setClassName(final String className) /*-{
             this.className = className;
+            return this;
+        }-*/;
+
+        public final native Dialog setSize(final BootboxSize size) /*-{
+            this.size = size.@org.gwtbootstrap3.extras.bootbox.client.constants.BootboxSize::getSize()();
             return this;
         }-*/;
 
