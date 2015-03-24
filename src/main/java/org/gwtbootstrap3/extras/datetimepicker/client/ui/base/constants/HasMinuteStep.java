@@ -21,13 +21,12 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  */
 
 /**
- * Enum. Default: HOUR
+ * Number. Default: 5
  * <p/>
- * The lowest view that the datetimepicker should show.
+ * The increment used to build the hour view. A preset is created for each minuteStep minutes.
  *
  * @author Joshua Godi
- * @see org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerView
  */
-public interface HasMinView {
-    void setMinView(DateTimePickerView dateTimePickerView);
+public interface HasMinuteStep {
+    void setMinuteStep(int minuteStep);
 }

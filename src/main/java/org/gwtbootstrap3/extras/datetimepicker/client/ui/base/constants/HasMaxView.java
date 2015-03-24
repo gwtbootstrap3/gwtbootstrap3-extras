@@ -21,13 +21,13 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  */
 
 /**
- * Enum. Default: HOUR
+ * Enum. Default: DECADE
  * <p/>
- * The lowest view that the datetimepicker should show.
+ * The highest view that the datetimepicker should show.
  *
  * @author Joshua Godi
  * @see org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerView
  */
-public interface HasMinView {
-    void setMinView(DateTimePickerView dateTimePickerView);
+public interface HasMaxView {
+    void setMaxView(DateTimePickerView dateTimePickerView);
 }

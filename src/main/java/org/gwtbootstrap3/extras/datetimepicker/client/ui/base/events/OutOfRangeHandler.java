@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
+package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events;
 
 /*
  * #%L
@@ -20,14 +20,12 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #L%
  */
 
+import com.google.gwt.event.shared.EventHandler;
+
 /**
- * Enum. Default: HOUR
- * <p/>
- * The lowest view that the datetimepicker should show.
- *
  * @author Joshua Godi
- * @see org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerView
  */
-public interface HasMinView {
-    void setMinView(DateTimePickerView dateTimePickerView);
+public interface OutOfRangeHandler extends EventHandler {
+    void onOutOfRange(final OutOfRangeEvent evt);
 }
+

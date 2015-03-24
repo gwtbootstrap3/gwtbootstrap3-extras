@@ -20,8 +20,8 @@
   -->
 <module>
     <public path="resource">
-        <include name="css/bootstrap-datepicker3-1.4.0.min.cache.css"/>
+        <include name="css/bootstrap-datetimepicker-2.3.1.min.cache.css"/>
     </public>
 
-    <stylesheet src="css/bootstrap-datepicker3-1.4.0.min.cache.css"/>
+    <stylesheet src="css/bootstrap-datetimepicker-2.3.1.min.cache.css"/>
 </module>

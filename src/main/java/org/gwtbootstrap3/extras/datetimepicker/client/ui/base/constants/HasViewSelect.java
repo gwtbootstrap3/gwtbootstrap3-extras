@@ -27,8 +27,8 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * however you can choose the first one, so at each click the date will be updated.
  *
  * @author Joshua Godi
- * @see DateTimePickerMinView
+ * @see org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerView
  */
 public interface HasViewSelect {
-    void setViewSelect(DateTimePickerMinView dateTimePickerMinView);
+    void setViewSelect(DateTimePickerView dateTimePickerView);
 }

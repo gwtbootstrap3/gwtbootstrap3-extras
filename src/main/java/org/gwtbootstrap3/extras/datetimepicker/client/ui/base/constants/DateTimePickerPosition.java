@@ -26,15 +26,10 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * @author Joshua Godi
  */
 public enum DateTimePickerPosition {
-    AUTO("auto"),
-    TOP_AUTO("top auto"),
-    BOTTOM_AUTO("bottom auto"),
-    AUTO_RIGHT("auto right"),
-    AUTO_LEFT("auto left"),
-    TOP_LEFT("top left"),
-    TOP_RIGHT("top right"),
-    BOTTOM_LEFT("bottom left"),
-    BOTTOM_RIGHT("bottom right");
+    TOP_LEFT("top-left"),
+    TOP_RIGHT("top-right"),
+    BOTTOM_LEFT("bottom-left"),
+    BOTTOM_RIGHT("bottom-right");
 
     private final String position;
 

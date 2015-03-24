@@ -32,8 +32,8 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * 'decade' for the 10-year overview. Useful for date-of-birth datetimepickers.
  *
  * @author Joshua Godi
- * @see DateTimePickerMinView
+ * @see org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerView
  */
 public interface HasStartView {
-    void setStartView(DateTimePickerMinView dateTimePickerMinView);
+    void setStartView(DateTimePickerView dateTimePickerView);
 }
