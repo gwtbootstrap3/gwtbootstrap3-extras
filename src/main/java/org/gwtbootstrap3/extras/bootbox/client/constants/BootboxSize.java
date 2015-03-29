@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.bootbox.client;
+package org.gwtbootstrap3.extras.bootbox.client.constants;
 
 /*
  * #%L
@@ -20,17 +20,23 @@ package org.gwtbootstrap3.extras.bootbox.client;
  * #L%
  */
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
-
 /**
- * @author Sven Jacobs
+ * Bootbox window size.
+ *  
+ * @author Tercio Gaudencio Filho (terciofilho [at] gmail.com)
  */
-interface BootboxClientBundle extends ClientBundle {
+public enum BootboxSize {
+    
+    LARGE("large"), SMALL("small");
+    
+    private String size;
 
-    static final BootboxClientBundle INSTANCE = GWT.create(BootboxClientBundle.class);
-
-    @Source("resource/js/bootbox-4.4.0.min.cache.js")
-    TextResource bootbox();
+    private BootboxSize(String size) {
+        this.size=size;
+    }
+    
+    public String getSize() {
+        return size;
+    }
+    
 }

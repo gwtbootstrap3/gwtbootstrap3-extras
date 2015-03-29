@@ -24,6 +24,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback;
 import org.gwtbootstrap3.extras.bootbox.client.callback.ConfirmCallback;
 import org.gwtbootstrap3.extras.bootbox.client.callback.PromptCallback;
+import org.gwtbootstrap3.extras.bootbox.client.constants.BootboxSize;
 
 /**
  * Created by kyle on 2013/12/11.
@@ -200,8 +201,13 @@ public class Bootbox {
             return this;
         }-*/;
 
-        public final native Dialog set(final String className) /*-{
+        public final native Dialog setClassName(final String className) /*-{
             this.className = className;
+            return this;
+        }-*/;
+
+        public final native Dialog setSize(final BootboxSize size) /*-{
+            this.size = size.@org.gwtbootstrap3.extras.bootbox.client.constants.BootboxSize::getSize()();
             return this;
         }-*/;
 
@@ -215,7 +221,7 @@ public class Bootbox {
             };
             return this;
         }-*/;
-        
+
         public final native Dialog addButton(String label , String className) /*-{
             this.buttons = this.buttons || {};
             this.buttons[label] = {
@@ -223,7 +229,17 @@ public class Bootbox {
             };
             return this;
         }-*/;
-        
+
+        public final native Dialog addButton(String label , AlertCallback callback) /*-{
+            this.buttons = this.buttons || {};
+            this.buttons[label] = {
+                callback: function() {
+                    callback.@org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback::callback()();
+                }
+            };
+            return this;
+        }-*/;
+
         public final native Dialog addButton(String label) /*-{
             this.buttons = this.buttons || {};
             this.buttons[label] = {};
@@ -235,6 +251,5 @@ public class Bootbox {
         }
 
     }
-
 
 }
