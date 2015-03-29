@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
  * #L%
  */
 
-import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
@@ -201,31 +200,19 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     @Override
     public void setValue(final Boolean value) {
-        if (isAttached()) {
-            setValue(value, false);
-        } else {
-            checkBox.setValue(value);
-        }
+        setValue(value, false);
     }
 
     @Override
     public void setValue(final Boolean value, final boolean fireEvents) {
-
-        Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
-            @Override
-            public boolean execute() {
-                if (isAttached()) {
-                    switchState(getElement(), value, true);
-
-                    if (fireEvents) {
-                        ValueChangeEvent.fire(ToggleSwitchBase.this, value);
-                    }
-                    return false;
-                } else {
-                    return true;
-                }
+        if (isAttached()) {
+            switchState(getElement(), value, true);
+            if (fireEvents) {
+                ValueChangeEvent.fire(ToggleSwitchBase.this, value);
             }
-        }, 100);
+        } else {
+            checkBox.setValue(value);
+        }
     }
 
     public void onChange(final boolean value) {
