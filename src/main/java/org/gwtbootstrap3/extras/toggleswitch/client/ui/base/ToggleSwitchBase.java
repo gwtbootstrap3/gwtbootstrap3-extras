@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -195,7 +195,10 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     @Override
     public Boolean getValue() {
-        return switchState(getElement());
+        if (isAttached()) {
+            return switchState(getElement());
+        }
+        return checkBox.getValue();
     }
 
     @Override
@@ -205,13 +208,14 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     @Override
     public void setValue(final Boolean value, final boolean fireEvents) {
+        Boolean oldValue = getValue();
         if (isAttached()) {
             switchState(getElement(), value, true);
-            if (fireEvents) {
-                ValueChangeEvent.fire(ToggleSwitchBase.this, value);
-            }
         } else {
             checkBox.setValue(value);
+        }
+        if (fireEvents) {
+            ValueChangeEvent.fireIfNotEqual(ToggleSwitchBase.this, oldValue, value);
         }
     }
 
