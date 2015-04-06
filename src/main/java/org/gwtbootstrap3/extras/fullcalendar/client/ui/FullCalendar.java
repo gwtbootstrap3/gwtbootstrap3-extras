@@ -376,7 +376,7 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
     
     public void unselect() {
         unselect(getElement().getId());
-	}
+    }
     
     private native void unselect(String id) /*-{
         $wnd.jQuery('#' + id).fullCalendar('unselect');

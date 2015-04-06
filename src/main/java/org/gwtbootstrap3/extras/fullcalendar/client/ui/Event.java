@@ -93,9 +93,9 @@ public class Event implements IsJavaScriptObject {
     }
 
     private native void setStart(String start) /*-{
-		var theInstance = this;
-    	theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start = start;
-	}-*/;
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start = start;
+    }-*/;
 
     public native void setStart(final JavaScriptObject start) /*-{
         var theInstance = this;
