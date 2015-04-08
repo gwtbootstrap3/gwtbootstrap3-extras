@@ -33,6 +33,7 @@ public class CalendarConfig {
     private Language langauge;//http://arshaw.com/fullcalendar/docs/text/lang/
 
     private ClickAndHoverConfig clickHoverConfig;//http://arshaw.com/fullcalendar/docs/mouse/
+    private SelectConfig selectConfig;//http://arshaw.com/fullcalendar/docs/selection/
     private DragAndResizeConfig dragResizeConfig;//http://arshaw.com/fullcalendar/docs/event_ui/;
     private EventDataConfig eventConfig;//http://arshaw.com/fullcalendar/docs/event_data/
     private GeneralDisplay generalDisplay;//http://arshaw.com/fullcalendar/docs/display/
@@ -171,6 +172,14 @@ public class CalendarConfig {
     public void setClickHoverConfig(final ClickAndHoverConfig clickHoverConfig) {
         this.clickHoverConfig = clickHoverConfig;
     }
+    
+    public SelectConfig getSelectConfig() {
+        return selectConfig;
+    }
+
+    public void setSelectConfig(final SelectConfig selectConfig) {
+        this.selectConfig = selectConfig;
+    }
 
     public DragAndResizeConfig getDragResizeConfig() {
         return dragResizeConfig;
@@ -209,6 +218,7 @@ public class CalendarConfig {
         setParameter(params, getDayNames());
         setParameter(params, getDragResizeConfig());
         setParameter(params, getClickHoverConfig());
+        setParameter(params, getSelectConfig());
         setParameter(params, getEventConfig());
         setParameter(params, getColumnFormat());
         setParameter(params, getTimeFormat());
