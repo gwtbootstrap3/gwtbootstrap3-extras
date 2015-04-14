@@ -76,22 +76,26 @@ public class Slider extends SliderBase<Double> {
 
     @Override
     protected native void onSlide(Event event) /*-{
-        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideEvent(Ljava/lang/Double;)(event.value);
+        var value = @java.lang.Double::new(D)(event.value);
+        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideEvent(Ljava/lang/Double;)(value);
     }-*/;
 
     @Override
     protected native void onSlideStart(Event event) /*-{
-        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideStartEvent(Ljava/lang/Double;)(event.value);
+        var value = @java.lang.Double::new(D)(event.value);
+        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideStartEvent(Ljava/lang/Double;)(value);
     }-*/;
 
     @Override
     protected native void onSlideStop(Event event) /*-{
-        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideStopEvent(Ljava/lang/Double;)(event.value);
+        var value = @java.lang.Double::new(D)(event.value);
+        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireSlideStopEvent(Ljava/lang/Double;)(value);
     }-*/;
 
     @Override
     protected native void onSlideChange(Event event) /*-{
-        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireChangeEvent(Ljava/lang/Double;)(event.value.newValue);
+        var value = @java.lang.Double::new(D)(event.value.newValue);
+        this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::fireChangeEvent(Ljava/lang/Double;)(value);
     }-*/;
 
 }
