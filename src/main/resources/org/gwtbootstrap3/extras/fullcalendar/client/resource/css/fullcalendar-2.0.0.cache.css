@@ -130,7 +130,7 @@ html .fc,
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
 	background: #bce8f1;
 	opacity: .3;
-	filter: alpha(opacity=30); /* for IE */
+	filter: literal('alpha(opacity=30)'); /* for IE */
 	}
 	
 
@@ -252,7 +252,7 @@ html .fc,
 	cursor: default;
 	background-image: none;
 	opacity: 0.65;
-	filter: alpha(opacity=65);
+	filter: literal('alpha(opacity=65)');
 	box-shadow: none;
 	}
 
@@ -411,7 +411,7 @@ table.fc-border-separate {
 	
 .fc-grid .fc-other-month .fc-day-number {
 	opacity: 0.3;
-	filter: alpha(opacity=30); /* for IE */
+	filter: literal('alpha(opacity=30)'); /* for IE */
 	/* opacity with small font can sometimes look too faded
 	   might want to set the 'color' property instead
 	   making day-numbers bold also fixes the problem */
@@ -529,7 +529,7 @@ table.fc-border-separate {
 	}
 	
 .fc-agenda-slots tr.fc-minor th.ui-widget-header {
-	*border-top-style: solid; /* doesn't work with background in IE6/7 */
+	border-top-style: solid; /* doesn't work with background in IE6/7 */
 	}
 	
 
@@ -572,7 +572,7 @@ table.fc-border-separate {
 	height: 100%;
 	background: #fff;
 	opacity: .25;
-	filter: alpha(opacity=25);
+	filter: literal('alpha(opacity=25)');
 	}
 	
 .fc .ui-draggable-dragging .fc-event-bg, /* TODO: something nicer like .fc-opacity */
