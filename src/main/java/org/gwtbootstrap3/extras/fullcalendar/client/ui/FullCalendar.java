@@ -83,11 +83,15 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
     }
 
     private void renderCalendar() {
+        boolean selectable = false;
+        boolean selectHelper = false;
         JsArray<JavaScriptObject> javascriptParams = null;
         String language = null;
         String timezone = null;
         String weekNumberTitle = null;
         if (config != null) {
+            selectable = config.isSelectable();
+            selectHelper = config.isSelectHelper();
             timezone = config.getTimezone();
             weekNumberTitle = config.getWeekNumberTitle();
             javascriptParams = config.getJavaScriptParameters();
@@ -99,6 +103,8 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
         addCalendar(getElement().getId(),
                 currentView.name(),
                 editable,
+                selectable,
+                selectHelper,
                 language,
                 timezone,
                 weekNumberTitle,
@@ -148,6 +154,8 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
     private native void addCalendar(String id,
                                     String currentView,
                                     boolean editable,
+                                    boolean selectable,
+                                    boolean selectHelper,
                                     String lang,
                                     String timezone,
                                     String weekNumberTitle,
@@ -155,8 +163,8 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
     ) /*-{
         var fullCalendarParams = {
             defaultView: currentView,
-            selectable: true,
-            selectHelper: true,
+            selectable: selectable,
+            selectHelper: selectHelper,
             editable: editable
 
         };
