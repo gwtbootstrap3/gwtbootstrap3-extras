@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -227,6 +227,31 @@ public class Event implements IsJavaScriptObject {
             return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.durationEditable;
         }
         return false;
+    }-*/;
+    
+    public native void setRendering(String rendering) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.rendering = rendering;
+    }-*/;
+    
+    public native void setOverlap(boolean overlap) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.overlap = overlap;
+    }-*/;
+    
+    public native void setConstraint(String constraint) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.constraint = constraint;
+    }-*/;
+    
+    public native void setConstraint(JavaScriptObject constraint) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.constraint = constraint;
+    }-*/;
+    
+    private native JavaScriptObject getSource() /*-{
+        var theInstance = this;
+        return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.source;
     }-*/;
 
     public native void setColor(String color) /*-{
