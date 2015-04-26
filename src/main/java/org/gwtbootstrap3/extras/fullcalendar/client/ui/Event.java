@@ -234,9 +234,25 @@ public class Event implements IsJavaScriptObject {
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.rendering = rendering;
     }-*/;
     
+    public native String getRendering() /*-{
+        var theInstance = this;
+         if (theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.rendering) {
+            return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.rendering;
+        }
+        return null;
+    }-*/;
+    
     public native void setOverlap(boolean overlap) /*-{
         var theInstance = this;
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.overlap = overlap;
+    }-*/;
+    
+    public native boolean getOverlap() /*-{
+        var theInstance = this;
+        if (typeof theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.overlap != 'undefined') {
+            return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.overlap;
+        }
+        return true;
     }-*/;
     
     public native void setConstraint(String constraint) /*-{
@@ -249,10 +265,14 @@ public class Event implements IsJavaScriptObject {
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.constraint = constraint;
     }-*/;
     
-    private native JavaScriptObject getSource() /*-{
+    private native JavaScriptObject getJSOSource() /*-{
         var theInstance = this;
         return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.source;
     }-*/;
+    
+    public EventSource getSource() {
+        return new EventSource(getJSOSource());
+    }
 
     public native void setColor(String color) /*-{
         var theInstance = this;
