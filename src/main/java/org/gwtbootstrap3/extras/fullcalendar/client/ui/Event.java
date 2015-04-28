@@ -92,7 +92,7 @@ public class Event implements IsJavaScriptObject {
         }
     }
 
-    private native void setStart(String start) /*-{
+    public native void setStart(String start) /*-{
         var theInstance = this;
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start = start;
     }-*/;
@@ -135,7 +135,7 @@ public class Event implements IsJavaScriptObject {
         }
     }
 
-    private native void setEnd(String end) /*-{
+    public native void setEnd(String end) /*-{
         var theInstance = this;
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end = end;
     }-*/;
