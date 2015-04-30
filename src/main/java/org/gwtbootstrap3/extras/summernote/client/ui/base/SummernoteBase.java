@@ -42,6 +42,7 @@ public class SummernoteBase extends TextArea {
     private boolean hasFocus = false;
     private String code;
     private Toolbar toolbar = buildDefaultToolbar();
+    private boolean styleWithSpan = true;
 
     public SummernoteBase() {
     }
@@ -60,6 +61,10 @@ public class SummernoteBase extends TextArea {
 
     public void setCode(final String code) {
         this.code = code;
+    }
+    
+    public void setStyleWithSpan(final boolean styleWithSpan) {
+        this.styleWithSpan = styleWithSpan;
     }
 
     public HandlerRegistration addInitializedHandler(final SummernoteInitializedHandler handler) {
@@ -126,7 +131,7 @@ public class SummernoteBase extends TextArea {
     }
 
     private void initialize() {
-        initialize(getElement(), height, hasFocus, toolbar.build());
+        initialize(getElement(), height, hasFocus, styleWithSpan, toolbar.build());
 
         if (code != null) {
             setCode(getElement(), code);
@@ -181,13 +186,14 @@ public class SummernoteBase extends TextArea {
         fireEvent(new SummernoteOnPasteEvent(this, evt));
     }
 
-    private native void initialize(Element e, int height, boolean hasFocus, JavaScriptObject toolbar) /*-{
+    private native void initialize(Element e, int height, boolean hasFocus, boolean styleWithSpan, JavaScriptObject toolbar) /*-{
         var target = this;
 
         $wnd.jQuery(e).summernote({
             height: height,
             focus: hasFocus,
             toolbar: toolbar,
+            styleWithSpan: styleWithSpan,
             oninit: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onInitialize(Lcom/google/gwt/user/client/Event;)(evt);
             },
