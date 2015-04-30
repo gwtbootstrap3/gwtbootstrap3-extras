@@ -1,16 +1,26 @@
+sudo: false
+
 language: java
 
 jdk:
   - oraclejdk8
   - oraclejdk7
 
-branches:
-  only:
-    - master
-
 cache:
   directories:
     - $HOME/.m2
 
+before_install:
+  # install the gwtbootstrap3 library before we build the extras
+  - git clone https://github.com/gwtbootstrap3/gwtbootstrap3.git
+  - cd gwtbootstrap3
+  - mvn install -DskipTests=true -DdryRun=true
+  - cd ..
+
+install: true
+
 script:
   - mvn clean install -DdryRun=true -Dlicense.failOnMissingHeader=true -Dlicense.failOnNotUptodateHeader=true
+
+after_success:
+  - ./deploy.sh

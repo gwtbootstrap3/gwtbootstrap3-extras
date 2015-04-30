@@ -327,7 +327,8 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
      * and {@link #getValue(int)} for getting all the values selected or {@link #getAllSelectedValues()}
      */
     public String getValue() {
-        return getSelectElement().getOptions().getItem(getSelectElement().getSelectedIndex()).getValue();
+        int selectedIndex = getSelectElement().getSelectedIndex();
+        return selectedIndex == -1 ? null : getSelectElement().getOptions().getItem(selectedIndex).getValue();
     }
 
     public List<String> getAllSelectedValues() {

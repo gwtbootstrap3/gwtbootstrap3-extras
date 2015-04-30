@@ -24,5 +24,4 @@
     <inherits name='org.gwtbootstrap3.extras.animate.client.AnimateResources'/>
 
     <source path='client'/>
-
 </module>

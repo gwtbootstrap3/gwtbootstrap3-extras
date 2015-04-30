@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
  * #L%
  */
 
-import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
@@ -196,36 +195,28 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
 
     @Override
     public Boolean getValue() {
-        return switchState(getElement());
+        if (isAttached()) {
+            return switchState(getElement());
+        }
+        return checkBox.getValue();
     }
 
     @Override
     public void setValue(final Boolean value) {
-        if (isAttached()) {
-            setValue(value, false);
-        } else {
-            checkBox.setValue(value);
-        }
+        setValue(value, false);
     }
 
     @Override
     public void setValue(final Boolean value, final boolean fireEvents) {
-
-        Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
-            @Override
-            public boolean execute() {
-                if (isAttached()) {
-                    switchState(getElement(), value);
-
-                    if (fireEvents) {
-                        ValueChangeEvent.fire(ToggleSwitchBase.this, value);
-                    }
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        }, 100);
+        Boolean oldValue = getValue();
+        if (isAttached()) {
+            switchState(getElement(), value, true);
+        } else {
+            checkBox.setValue(value);
+        }
+        if (fireEvents) {
+            ValueChangeEvent.fireIfNotEqual(ToggleSwitchBase.this, oldValue, value);
+        }
     }
 
     public void onChange(final boolean value) {
@@ -372,8 +363,8 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         return $wnd.jQuery(e).bootstrapSwitch(cmd);
     }-*/;
 
-    private native void switchState(Element e, boolean value) /*-{
-        $wnd.jQuery(e).bootstrapSwitch('state', value);
+    private native void switchState(Element e, boolean value, boolean skip) /*-{
+        $wnd.jQuery(e).bootstrapSwitch('state', value, skip);
     }-*/;
 
     private native boolean switchState(Element e) /*-{

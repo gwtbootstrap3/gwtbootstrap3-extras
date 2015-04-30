@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.slider.client;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,12 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * @author Sven Jacobs
+ * @author Xiaodong SUN
  */
 interface SliderClientBundle extends ClientBundle {
 
     static final SliderClientBundle INSTANCE = GWT.create(SliderClientBundle.class);
 
-    @Source("resource/js/bootstrap-slider-1.4.3.min.cache.js")
+    @Source("resource/js/bootstrap-slider-4.5.6.min.cache.js")
     TextResource slider();
-
-    @Source("resource/js/modernizr-touch-2.7.1.cache.js")
-    TextResource modernizr();
 }
