@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,8 +48,12 @@ public class CalendarConfig {
 
     private String weekNumberTitle;
     private String timezone;
+    private String unselectCancel;
+    private String selectContraint;
     private boolean selectable;
     private boolean selectHelper;
+    private boolean unselectAuto = true;
+    private boolean selectOverlap = true;
 
     public CalendarConfig() {
         this(null);
@@ -209,7 +213,38 @@ public class CalendarConfig {
     public void setTimezone(final String timezone) {
         this.timezone = timezone;
     }
+    public boolean isUnselectAuto() {
+        return unselectAuto;
+    }
 
+    public void setUnselectAuto(final boolean unselectAuto) {
+        this.unselectAuto = unselectAuto;
+    }
+
+    public String getUnselectCancel() {
+        return unselectCancel;
+    }
+
+    public void setUnselectCancel(final String unselectCancel) {
+        this.unselectCancel = unselectCancel;
+    }
+
+    public boolean isSelectOverlap() {
+        return selectOverlap;
+    }
+
+    public void setSelectOverlap(final boolean selectOverlap) {
+        this.selectOverlap = selectOverlap;
+    }
+
+    public String getSelectContraint() {
+        return selectContraint;
+    }
+
+    public void setSelectContraint(final String selectContraint) {
+        this.selectContraint = selectContraint;
+    }
+    
     public JsArray<JavaScriptObject> getJavaScriptParameters() {
         final JsArray<JavaScriptObject> params = (JsArray<JavaScriptObject>) JsArray.createArray();
         setParameter(params, getGeneralDisplay());

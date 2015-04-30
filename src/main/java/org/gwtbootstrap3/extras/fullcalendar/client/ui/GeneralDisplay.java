@@ -157,6 +157,11 @@ public class GeneralDisplay implements IsJavaScriptObject {
         }
 
     }-*/;
+    
+    public native void setBusinessHours(boolean businessHours) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.businessHours = businessHours;
+    }-*/;
 
     public native void setHeight(int height) /*-{
         var theInstance = this;

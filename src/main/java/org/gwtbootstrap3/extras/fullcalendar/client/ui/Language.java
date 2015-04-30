@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,12 +50,15 @@ public enum Language {
     Hindi("hi", FullCalendarClientBundle.INSTANCE.getHindi()),
     Croatian("hr", FullCalendarClientBundle.INSTANCE.getCroatian()),
     Hungarian("hu", FullCalendarClientBundle.INSTANCE.getHungarian()),
+    Indonesian("id", FullCalendarClientBundle.INSTANCE.getIndonesian()),
+    Islandic("is", FullCalendarClientBundle.INSTANCE.getIslandic()),
     Italian("it", FullCalendarClientBundle.INSTANCE.getItalian()),
     Japanese("ja", FullCalendarClientBundle.INSTANCE.getJapanese()),
     Korean("ko", FullCalendarClientBundle.INSTANCE.getKorean()),
     Lithuanian("lt", FullCalendarClientBundle.INSTANCE.getLithuanian()),
     Latvian("lv", FullCalendarClientBundle.INSTANCE.getLatvian()),
     Dutch("nl", FullCalendarClientBundle.INSTANCE.getDutch()),
+    NowegianBokmal("no", FullCalendarClientBundle.INSTANCE.getNowegianBokmal()),
     Polish("pl", FullCalendarClientBundle.INSTANCE.getPolish()),
     PortugeseBrazil("pt-br", FullCalendarClientBundle.INSTANCE.getPortugeseBrazil()),
     Portugese("pt", FullCalendarClientBundle.INSTANCE.getPortugese()),

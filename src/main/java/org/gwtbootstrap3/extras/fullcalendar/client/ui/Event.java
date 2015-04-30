@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.fullcalendar.client.ui;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -92,7 +92,7 @@ public class Event implements IsJavaScriptObject {
         }
     }
 
-    private native void setStart(String start) /*-{
+    public native void setStart(String start) /*-{
         var theInstance = this;
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.start = start;
     }-*/;
@@ -135,7 +135,7 @@ public class Event implements IsJavaScriptObject {
         }
     }
 
-    private native void setEnd(String end) /*-{
+    public native void setEnd(String end) /*-{
         var theInstance = this;
         theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.end = end;
     }-*/;
@@ -228,6 +228,51 @@ public class Event implements IsJavaScriptObject {
         }
         return false;
     }-*/;
+    
+    public native void setRendering(String rendering) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.rendering = rendering;
+    }-*/;
+    
+    public native String getRendering() /*-{
+        var theInstance = this;
+         if (theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.rendering) {
+            return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.rendering;
+        }
+        return null;
+    }-*/;
+    
+    public native void setOverlap(boolean overlap) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.overlap = overlap;
+    }-*/;
+    
+    public native boolean getOverlap() /*-{
+        var theInstance = this;
+        if (typeof theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.overlap != 'undefined') {
+            return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.overlap;
+        }
+        return true;
+    }-*/;
+    
+    public native void setConstraint(String constraint) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.constraint = constraint;
+    }-*/;
+    
+    public native void setConstraint(JavaScriptObject constraint) /*-{
+        var theInstance = this;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.constraint = constraint;
+    }-*/;
+    
+    private native JavaScriptObject getJSOSource() /*-{
+        var theInstance = this;
+        return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.Event::event.source;
+    }-*/;
+    
+    public EventSource getSource() {
+        return new EventSource(getJSOSource());
+    }
 
     public native void setColor(String color) /*-{
         var theInstance = this;
