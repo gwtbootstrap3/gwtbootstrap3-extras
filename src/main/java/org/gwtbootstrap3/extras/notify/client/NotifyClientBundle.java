@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.notify.client;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,6 @@ public interface NotifyClientBundle extends ClientBundle {
 
     static final NotifyClientBundle INSTANCE = GWT.create(NotifyClientBundle.class);
 
-    @Source("resource/js/bootstrap-notify-3.0.0.min.cache.js")
+    @Source("resource/js/bootstrap-notify-3.1.3.min.cache.js")
     TextResource notifyJS();
 }
