@@ -432,6 +432,59 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         this.weekStart = weekStart;
     }
 
+    /**
+     * Convert GWT date format to bootstrap date format
+     * 
+     * @param format date format using GWT notation
+     * @return date format using bootstrap notation
+     */
+    private static String toBootstrapDateFormat(final String format) {
+        String bootstrap_format = format;
+        
+        // Replace long day name "EEEE" with "DD"
+        bootstrap_format = bootstrap_format.replace("EEEE", "DD");
+        // Replace short day name "EE" with "DD"
+        bootstrap_format = bootstrap_format.replaceAll("E{1,3}", "D");
+        // If there are at least 3 Ms there is month name in wording
+        if (bootstrap_format.contains("MMM")) {
+            // Replace long date month "MMMM" with "MM"
+            bootstrap_format = bootstrap_format.replace("MMMM", "MM");
+            // Replace month name "MMM" with "M"
+            bootstrap_format = bootstrap_format.replace("MMM", "M");
+        }
+        else {
+            // Replace month number with leading 0 "MM" with "mm"
+            bootstrap_format = bootstrap_format.replace("MM", "mm");
+            // Replace month number "M" with "m"
+            bootstrap_format = bootstrap_format.replace("M", "m");
+        }
+        if (!bootstrap_format.contains("yy")) {
+            // Replace full year format "y" with "yyyy"
+            bootstrap_format = bootstrap_format.replace("y", "yyyy");
+        }
+        
+        return bootstrap_format;
+    }
+    
+    /**
+     * Sets format of the date using GWT notation
+     * 
+     * @param format date format in GWT notation
+     */
+    public void setGWTFormat(final String format) {
+        this.format = toBootstrapDateFormat(format);
+
+        // Get the old value
+        final Date oldValue = getValue();
+
+        // Make the new DateTimeFormat
+        this.dateTimeFormat = DateTimeFormat.getFormat(format);
+
+        if (oldValue != null) {
+            setValue(oldValue);
+        }
+    }
+
     @Override
     public void setFormat(final String format) {
         this.format = format;
