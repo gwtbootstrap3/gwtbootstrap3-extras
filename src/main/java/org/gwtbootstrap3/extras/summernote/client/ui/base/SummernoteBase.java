@@ -21,11 +21,14 @@ package org.gwtbootstrap3.extras.summernote.client.ui.base;
  */
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
 import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.extras.summernote.client.event.*;
+import org.gwtbootstrap3.extras.summernote.client.ui.SummernoteLanguage;
 
 /**
  * Wrapper for the Summernote WYSIWYG Editor
@@ -43,7 +46,8 @@ public class SummernoteBase extends TextArea {
     private String code;
     private Toolbar toolbar = buildDefaultToolbar();
     private boolean styleWithSpan = true;
-
+    private SummernoteLanguage language = SummernoteLanguage.EN;
+    
     public SummernoteBase() {
     }
 
@@ -65,6 +69,20 @@ public class SummernoteBase extends TextArea {
     
     public void setStyleWithSpan(final boolean styleWithSpan) {
         this.styleWithSpan = styleWithSpan;
+    }
+    
+    public void setLanguage(final SummernoteLanguage language) {
+        this.language = language;
+
+        // Inject the JS for the language
+        if (language.getJs() != null) {
+            ScriptInjector.fromString(language.getJs().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
+        }
+        reconfigure();
+    }
+
+    public SummernoteLanguage getLanguage() {
+        return language;
     }
 
     public HandlerRegistration addInitializedHandler(final SummernoteInitializedHandler handler) {
@@ -131,7 +149,7 @@ public class SummernoteBase extends TextArea {
     }
 
     private void initialize() {
-        initialize(getElement(), height, hasFocus, styleWithSpan, toolbar.build());
+        initialize(getElement(), height, hasFocus, styleWithSpan, toolbar.build(), language.getCode());
 
         if (code != null) {
             setCode(getElement(), code);
@@ -186,7 +204,7 @@ public class SummernoteBase extends TextArea {
         fireEvent(new SummernoteOnPasteEvent(this, evt));
     }
 
-    private native void initialize(Element e, int height, boolean hasFocus, boolean styleWithSpan, JavaScriptObject toolbar) /*-{
+    private native void initialize(Element e, int height, boolean hasFocus, boolean styleWithSpan, JavaScriptObject toolbar, String language) /*-{
         var target = this;
 
         $wnd.jQuery(e).summernote({
@@ -194,6 +212,7 @@ public class SummernoteBase extends TextArea {
             focus: hasFocus,
             toolbar: toolbar,
             styleWithSpan: styleWithSpan,
+            lang: language,
             oninit: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onInitialize(Lcom/google/gwt/user/client/Event;)(evt);
             },
