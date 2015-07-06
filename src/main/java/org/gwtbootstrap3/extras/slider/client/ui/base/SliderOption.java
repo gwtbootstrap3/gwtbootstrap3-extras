@@ -56,6 +56,7 @@ enum SliderOption {
     ;
 
     private final String name;
+    private final String dataAttrName;
     private final static String DATA_ATTRIBUTE_PREFIX = "data-slider-";
 
     /**
@@ -63,6 +64,7 @@ enum SliderOption {
      */
     private SliderOption(final String name) {
         this.name = name;
+        this.dataAttrName = name.replaceAll("_", "-");
     }
 
     /**
@@ -81,6 +83,6 @@ enum SliderOption {
      * @return the data attribute name
      */
     public String getDataAttribute() {
-        return DATA_ATTRIBUTE_PREFIX + name;
+        return DATA_ATTRIBUTE_PREFIX + dataAttrName;
     }
 }
