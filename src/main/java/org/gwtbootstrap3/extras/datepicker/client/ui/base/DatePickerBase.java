@@ -814,6 +814,7 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     @Override
     public void setErrorHandler(ErrorHandler errorHandler) {
         errorHandlerMixin.setErrorHandler(errorHandler);
+        validatorMixin.setErrorHandler(errorHandler);
     }
 
     /** {@inheritDoc} */
