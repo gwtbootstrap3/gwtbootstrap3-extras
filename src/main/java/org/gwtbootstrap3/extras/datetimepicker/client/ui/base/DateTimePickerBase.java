@@ -788,6 +788,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     @Override
     public void setErrorHandler(ErrorHandler errorHandler) {
         errorHandlerMixin.setErrorHandler(errorHandler);
+        validatorMixin.setErrorHandler(errorHandler);
     }
 
     /** {@inheritDoc} */
