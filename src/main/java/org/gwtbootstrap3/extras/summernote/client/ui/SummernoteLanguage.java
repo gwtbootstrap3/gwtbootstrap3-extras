@@ -28,6 +28,7 @@ import org.gwtbootstrap3.extras.summernote.client.SummernoteClientBundle;
  */
 public enum SummernoteLanguage {
     AR_AR("ar-AR", SummernoteClientBundle.INSTANCE.ar_AR()),
+    BG_BG("bg-BG", SummernoteClientBundle.INSTANCE.bg_BG()),
     CA_ES("ca-ES", SummernoteClientBundle.INSTANCE.ca_ES()),
     CS_CZ("cs-CZ", SummernoteClientBundle.INSTANCE.cs_CZ()),
     DA_DK("da-DK", SummernoteClientBundle.INSTANCE.da_DK()),
