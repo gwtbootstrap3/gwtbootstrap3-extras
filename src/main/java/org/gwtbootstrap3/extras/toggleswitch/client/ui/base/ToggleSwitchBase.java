@@ -217,7 +217,7 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
      * @param value the changed value.
      */
     public void onChange(final boolean value) {
-        ValueChangeEvent.fire(ToggleSwitchBase.this, value);
+        ValueChangeEvent.fire(this, value);
     }
     
     @Override
