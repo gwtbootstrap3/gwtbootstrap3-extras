@@ -193,77 +193,33 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         return addHandler(handler, ValueChangeEvent.getType());
     }
 
-    /**
-     * Gets the value of this widget.
-     * 
-     * return the value of the undelying {@link CheckBox}.  This is important because the editor's 
-     * {@link #getValue()} method often is called when not attached.
-     */
+    /** inheritedDoc */
     @Override
     public Boolean getValue() {
-        return checkBox.getValue();
+        return switchState(getElement());
     }
 
+    /** inheritedDoc */
     @Override
     public void setValue(final Boolean value) {
         setValue(value, false);
     }
 
-    /**
-     * Called when this widget is attached to the DOM.
-     * 
-     * Here we want to make sure the state of the toggle switch hasn't changed before it was 
-     * attached or re-attached to the DOM.  If the value has changed update the toggle switch 
-     * via {@link #switchState(Element, boolean, boolean)}.
-     */
-    @Override
-    public void onAttach() {
-        super.onAttach();
-        boolean switchValue = switchState(getElement());
-        boolean value = getValue();
-        if (value != switchValue) {
-            switchState(getElement(), value, true);
-        }
-    }
-    
-    /**
-     * Sets the value of this widget.
-     * 
-     * If we are attached to the DOM, simply switch the state of to the new value and  
-     * if there is a switch in state then the onChange method will be called, if necessary, by 
-     * the 'switchChange.bootstrapSwitch' callback.
-     * 
-     * If we are not attached to the DOM, manually call the onChange method to update the value 
-     * of the underlying {@link CheckBox} and fire change events. 
-     */
+    /** inheritedDoc */
     @Override
     public void setValue(final Boolean value, final boolean fireEvents) {
-        if (isAttached()) {
-            switchState(getElement(), value, true);
-        } else {
-            onChange(value, fireEvents);
-        }
+        switchState(getElement(), value, true);
     }
 
+    /**
+     * Called when the state of the switch changes via the 'switchChange.bootstrapSwitch' callback.
+     * 
+     * @param value the changed value.
+     */
     public void onChange(final boolean value) {
-        onChange(value, true);
+        ValueChangeEvent.fire(ToggleSwitchBase.this, value);
     }
     
-    /**
-     * Called when the state of the toggle switch has changed (via the 'switchChange.bootstrapSwitch' 
-     * callback) or when {@link #setValue(Boolean)} is called while this element is not attached to the DOM.
-     * 
-     * @param value the new value of the toggle switch.
-     * @param fireEvents should we fire events?
-     */
-    public void onChange(final boolean value, boolean fireEvents) {
-        Boolean oldValue = getValue();
-        checkBox.setValue(value);
-        if (fireEvents) {
-            ValueChangeEvent.fireIfNotEqual(ToggleSwitchBase.this, oldValue, value);
-        }
-    }
-
     @Override
     public LeafValueEditor<Boolean> asEditor() {
         if (editor == null) {
