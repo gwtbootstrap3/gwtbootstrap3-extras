@@ -20,16 +20,6 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
  * #L%
  */
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.editor.client.IsEditor;
-import com.google.gwt.editor.client.LeafValueEditor;
-import com.google.gwt.editor.client.adapters.TakesValueEditor;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.*;
-
 import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
@@ -43,6 +33,21 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.ColorType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.SizeType;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.editor.client.IsEditor;
+import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.editor.client.adapters.TakesValueEditor;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasEnabled;
+import com.google.gwt.user.client.ui.HasName;
+import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.HasVisibility;
+import com.google.gwt.user.client.ui.Widget;
+
 /**
  * Original source from http://www.bootstrap-switch.org/
  * @author Grant Slender
@@ -50,7 +55,6 @@ import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.SizeType;
 public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasValue<Boolean>, HasValueChangeHandlers<Boolean>,
         HasEnabled, HasVisibility, HasId, HasName, HasResponsiveness, IsEditor<LeafValueEditor<Boolean>> {
 
-    private final SimpleCheckBox checkBox;
     private SizeType size = SizeType.REGULAR;
     private ColorType onColor = ColorType.DEFAULT;
     private ColorType offColor = ColorType.PRIMARY;
@@ -58,11 +62,8 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     private final AttributeMixin<ToggleSwitchBase> attributeMixin = new AttributeMixin<ToggleSwitchBase>(this);
     private LeafValueEditor<Boolean> editor;
 
-    protected ToggleSwitchBase(SimpleCheckBox checkBox) {
-        this.checkBox = checkBox;
-        // remove the gwt styles
-        checkBox.setStyleName("");
-        setElement((Element) checkBox.getElement());
+    protected ToggleSwitchBase(Element element) {
+        setElement(element);
     }
 
     @Override
@@ -99,12 +100,12 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     
     @Override
     public void setName(String name) {
-        checkBox.setName(name);
+        ((InputElement)getElement().cast()).setName(name);
     }
 
     @Override
     public String getName() {
-        return checkBox.getName();
+        return ((InputElement)getElement().cast()).getName();
     }
 
     @Override
