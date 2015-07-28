@@ -20,16 +20,15 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui;
  * #L%
  */
 
+import org.gwtbootstrap3.client.ui.SimpleRadioButton;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.ToggleSwitchBase;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.uibinder.client.UiConstructor;
 
 public class ToggleSwitchRadio extends ToggleSwitchBase {
 
     @UiConstructor
     public ToggleSwitchRadio(String name) {
-        super(Document.get().createRadioInputElement(name));
+        super(new SimpleRadioButton(name));
     }
-    
 }

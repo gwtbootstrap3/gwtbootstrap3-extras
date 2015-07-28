@@ -20,6 +20,16 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
  * #L%
  */
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.editor.client.IsEditor;
+import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.editor.client.adapters.TakesValueEditor;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.*;
+
 import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
@@ -33,21 +43,6 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.ColorType;
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.constants.SizeType;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.InputElement;
-import com.google.gwt.editor.client.IsEditor;
-import com.google.gwt.editor.client.LeafValueEditor;
-import com.google.gwt.editor.client.adapters.TakesValueEditor;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.HasEnabled;
-import com.google.gwt.user.client.ui.HasName;
-import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.HasVisibility;
-import com.google.gwt.user.client.ui.Widget;
-
 /**
  * Original source from http://www.bootstrap-switch.org/
  * @author Grant Slender
@@ -55,6 +50,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasValue<Boolean>, HasValueChangeHandlers<Boolean>,
         HasEnabled, HasVisibility, HasId, HasName, HasResponsiveness, IsEditor<LeafValueEditor<Boolean>> {
 
+    private final SimpleCheckBox checkBox;
     private SizeType size = SizeType.REGULAR;
     private ColorType onColor = ColorType.DEFAULT;
     private ColorType offColor = ColorType.PRIMARY;
@@ -62,8 +58,11 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     private final AttributeMixin<ToggleSwitchBase> attributeMixin = new AttributeMixin<ToggleSwitchBase>(this);
     private LeafValueEditor<Boolean> editor;
 
-    protected ToggleSwitchBase(Element element) {
-        setElement(element);
+    protected ToggleSwitchBase(SimpleCheckBox checkBox) {
+        this.checkBox = checkBox;
+        // remove the gwt styles
+        checkBox.setStyleName("");
+        setElement((Element) checkBox.getElement());
     }
 
     @Override
@@ -100,12 +99,12 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
     
     @Override
     public void setName(String name) {
-        ((InputElement)getElement().cast()).setName(name);
+        checkBox.setName(name);
     }
 
     @Override
     public String getName() {
-        return ((InputElement)getElement().cast()).getName();
+        return checkBox.getName();
     }
 
     @Override
@@ -194,33 +193,77 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         return addHandler(handler, ValueChangeEvent.getType());
     }
 
-    /** inheritedDoc */
+    /**
+     * Gets the value of this widget.
+     * 
+     * return the value of the undelying {@link CheckBox}.  This is important because the editor's 
+     * {@link #getValue()} method often is called when not attached.
+     */
     @Override
     public Boolean getValue() {
-        return switchState(getElement());
+        return checkBox.getValue();
     }
 
-    /** inheritedDoc */
     @Override
     public void setValue(final Boolean value) {
         setValue(value, false);
     }
 
-    /** inheritedDoc */
-    @Override
-    public void setValue(final Boolean value, final boolean fireEvents) {
-        switchState(getElement(), value, true);
-    }
-
     /**
-     * Called when the state of the switch changes via the 'switchChange.bootstrapSwitch' callback.
+     * Called when this widget is attached to the DOM.
      * 
-     * @param value the changed value.
+     * Here we want to make sure the state of the toggle switch hasn't changed before it was 
+     * attached or re-attached to the DOM.  If the value has changed update the toggle switch 
+     * via {@link #switchState(Element, boolean, boolean)}.
      */
-    public void onChange(final boolean value) {
-        ValueChangeEvent.fire(this, value);
+    @Override
+    public void onAttach() {
+        super.onAttach();
+        boolean switchValue = switchState(getElement());
+        boolean value = getValue();
+        if (value != switchValue) {
+            switchState(getElement(), value, true);
+        }
     }
     
+    /**
+     * Sets the value of this widget.
+     * 
+     * If we are attached to the DOM, simply switch the state of to the new value and  
+     * if there is a switch in state then the onChange method will be called, if necessary, by 
+     * the 'switchChange.bootstrapSwitch' callback.
+     * 
+     * If we are not attached to the DOM, manually call the onChange method to update the value 
+     * of the underlying {@link CheckBox} and fire change events. 
+     */
+    @Override
+    public void setValue(final Boolean value, final boolean fireEvents) {
+        if (isAttached()) {
+            switchState(getElement(), value, true);
+        } else {
+            onChange(value, fireEvents);
+        }
+    }
+
+    public void onChange(final boolean value) {
+        onChange(value, true);
+    }
+    
+    /**
+     * Called when the state of the toggle switch has changed (via the 'switchChange.bootstrapSwitch' 
+     * callback) or when {@link #setValue(Boolean)} is called while this element is not attached to the DOM.
+     * 
+     * @param value the new value of the toggle switch.
+     * @param fireEvents should we fire events?
+     */
+    public void onChange(final boolean value, boolean fireEvents) {
+        Boolean oldValue = getValue();
+        checkBox.setValue(value);
+        if (fireEvents) {
+            ValueChangeEvent.fireIfNotEqual(ToggleSwitchBase.this, oldValue, value);
+        }
+    }
+
     @Override
     public LeafValueEditor<Boolean> asEditor() {
         if (editor == null) {

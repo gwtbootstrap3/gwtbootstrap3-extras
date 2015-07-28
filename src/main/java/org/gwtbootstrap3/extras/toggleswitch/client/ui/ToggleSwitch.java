@@ -2,7 +2,7 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui;
 
 import org.gwtbootstrap3.extras.toggleswitch.client.ui.base.ToggleSwitchBase;
 
-import com.google.gwt.dom.client.Document;
+import com.google.gwt.user.client.ui.SimpleCheckBox;
 
 /*
  * #%L
@@ -30,7 +30,7 @@ import com.google.gwt.dom.client.Document;
 public class ToggleSwitch extends ToggleSwitchBase {
 
     public ToggleSwitch() {
-        super(Document.get().createCheckInputElement());
+        super(new SimpleCheckBox());
     }
     
 }
