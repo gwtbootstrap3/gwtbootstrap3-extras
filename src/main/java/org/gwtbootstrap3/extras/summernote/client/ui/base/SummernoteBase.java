@@ -213,28 +213,28 @@ public class SummernoteBase extends TextArea {
             toolbar: toolbar,
             styleWithSpan: styleWithSpan,
             lang: language,
-            oninit: function (evt) {
+            onInit: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onInitialize(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onenter: function (evt) {
+            onEnter: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onEnter(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onfocus: function (evt) {
+            onFocus: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onFocus(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onblur: function (evt) {
+            onBlur: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onBlue(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onkeyup: function (evt) {
+            onKeyup: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onKeyUp(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onkeydown: function (evt) {
+            onKeydown: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onKeyDown(Lcom/google/gwt/user/client/Event;)(evt);
             },
             onImageUpload: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onImageUpload(Lcom/google/gwt/user/client/Event;)(evt);
             },
-            onpaste: function (evt) {
+            onPaste: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onPaste(Lcom/google/gwt/user/client/Event;)(evt);
             }
         });
