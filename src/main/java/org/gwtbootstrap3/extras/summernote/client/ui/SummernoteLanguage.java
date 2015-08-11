@@ -46,6 +46,7 @@ public enum SummernoteLanguage {
     KO_KR("ko-KR", SummernoteClientBundle.INSTANCE.ko_KR()),
     NB_NO("nb-NO", SummernoteClientBundle.INSTANCE.nb_NO()),
     NL_NL("nl-NL", SummernoteClientBundle.INSTANCE.nl_NL()),
+    LT_LT("lt-LT", SummernoteClientBundle.INSTANCE.lt_LT()),
     PL_PL("pl-PL", SummernoteClientBundle.INSTANCE.pl_PL()),
     PT_BR("pt-BR", SummernoteClientBundle.INSTANCE.pt_BR()),
     PT_PT("pt-PT", SummernoteClientBundle.INSTANCE.pt_PT()),
