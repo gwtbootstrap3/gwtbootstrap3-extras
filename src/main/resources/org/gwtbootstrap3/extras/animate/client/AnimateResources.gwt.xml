@@ -22,9 +22,9 @@
 <module>
 
     <public path="resource">
-        <include name="css/animate-3.2.0.min.cache.css"/>
+        <include name="css/animate-3.4.0.min.cache.css"/>
     </public>
 
-    <stylesheet src="css/animate-3.2.0.min.cache.css"/>
+    <stylesheet src="css/animate-3.3.0.min.cache.css"/>
 
 </module>
