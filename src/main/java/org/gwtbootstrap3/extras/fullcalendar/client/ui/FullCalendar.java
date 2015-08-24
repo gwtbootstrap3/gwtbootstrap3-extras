@@ -282,6 +282,14 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
         }
     }
 
+    public void removeAllEvents() {
+        removeAllEvents(getElement().getId());
+    }
+
+    private native void removeAllEvents(String id) /*-{
+        $wnd.jQuery('#' + id).fullCalendar('removeEvents');
+    }-*/;
+
     public native void removeEvent(String id, String eventId) /*-{
         $wnd.jQuery('#' + id).fullCalendar('removeEvents', eventId);
     }-*/;
