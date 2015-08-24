@@ -84,7 +84,7 @@ public class GeneralDisplay implements IsJavaScriptObject {
     public native void setFirstDayOption(int firstDay) /*-{
         if (firstDay >= 0 && firstDay <= 6) {
             var theInstance = this;
-            return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.firstDay = firstDay;
+            theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.firstDay = firstDay;
         }
     }-*/;
 
@@ -99,7 +99,7 @@ public class GeneralDisplay implements IsJavaScriptObject {
 
     private native void setHeader(JavaScriptObject header) /*-{
         var theInstance = this;
-        return theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.header = header;
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.GeneralDisplay::general.header = header;
     }-*/;
 
     public native void setWeekends(boolean weekends) /*-{
