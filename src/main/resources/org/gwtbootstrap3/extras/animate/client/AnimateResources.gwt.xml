@@ -3,7 +3,7 @@
   #%L
   GwtBootstrap3
   %%
-  Copyright (C) 2013 GwtBootstrap3
+  Copyright (C) 2015 GwtBootstrap3
   %%
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -25,6 +25,6 @@
         <include name="css/animate-3.4.0.min.cache.css"/>
     </public>
 
-    <stylesheet src="css/animate-3.3.0.min.cache.css"/>
+    <stylesheet src="css/animate-3.4.0.min.cache.css"/>
 
 </module>
