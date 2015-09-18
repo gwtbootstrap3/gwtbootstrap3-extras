@@ -19,8 +19,8 @@
   -->
 <module>
     <public path="resource">
-        <include name="css/card-1.0.0.cache.css"/>
+        <include name="css/card-1.0.1.cache.css"/>
     </public>
 
-    <stylesheet src="css/card-1.0.0.cache.css"/>
+    <stylesheet src="css/card-1.0.1.cache.css"/>
 </module>
