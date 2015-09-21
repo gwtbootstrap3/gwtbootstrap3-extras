@@ -333,6 +333,18 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
         return selectedIndex == -1 ? null : getSelectElement().getOptions().getItem(selectedIndex).getValue();
     }
 
+    /**
+     * Return the first selected value found.
+     */
+    public String getSelectedValue() {
+        for (int i = 0; i < getItemCount(); i++) {
+            if (isItemSelected(i)) {
+                return getValue(i);
+            }
+        }
+        return null;
+    }
+
     public List<String> getAllSelectedValues() {
         final List<String> allSelected = new ArrayList<String>();
 
