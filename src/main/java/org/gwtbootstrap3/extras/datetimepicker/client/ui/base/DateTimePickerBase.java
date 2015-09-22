@@ -326,6 +326,9 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     /** {@inheritDoc} */
     @Override
     public void onChangeDate(final Event e) {
+        if(getValidateOnBlur()) {
+            validate();
+        }
         fireEvent(new ChangeDateEvent(e));
         ValueChangeEvent.fire(DateTimePickerBase.this, getValue());
         hide();
