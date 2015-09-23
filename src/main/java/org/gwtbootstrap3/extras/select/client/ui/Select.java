@@ -26,6 +26,7 @@ import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -46,6 +47,7 @@ import org.gwtbootstrap3.extras.select.client.constants.SelectLanguage;
 import org.gwtbootstrap3.extras.select.client.ui.interfaces.HasLanguage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.gwtbootstrap3.extras.select.client.constants.DataAttributes.*;
@@ -331,12 +333,31 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
         return selectedIndex == -1 ? null : getSelectElement().getOptions().getItem(selectedIndex).getValue();
     }
 
+    /**
+     * @return the selected value, if multiple it will return the first selected item see {@link #isItemSelected(int)}
+     * and {@link #getValue(int)} for getting all the values selected or {@link #getAllSelectedValues()}
+     */
+    public String getSelectedValue() {
+        return getValue();
+    }
+
     public List<String> getAllSelectedValues() {
         final List<String> allSelected = new ArrayList<String>();
 
         for (int i = 0; i < getItemCount(); i++) {
             if (isItemSelected(i)) {
                 allSelected.add(getValue(i));
+            }
+        }
+        return allSelected;
+    }
+
+    public List<OptionElement> getAllSelectedOptions() {
+        final List<OptionElement> allSelected = new ArrayList<OptionElement>();
+
+        for (int i = 0; i < getItemCount(); i++) {
+            if (isItemSelected(i)) {
+                allSelected.add(getOption(i));
             }
         }
         return allSelected;
@@ -350,6 +371,24 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
     public String getValue(final int index) {
         checkIndex(index);
         return getSelectElement().getOptions().getItem(index).getValue();
+    }
+
+    public OptionElement getOption(final int index) {
+        checkIndex(index);
+        return getSelectElement().getOptions().getItem(index);
+    }
+
+    /**
+     * Manually select list options by value.
+     */
+    public void selectValues(String value, final String... values) {
+        List<String> selectedValues = getAllSelectedValues();
+
+        selectedValues.add(value);
+        if(values != null && values.length > 0) {
+            selectedValues.addAll(Arrays.asList(values));
+        }
+        setValues(selectedValues.toArray(new String[selectedValues.size()]));
     }
 
     public void selectAll() {
