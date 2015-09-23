@@ -334,16 +334,11 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
     }
 
     /**
-     * Return the first selected value found, otherwise
-     * returns null if no value is selected.
+     * @return the selected value, if multiple it will return the first selected item see {@link #isItemSelected(int)}
+     * and {@link #getValue(int)} for getting all the values selected or {@link #getAllSelectedValues()}
      */
     public String getSelectedValue() {
-        for (int i = 0; i < getItemCount(); i++) {
-            if (isItemSelected(i)) {
-                return getValue(i);
-            }
-        }
-        return null;
+        return getValue();
     }
 
     public List<String> getAllSelectedValues() {
