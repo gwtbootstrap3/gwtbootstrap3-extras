@@ -27,20 +27,34 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.SelectElement;
+import com.google.gwt.editor.client.Editor;
+import com.google.gwt.editor.client.EditorError;
+import com.google.gwt.editor.client.HasEditorErrors;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.HasName;
 
+import com.google.gwt.user.client.ui.HasValue;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
+import org.gwtbootstrap3.client.ui.base.mixin.DefaultValidatorMixin;
 import org.gwtbootstrap3.client.ui.base.mixin.EnabledMixin;
+import org.gwtbootstrap3.client.ui.base.mixin.ErrorHandlerMixin;
 import org.gwtbootstrap3.client.ui.base.mixin.FocusableMixin;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.gwtbootstrap3.client.ui.form.error.ErrorHandler;
+import org.gwtbootstrap3.client.ui.form.error.ErrorHandlerType;
+import org.gwtbootstrap3.client.ui.form.error.HasErrorHandler;
+import org.gwtbootstrap3.client.ui.form.validator.HasValidators;
+import org.gwtbootstrap3.client.ui.form.validator.ValidationChangedEvent;
+import org.gwtbootstrap3.client.ui.form.validator.Validator;
 import org.gwtbootstrap3.extras.select.client.constants.Styles;
 import org.gwtbootstrap3.extras.select.client.constants.SelectLanguage;
 import org.gwtbootstrap3.extras.select.client.ui.interfaces.HasLanguage;
@@ -53,7 +67,8 @@ import static org.gwtbootstrap3.extras.select.client.constants.DataAttributes.*;
 /**
  * @author godi
  */
-public class Select extends ComplexWidget implements Focusable, HasEnabled, HasLanguage, HasName {
+public class Select extends ComplexWidget implements Focusable, HasEnabled, HasLanguage, HasName, HasValue<String>,
+        Editor<String>, HasEditorErrors<String>, HasErrorHandler, HasValidators<String> {
     private static final String REFRESH = "refresh";
     private static final String RENDER = "render";
     private static final String SHOW = "show";
@@ -68,6 +83,13 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
     private final FocusableMixin<Select> focusableMixin = new FocusableMixin<Select>(this);
     private final EnabledMixin<Select> enabledMixin = new EnabledMixin<Select>(this);
 
+    private final ErrorHandlerMixin<Select> errorHandlerMixin = new ErrorHandlerMixin<Select>(this);
+
+    private final DefaultValidatorMixin<Select, String> validatorMixin = new DefaultValidatorMixin<Select, String>(this,
+        errorHandlerMixin.getErrorHandler());
+
+    private HandlerRegistration changeHandler;
+
     public Select() {
         selectElement = Document.get().createSelectElement();
         setElement(selectElement);
@@ -79,7 +101,27 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
     protected void onLoad() {
         super.onLoad();
 
+        changeHandler = addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                Scheduler.get().scheduleDeferred(new Command() {
+                    @Override
+                    public void execute() {
+                        if(getValidateOnBlur()) {
+                            errorHandlerMixin.clearErrors();
+                            validate();
+                        }
+                    }
+                });
+            }
+        });
+
         initialize();
+    }
+
+    @Override
+    protected void onUnload() {
+        changeHandler.removeHandler();
     }
 
     public HandlerRegistration addChangeHandler(final ChangeHandler handler) {
@@ -284,19 +326,37 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
         return attributeMixin.getAttribute(DATA_STYLE);
     }
 
-    public void setValue(final String value) {
+    @Override
+    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
+        return addHandler(handler, ValueChangeEvent.getType());
+    }
+
+    @Override
+    public void setValue(String value) {
+        setValue(value, false);
+    }
+
+    @Override
+    public void setValue(final String value, final boolean fireEvents) {
         // Need to defer the setValue to make sure the element is actually in the DOM to manipulate
         Scheduler.get().scheduleDeferred(new Command() {
             @Override
             public void execute() {
+                String oldValue = fireEvents ? getValue() : null;
                 setValue(getElement(), value);
+
+                if (fireEvents) {
+                    String newValue = getValue();
+                    ValueChangeEvent.fireIfNotEqual(Select.this, oldValue, newValue);
+                }
             }
         });
     }
 
-    public void setValues(final String... values) {
+    public void setValues(String... values) {
         final JsArrayString array = JavaScriptObject.createArray().cast();
 
+        final int oldCount = getAllSelectedValues().size();
         for (final String value : values) {
             array.push(value);
         }
@@ -306,6 +366,13 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
             @Override
             public void execute() {
                 setValue(getElement(), array);
+
+                int newCount = getAllSelectedValues().size();
+                if (oldCount != newCount) {
+                    for (int i = 0; i < array.length(); i++) {
+                        ValueChangeEvent.fire(Select.this, array.get(i));
+                    }
+                }
             }
         });
     }
@@ -442,6 +509,83 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
      */
     public int getItemCount() {
         return getSelectElement().getOptions().getLength();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void showErrors(List<EditorError> errors) {
+        errorHandlerMixin.showErrors(errors);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ErrorHandler getErrorHandler() {
+        return errorHandlerMixin.getErrorHandler();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setErrorHandler(ErrorHandler handler) {
+        errorHandlerMixin.setErrorHandler(handler);
+        validatorMixin.setErrorHandler(handler);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ErrorHandlerType getErrorHandlerType() {
+        return errorHandlerMixin.getErrorHandlerType();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setErrorHandlerType(ErrorHandlerType type) {
+        errorHandlerMixin.setErrorHandlerType(type);
+    }
+
+    @Override
+    public void addValidator(Validator<String> validator) {
+        validatorMixin.addValidator(validator);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean removeValidator(Validator<String> validator) {
+        return validatorMixin.removeValidator(validator);
+    }
+
+    @Override
+    public boolean getValidateOnBlur() {
+        return validatorMixin.getValidateOnBlur();
+    }
+
+    @Override
+    public void setValidateOnBlur(boolean validateOnBlur) {
+        validatorMixin.setValidateOnBlur(validateOnBlur);
+    }
+
+    @Override
+    public void setValidators(Validator<String>... validators) {
+        validatorMixin.setValidators(validators);
+    }
+
+    @Override
+    public boolean validate() {
+        return validatorMixin.validate();
+    }
+
+    @Override
+    public boolean validate(boolean show) {
+        return validatorMixin.validate(show);
+    }
+
+    @Override
+    public void reset() {
+        validatorMixin.reset();
+    }
+
+    @Override
+    public com.google.web.bindery.event.shared.HandlerRegistration addValidationChangedHandler(ValidationChangedEvent.ValidationChangedHandler handler) {
+        return validatorMixin.addValidationChangedHandler(handler);
     }
 
     private native void initialize(Element e) /*-{
