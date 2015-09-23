@@ -23,12 +23,22 @@ package org.gwtbootstrap3.extras.summernote.client.ui.base;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.editor.client.EditorError;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.user.client.Event;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import org.gwtbootstrap3.client.ui.TextArea;
+import org.gwtbootstrap3.client.ui.base.mixin.ErrorHandlerMixin;
+import org.gwtbootstrap3.client.ui.form.error.ErrorHandler;
+import org.gwtbootstrap3.client.ui.form.error.ErrorHandlerType;
+import org.gwtbootstrap3.client.ui.form.validator.ValidationChangedEvent;
+import org.gwtbootstrap3.client.ui.form.validator.Validator;
 import org.gwtbootstrap3.extras.summernote.client.event.*;
 import org.gwtbootstrap3.extras.summernote.client.ui.SummernoteLanguage;
+import org.gwtbootstrap3.extras.summernote.client.ui.base.mixin.SummernoteValidatorMixin;
+
+import java.util.List;
 
 /**
  * Wrapper for the Summernote WYSIWYG Editor
@@ -47,8 +57,12 @@ public class SummernoteBase extends TextArea {
     private Toolbar toolbar = buildDefaultToolbar();
     private boolean styleWithSpan = true;
     private SummernoteLanguage language = SummernoteLanguage.EN;
+    private SummernoteValidatorMixin validatorMixin;
+    private final ErrorHandlerMixin<String> errorHandlerMixin;
     
     public SummernoteBase() {
+        errorHandlerMixin = new ErrorHandlerMixin<String>(this);
+        validatorMixin = new SummernoteValidatorMixin(this, errorHandlerMixin.getErrorHandler());
     }
 
     public void setHeight(final int height) {
@@ -118,6 +132,107 @@ public class SummernoteBase extends TextArea {
     }
 
     /**
+     * Override the validation methods.
+     */
+
+    /** {@inheritDoc} */
+    @Override
+    public HandlerRegistration addValidationChangedHandler(ValidationChangedEvent.ValidationChangedHandler handler) {
+        return validatorMixin.addValidationChangedHandler(handler);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean getAllowBlank() {
+        return validatorMixin.getAllowBlank();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setAllowBlank(boolean allowBlank) {
+        validatorMixin.setAllowBlank(allowBlank);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void addValidator(Validator<String> validator) {
+        validatorMixin.addValidator(validator);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean getValidateOnBlur() {
+        return validatorMixin.getValidateOnBlur();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean removeValidator(Validator<String> validator) {
+        return validatorMixin.removeValidator(validator);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void reset() {
+        validatorMixin.reset();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setValidateOnBlur(boolean validateOnBlur) {
+        validatorMixin.setValidateOnBlur(validateOnBlur);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setValidators(Validator<String>... validators) {
+        validatorMixin.setValidators(validators);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean validate() {
+        return validatorMixin.validate();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean validate(boolean show) {
+        return validatorMixin.validate(show);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ErrorHandler getErrorHandler() {
+        return errorHandlerMixin.getErrorHandler();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setErrorHandler(ErrorHandler errorHandler) {
+        errorHandlerMixin.setErrorHandler(errorHandler);
+        validatorMixin.setErrorHandler(errorHandler);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ErrorHandlerType getErrorHandlerType() {
+        return errorHandlerMixin.getErrorHandlerType();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setErrorHandlerType(ErrorHandlerType errorHandlerType) {
+        errorHandlerMixin.setErrorHandlerType(errorHandlerType);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void showErrors(List<EditorError> errors) {
+        errorHandlerMixin.showErrors(errors);
+    }
+
+    /**
      * Gets the HTML code generated from the editor
      *
      * @return generated code
@@ -176,7 +291,7 @@ public class SummernoteBase extends TextArea {
         fireEvent(new SummernoteInitializedEvent(this, evt));
     }
 
-    protected void onBlue(final Event evt) {
+    protected void onBlur(final Event evt) {
         fireEvent(new SummernoteOnBlurEvent(this, evt));
     }
 
@@ -197,10 +312,12 @@ public class SummernoteBase extends TextArea {
     }
 
     protected void onKeyDown(final Event evt) {
+        ValueChangeEvent.fire(SummernoteBase.this, getText());
         fireEvent(new SummernoteOnKeyDownEvent(this, evt));
     }
 
     protected void onPaste(final Event evt) {
+        ValueChangeEvent.fire(SummernoteBase.this, getText());
         fireEvent(new SummernoteOnPasteEvent(this, evt));
     }
 
@@ -223,7 +340,7 @@ public class SummernoteBase extends TextArea {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onFocus(Lcom/google/gwt/user/client/Event;)(evt);
             },
             onBlur: function (evt) {
-                target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onBlue(Lcom/google/gwt/user/client/Event;)(evt);
+                target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onBlur(Lcom/google/gwt/user/client/Event;)(evt);
             },
             onKeyup: function (evt) {
                 target.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::onKeyUp(Lcom/google/gwt/user/client/Event;)(evt);
