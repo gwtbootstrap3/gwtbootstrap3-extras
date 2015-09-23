@@ -629,8 +629,8 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
         this.remove(w.getElement());
 
         configure(w.getElement(), container.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
-                startView.getValue(), minView.getValue(), showTodayButton, highlightToday, keyboardNavigation, forceParse, viewSelect.getValue(),
-                language.getCode(), position.getPosition());
+            startView.getValue(), minView.getValue(), showTodayButton, highlightToday, keyboardNavigation, forceParse, viewSelect.getValue(),
+            language.getCode(), position.getPosition());
     }
 
     protected void execute(final String cmd) {
@@ -766,6 +766,18 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     @Override
     public boolean getValidateOnBlur() {
         return validatorMixin.getValidateOnBlur();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean isValidationEnabled() {
+        return validatorMixin.isValidationEnabled();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setValidationEnabled(boolean enabled) {
+        validatorMixin.setValidationEnabled(enabled);
     }
 
     /** {@inheritDoc} */

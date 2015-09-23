@@ -603,8 +603,8 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         this.remove(w.getElement());
 
         configure(w.getElement(), container.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
-                startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
-                keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian, language.getCode(), position.getPosition());
+            startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
+            keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian, language.getCode(), position.getPosition());
     }
 
     protected void execute(final String cmd) {
@@ -740,6 +740,18 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     @Override
     public boolean getValidateOnBlur() {
         return validatorMixin.getValidateOnBlur();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean isValidationEnabled() {
+        return validatorMixin.isValidationEnabled();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setValidationEnabled(boolean enabled) {
+        validatorMixin.setValidationEnabled(enabled);
     }
 
     /** {@inheritDoc} */
