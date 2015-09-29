@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
@@ -51,6 +50,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayNumber;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.core.client.JsonUtils;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
@@ -76,17 +76,13 @@ public abstract class SliderBase<T> extends Widget implements
         HasValue<T>, IsEditor<LeafValueEditor<T>>, HasEnabled, HasId,
         HasResponsiveness, HasAllSlideHandlers<T> {
 
-    private final TextBox textBox;
     private FormatterCallback<T> formatterCallback;
     private LeafValueEditor<T> editor;
 
     private final AttributeMixin<SliderBase<T>> attributeMixin = new AttributeMixin<SliderBase<T>>(this);
 
     protected SliderBase() {
-        textBox = new TextBox();
-        // now remove the bootstrap styles
-        textBox.removeStyleName(UIObject.getStyleName(textBox.getElement()));
-        setElement((Element) textBox.getElement());
+        setElement(Document.get().createTextInputElement());
     }
 
     @Override
