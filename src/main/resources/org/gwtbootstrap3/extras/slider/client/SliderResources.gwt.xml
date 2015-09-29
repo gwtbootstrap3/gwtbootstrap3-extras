@@ -20,8 +20,8 @@
   -->
 <module>
     <public path="resource">
-        <include name="css/bootstrap-slider-4.5.6.min.cache.css"/>
+        <include name="css/bootstrap-slider-5.1.1.min.cache.css"/>
     </public>
 
-    <stylesheet src="css/bootstrap-slider-4.5.6.min.cache.css"/>
+    <stylesheet src="css/bootstrap-slider-5.1.1.min.cache.css"/>
 </module>
