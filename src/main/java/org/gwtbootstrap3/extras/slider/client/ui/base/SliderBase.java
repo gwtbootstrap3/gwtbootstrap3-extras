@@ -77,7 +77,7 @@ public abstract class SliderBase<T> extends Widget implements
         HasResponsiveness, HasAllSlideHandlers<T> {
 
     private final TextBox textBox;
-    private FormatterCallback formatterCallback;
+    private FormatterCallback<T> formatterCallback;
     private LeafValueEditor<T> editor;
 
     private final AttributeMixin<SliderBase<T>> attributeMixin = new AttributeMixin<SliderBase<T>>(this);
@@ -99,6 +99,13 @@ public abstract class SliderBase<T> extends Widget implements
         initSlider(getElement(), options);
         bindSliderEvents(getElement());
     }
+
+    /**
+     * Sets formatter option if defined when attaching to the DOM.
+     *
+     * @param options
+     */
+    protected abstract void setFormatterOption(JavaScriptObject options);
 
     @Override
     protected void onUnload() {
@@ -297,7 +304,7 @@ public abstract class SliderBase<T> extends Widget implements
      *
      * @param formatterCallback
      */
-    public void setFormatter(final FormatterCallback formatterCallback) {
+    public void setFormatter(final FormatterCallback<T> formatterCallback) {
         this.formatterCallback = formatterCallback;
         if (isAttached()) {
             setFormatter(getElement());
@@ -305,11 +312,27 @@ public abstract class SliderBase<T> extends Widget implements
         }
     }
 
-    private String formatter(final double value) {
+    /**
+     * Sets the callback function of the {@link SliderOption#FORMATTER} attribute.
+     *
+     * @param element
+     */
+    protected abstract void setFormatter(Element element);
+
+	protected String formatTooltip(final T value) {
         if (formatterCallback != null)
             return formatterCallback.formatTooltip(value);
-        return Double.toString(value);
+        return convertToString(value);
     }
+
+    /**
+     * Converts the slider value to string value to be displayed
+     * as tool-tip text.
+     *
+     * @param value
+     * @return
+     */
+    protected abstract String convertToString(final T value);
 
     public boolean isNaturalArrowKeys() {
         return getBooleanAttribute(SliderOption.NATURAL_ARROW_KEYS, false);
@@ -472,7 +495,7 @@ public abstract class SliderBase<T> extends Widget implements
     protected abstract T getValue(Element e);
 
     /**
-     * Converts the value of the {@link SliderOption.VALUE} attribute to the
+     * Converts the value of the {@link SliderOption#VALUE} attribute to the
      * slider value.
      *
      * @param value
@@ -811,21 +834,6 @@ public abstract class SliderBase<T> extends Widget implements
 
     private native boolean isEnabled(Element e) /*-{
         return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::IS_ENABLED);
-    }-*/;
-
-    private native void setFormatterOption(JavaScriptObject options) /*-{
-        var slider = this;
-        options.formatter = function(value) {
-            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(value);
-        };
-    }-*/;
-
-    private native void setFormatter(Element e) /*-{
-        var slider = this;
-        var attr = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::FORMATTER;
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, function(value) {
-            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(value);
-        });
     }-*/;
 
     /**
