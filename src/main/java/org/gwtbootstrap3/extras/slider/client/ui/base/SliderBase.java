@@ -305,10 +305,11 @@ public abstract class SliderBase<T> extends Widget implements
         }
     }
 
-    private String formatter(final double value) {
-        if (formatterCallback != null)
+    private String formatter(final Object value) {
+        if (formatterCallback != null) {
             return formatterCallback.formatTooltip(value);
-        return Double.toString(value);
+        }
+        return Double.toString((Double) value);
     }
 
     public boolean isNaturalArrowKeys() {
@@ -472,7 +473,7 @@ public abstract class SliderBase<T> extends Widget implements
     protected abstract T getValue(Element e);
 
     /**
-     * Converts the value of the {@link SliderOption.VALUE} attribute to the
+     * Converts the value of the {@link SliderOption#VALUE} attribute to the
      * slider value.
      *
      * @param value
@@ -816,7 +817,7 @@ public abstract class SliderBase<T> extends Widget implements
     private native void setFormatterOption(JavaScriptObject options) /*-{
         var slider = this;
         options.formatter = function(value) {
-            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(value);
+            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(Ljava/lang/Object;)(value);
         };
     }-*/;
 
@@ -824,7 +825,7 @@ public abstract class SliderBase<T> extends Widget implements
         var slider = this;
         var attr = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::FORMATTER;
         $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, function(value) {
-            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(value);
+            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(Ljava/lang/Object;)(value);
         });
     }-*/;
 
