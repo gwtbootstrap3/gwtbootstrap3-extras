@@ -61,7 +61,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -315,7 +314,7 @@ public abstract class SliderBase<T> extends Widget implements
      */
     protected abstract void setFormatter(Element element);
 
-	protected String formatTooltip(final T value) {
+    protected String formatTooltip(final T value) {
         if (formatterCallback != null)
             return formatterCallback.formatTooltip(value);
         return convertToString(value);
