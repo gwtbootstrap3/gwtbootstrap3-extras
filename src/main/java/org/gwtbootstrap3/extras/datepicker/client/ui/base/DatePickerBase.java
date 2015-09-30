@@ -80,6 +80,8 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.editor.client.EditorError;
 import com.google.gwt.editor.client.HasEditorErrors;
 import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -101,6 +103,30 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
         HasLanguage, HasName, HasValue<Date>, HasPosition, LeafValueEditor<Date>, HasEditorErrors<Date>, HasErrorHandler,
         HasValidators<Date>, HasBlankValidator<Date> {
 
+    static class DatePickerValidatorMixin extends BlankValidatorMixin<DatePickerBase, Date> {
+
+        private boolean showing = false;
+
+        public void setShowing(boolean showing) {
+            this.showing = showing;
+        }
+
+        public DatePickerValidatorMixin(DatePickerBase inputWidget, ErrorHandler errorHandler) {
+            super(inputWidget, errorHandler);
+        }
+
+        @Override
+        protected com.google.web.bindery.event.shared.HandlerRegistration setupBlurValidation() {
+            return getInputWidget().addDomHandler(new BlurHandler() {
+                @Override
+                public void onBlur(BlurEvent event) {
+                    getInputWidget().validate(!showing && getValidateOnBlur());
+                }
+            }, BlurEvent.getType());
+        }
+
+    }
+
     // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
     // for more information on syntax
     private static final Map<Character, Character> DATE_TIME_FORMAT_MAP = new HashMap<Character, Character>();
@@ -114,8 +140,8 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     private final DateTimeFormat startEndDateFormat = DateTimeFormat.getFormat("MM-dd-yyyy");
     private LeafValueEditor<Date> editor;
     private final ErrorHandlerMixin<Date> errorHandlerMixin = new ErrorHandlerMixin<Date>(this);
-    private final BlankValidatorMixin<DatePickerBase, Date> validatorMixin = new BlankValidatorMixin<DatePickerBase, Date>(this,
-        errorHandlerMixin.getErrorHandler());
+    private final DatePickerValidatorMixin validatorMixin = new DatePickerValidatorMixin(this,
+            errorHandlerMixin.getErrorHandler());
 
     /**
      * DEFAULT values
@@ -287,12 +313,11 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     /** {@inheritDoc} */
     @Override
     public void onShow(final Event e) {
+        validatorMixin.setShowing(true);
         // On show we put focus on the textbox
         textBox.setFocus(true);
         fireEvent(new ShowEvent(e));
     }
-    
-    
 
     /** {@inheritDoc} */
     @Override
@@ -303,9 +328,10 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     /** {@inheritDoc} */
     @Override
     public void onHide(final Event e) {
+        validatorMixin.setShowing(false);
+        validate(getValidateOnBlur());
         // On hide we remove focus from the textbox
         textBox.setFocus(false);
-
         fireEvent(new HideEvent(e));
     }
 
