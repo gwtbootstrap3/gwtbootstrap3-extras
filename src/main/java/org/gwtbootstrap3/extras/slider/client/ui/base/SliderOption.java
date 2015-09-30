@@ -50,9 +50,11 @@ enum SliderOption {
     FORMATTER("formatter"),
     NATURAL_ARROW_KEYS("natural_arrow_keys"),
     TICKS("ticks"),
+    TICKS_POSITIONS("ticks_positions"),
     TICKS_LABELS("ticks_labels"),
     TICKS_SNAP_BOUNDS("ticks_snap_bounds"),
     SCALE("scale"),
+    FOCUS("focus")
     ;
 
     private final String name;
