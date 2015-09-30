@@ -364,6 +364,20 @@ public abstract class SliderBase<T> extends Widget implements
         updateSliderForNumberArray(SliderOption.TICKS, ticks);
     }
 
+    public List<Double> getTicksPositions() {
+        return getNumberArrayAttribute(SliderOption.TICKS_POSITIONS, Collections.<Double>emptyList());
+    }
+
+    /**
+     * Defines the positions of the tick values in percentages.<br>
+     * The first value should always be 0, the last value should always be 100 percent.
+     *
+     * @param ticksPositions
+     */
+    public void setTicksPositions(final List<Double> ticksPositions) {
+        updateSliderForNumberArray(SliderOption.TICKS_POSITIONS, ticksPositions);
+    }
+
     public List<String> getTicksLabels() {
         return getStringArrayAttribute(SliderOption.TICKS_LABELS, Collections.<String>emptyList());
     }
@@ -395,6 +409,19 @@ public abstract class SliderBase<T> extends Widget implements
 
     public ScaleType getScale() {
         return getEnumAttribute(SliderOption.SCALE, ScaleType.class, ScaleType.LINEAR);
+    }
+
+    /**
+     * Focus the appropriate slider handle after a value change.
+     * Defaults to false.
+     * @param focus
+     */
+    public void setFocusHandle(final boolean focus) {
+        updateSlider(SliderOption.FOCUS, focus);
+    }
+
+    public boolean getFocusHandle() {
+        return getBooleanAttribute(SliderOption.FOCUS, false);
     }
 
     /**
