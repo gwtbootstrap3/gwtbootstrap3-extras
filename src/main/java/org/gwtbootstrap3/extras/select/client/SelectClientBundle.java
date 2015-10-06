@@ -40,6 +40,9 @@ public interface SelectClientBundle extends ClientBundle {
     @Source("resource/js/locales.cache.1.7.4/defaults-de_DE.min.js")
     TextResource de();
 
+    @Source("resource/js/locales.cache.1.7.4/defaults-da_DK.min.js")
+    TextResource da();
+
     @Source("resource/js/locales.cache.1.7.4/defaults-en_US.min.js")
     TextResource en();
 
@@ -58,6 +61,9 @@ public interface SelectClientBundle extends ClientBundle {
     @Source("resource/js/locales.cache.1.7.4/defaults-it_IT.min.js")
     TextResource it();
 
+    @Source("resource/js/locales.cache.1.7.4/defaults-ko_KR.min.js")
+    TextResource ko();
+
     @Source("resource/js/locales.cache.1.7.4/defaults-nl_NL.min.js")
     TextResource nl();
 
@@ -67,11 +73,17 @@ public interface SelectClientBundle extends ClientBundle {
     @Source("resource/js/locales.cache.1.7.4/defaults-pt_BR.min.js")
     TextResource pt_BR();
 
+    @Source("resource/js/locales.cache.1.7.4/defaults-pt_PT.min.js")
+    TextResource pt_PT();
+
     @Source("resource/js/locales.cache.1.7.4/defaults-ro_RO.min.js")
     TextResource ro();
 
     @Source("resource/js/locales.cache.1.7.4/defaults-ru_RU.min.js")
     TextResource ru();
+
+    @Source("resource/js/locales.cache.1.7.4/defaults-sk_SK.min.js")
+    TextResource sk();
 
     @Source("resource/js/locales.cache.1.7.4/defaults-sl_SI.min.js")
     TextResource sl();
