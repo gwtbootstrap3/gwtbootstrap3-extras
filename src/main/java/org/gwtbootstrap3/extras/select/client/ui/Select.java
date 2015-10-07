@@ -373,14 +373,21 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
     /**
      * Manually select list options by value.
      */
-    public void selectValues(String value, final String... values) {
+    public void selectValues(final String... values) {
         List<String> selectedValues = getAllSelectedValues();
 
-        selectedValues.add(value);
         if(values != null && values.length > 0) {
             selectedValues.addAll(Arrays.asList(values));
         }
-        setValues(selectedValues.toArray(new String[selectedValues.size()]));
+
+        if(selectedValues.size() > 0) {
+            if (isMultiple()) {
+                setValues(selectedValues.toArray(new String[selectedValues.size()]));
+            } else {
+                // Cannot call setValues on a non-multiple Select
+                setValue(selectedValues.get(0));
+            }
+        }
     }
 
     public void selectAll() {
