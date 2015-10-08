@@ -254,6 +254,7 @@ public class SummernoteBase extends TextArea {
     }-*/;
 
     private native void setCode(Element e, String code) /*-{
+        this.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase::setCode(Ljava/lang/String;)(code);
         $wnd.jQuery(e).code(code);
     }-*/;
 
