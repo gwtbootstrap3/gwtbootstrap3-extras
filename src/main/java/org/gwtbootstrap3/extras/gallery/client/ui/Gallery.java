@@ -22,6 +22,8 @@ package org.gwtbootstrap3.extras.gallery.client.ui;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.LoadEvent;
+import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -135,8 +137,20 @@ public class Gallery extends ComplexWidget {
     }
 
     @Override
-    public void add(Widget child) {
+    public void add(final Widget child) {
         if(child instanceof GalleryImage) {
+            ((GalleryImage) child).addLoadHandler(new LoadHandler() {
+                @Override
+                public void onLoad(LoadEvent event) {
+                    if(thumbnailWidth != null) {
+                        child.setWidth(thumbnailWidth);
+                    }
+                    if(thumbnailHeight != null) {
+                        child.setHeight(thumbnailHeight);
+                    }
+                }
+            });
+
             super.add(child);
         } else {
             throw new IllegalArgumentException("Gallery can only contain GalleryImage's.");
@@ -300,22 +314,6 @@ public class Gallery extends ComplexWidget {
 
     @Override
     protected void onLoad() {
-        // Update all gallery thumbnail sizes
-        if(thumbnailHeight != null || thumbnailWidth != null) {
-            // Loop add child widgets
-            for (Widget child : this) {
-                if (child instanceof GalleryImage) {
-                    GalleryImage image = (GalleryImage) child;
-                    if (thumbnailHeight != null) {
-                        image.setHeight(thumbnailHeight);
-                    }
-                    if (thumbnailWidth != null) {
-                        image.setWidth(thumbnailWidth);
-                    }
-                }
-            }
-        }
-
         if(galleryRoot != null) {
             if (!galleryRoot.isAttached()) {
                 // Add the gallery to the root panel

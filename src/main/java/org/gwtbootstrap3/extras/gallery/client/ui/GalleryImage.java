@@ -30,6 +30,10 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasLoadHandlers;
+import com.google.gwt.event.dom.client.LoadEvent;
+import com.google.gwt.event.dom.client.LoadHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Image;
@@ -42,7 +46,7 @@ import org.gwtbootstrap3.client.ui.base.HasHref;
  *
  * @author Ben Dol
  */
-public class GalleryImage extends ComplexWidget implements HasHref {
+public class GalleryImage extends ComplexWidget implements HasHref, HasLoadHandlers {
 
     private Image image;
 
@@ -117,13 +121,18 @@ public class GalleryImage extends ComplexWidget implements HasHref {
         Scheduler.get().scheduleDeferred(new Command() {
             @Override
             public void execute() {
-                for(Widget child : GalleryImage.this) {
-                    if(child instanceof HasClickHandlers && !(child instanceof Image)) {
+                for (Widget child : GalleryImage.this) {
+                    if (child instanceof HasClickHandlers && !(child instanceof Image)) {
                         Style style = child.getElement().getStyle();
-                        style.setBottom((double)image.getHeight(), Unit.PX);
+                        style.setBottom((double) image.getHeight(), Unit.PX);
                     }
                 }
             }
         });
+    }
+
+    @Override
+    public HandlerRegistration addLoadHandler(LoadHandler handler) {
+        return image.addHandler(handler, LoadEvent.getType());
     }
 }

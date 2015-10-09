@@ -31,11 +31,8 @@ public class GalleryEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        inject(GalleryClientBundle.INSTANCE.blueimpGallery());
-        inject(GalleryClientBundle.INSTANCE.blueimpJQuery());
-        inject(GalleryClientBundle.INSTANCE.fullscreen());
-        inject(GalleryClientBundle.INSTANCE.indicator());
-        inject(GalleryClientBundle.INSTANCE.bootstrapGallery());
+        inject(GalleryClientBundle.INSTANCE.blueimp());
+        inject(GalleryClientBundle.INSTANCE.gallery());
     }
 
     private void inject(TextResource resource) {

@@ -31,17 +31,8 @@ public interface GalleryClientBundle extends ClientBundle {
   static final GalleryClientBundle INSTANCE = GWT.create(GalleryClientBundle.class);
 
   @Source("resource/js/bootstrap-image-gallery-3.1.3.min.cache.js")
-  TextResource bootstrapGallery();
-
-  @Source("resource/js/blueimp-gallery-2.16.0.min.cache.js")
-  TextResource blueimpGallery();
+  TextResource gallery();
 
   @Source("resource/js/jquery.blueimp-gallery-2.16.0.min.cache.js")
-  TextResource blueimpJQuery();
-
-  @Source("resource/js/blueimp-gallery-fullscreen-2.16.0.cache.js")
-  TextResource fullscreen();
-
-  @Source("resource/js/blueimp-gallery-indicator-2.16.0.cache.js")
-  TextResource indicator();
+  TextResource blueimp();
 }

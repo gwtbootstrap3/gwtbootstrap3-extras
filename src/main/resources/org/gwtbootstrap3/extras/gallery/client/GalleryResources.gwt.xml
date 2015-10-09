@@ -24,6 +24,5 @@
 
     <stylesheet src="css/blueimp-gallery-fix.cache.css"/>
     <stylesheet src="css/blueimp-gallery-2.16.0.min.cache.css"/>
-    <stylesheet src="css/blueimp-gallery-indicator-2.16.0.cache.css"/>
     <stylesheet src="css/bootstrap-image-gallery-3.1.3.min.cache.css"/>
 </module>
