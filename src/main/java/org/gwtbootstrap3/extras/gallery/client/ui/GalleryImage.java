@@ -20,6 +20,7 @@ package org.gwtbootstrap3.extras.gallery.client.ui;
  * #L%
  */
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
@@ -30,6 +31,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiConstructor;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
@@ -57,7 +59,7 @@ public class GalleryImage extends ComplexWidget implements HasHref {
     }
 
     @Override
-    public void add(Widget child) {
+    public void add(final Widget child) {
         if(child instanceof Image) {
             if(image != null) {
                 image.removeFromParent();
@@ -75,10 +77,15 @@ public class GalleryImage extends ComplexWidget implements HasHref {
                 }
             });
 
-            Style style = child.getElement().getStyle();
-            style.setPosition(Position.RELATIVE);
-            style.setBottom((double)image.getHeight(), Unit.PX);
-            style.setLeft(4, Unit.PX);
+            Scheduler.get().scheduleDeferred(new Command() {
+                @Override
+                public void execute() {
+                    Style style = child.getElement().getStyle();
+                    style.setPosition(Position.RELATIVE);
+                    style.setBottom((double) image.getHeight(), Unit.PX);
+                    style.setLeft(4, Unit.PX);
+                }
+            });
 
             super.add(child);
         } else {
@@ -107,11 +114,16 @@ public class GalleryImage extends ComplexWidget implements HasHref {
         super.setHeight(height);
         image.setHeight(height);
 
-        for(Widget child : this) {
-            if(child instanceof HasClickHandlers) {
-                Style style = child.getElement().getStyle();
-                style.setBottom((double)image.getHeight(), Unit.PX);
+        Scheduler.get().scheduleDeferred(new Command() {
+            @Override
+            public void execute() {
+                for(Widget child : GalleryImage.this) {
+                    if(child instanceof HasClickHandlers && !(child instanceof Image)) {
+                        Style style = child.getElement().getStyle();
+                        style.setBottom((double)image.getHeight(), Unit.PX);
+                    }
+                }
             }
-        }
+        });
     }
 }
