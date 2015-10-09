@@ -32,7 +32,7 @@ import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.constants.HeadingSize;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.html.Div;
-import org.gwtbootstrap3.client.ui.html.UnorderedList;
+import org.gwtbootstrap3.client.ui.html.OrderedList;
 import org.gwtbootstrap3.extras.gallery.client.events.GalleryCloseEvent;
 import org.gwtbootstrap3.extras.gallery.client.events.GalleryCloseHandler;
 import org.gwtbootstrap3.extras.gallery.client.events.GalleryClosedEvent;
@@ -64,7 +64,7 @@ public class Gallery extends ComplexWidget {
     private Anchor prev;
     private Anchor next;
     private Anchor close;
-    private UnorderedList indicator;
+    private OrderedList indicator;
 
     // Options
     private String thumbnailHeight;
@@ -293,7 +293,7 @@ public class Gallery extends ComplexWidget {
         close.setIcon(IconType.CLOSE);
         galleryRoot.add(close);
 
-        indicator = new UnorderedList();
+        indicator = new OrderedList();
         indicator.getElement().setClassName("indicator");
         galleryRoot.add(indicator);
     }
