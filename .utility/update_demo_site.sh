@@ -7,19 +7,27 @@ echo -e "GH_TOKEN is not set"
 exit 1
 fi	
 			
-echo -e "Publishing snapshot demo app . . .\n"
+echo -e "Publishing demo to gh-pages . . .\n"
 
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "travis-ci"
 
 # clone and build the demo application.
 cd $HOME
+rm -rf demo
 git clone --quiet --branch=master https://$GH_TOKEN@github.com/gwtbootstrap3/gwtbootstrap3-demo demo > /dev/null
 cd demo
-mvn clean package
+mvn clean package || { echo -e "gwtbootstrap3-demo build failed" ; exit 1; }
+
+# check to make sure the demo war file is present.
+if ![[ -f $HOME/demo/target/gwtbootstrap3-demo-*.war ]]; then
+echo -e "gwtbootstrap3-demo war file not found."
+exit 1
+fi	
 
 # clone the gh-pages branch.
 cd $HOME
+rm -rf gh-pages
 git clone --quiet --branch=gh-pages https://$GH_TOKEN@github.com/gwtbootstrap3/gwtbootstrap3-demo gh-pages > /dev/null
 cd gh-pages
 
@@ -37,9 +45,9 @@ rm -rf ./snapshot/META-INF
 rm -rf ./snapshot/WEB-INF
 
 git add -f .
-git commit -m "Lastest demo app on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to gh-pages"
+git commit -m "Auto-push demo to gh-pages successful. (Travis build: $TRAVIS_BUILD_NUMBER)"
 git push -fq origin gh-pages > /dev/null
 
-echo -e "Published demo application to gh-pages.\n"
+echo -e "Published demo to gh-pages.\n"
 	
 fi
