@@ -20,7 +20,7 @@ cd demo
 mvn clean package || { echo -e "gwtbootstrap3-demo build failed" ; exit 1; }
 
 # check to make sure the demo war file is present.
-if ![[ -f $HOME/demo/target/gwtbootstrap3-demo-*.war ]]; then
+if [ ! -f $HOME/demo/target/gwtbootstrap3-demo-*.war ]; then
 echo -e "gwtbootstrap3-demo war file not found."
 exit 1
 fi	
