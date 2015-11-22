@@ -181,16 +181,16 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
         return attributeMixin.getAttribute(DATA_WIDTH);
     }
 
-        /**
+    /**
      * Sets the Max Number of selectable option of the select
      * <p/>
      */
-    public void setMaxOption(final String maxOption) {
-        attributeMixin.setAttribute(DATA_MAX_OPTION, maxOption);
+    public void setMaxOptions(final String maxOptions) {
+        attributeMixin.setAttribute(DATA_MAX_OPTIONS, maxOptions);
     }
 
-    public String getMaxOption() {
-        return attributeMixin.getAttribute(DATA_MAX_OPTION);
+    public String getMaxOptions() {
+        return attributeMixin.getAttribute(DATA_MAX_OPTIONS);
     }
 
     public void setShowMenuArrow(final boolean showMenuArrow) {
