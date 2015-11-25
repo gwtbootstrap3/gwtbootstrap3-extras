@@ -153,7 +153,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     /**
      * DEFAULT values
      */
-    private String format = "mm/dd/yyyy HH:ii";
+    private String format = "mm/dd/yyyy hh:ii";
     private DateTimePickerDayOfWeek weekStart = DateTimePickerDayOfWeek.SUNDAY;
     private DateTimePickerDayOfWeek[] daysOfWeekDisabled = {};
     private boolean autoClose = false;
@@ -213,7 +213,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         return textBox.isReadOnly();
     }
 
-    
+
     /** {@inheritDoc} */
     @Override
     public boolean isEnabled() {
