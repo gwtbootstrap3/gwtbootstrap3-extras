@@ -31,135 +31,132 @@ public interface DateTimePickerClientBundle extends ClientBundle {
 
     static final DateTimePickerClientBundle INSTANCE = GWT.create(DateTimePickerClientBundle.class);
 
-    @Source("resource/js/bootstrap-datetimepicker-2.3.1.min.cache.js")
+    @Source("resource/js/bootstrap-datetimepicker-2.3.5.min.js")
     TextResource dateTimePicker();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.ar.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ar.js")
     TextResource ar();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.bg.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.bg.js")
     TextResource bg();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.ca.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ca.js")
     TextResource ca();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.cs.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.cs.js")
     TextResource cs();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.da.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.da.js")
     TextResource da();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.de.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.de.js")
     TextResource de();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.ee.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ee.js")
     TextResource ee();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.el.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.el.js")
     TextResource el();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.es.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.es.js")
     TextResource es();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.fi.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.fi.js")
     TextResource fi();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.fr.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.fr.js")
     TextResource fr();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.he.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.he.js")
     TextResource he();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.hr.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.hr.js")
     TextResource hr();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.hu.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.hu.js")
     TextResource hu();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.id.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.id.js")
     TextResource id();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.is.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.is.js")
     TextResource is();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.it.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.it.js")
     TextResource it();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.ja.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ja.js")
     TextResource ja();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.ko.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ko.js")
     TextResource ko();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.kr.js")
-    TextResource kr();
-
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.lt.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.lt.js")
     TextResource lt();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.lv.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.lv.js")
     TextResource lv();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.ms.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ms.js")
     TextResource ms();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.nb.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.nb.js")
     TextResource nb();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.nl.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.nl.js")
     TextResource nl();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.no.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.no.js")
     TextResource no();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.pl.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.pl.js")
     TextResource pl();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.pt-BR.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.pt-BR.js")
     TextResource pt_BR();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.pt.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.pt.js")
     TextResource pt();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.ro.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ro.js")
     TextResource ro();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.rs-latin.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.rs-latin.js")
     TextResource rs_latin();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.rs.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.rs.js")
     TextResource rs();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.ru.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ru.js")
     TextResource ru();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.sk.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.sk.js")
     TextResource sk();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.sl.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.sl.js")
     TextResource sl();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.sv.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.sv.js")
     TextResource sv();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.sw.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.sw.js")
     TextResource sw();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.th.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.th.js")
     TextResource th();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.tr.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.tr.js")
     TextResource tr();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.ua.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ua.js")
     TextResource ua();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.uk.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.uk.js")
     TextResource uk();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.zh-CN.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.zh-CN.js")
     TextResource zh_CN();
 
-    @Source("resource/js/locales.cache.2.3.1/bootstrap-datetimepicker.zh-TW.js")
+    @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.zh-TW.js")
     TextResource zh_TW();
 }

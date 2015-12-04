@@ -46,7 +46,6 @@ public enum DateTimePickerLanguage {
     IT("it", DateTimePickerClientBundle.INSTANCE.it()),
     JA("ja", DateTimePickerClientBundle.INSTANCE.ja()),
     KO("ko", DateTimePickerClientBundle.INSTANCE.ko()),
-    KR("kr", DateTimePickerClientBundle.INSTANCE.kr()),
     LT("lt", DateTimePickerClientBundle.INSTANCE.lt()),
     LV("lv", DateTimePickerClientBundle.INSTANCE.lv()),
     MS("ms", DateTimePickerClientBundle.INSTANCE.ms()),
