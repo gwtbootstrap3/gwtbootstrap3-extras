@@ -31,7 +31,7 @@ public interface DateTimePickerClientBundle extends ClientBundle {
 
     static final DateTimePickerClientBundle INSTANCE = GWT.create(DateTimePickerClientBundle.class);
 
-    @Source("resource/js/bootstrap-datetimepicker-2.3.5.min.js")
+    @Source("resource/js/bootstrap-datetimepicker-2.3.5.min.cache.js")
     TextResource dateTimePicker();
 
     @Source("resource/js/locales-2.3.5/bootstrap-datetimepicker.ar.js")
