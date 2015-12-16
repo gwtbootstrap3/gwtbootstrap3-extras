@@ -521,6 +521,68 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     public void setWeekStart(final DateTimePickerDayOfWeek weekStart) {
         this.weekStart = weekStart;
     }
+    
+        /**
+     * Convert GWT date time format to bootstrap date time format
+     *
+     * @param format date time format using GWT notation
+     * @return date time format using bootstrap notation
+     */
+    private static String toBootstrapDateFormat(final String format) {
+        String bootstrap_format = format;
+
+        // Replace long day name "EEEE" with "DD"
+        bootstrap_format = bootstrap_format.replace("EEEE", "DD");
+        // Replace short day name "EE" with "DD"
+        bootstrap_format = bootstrap_format.replaceAll("E{1,3}", "D");
+        // Replace minutes "m" with "i"
+        bootstrap_format = bootstrap_format.replaceAll("m", "i");
+        // Replace "H" with "h" and vice versa
+        bootstrap_format = bootstrap_format.replaceAll("H", "Q");
+        bootstrap_format = bootstrap_format.replaceAll("h", "H");
+        bootstrap_format = bootstrap_format.replaceAll("Q", "h");
+        // Replace "a" with "P" for AM/PM markers
+        bootstrap_format = bootstrap_format.replaceAll("a", "P");
+
+        // If there are at least 3 Ms there is month name in wording
+        if (bootstrap_format.contains("MMM")) {
+            // Replace long date month "MMMM" with "MM"
+            bootstrap_format = bootstrap_format.replace("MMMM", "MM");
+            // Replace month name "MMM" with "M"
+            bootstrap_format = bootstrap_format.replace("MMM", "M");
+        }
+        else {
+            // Replace month number with leading 0 "MM" with "mm"
+            bootstrap_format = bootstrap_format.replace("MM", "mm");
+            // Replace month number "M" with "m"
+            bootstrap_format = bootstrap_format.replace("M", "m");
+        }
+        if (!bootstrap_format.contains("yy")) {
+            // Replace full year format "y" with "yyyy"
+            bootstrap_format = bootstrap_format.replace("y", "yyyy");
+        }
+
+        return bootstrap_format;
+    }
+
+    /**
+     * Sets format of the date using GWT notation
+     *
+     * @param format date time format in GWT notation
+     */
+    public void setGWTFormat(final String format) {
+        this.format = toBootstrapDateFormat(format);
+
+        // Get the old value
+        final Date oldValue = getValue();
+
+        // Make the new DateTimeFormat
+        this.dateTimeFormat = DateTimeFormat.getFormat(format);
+
+        if (oldValue != null) {
+            setValue(oldValue);
+        }
+    }
 
     /** {@inheritDoc} */
     @Override
