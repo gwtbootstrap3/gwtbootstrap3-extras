@@ -1,10 +1,10 @@
-package org.gwtbootstrap3.extras.summernote.client.ui;
+package org.gwtbootstrap3.extras.summernote.client.ui.base;
 
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,24 +20,27 @@ package org.gwtbootstrap3.extras.summernote.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase;
+import org.gwtbootstrap3.client.ui.html.Text;
+
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Node;
 
 /**
- * @author godi
+ * This hint handler provides a default implementation of
+ * the template and content options.
+ *
+ * @author Xiaodong Sun
  */
-public class Summernote extends SummernoteBase {
+public abstract class DefaultHintHandler implements HintHandler {
 
-    public Summernote() {
-        super();
+    @Override
+    public String getTemplate(String item) {
+        return item;
     }
 
-    public Summernote(final int height) {
-        super();
-        setDefaultHeight(height);
+    @Override
+    public Node getContent(String item) {new Text(item);
+        return Document.get().createTextNode(item);
     }
 
-    public Summernote(final int height, final boolean hasFocus) {
-        this(height);
-        setHasFocus(hasFocus);
-    }
 }

@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.summernote.client.event;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,20 @@ package org.gwtbootstrap3.extras.summernote.client.event;
  * #L%
  */
 
-import com.google.gwt.user.client.Event;
-import org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
- * @author godi
+ * A widget that implements this interface is a public source of
+ * {@link SummernoteKeyDownEvent} events.
  */
-public interface SummernoteEvent {
-    SummernoteBase getSummernote();
+public interface HasSummernoteKeyDownHandlers extends HasHandlers {
 
-    Event getNativeEvent();
+    /**
+     * Adds a {@link SummernoteKeyDownEvent} handler.
+     *
+     * @param handler the handler
+     * @return the registration for the event
+     */
+    HandlerRegistration addSummernoteKeyDownHandler(SummernoteKeyDownHandler handler);
 }

@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.summernote.client.event;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,16 @@ package org.gwtbootstrap3.extras.summernote.client.event;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * @author godi
+ * Handler interface for {@link SummernoteInitEvent} events.
+ *
+ * @author Xiaodong Sun
  */
-public interface SummernoteOnEnterHandler extends EventHandler {
-    void onEnter(SummernoteOnEnterEvent event);
+public interface SummernoteInitHandler extends EventHandler {
+
+    /**
+     * Called when {@link SummernoteInitEvent} is fired.
+     *
+     * @param event the {@link SummernoteInitEvent} that was fired
+     */
+    void onSummernoteInit(SummernoteInitEvent event);
 }
