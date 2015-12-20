@@ -77,8 +77,8 @@ public class SummernoteKeyUpEvent extends GwtEvent<SummernoteKeyUpHandler> {
      * @return native key up event
      */
     public NativeEvent getNativeEvent() {
-		return nativeEvent;
-	}
+        return nativeEvent;
+    }
 
     @Override
     protected void dispatch(final SummernoteKeyUpHandler handler) {

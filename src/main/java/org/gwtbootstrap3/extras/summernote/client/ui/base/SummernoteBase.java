@@ -310,7 +310,7 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers {
         // Inject the language JS is necessary
         if (language.getJs() != null) {
             ScriptInjector.fromString(language.getJs().getText())
-            	.setWindow(ScriptInjector.TOP_WINDOW).inject();
+                .setWindow(ScriptInjector.TOP_WINDOW).inject();
         }
         // Initialize
         initialize(getElement(), options);

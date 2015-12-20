@@ -27,50 +27,50 @@ package org.gwtbootstrap3.extras.summernote.client.ui.base;
  */
 public enum ToolbarButton {
 
-	/* Insert */
-	PICTURE("picture"),
-	LINK("link"),
-	VIDEO("video"),
-	TABLE("table"),
-	HR("hr"),
+    /* Insert */
+    PICTURE("picture"),
+    LINK("link"),
+    VIDEO("video"),
+    TABLE("table"),
+    HR("hr"),
 
-	/* Font Style */
-	FONT_NAME("fontname"),
-	FONT_SIZE("fontsize"),
-	COLOR("color"),
-	BOLD("bold"),
-	ITALIC("italic"),
-	UNDERLINE("underline"),
-	STRIKETHROUGH("strikethrough"),
-	CLEAR("clear"),
+    /* Font Style */
+    FONT_NAME("fontname"),
+    FONT_SIZE("fontsize"),
+    COLOR("color"),
+    BOLD("bold"),
+    ITALIC("italic"),
+    UNDERLINE("underline"),
+    STRIKETHROUGH("strikethrough"),
+    CLEAR("clear"),
 
-	/* Paragraph Style */
-	STYLE("style"),
-	OL("ol"),
-	UL("ul"),
-	PARAGRAPH("paragraph"),
-	HEIGHT("height"),
+    /* Paragraph Style */
+    STYLE("style"),
+    OL("ol"),
+    UL("ul"),
+    PARAGRAPH("paragraph"),
+    HEIGHT("height"),
 
-	/* Misc */
-	FULL_SCREEN("fullscreen"),
-	CODE_VIEW("codeview"),
-	UNDO("undo"),
-	REDO("redo"),
-	HELP("help"),
-	;
+    /* Misc */
+    FULL_SCREEN("fullscreen"),
+    CODE_VIEW("codeview"),
+    UNDO("undo"),
+    REDO("redo"),
+    HELP("help"),
+    ;
 
-	private final String id;
+    private final String id;
 
-	private ToolbarButton(String id) {
-		this.id = id;
-	}
+    private ToolbarButton(String id) {
+        this.id = id;
+    }
 
-	/**
-	 *
-	 * @return
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     *
+     * @return
+     */
+    public String getId() {
+        return id;
+    }
 
 }

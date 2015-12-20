@@ -118,7 +118,7 @@ public class SummernoteImageUploadEvent extends GwtEvent<SummernoteImageUploadHa
      * inserted.
      *
      * @return the JavaScript array of the {@link ImageFile}s to be
-     * 	    inserted.
+     *         inserted.
      */
     public JsArray<ImageFile> getImages() {
         return images;
