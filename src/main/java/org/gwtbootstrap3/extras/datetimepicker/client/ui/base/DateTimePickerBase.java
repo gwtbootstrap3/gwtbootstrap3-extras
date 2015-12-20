@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -521,8 +521,8 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     public void setWeekStart(final DateTimePickerDayOfWeek weekStart) {
         this.weekStart = weekStart;
     }
-    
-        /**
+
+    /**
      * Convert GWT date time format to bootstrap date time format
      *
      * @param format date time format using GWT notation
@@ -851,7 +851,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
 
     /** {@inheritDoc} */
     @Override
-    public void setValidators(Validator<Date>... validators) {
+    public void setValidators(@SuppressWarnings("unchecked") Validator<Date>... validators) {
         validatorMixin.setValidators(validators);
     }
 
