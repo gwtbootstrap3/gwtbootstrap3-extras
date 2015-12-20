@@ -55,7 +55,7 @@ public enum SummernoteLanguage {
     SK_SK("sk-SK", SummernoteClientBundle.INSTANCE.sk_SK()),
     SL_SL("sl-SI", SummernoteClientBundle.INSTANCE.sl_SI()),
     SR_RS("sr-RS", SummernoteClientBundle.INSTANCE.sr_RS()),
-    SR_RS_LATION("sr-RS-Latin", SummernoteClientBundle.INSTANCE.sr_RS_Latin()),
+    SR_RS_LATIN("sr-RS-Latin", SummernoteClientBundle.INSTANCE.sr_RS_Latin()),
     SV_SE("sv-SE", SummernoteClientBundle.INSTANCE.sv_SE()),
     TH_TH("th-TH", SummernoteClientBundle.INSTANCE.th_TH()),
     TR_TR("tr-TR", SummernoteClientBundle.INSTANCE.tr_TR()),
@@ -63,7 +63,7 @@ public enum SummernoteLanguage {
     VI_VN("vi-VN", SummernoteClientBundle.INSTANCE.vi_VN()),
     ZH_CN("zh-CN", SummernoteClientBundle.INSTANCE.zh_CN()),
     ZH_TW("zh-TW", SummernoteClientBundle.INSTANCE.zh_TW()),
-    EN("en-GB", null); // Base language, don't need another file
+    EN_US("en-US", null); // Base language, don't need another file
   
     private final String code;
     private final TextResource js;

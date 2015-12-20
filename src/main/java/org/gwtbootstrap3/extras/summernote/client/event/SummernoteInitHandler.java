@@ -1,10 +1,10 @@
-package org.gwtbootstrap3.extras.summernote.client.ui;
+package org.gwtbootstrap3.extras.summernote.client.event;
 
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,24 +20,19 @@ package org.gwtbootstrap3.extras.summernote.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteBase;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
- * @author godi
+ * Handler interface for {@link SummernoteInitEvent} events.
+ *
+ * @author Xiaodong Sun
  */
-public class Summernote extends SummernoteBase {
+public interface SummernoteInitHandler extends EventHandler {
 
-    public Summernote() {
-        super();
-    }
-
-    public Summernote(final int height) {
-        super();
-        setDefaultHeight(height);
-    }
-
-    public Summernote(final int height, final boolean hasFocus) {
-        this(height);
-        setHasFocus(hasFocus);
-    }
+    /**
+     * Called when {@link SummernoteInitEvent} is fired.
+     *
+     * @param event the {@link SummernoteInitEvent} that was fired
+     */
+    void onSummernoteInit(SummernoteInitEvent event);
 }
