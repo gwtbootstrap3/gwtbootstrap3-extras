@@ -88,7 +88,7 @@ public class Slider extends SliderBase<Double> {
     }-*/;
 
     @Override
-    protected String convertToString(Double value) {
+    protected String format(Double value) {
         return value.toString();
     }
 

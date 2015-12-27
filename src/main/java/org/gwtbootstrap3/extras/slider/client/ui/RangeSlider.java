@@ -101,7 +101,7 @@ public class RangeSlider extends SliderBase<Range> {
     }-*/;
 
     @Override
-    protected String convertToString(Range value) {
+    protected String format(Range value) {
         return value.getMinValue() + " : " + value.getMaxValue();
     }
 
