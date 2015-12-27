@@ -33,6 +33,7 @@ import org.gwtbootstrap3.extras.slider.client.ui.base.constants.HandleType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.OrientationType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.ScaleType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.SelectionType;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.TooltipPosition;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.TooltipType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.HasAllSlideHandlers;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideDisabledEvent;
@@ -246,6 +247,22 @@ public abstract class SliderBase<T> extends Widget implements
         updateSlider(SliderOption.TOOLTIP_SPLIT, tooltipSplit);
     }
 
+    public TooltipPosition getTooltipPosition() {
+        TooltipPosition defaultPosition = getOrientation() == OrientationType.HORIZONTAL ?
+                TooltipPosition.TOP : TooltipPosition.RIGHT;
+        return getEnumAttribute(SliderOption.TOOLTIP_POSITION, TooltipPosition.class, defaultPosition);
+    }
+
+    /**
+     * Sets the tool-tip position.
+     *
+     * @param position
+     * @see TooltipPosition
+     */
+    public void setTooltipPosition(final TooltipPosition position) {
+        updateSlider(SliderOption.TOOLTIP_POSITION, position.getPosition());
+    }
+
     public HandleType getHandle() {
         return getEnumAttribute(SliderOption.HANDLE, HandleType.class, HandleType.ROUND);
     }
@@ -317,17 +334,17 @@ public abstract class SliderBase<T> extends Widget implements
     protected String formatTooltip(final T value) {
         if (formatterCallback != null)
             return formatterCallback.formatTooltip(value);
-        return convertToString(value);
+        return format(value);
     }
 
     /**
-     * Converts the slider value to string value to be displayed
+     * Formats the slider value to string value to be displayed
      * as tool-tip text.
      *
      * @param value
      * @return
      */
-    protected abstract String convertToString(final T value);
+    protected abstract String format(final T value);
 
     public boolean isNaturalArrowKeys() {
         return getBooleanAttribute(SliderOption.NATURAL_ARROW_KEYS, false);
@@ -414,6 +431,7 @@ public abstract class SliderBase<T> extends Widget implements
     /**
      * Focus the appropriate slider handle after a value change.
      * Defaults to false.
+     *
      * @param focus
      */
     public void setFocusHandle(final boolean focus) {
@@ -860,7 +878,7 @@ public abstract class SliderBase<T> extends Widget implements
 
     /**
      * FIXME: This is a workaround for the refresh command, since it is buggy in
-     * the current version (4.5.6). After executing this command, the slider
+     * the current version (5.3.3). After executing this command, the slider
      * becomes consistently a range slider with 2 handles. This should be
      * removed once the bug is fixed in a future version.
      *

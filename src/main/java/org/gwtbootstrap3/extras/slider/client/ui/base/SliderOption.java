@@ -44,6 +44,7 @@ enum SliderOption {
     SELECTION("selection"),
     TOOLTIP("tooltip"),
     TOOLTIP_SPLIT("tooltip_split"),
+    TOOLTIP_POSITION("tooltip_position"),
     HANDLE("handle"),
     REVERSED("reversed"),
     ENABLED("enabled"),
@@ -54,7 +55,7 @@ enum SliderOption {
     TICKS_LABELS("ticks_labels"),
     TICKS_SNAP_BOUNDS("ticks_snap_bounds"),
     SCALE("scale"),
-    FOCUS("focus")
+    FOCUS("focus"),
     ;
 
     private final String name;
