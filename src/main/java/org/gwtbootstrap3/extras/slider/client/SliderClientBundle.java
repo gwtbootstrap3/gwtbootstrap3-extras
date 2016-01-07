@@ -31,6 +31,6 @@ interface SliderClientBundle extends ClientBundle {
 
     static final SliderClientBundle INSTANCE = GWT.create(SliderClientBundle.class);
 
-    @Source("resource/js/bootstrap-slider-5.3.3.min.cache.js")
+    @Source("resource/js/bootstrap-slider-6.0.4.min.cache.js")
     TextResource slider();
 }

@@ -116,7 +116,7 @@ class SummernoteOptions extends JavaScriptObject {
      * @see {@link SummernoteBase#setToolbar(Toolbar)}
      */
     final native void setToolbar(Toolbar toolbar) /*-{
-           this.toolbar = toolbar.@org.gwtbootstrap3.extras.summernote.client.ui.base.Toolbar::build()();
+        this.toolbar = toolbar.@org.gwtbootstrap3.extras.summernote.client.ui.base.Toolbar::build()();
     }-*/;
 
     /**
