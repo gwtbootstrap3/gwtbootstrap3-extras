@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.summernote.client.ui.base;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2015 GwtBootstrap3
+ * Copyright (C) 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -124,6 +124,20 @@ class SummernoteOptions extends JavaScriptObject {
      */
     final native void setHeight(int height) /*-{
         this.height = height;
+    }-*/;
+
+    /**
+     * @see {@link SummernoteBase#setMaxHeight(int)}
+     */
+    final native void setMaxHeight(int maxHeight) /*-{
+        this.maxHeight = maxHeight;
+    }-*/;
+
+    /**
+     * @see {@link SummernoteBase#setMinHeight(int)}
+     */
+    final native void setMinHeight(int minHeight) /*-{
+        this.minHeight = minHeight;
     }-*/;
 
     /**

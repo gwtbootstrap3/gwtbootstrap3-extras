@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.summernote.client.ui.base;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2015 GwtBootstrap3
+ * Copyright (C) 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,6 +47,7 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.UIObject;
 
 /**
@@ -56,7 +57,7 @@ import com.google.gwt.user.client.ui.UIObject;
  *
  * @author Xiaodong Sun
  */
-public class SummernoteBase extends Div implements HasAllSummernoteHandlers {
+public class SummernoteBase extends Div implements HasAllSummernoteHandlers, HasEnabled {
 
     /**
      * Language; defaults to {@link SummernoteLanguage#EN_US}
@@ -67,6 +68,11 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers {
      * Initialize options
      */
     private SummernoteOptions options = SummernoteOptions.newOptions();
+
+    /**
+     * Enabled/Disabled state
+     */
+    private boolean enabled = true;
 
     private boolean hasInitHandler = false;
     private boolean hasEnterHandler = false;
@@ -93,6 +99,24 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers {
      */
     public void setDefaultHeight(final int height) {
         options.setHeight(height);
+    }
+
+    /**
+     * Sets the maximum height of the editor (in pixel).
+     *
+     * @param maxHeight
+     */
+    public void setMaxHeight(final int maxHeight) {
+        options.setMaxHeight(maxHeight);
+    }
+
+    /**
+     * Sets the minimum height of the editor (in pixel).
+     *
+     * @param minHeight
+     */
+    public void setMinHeight(final int minHeight) {
+        options.setMinHeight(minHeight);
     }
 
     /**
@@ -298,6 +322,28 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers {
         return getElement().getInnerHTML().isEmpty();
     }
 
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        if (isAttached()) {
+            command(getElement(), enabled ? "enable" : "disable");
+        }
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    /**
+     * Resets the editor.
+     */
+    public void reset() {
+        if (isAttached()) {
+            command(getElement(), "reset");
+        }
+    }
+
     /**
      * Call this when updating options to ensure everything is up to date
      */
@@ -314,6 +360,8 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers {
         }
         // Initialize
         initialize(getElement(), options);
+        // Enable/Disable editor
+        setEnabled(enabled);
     }
 
     @Override
@@ -418,6 +466,10 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers {
 
     private native boolean isEmpty(Element e)/*-{
         return $wnd.jQuery(e).summernote('isEmpty');
+    }-*/;
+
+    private native void command(Element e, String command)/*-{
+        $wnd.jQuery(e).summernote(command);
     }-*/;
 
     private native void insertImages(Element e, JsArray<ImageFile> images) /*-{
