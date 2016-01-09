@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.bootbox.client;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,16 +20,24 @@ package org.gwtbootstrap3.extras.bootbox.client;
  * #L%
  */
 
-import com.google.gwt.core.client.JavaScriptObject;
-import org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback;
 import org.gwtbootstrap3.extras.bootbox.client.callback.ConfirmCallback;
 import org.gwtbootstrap3.extras.bootbox.client.callback.PromptCallback;
-import org.gwtbootstrap3.extras.bootbox.client.constants.BootboxSize;
+import org.gwtbootstrap3.extras.bootbox.client.callback.SimpleCallback;
+import org.gwtbootstrap3.extras.bootbox.client.options.AlertOptions;
+import org.gwtbootstrap3.extras.bootbox.client.options.BootboxLocale;
+import org.gwtbootstrap3.extras.bootbox.client.options.ConfirmOptions;
+import org.gwtbootstrap3.extras.bootbox.client.options.DialogOptions;
+import org.gwtbootstrap3.extras.bootbox.client.options.PromptOptions;
 
 /**
- * Created by kyle on 2013/12/11.
+ * Bootbox.js is a small JavaScript library which allows you
+ * to create programmatic dialog boxes using Bootstrap modals.
+ *
+ * @author Xiaodong Sun
+ * @see http://bootboxjs.com/
  */
 public class Bootbox {
+
     /**
      * Displays a message in a modal dialog box.
      *
@@ -46,10 +54,19 @@ public class Bootbox {
      * @param msg      the message to be displayed.
      * @param callback the callback handler.
      */
-    public static native void alert(String msg, AlertCallback callback) /*-{
+    public static native void alert(String msg, SimpleCallback callback) /*-{
         $wnd.bootbox.alert(msg, function () {
-            callback.@org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback::callback()();
+            callback.@org.gwtbootstrap3.extras.bootbox.client.callback.SimpleCallback::callback()();
         });
+    }-*/;
+
+    /**
+     * Displays a customized alert with the given {@link AlertOptions}.
+     *
+     * @param options
+     */
+    public static native void alert(AlertOptions options) /*-{
+        $wnd.bootbox.alert(options);
     }-*/;
 
     /**
@@ -66,6 +83,15 @@ public class Bootbox {
     }-*/;
 
     /**
+     * Displays a customized confirm with the given {@link ConfirmOptions}.
+     *
+     * @param options
+     */
+    public static native void confirm(ConfirmOptions options) /*-{
+        $wnd.bootbox.confirm(options);
+    }-*/;
+
+    /**
      * Displays a request for information in a modal dialog box, along with the
      * standard 'OK' and 'Cancel' buttons.
      *
@@ -79,177 +105,67 @@ public class Bootbox {
     }-*/;
 
     /**
-     * Displays a completely customisable dialog in a modal dialog box.
+     * Displays a customized prompt with the given {@link PromptOptions}.
      *
-     * @param dialog      the dialog configuration.
+     * @param options
      */
-    public static native void dialog(Dialog dialog) /*-{
-        $wnd.bootbox.dialog(dialog);
+    public static native void prompt(PromptOptions options) /*-{
+        $wnd.bootbox.prompt(options);
     }-*/;
 
     /**
-     * Hide all currently active bootbox dialogs. 
+     * Displays a completely customizable dialog in a modal dialog box.
+     *
+     * @param options the dialog options.
+     */
+    public static native void dialog(final DialogOptions options) /*-{
+        $wnd.bootbox.dialog(options);
+    }-*/;
+
+    /**
+     * Sets a callback when dialog gets initialized.
+     *
+     * @param callback
+     */
+    public static native void init(SimpleCallback callback) /*-{
+        $wnd.bootbox.init(function() {
+            if (callback)
+                callback.@org.gwtbootstrap3.extras.bootbox.client.callback.SimpleCallback::callback()();
+        });
+    }-*/;
+
+    /**
+     * Set many of the default options shown in the dialog example.<br>
+     * <br>
+     * Many of these options are also applied to the basic wrapper methods
+     * and can be overridden whenever the wrapper methods are invoked
+     * with a single options argument.
+     *
+     * @param options
+     */
+    public static native void setDefaults(DialogOptions options) /*-{
+        $wnd.bootbox.setDefaults(options);
+    }-*/;
+
+    /**
+     * Sets a locale.
+     *
+     * @param locale if <code>null</code>, defaults to {@link BootboxLocale#EN}.
+     */
+    public static void setLocale(final BootboxLocale locale) {
+        BootboxLocale l = (locale != null) ? locale : BootboxLocale.getDefault();
+        setLocale(l.getLocale());
+    }
+
+    private static native void setLocale(String locale) /*-{
+        $wnd.bootbox.setLocale(locale);
+    }-*/;
+
+    /**
+     * Hide all currently active bootbox dialogs.
      * <p>Individual dialogs can be closed as per normal Bootstrap dialogs: dialog.modal('hide').
      */
     public static native void hideAll() /*-{
         $wnd.bootbox.hideAll();
     }-*/;
-
-    /**
-     * Creates a Defaults object.
-     */
-    public static Defaults createDefaults() {
-        return Defaults.create();
-    }
-
-    /**
-     * Used to provide defaults configurations to Bootbox.
-     *
-     * @author Tercio Gaudencio Filho (terciofilho [at] gmail.com)
-     */
-    public static class Defaults extends JavaScriptObject {
-
-        protected Defaults() {
-        }
-
-        public static final Defaults create() {
-            return JavaScriptObject.createObject().cast();
-        }
-
-        public final native Defaults setLocale(final String locale) /*-{
-            this.locale = locale;
-            return this;
-        }-*/;
-
-        public final native Defaults setShow(final boolean show) /*-{
-            this.show = show;
-            return this;
-        }-*/;
-
-        public final native Defaults setBackdrop(final boolean backdrop) /*-{
-            this.backdrop = backdrop;
-            return this;
-        }-*/;
-
-        public final native Defaults setCloseButton(final boolean closeButton) /*-{
-            this.closeButton = closeButton;
-            return this;
-        }-*/;
-
-        public final native Defaults setAnimate(final boolean animate) /*-{
-            this.animate = animate;
-            return this;
-        }-*/;
-
-        public final native Defaults setClassName(final String className) /*-{
-            this.className = className;
-            return this;
-        }-*/;
-        
-        /**
-         * Define Bootbox defaults. Call this method to set the defaults in Bootbox. 
-         */
-        public final native void setDefaults() /*-{
-            $wnd.bootbox.setDefaults(this);
-        }-*/;
-
-    }
-    
-    /**
-     * Used to provide a Dialog configuration.
-     * 
-     * @author Tercio Gaudencio Filho (terciofilho [at] gmail.com)
-     */
-    public static class Dialog extends JavaScriptObject {
-
-        protected Dialog() {
-        }
-
-        public static final Dialog create() {
-            return JavaScriptObject.createObject().cast();
-        }
-
-        public final native Dialog setMessage(final String message) /*-{
-            this.message = message;
-            return this;
-        }-*/;
-
-        public final native Dialog setTitle(final String title) /*-{
-            this.title = title;
-            return this;
-        }-*/;
-
-        public final native Dialog setOnEscape(final AlertCallback callback) /*-{
-            this.onEscape = function() {
-                callback.@org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback::callback()();
-            };
-            return this;
-        }-*/;
-
-        public final native Dialog setBackdrop(final boolean backdrop) /*-{
-            this.backdrop = backdrop;
-            return this;
-        }-*/;
-
-        public final native Dialog setCloseButton(final boolean closeButton) /*-{
-            this.closeButton = closeButton;
-            return this;
-        }-*/;
-
-        public final native Dialog setAnimate(final boolean animate) /*-{
-            this.animate = animate;
-            return this;
-        }-*/;
-
-        public final native Dialog setClassName(final String className) /*-{
-            this.className = className;
-            return this;
-        }-*/;
-
-        public final native Dialog setSize(final BootboxSize size) /*-{
-            this.size = size.@org.gwtbootstrap3.extras.bootbox.client.constants.BootboxSize::getSize()();
-            return this;
-        }-*/;
-
-        public final native Dialog addButton(String label , String className, AlertCallback callback) /*-{
-            this.buttons = this.buttons || {};
-            this.buttons[label] = {
-                className: className,
-                callback: function() {
-                    callback.@org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback::callback()();
-                }
-            };
-            return this;
-        }-*/;
-
-        public final native Dialog addButton(String label , String className) /*-{
-            this.buttons = this.buttons || {};
-            this.buttons[label] = {
-                className: className
-            };
-            return this;
-        }-*/;
-
-        public final native Dialog addButton(String label , AlertCallback callback) /*-{
-            this.buttons = this.buttons || {};
-            this.buttons[label] = {
-                callback: function() {
-                    callback.@org.gwtbootstrap3.extras.bootbox.client.callback.AlertCallback::callback()();
-                }
-            };
-            return this;
-        }-*/;
-
-        public final native Dialog addButton(String label) /*-{
-            this.buttons = this.buttons || {};
-            this.buttons[label] = {};
-            return this;
-        }-*/;
-
-        public final void show() {
-            Bootbox.dialog(this);
-        }
-
-    }
-
 }

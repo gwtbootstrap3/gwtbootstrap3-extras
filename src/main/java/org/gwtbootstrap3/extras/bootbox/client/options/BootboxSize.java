@@ -1,10 +1,10 @@
-package org.gwtbootstrap3.extras.bootbox.client.callback;
+package org.gwtbootstrap3.extras.bootbox.client.options;
 
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,22 @@ package org.gwtbootstrap3.extras.bootbox.client.callback;
  */
 
 /**
- * Created by kyle on 2013/12/11.
+ * Bootbox window size.
+ *  
+ * @author Tercio Gaudencio Filho (terciofilho [at] gmail.com)
  */
-public interface AlertCallback extends Callback {
-    public void callback();
+public enum BootboxSize {
+    
+    LARGE("large"), SMALL("small");
+    
+    private String size;
+
+    private BootboxSize(String size) {
+        this.size=size;
+    }
+    
+    public String getSize() {
+        return size;
+    }
+    
 }
