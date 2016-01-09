@@ -59,10 +59,9 @@ public class GalleryCloseEvent extends GwtEvent<GalleryCloseHandler> {
         return nativeEvent;
     }
 
-    @SuppressWarnings({"unchecked"})
     @Override
     public Type<GalleryCloseHandler> getAssociatedType() {
-        return (Type) TYPE;
+        return TYPE;
     }
 
     @Override

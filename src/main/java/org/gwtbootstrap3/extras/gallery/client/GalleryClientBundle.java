@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.gallery.client;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ import com.google.gwt.resources.client.TextResource;
 public interface GalleryClientBundle extends ClientBundle {
   static final GalleryClientBundle INSTANCE = GWT.create(GalleryClientBundle.class);
 
-  @Source("resource/js/bootstrap-image-gallery-3.1.3.min.cache.js")
+  @Source("resource/js/bootstrap-image-gallery-3.3.6.min.cache.js")
   TextResource gallery();
 
-  @Source("resource/js/jquery.blueimp-gallery-2.16.0.min.cache.js")
+  @Source("resource/js/jquery.blueimp-gallery-2.17.0.min.cache.js")
   TextResource blueimp();
 }

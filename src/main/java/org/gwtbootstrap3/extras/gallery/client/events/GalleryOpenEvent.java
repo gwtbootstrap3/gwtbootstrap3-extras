@@ -59,10 +59,9 @@ public class GalleryOpenEvent extends GwtEvent<GalleryOpenHandler> {
         return nativeEvent;
     }
 
-    @SuppressWarnings({"unchecked"})
     @Override
     public Type<GalleryOpenHandler> getAssociatedType() {
-        return (Type) TYPE;
+        return TYPE;
     }
 
     @Override
