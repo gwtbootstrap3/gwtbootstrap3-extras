@@ -1,10 +1,10 @@
-package org.gwtbootstrap3.extras.bootbox.client.constants;
+package org.gwtbootstrap3.extras.bootbox.client.callback;
 
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,22 +21,22 @@ package org.gwtbootstrap3.extras.bootbox.client.constants;
  */
 
 /**
- * Bootbox window size.
- *  
- * @author Tercio Gaudencio Filho (terciofilho [at] gmail.com)
+ * Simple Bootbox callback without argument.
+ *
+ * @author Xiaodong Sun
  */
-public enum BootboxSize {
-    
-    LARGE("large"), SMALL("small");
-    
-    private String size;
+public interface SimpleCallback extends Callback {
 
-    private BootboxSize(String size) {
-        this.size=size;
-    }
-    
-    public String getSize() {
-        return size;
-    }
-    
+    /**
+     * No-arguments callback function.
+     */
+    void callback();
+
+    /**
+     * Default {@link SimpleCallback} does nothing.
+     */
+    static final SimpleCallback DEFAULT_SIMPLE_CALLBACK = new SimpleCallback() {
+        @Override
+        public void callback() {}
+    };
 }

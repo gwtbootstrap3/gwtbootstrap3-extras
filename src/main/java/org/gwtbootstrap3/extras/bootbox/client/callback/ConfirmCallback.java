@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.bootbox.client.callback;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,25 @@ package org.gwtbootstrap3.extras.bootbox.client.callback;
  */
 
 /**
- * Created by kyle on 2013/12/11.
+ * Confirm callback according to the result.
+ *
+ * @author Xiaodong Sun
  */
 public interface ConfirmCallback extends Callback {
-    public void callback(boolean result);
+
+    /**
+     * Callback according to the result.
+     *
+     * @param result <code>true</code> if the user presses the confirm button,
+     *     or <code>false</code> if the user presses the cancel button
+     */
+    void callback(boolean result);
+
+    /**
+     * Default {@link ConfirmCallback} does nothing.
+     */
+    static final ConfirmCallback DEFAULT_CONFIRM_CALLBACK = new ConfirmCallback() {
+        @Override
+        public void callback(boolean result) {}
+    };
 }
