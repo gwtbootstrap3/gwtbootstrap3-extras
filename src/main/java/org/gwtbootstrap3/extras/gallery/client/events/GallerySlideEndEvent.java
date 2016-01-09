@@ -65,10 +65,9 @@ public class GallerySlideEndEvent extends GwtEvent<GallerySlideEndHandler> {
         return index;
     }
 
-    @SuppressWarnings({"unchecked"})
     @Override
     public Type<GallerySlideEndHandler> getAssociatedType() {
-        return (Type) TYPE;
+        return TYPE;
     }
 
     @Override
