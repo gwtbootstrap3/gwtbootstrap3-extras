@@ -1,7 +1,5 @@
 package org.gwtbootstrap3.extras.bootbox.client.options;
 
-import org.gwtbootstrap3.client.ui.constants.Type;
-
 /*
  * #%L
  * GwtBootstrap3
@@ -27,7 +25,7 @@ import org.gwtbootstrap3.client.ui.constants.Type;
  *
  * @author Xiaodong Sun
  */
-public enum BootboxLocale implements Type {
+public enum BootboxLocale {
 
     BG_BG("bg_BG"),
     BR("br"),
