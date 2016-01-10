@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datepicker.client.ui.base;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -162,7 +162,7 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
 
     private Widget container = null;
     private DatePickerLanguage language = DatePickerLanguage.EN;
-    private DatePickerPosition position = DatePickerPosition.TOP_LEFT;
+    private DatePickerPosition position = DatePickerPosition.AUTO;
 
     public DatePickerBase() {
         textBox = new TextBox();
@@ -346,7 +346,6 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     public void onChangeDate(final Event e) {
         fireEvent(new ChangeDateEvent(e));
         ValueChangeEvent.fire(DatePickerBase.this, getValue());
-        hide();
     }
 
     /** {@inheritDoc} */
@@ -497,13 +496,13 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
 
     /**
      * Convert GWT date format to bootstrap date format
-     * 
+     *
      * @param format date format using GWT notation
      * @return date format using bootstrap notation
      */
     private static String toBootstrapDateFormat(final String format) {
         String bootstrap_format = format;
-        
+
         // Replace long day name "EEEE" with "DD"
         bootstrap_format = bootstrap_format.replace("EEEE", "DD");
         // Replace short day name "EE" with "DD"
@@ -525,13 +524,13 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
             // Replace full year format "y" with "yyyy"
             bootstrap_format = bootstrap_format.replace("y", "yyyy");
         }
-        
+
         return bootstrap_format;
     }
 
     /**
      * Sets format of the date using GWT notation
-     * 
+     *
      * @param format date format in GWT notation
      */
     public void setGWTFormat(final String format) {
@@ -813,6 +812,7 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     }
 
     /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
     @Override
     public void setValidators(Validator<Date>... validators) {
         validatorMixin.setValidators(validators);
