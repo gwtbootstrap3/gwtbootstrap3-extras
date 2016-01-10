@@ -3,8 +3,6 @@
 This is the Extra (third party) components for [GwtBootstrap3](https://github.com/gwtbootstrap3/gwtbootstrap3).
 Checkout the [demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/) for more information.
 
-https://david-dm.org/crevete/gwtbootstrap3-extras.svg
-
 To use the widgets defined here, you will need to add this dependency.
 
 ```xml
