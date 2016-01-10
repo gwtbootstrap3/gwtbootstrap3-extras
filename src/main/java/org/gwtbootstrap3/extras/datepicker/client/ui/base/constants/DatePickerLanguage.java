@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,27 +20,32 @@ package org.gwtbootstrap3.extras.datepicker.client.ui.base.constants;
  * #L%
  */
 
-import com.google.gwt.resources.client.TextResource;
 import org.gwtbootstrap3.extras.datepicker.client.DatePickerClientBundle;
+
+import com.google.gwt.resources.client.TextResource;
 
 /**
  * @author Joshua Godi
  */
 public enum DatePickerLanguage {
     AR("ar", DatePickerClientBundle.INSTANCE.ar()),
+    AZ("az", DatePickerClientBundle.INSTANCE.az()),
     BG("bg", DatePickerClientBundle.INSTANCE.bg()),
+    BS("bs", DatePickerClientBundle.INSTANCE.bs()),
     CA("ca", DatePickerClientBundle.INSTANCE.ca()),
     CS("cs", DatePickerClientBundle.INSTANCE.cs()),
+    CY("cy", DatePickerClientBundle.INSTANCE.cy()),
     DA("da", DatePickerClientBundle.INSTANCE.da()),
     DE("de", DatePickerClientBundle.INSTANCE.de()),
     EL("el", DatePickerClientBundle.INSTANCE.el()),
     EN_GB("en-GB", DatePickerClientBundle.INSTANCE.en_GB()),
+    EO("eo", DatePickerClientBundle.INSTANCE.eo()),
     ES("es", DatePickerClientBundle.INSTANCE.es()),
     ET("et", DatePickerClientBundle.INSTANCE.et()),
     EU("eu", DatePickerClientBundle.INSTANCE.eu()),
     FA("fa", DatePickerClientBundle.INSTANCE.fa()),
-    FO("fo", DatePickerClientBundle.INSTANCE.fo()),
     FI("fi", DatePickerClientBundle.INSTANCE.fi()),
+    FO("fo", DatePickerClientBundle.INSTANCE.fo()),
     FR("fr", DatePickerClientBundle.INSTANCE.fr()),
     FR_CH("fr-CH", DatePickerClientBundle.INSTANCE.fr_CH()),
     GL("gl", DatePickerClientBundle.INSTANCE.gl()),
@@ -56,10 +61,13 @@ public enum DatePickerLanguage {
     KA("ka", DatePickerClientBundle.INSTANCE.ka()),
     KH("kh", DatePickerClientBundle.INSTANCE.kh()),
     KK("kk", DatePickerClientBundle.INSTANCE.kk()),
+    KO("ko", DatePickerClientBundle.INSTANCE.ko()),
     KR("kr", DatePickerClientBundle.INSTANCE.kr()),
     LT("lt", DatePickerClientBundle.INSTANCE.lt()),
     LV("lv", DatePickerClientBundle.INSTANCE.lv()),
+    ME("me", DatePickerClientBundle.INSTANCE.me()),
     MK("mk", DatePickerClientBundle.INSTANCE.mk()),
+    MN("mn", DatePickerClientBundle.INSTANCE.mn()),
     MS("ms", DatePickerClientBundle.INSTANCE.ms()),
     NB("nb", DatePickerClientBundle.INSTANCE.nb()),
     NL("nl", DatePickerClientBundle.INSTANCE.nl()),
@@ -81,8 +89,8 @@ public enum DatePickerLanguage {
     SW("sw", DatePickerClientBundle.INSTANCE.sw()),
     TH("th", DatePickerClientBundle.INSTANCE.th()),
     TR("tr", DatePickerClientBundle.INSTANCE.tr()),
-    VI("vi", DatePickerClientBundle.INSTANCE.vi()),
     UK("uk", DatePickerClientBundle.INSTANCE.uk()),
+    VI("vi", DatePickerClientBundle.INSTANCE.vi()),
     ZH_CN("zh-CN", DatePickerClientBundle.INSTANCE.zh_CN()),
     ZH_TW("zh-TW", DatePickerClientBundle.INSTANCE.zh_TW()),
     EN("en", null); // Base language, don't need another file
