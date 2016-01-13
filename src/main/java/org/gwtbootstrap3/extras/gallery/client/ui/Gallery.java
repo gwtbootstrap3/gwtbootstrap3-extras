@@ -373,7 +373,6 @@ public class Gallery extends ComplexWidget {
     }-*/;
 
     private native void destroy(Element e) /*-{
-        $wnd.jQuery(e).destroy();
         $wnd.jQuery(e).off('open');
         $wnd.jQuery(e).off('opened');
         $wnd.jQuery(e).off('close');
