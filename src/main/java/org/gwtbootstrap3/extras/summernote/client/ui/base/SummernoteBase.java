@@ -390,7 +390,7 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers, Has
         if (isAttached()) {
             command(getElement(), "empty");
         } else {
-        	super.clear();
+            super.clear();
             getElement().removeAllChildren();
         }
     }
