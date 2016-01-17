@@ -56,6 +56,34 @@ class SummernoteOptions extends JavaScriptObject {
     }-*/;
 
     /**
+     * @see {@link SummernoteBase#setFontNames(boolean)}
+     */
+    final native void setFontNames(JsArrayString fontNames) /*-{
+        this.fontNames = fontNames;
+    }-*/;
+
+    /**
+     * @see {@link SummernoteBase#setFontNamesIgnoreCheck(boolean)}
+     */
+    final native void setFontNamesIgnoreCheck(JsArrayString fontNamesIgnoreCheck) /*-{
+        this.fontNamesIgnoreCheck = fontNamesIgnoreCheck;
+    }-*/;
+
+    /**
+     * @see {@link SummernoteBase#setDialogsInBody(boolean)}
+     */
+    final native void setDialogsInBody(boolean dialogsInBody) /*-{
+        this.dialogsInBody = dialogsInBody;
+    }-*/;
+
+    /**
+     * @see {@link SummernoteBase#setDialogsFade(boolean)}
+     */
+    final native void setDialogsFade(boolean dialogsFade) /*-{
+        this.dialogsFade = dialogsFade;
+    }-*/;
+
+    /**
      * @see {@link SummernoteBase#setDisableDragAndDrop(boolean)}
      */
     final native void setDisableDragAndDrop(boolean disableDragAndDrop) /*-{
