@@ -42,6 +42,8 @@ public enum ToolbarButton {
     ITALIC("italic"),
     UNDERLINE("underline"),
     STRIKETHROUGH("strikethrough"),
+    SUPER_SCRIPT("superscript"),
+    SUB_SCRIPT("subscript"),
     CLEAR("clear"),
 
     /* Paragraph Style */

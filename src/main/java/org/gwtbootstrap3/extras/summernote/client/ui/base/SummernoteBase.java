@@ -43,7 +43,9 @@ import org.gwtbootstrap3.extras.summernote.client.event.SummernotePasteEvent;
 import org.gwtbootstrap3.extras.summernote.client.event.SummernotePasteHandler;
 import org.gwtbootstrap3.extras.summernote.client.ui.SummernoteLanguage;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -165,6 +167,37 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers, Has
     }
 
     /**
+     * Set customized font names.
+     *
+     * @param fontNames customized font names
+     * @see SummernoteFontName
+     */
+    public void setFontNames(final SummernoteFontName... fontNames) {
+        JsArrayString array = JavaScriptObject.createArray().cast();
+        for (SummernoteFontName fontName : fontNames) {
+            array.push(fontName.getName());
+        }
+        options.setFontNames(array);
+    }
+
+    /**
+     * Set a list for Web fonts to be ignored. <br>
+     * <br>
+     * Summernote tests font in fontNames before adding them to drop-down.
+     * This is problem while using Web fonts. It’s not easy picking up
+     * nice time to check availabilities of Web fonts.
+     *
+     * @param fontNames
+     */
+    public void setFontNamesIgnoreCheck(final SummernoteFontName... fontNames) {
+        JsArrayString array = JavaScriptObject.createArray().cast();
+        for (SummernoteFontName fontName : fontNames) {
+            array.push(fontName.getName());
+        }
+        options.setFontNamesIgnoreCheck(array);
+    }
+
+    /**
      * Set the air mode of the editor. Air-mode gives clearer interface with
      * hidden toolbar. To reveal toolbar, select a text where you want to
      * shape up.<br>
@@ -189,7 +222,33 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers, Has
     }
 
     /**
-     * Set <code>true</code> to disable drag and drop. Defaults to <code>false</code>.
+     * Set <code>true</code> to place dialogs in &lt;body&gt;
+     * rather than in the editor.<br>
+     * <br>
+     * Defaults to <code>false</code>.
+     *
+     * @param dialogsInBody if <code>true</code>, place dialogs in &lt;body&gt;
+     */
+    public void setDialogsInBody(final boolean dialogsInBody) {
+        options.setDialogsInBody(dialogsInBody);
+    }
+
+    /**
+     * Set <code>true</code> to turn on dialogs fading effect
+     * when showing or hiding.<br>
+     * <br>
+     * Defaults to <code>false</code>.
+     *
+     * @param dialogsFade if <code>true</code>, turn on dialogs fading effect
+     */
+    public void setDialogsFade(final boolean dialogsFade) {
+        options.setDialogsFade(dialogsFade);
+    }
+
+    /**
+     * Set <code>true</code> to disable drag and drop.<br>
+     * <br>
+     * Defaults to <code>false</code>.
      *
      * @param disableDragAndDrop if <code>true</code>, disable drag and drop
      */
@@ -322,6 +381,20 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers, Has
         return getElement().getInnerHTML().isEmpty();
     }
 
+    /**
+     * Removes all contents and restores the editable instance
+     * to an <code>_emptyPara_</code>: &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+     */
+    @Override
+    public void clear() {
+        if (isAttached()) {
+            command(getElement(), "empty");
+        } else {
+        	super.clear();
+            getElement().removeAllChildren();
+        }
+    }
+
     @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
@@ -336,11 +409,13 @@ public class SummernoteBase extends Div implements HasAllSummernoteHandlers, Has
     }
 
     /**
-     * Resets the editor.
+     * Clear editor contents and remove all stored history.
      */
     public void reset() {
         if (isAttached()) {
             command(getElement(), "reset");
+        } else {
+            clear();
         }
     }
 
