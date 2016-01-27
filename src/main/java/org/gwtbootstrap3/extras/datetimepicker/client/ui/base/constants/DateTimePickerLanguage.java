@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ public enum DateTimePickerLanguage {
     IS("is", DateTimePickerClientBundle.INSTANCE.is()),
     IT("it", DateTimePickerClientBundle.INSTANCE.it()),
     JA("ja", DateTimePickerClientBundle.INSTANCE.ja()),
+    KA("ka", DateTimePickerClientBundle.INSTANCE.ka()),
     KO("ko", DateTimePickerClientBundle.INSTANCE.ko()),
     LT("lt", DateTimePickerClientBundle.INSTANCE.lt()),
     LV("lv", DateTimePickerClientBundle.INSTANCE.lv()),
