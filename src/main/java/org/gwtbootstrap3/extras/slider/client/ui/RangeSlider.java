@@ -22,6 +22,7 @@ package org.gwtbootstrap3.extras.slider.client.ui;
 
 import org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.Event;
@@ -79,6 +80,30 @@ public class RangeSlider extends SliderBase<Range> {
         var range = $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
         return @org.gwtbootstrap3.extras.slider.client.ui.Range::new(Lcom/google/gwt/core/client/JsArrayNumber;)(range);
     }-*/;
+
+    @Override
+    protected native void setFormatterOption(JavaScriptObject options) /*-{
+        var slider = this;
+        options.formatter = function(value) {
+            var range = @org.gwtbootstrap3.extras.slider.client.ui.Range::new(Lcom/google/gwt/core/client/JsArrayNumber;)(value);
+            return slider.@org.gwtbootstrap3.extras.slider.client.ui.RangeSlider::formatTooltip(Lorg/gwtbootstrap3/extras/slider/client/ui/Range;)(range);
+        };
+    }-*/;
+
+    @Override
+    protected native void setFormatter(Element e) /*-{
+        var slider = this;
+        var attr = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::FORMATTER;
+        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, function(value) {
+            var range = @org.gwtbootstrap3.extras.slider.client.ui.Range::new(Lcom/google/gwt/core/client/JsArrayNumber;)(value);
+            return slider.@org.gwtbootstrap3.extras.slider.client.ui.RangeSlider::formatTooltip(Lorg/gwtbootstrap3/extras/slider/client/ui/Range;)(range);
+        });
+    }-*/;
+
+    @Override
+    protected String format(Range value) {
+        return value.getMinValue() + " : " + value.getMaxValue();
+    }
 
     @Override
     protected Range convertValue(String value) {

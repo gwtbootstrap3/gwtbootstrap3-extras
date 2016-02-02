@@ -28,6 +28,7 @@ import org.gwtbootstrap3.extras.summernote.client.SummernoteClientBundle;
  */
 public enum SummernoteLanguage {
     AR_AR("ar-AR", SummernoteClientBundle.INSTANCE.ar_AR()),
+    BG_BG("bg-BG", SummernoteClientBundle.INSTANCE.bg_BG()),
     CA_ES("ca-ES", SummernoteClientBundle.INSTANCE.ca_ES()),
     CS_CZ("cs-CZ", SummernoteClientBundle.INSTANCE.cs_CZ()),
     DA_DK("da-DK", SummernoteClientBundle.INSTANCE.da_DK()),
@@ -45,6 +46,7 @@ public enum SummernoteLanguage {
     KO_KR("ko-KR", SummernoteClientBundle.INSTANCE.ko_KR()),
     NB_NO("nb-NO", SummernoteClientBundle.INSTANCE.nb_NO()),
     NL_NL("nl-NL", SummernoteClientBundle.INSTANCE.nl_NL()),
+    LT_LT("lt-LT", SummernoteClientBundle.INSTANCE.lt_LT()),
     PL_PL("pl-PL", SummernoteClientBundle.INSTANCE.pl_PL()),
     PT_BR("pt-BR", SummernoteClientBundle.INSTANCE.pt_BR()),
     PT_PT("pt-PT", SummernoteClientBundle.INSTANCE.pt_PT()),
@@ -53,7 +55,7 @@ public enum SummernoteLanguage {
     SK_SK("sk-SK", SummernoteClientBundle.INSTANCE.sk_SK()),
     SL_SL("sl-SI", SummernoteClientBundle.INSTANCE.sl_SI()),
     SR_RS("sr-RS", SummernoteClientBundle.INSTANCE.sr_RS()),
-    SR_RS_LATION("sr-RS-Latin", SummernoteClientBundle.INSTANCE.sr_RS_Latin()),
+    SR_RS_LATIN("sr-RS-Latin", SummernoteClientBundle.INSTANCE.sr_RS_Latin()),
     SV_SE("sv-SE", SummernoteClientBundle.INSTANCE.sv_SE()),
     TH_TH("th-TH", SummernoteClientBundle.INSTANCE.th_TH()),
     TR_TR("tr-TR", SummernoteClientBundle.INSTANCE.tr_TR()),
@@ -61,7 +63,7 @@ public enum SummernoteLanguage {
     VI_VN("vi-VN", SummernoteClientBundle.INSTANCE.vi_VN()),
     ZH_CN("zh-CN", SummernoteClientBundle.INSTANCE.zh_CN()),
     ZH_TW("zh-TW", SummernoteClientBundle.INSTANCE.zh_TW()),
-    EN("en-GB", null); // Base language, don't need another file
+    EN_US("en-US", null); // Base language, don't need another file
   
     private final String code;
     private final TextResource js;

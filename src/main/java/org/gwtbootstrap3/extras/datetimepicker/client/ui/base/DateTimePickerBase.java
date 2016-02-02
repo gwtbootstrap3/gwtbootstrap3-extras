@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.datetimepicker.client.ui.base;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import org.gwtbootstrap3.client.shared.event.ShowHandler;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasPlaceholder;
+import org.gwtbootstrap3.client.ui.base.HasReadOnly;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.base.ValueBoxBase;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
@@ -79,10 +80,11 @@ import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.events.OutOfRangeH
 
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.editor.client.EditorError;
 import com.google.gwt.editor.client.HasEditorErrors;
 import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -98,11 +100,35 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joshua Godi
  * @author Steven Jardine
  */
-public class DateTimePickerBase extends Widget implements HasEnabled, HasId, HasResponsiveness, HasVisibility, HasPlaceholder,
-        HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse, HasFormat, HasHighlightToday, HasKeyboardNavigation,
-        HasMaxView, HasMinuteStep, HasMinView, HasShowMeridian, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect,
-        HasWeekStart, HasDateTimePickerHandlers, HasLanguage, HasName, HasValue<Date>, HasPosition, LeafValueEditor<Date>,
-        HasEditorErrors<Date>, HasErrorHandler, HasValidators<Date>, HasBlankValidator<Date> {
+public class DateTimePickerBase extends Widget implements HasEnabled, HasReadOnly, HasId, HasResponsiveness, HasVisibility,
+        HasPlaceholder, HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse, HasFormat, HasHighlightToday,
+        HasKeyboardNavigation, HasMaxView, HasMinuteStep, HasMinView, HasShowMeridian, HasShowTodayButton, HasStartDate,
+        HasStartView, HasViewSelect, HasWeekStart, HasDateTimePickerHandlers, HasLanguage, HasName, HasValue<Date>, HasPosition,
+        LeafValueEditor<Date>, HasEditorErrors<Date>, HasErrorHandler, HasValidators<Date>, HasBlankValidator<Date> {
+
+    static class DatePickerValidatorMixin extends BlankValidatorMixin<DateTimePickerBase, Date> {
+
+        private boolean showing = false;
+
+        public void setShowing(boolean showing) {
+            this.showing = showing;
+        }
+
+        public DatePickerValidatorMixin(DateTimePickerBase inputWidget, ErrorHandler errorHandler) {
+            super(inputWidget, errorHandler);
+        }
+
+        @Override
+        protected com.google.web.bindery.event.shared.HandlerRegistration setupBlurValidation() {
+            return getInputWidget().addDomHandler(new BlurHandler() {
+                @Override
+                public void onBlur(BlurEvent event) {
+                    getInputWidget().validate(!showing && getValidateOnBlur());
+                }
+            }, BlurEvent.getType());
+        }
+
+    }
 
     // Check http://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
     // for more information on syntax
@@ -121,13 +147,13 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     private final DateTimeFormat startEndDateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
     private LeafValueEditor<Date> editor;
     private final ErrorHandlerMixin<Date> errorHandlerMixin = new ErrorHandlerMixin<Date>(this);
-    private final BlankValidatorMixin<DateTimePickerBase, Date> validatorMixin = new BlankValidatorMixin<DateTimePickerBase, Date>(this,
-        errorHandlerMixin.getErrorHandler());
+    private final DatePickerValidatorMixin validatorMixin = new DatePickerValidatorMixin(this,
+            errorHandlerMixin.getErrorHandler());
 
     /**
      * DEFAULT values
      */
-    private String format = "mm/dd/yyyy HH:ii";
+    private String format = "mm/dd/yyyy hh:ii";
     private DateTimePickerDayOfWeek weekStart = DateTimePickerDayOfWeek.SUNDAY;
     private DateTimePickerDayOfWeek[] daysOfWeekDisabled = {};
     private boolean autoClose = false;
@@ -141,7 +167,6 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     private int minuteStep = 5;
     private DateTimePickerView viewSelect = DateTimePickerView.HOUR;
     private boolean showMeridian = false;
-    private Widget container = null;
     private DateTimePickerLanguage language = DateTimePickerLanguage.EN;
     private DateTimePickerPosition position = DateTimePickerPosition.BOTTOM_RIGHT;
 
@@ -149,14 +174,6 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         textBox = new TextBox();
         setElement((Element) textBox.getElement());
         setFormat(format);
-    }
-
-    public void setContainer(final Widget container) {
-        this.container = container;
-    }
-
-    public Widget getContainer() {
-        return container;
     }
 
     public TextBox getTextBox() {
@@ -187,7 +204,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         return textBox.isReadOnly();
     }
 
-    
+
     /** {@inheritDoc} */
     @Override
     public boolean isEnabled() {
@@ -300,6 +317,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
             // On show we put focus on the textbox
             textBox.setFocus(true);
     
+            validatorMixin.setShowing(true);
             fireEvent(new ShowEvent(e));
         } else {
             // Don't show when it's readonly or disabled
@@ -316,9 +334,8 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     /** {@inheritDoc} */
     @Override
     public void onHide(final Event e) {
-        // On hide we remove focus from the textbox
-        textBox.setFocus(false);
-
+        validatorMixin.setShowing(false);
+        validate(getValidateOnBlur());
         fireEvent(new HideEvent(e));
     }
 
@@ -500,6 +517,68 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         this.weekStart = weekStart;
     }
 
+    /**
+     * Convert GWT date time format to bootstrap date time format
+     *
+     * @param format date time format using GWT notation
+     * @return date time format using bootstrap notation
+     */
+    private static String toBootstrapDateFormat(final String format) {
+        String bootstrap_format = format;
+
+        // Replace long day name "EEEE" with "DD"
+        bootstrap_format = bootstrap_format.replace("EEEE", "DD");
+        // Replace short day name "EE" with "DD"
+        bootstrap_format = bootstrap_format.replaceAll("E{1,3}", "D");
+        // Replace minutes "m" with "i"
+        bootstrap_format = bootstrap_format.replaceAll("m", "i");
+        // Replace "H" with "h" and vice versa
+        bootstrap_format = bootstrap_format.replaceAll("H", "Q");
+        bootstrap_format = bootstrap_format.replaceAll("h", "H");
+        bootstrap_format = bootstrap_format.replaceAll("Q", "h");
+        // Replace "a" with "P" for AM/PM markers
+        bootstrap_format = bootstrap_format.replaceAll("a", "P");
+
+        // If there are at least 3 Ms there is month name in wording
+        if (bootstrap_format.contains("MMM")) {
+            // Replace long date month "MMMM" with "MM"
+            bootstrap_format = bootstrap_format.replace("MMMM", "MM");
+            // Replace month name "MMM" with "M"
+            bootstrap_format = bootstrap_format.replace("MMM", "M");
+        }
+        else {
+            // Replace month number with leading 0 "MM" with "mm"
+            bootstrap_format = bootstrap_format.replace("MM", "mm");
+            // Replace month number "M" with "m"
+            bootstrap_format = bootstrap_format.replace("M", "m");
+        }
+        if (!bootstrap_format.contains("yy")) {
+            // Replace full year format "y" with "yyyy"
+            bootstrap_format = bootstrap_format.replace("y", "yyyy");
+        }
+
+        return bootstrap_format;
+    }
+
+    /**
+     * Sets format of the date using GWT notation
+     *
+     * @param format date time format in GWT notation
+     */
+    public void setGWTFormat(final String format) {
+        this.format = toBootstrapDateFormat(format);
+
+        // Get the old value
+        final Date oldValue = getValue();
+
+        // Make the new DateTimeFormat
+        this.dateTimeFormat = DateTimeFormat.getFormat(format);
+
+        if (oldValue != null) {
+            setValue(oldValue);
+        }
+    }
+
     /** {@inheritDoc} */
     @Override
     public void setFormat(final String format) {
@@ -571,17 +650,11 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         }
     }
 
-
     /** {@inheritDoc} */
     @Override
     protected void onLoad() {
         super.onLoad();
         configure();
-
-        // With the new update (2.3.1), the parent must have position: relative for positioning to work
-        if (getElement().getParentElement() != null) {
-            getElement().getParentElement().getStyle().setPosition(Style.Position.RELATIVE);
-        }
     }
 
     /** {@inheritDoc} */
@@ -592,22 +665,12 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     }
 
     protected void configure() {
-        // If the user hasn't specified the container, default to the widget's parent
-        // This makes sure the modal scroll with the content correctly
-        if (container == null) {
-            configure(this, this.getParent());
-        } else {
-            configure(this, container);
-        }
-    }
-
-    protected void configure(final Widget w, final Widget container) {
-        w.getElement().setAttribute("data-date-format", format);
+        getElement().setAttribute("data-date-format", format);
 
         // If configuring not for the first time, datetimepicker must be removed first.
-        this.remove(w.getElement());
+        this.remove(getElement());
 
-        configure(w.getElement(), container.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
+        configure(getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
                 startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
                 keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian, language.getCode(), position.getPosition());
     }
@@ -622,12 +685,6 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
 
     private native void remove(Element e) /*-{
         $wnd.jQuery(e).datetimepicker('remove');
-        $wnd.jQuery(e).off('show');
-        $wnd.jQuery(e).off('hide');
-        $wnd.jQuery(e).off('changeDate');
-        $wnd.jQuery(e).off('changeYear');
-        $wnd.jQuery(e).off('changeMonth');
-        $wnd.jQuery(e).off('outOfRange');
     }-*/;
 
     private native void show(Element e) /*-{
@@ -654,11 +711,10 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
         $wnd.jQuery(e).datetimepicker('setDaysOfWeekDisabled', daysOfWeekDisabled);
     }-*/;
 
-    protected native void configure(Element e, Element p, String format, int weekStart, String daysOfWeekDisabled,
-                                    boolean autoClose, int startView, int minView,
-                                    int maxView, boolean todayBtn, boolean highlightToday, boolean keyboardNavigation,
-                                    boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian, String language,
-                                    String position) /*-{
+    protected native void configure(Element e, String format, int weekStart, String daysOfWeekDisabled,
+         boolean autoClose, int startView, int minView, int maxView, boolean todayBtn, boolean highlightToday,
+         boolean keyboardNavigation, boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian,
+         String language, String position) /*-{
         var that = this;
         $wnd.jQuery(e).datetimepicker({
             format: format,
@@ -675,8 +731,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
             forceParse: forceParse,
             minuteStep: minuteStep,
             showMeridian: showMeridian,
-            pickerPosition: position,
-            container: p
+            pickerPosition: position
         })
             .on('show', function (e) {
                 that.@org.gwtbootstrap3.extras.datetimepicker.client.ui.base.DateTimePickerBase::onShow(Lcom/google/gwt/user/client/Event;)(e);
@@ -767,7 +822,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
 
     /** {@inheritDoc} */
     @Override
-    public void setValidators(Validator<Date>... validators) {
+    public void setValidators(@SuppressWarnings("unchecked") Validator<Date>... validators) {
         validatorMixin.setValidators(validators);
     }
 
@@ -793,6 +848,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasId, Has
     @Override
     public void setErrorHandler(ErrorHandler errorHandler) {
         errorHandlerMixin.setErrorHandler(errorHandler);
+        validatorMixin.setErrorHandler(errorHandler);
     }
 
     /** {@inheritDoc} */

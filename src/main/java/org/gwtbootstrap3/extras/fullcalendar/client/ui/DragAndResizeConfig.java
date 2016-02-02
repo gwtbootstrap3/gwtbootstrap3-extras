@@ -57,7 +57,7 @@ public class DragAndResizeConfig implements IsJavaScriptObject {
                 dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DragAndResizeCallback::eventDragStop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event, originalEvent);
             }
         };
-        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DragAndResizeConfig::script.eventDrop = function (event, revertFunc, jsEvent, ui, view) {
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DragAndResizeConfig::script.eventDrop = function (event, delta, revertFunc, jsEvent, ui, view) {
             var originalEvent = null;
             if (jsEvent && jsEvent.originalEvent) {
                 originalEvent = jsEvent.originalEvent;
@@ -83,7 +83,7 @@ public class DragAndResizeConfig implements IsJavaScriptObject {
                 dragResizeHandler.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DragAndResizeCallback::eventResizeStop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/dom/client/NativeEvent;)(event, originalEvent);
             }
         };
-        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DragAndResizeConfig::script.eventResize = function (event, revertFunc, jsEvent, ui, view) {
+        theInstance.@org.gwtbootstrap3.extras.fullcalendar.client.ui.DragAndResizeConfig::script.eventResize = function (event, delta, revertFunc, jsEvent, ui, view) {
             var originalEvent = null;
             if (jsEvent && jsEvent.originalEvent) {
                 originalEvent = jsEvent.originalEvent;

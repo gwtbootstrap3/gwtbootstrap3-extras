@@ -26,12 +26,14 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
 import org.gwtbootstrap3.extras.typeahead.client.base.Dataset;
 import org.gwtbootstrap3.extras.typeahead.client.base.Suggestion;
 import org.gwtbootstrap3.extras.typeahead.client.events.*;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Twitter typeahead.js
@@ -47,6 +49,7 @@ public class Typeahead<T> extends TextBox {
     private int minLength = 1;
 
     public Typeahead() {
+        setDatasets(new CollectionDataset(Collections.emptyList()));
     }
 
     /**

@@ -44,18 +44,22 @@ enum SliderOption {
     SELECTION("selection"),
     TOOLTIP("tooltip"),
     TOOLTIP_SPLIT("tooltip_split"),
+    TOOLTIP_POSITION("tooltip_position"),
     HANDLE("handle"),
     REVERSED("reversed"),
     ENABLED("enabled"),
     FORMATTER("formatter"),
     NATURAL_ARROW_KEYS("natural_arrow_keys"),
     TICKS("ticks"),
+    TICKS_POSITIONS("ticks_positions"),
     TICKS_LABELS("ticks_labels"),
     TICKS_SNAP_BOUNDS("ticks_snap_bounds"),
     SCALE("scale"),
+    FOCUS("focus"),
     ;
 
     private final String name;
+    private final String dataAttrName;
     private final static String DATA_ATTRIBUTE_PREFIX = "data-slider-";
 
     /**
@@ -63,6 +67,7 @@ enum SliderOption {
      */
     private SliderOption(final String name) {
         this.name = name;
+        this.dataAttrName = name.replaceAll("_", "-");
     }
 
     /**
@@ -81,6 +86,6 @@ enum SliderOption {
      * @return the data attribute name
      */
     public String getDataAttribute() {
-        return DATA_ATTRIBUTE_PREFIX + name;
+        return DATA_ATTRIBUTE_PREFIX + dataAttrName;
     }
 }

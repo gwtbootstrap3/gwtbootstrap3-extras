@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.select.client.constants;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class DataAttributes {
     public static final String DATA_SHOW_SUBTEXT = "data-show-subtext";
     public static final String DATA_SUBTEXT = "data-subtext";
     public static final String DATA_WIDTH = "data-width";
-    public static final String DATA_MAX_OPTION = "data-max-option";
+    public static final String DATA_MAX_OPTIONS = "data-max-options";
     public static final String DATA_MOBILE = "data-mobile";
     public static final String DATA_HIDDEN = "data-hidden";
 
