@@ -36,6 +36,8 @@ import java.util.Date;
  */
 public class Event implements IsJavaScriptObject {
 
+    private static final DateTimeFormat ISO_8601_FORMAT = DateTimeFormat.getFormat(PredefinedFormat.ISO_8601);
+    private static final DateTimeFormat RFC_2822_FORMAT = DateTimeFormat.getFormat(PredefinedFormat.RFC_2822);
     private JavaScriptObject event;
 
     public Event(final String id, final String title) {
@@ -308,11 +310,11 @@ public class Event implements IsJavaScriptObject {
     }-*/;
 
     public static String getDateAsRFC_2822(final Date d) {
-        return d == null ? "" : DateTimeFormat.getFormat(PredefinedFormat.RFC_2822).format(d);
+        return d == null ? "" : RFC_2822_FORMAT.format(d);
     }
 
     public static String getDateAsISO8601(final Date d) {
-        return d == null ? "" : DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).format(d);
+        return d == null ? "" : ISO_8601_FORMAT.format(d);
     }
 
     public static String getDateAsUnixTimestamp(final Date d) {

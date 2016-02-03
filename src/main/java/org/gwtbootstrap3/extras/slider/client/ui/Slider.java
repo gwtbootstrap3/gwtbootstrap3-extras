@@ -22,6 +22,7 @@ package org.gwtbootstrap3.extras.slider.client.ui;
 
 import org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.Event;
@@ -66,6 +67,30 @@ public class Slider extends SliderBase<Double> {
         var value = $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
         return @java.lang.Double::new(D)(value);
     }-*/;
+
+    @Override
+    protected native void setFormatterOption(JavaScriptObject options) /*-{
+        var slider = this;
+        options.formatter = function(value) {
+            var val = @java.lang.Double::new(D)(value);
+            return slider.@org.gwtbootstrap3.extras.slider.client.ui.Slider::formatTooltip(Ljava/lang/Double;)(val);
+        };
+    }-*/;
+
+    @Override
+    protected native void setFormatter(Element e) /*-{
+        var slider = this;
+        var attr = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::FORMATTER;
+        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, function(value) {
+            var val = @java.lang.Double::new(D)(value);
+            return slider.@org.gwtbootstrap3.extras.slider.client.ui.Slider::formatTooltip(Ljava/lang/Double;)(val);
+        });
+    }-*/;
+
+    @Override
+    protected String format(Double value) {
+        return value.toString();
+    }
 
     @Override
     protected Double convertValue(String value) {

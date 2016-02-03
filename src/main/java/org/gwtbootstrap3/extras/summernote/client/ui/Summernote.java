@@ -33,7 +33,7 @@ public class Summernote extends SummernoteBase {
 
     public Summernote(final int height) {
         super();
-        setHeight(height);
+        setDefaultHeight(height);
     }
 
     public Summernote(final int height, final boolean hasFocus) {

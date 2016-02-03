@@ -1,0 +1,4 @@
+.blueimp-gallery>.prev, .blueimp-gallery>.next {
+    border: none !important;
+    background: none !important;
+}

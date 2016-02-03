@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.base.HasId;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
@@ -34,6 +33,7 @@ import org.gwtbootstrap3.extras.slider.client.ui.base.constants.HandleType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.OrientationType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.ScaleType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.SelectionType;
+import org.gwtbootstrap3.extras.slider.client.ui.base.constants.TooltipPosition;
 import org.gwtbootstrap3.extras.slider.client.ui.base.constants.TooltipType;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.HasAllSlideHandlers;
 import org.gwtbootstrap3.extras.slider.client.ui.base.event.SlideDisabledEvent;
@@ -51,6 +51,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayNumber;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.core.client.JsonUtils;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.LeafValueEditor;
@@ -61,7 +62,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -76,17 +76,13 @@ public abstract class SliderBase<T> extends Widget implements
         HasValue<T>, IsEditor<LeafValueEditor<T>>, HasEnabled, HasId,
         HasResponsiveness, HasAllSlideHandlers<T> {
 
-    private final TextBox textBox;
-    private FormatterCallback formatterCallback;
+    private FormatterCallback<T> formatterCallback;
     private LeafValueEditor<T> editor;
 
     private final AttributeMixin<SliderBase<T>> attributeMixin = new AttributeMixin<SliderBase<T>>(this);
 
     protected SliderBase() {
-        textBox = new TextBox();
-        // now remove the bootstrap styles
-        textBox.removeStyleName(UIObject.getStyleName(textBox.getElement()));
-        setElement((Element) textBox.getElement());
+        setElement(Document.get().createTextInputElement());
     }
 
     @Override
@@ -99,6 +95,13 @@ public abstract class SliderBase<T> extends Widget implements
         initSlider(getElement(), options);
         bindSliderEvents(getElement());
     }
+
+    /**
+     * Sets formatter option if defined when attaching to the DOM.
+     *
+     * @param options
+     */
+    protected abstract void setFormatterOption(JavaScriptObject options);
 
     @Override
     protected void onUnload() {
@@ -244,6 +247,22 @@ public abstract class SliderBase<T> extends Widget implements
         updateSlider(SliderOption.TOOLTIP_SPLIT, tooltipSplit);
     }
 
+    public TooltipPosition getTooltipPosition() {
+        TooltipPosition defaultPosition = getOrientation() == OrientationType.HORIZONTAL ?
+                TooltipPosition.TOP : TooltipPosition.RIGHT;
+        return getEnumAttribute(SliderOption.TOOLTIP_POSITION, TooltipPosition.class, defaultPosition);
+    }
+
+    /**
+     * Sets the tool-tip position.
+     *
+     * @param position
+     * @see TooltipPosition
+     */
+    public void setTooltipPosition(final TooltipPosition position) {
+        updateSlider(SliderOption.TOOLTIP_POSITION, position.getPosition());
+    }
+
     public HandleType getHandle() {
         return getEnumAttribute(SliderOption.HANDLE, HandleType.class, HandleType.ROUND);
     }
@@ -297,7 +316,7 @@ public abstract class SliderBase<T> extends Widget implements
      *
      * @param formatterCallback
      */
-    public void setFormatter(final FormatterCallback formatterCallback) {
+    public void setFormatter(final FormatterCallback<T> formatterCallback) {
         this.formatterCallback = formatterCallback;
         if (isAttached()) {
             setFormatter(getElement());
@@ -305,11 +324,27 @@ public abstract class SliderBase<T> extends Widget implements
         }
     }
 
-    private String formatter(final double value) {
+    /**
+     * Sets the callback function of the {@link SliderOption#FORMATTER} attribute.
+     *
+     * @param element
+     */
+    protected abstract void setFormatter(Element element);
+
+    protected String formatTooltip(final T value) {
         if (formatterCallback != null)
             return formatterCallback.formatTooltip(value);
-        return Double.toString(value);
+        return format(value);
     }
+
+    /**
+     * Formats the slider value to string value to be displayed
+     * as tool-tip text.
+     *
+     * @param value
+     * @return
+     */
+    protected abstract String format(final T value);
 
     public boolean isNaturalArrowKeys() {
         return getBooleanAttribute(SliderOption.NATURAL_ARROW_KEYS, false);
@@ -346,6 +381,20 @@ public abstract class SliderBase<T> extends Widget implements
         updateSliderForNumberArray(SliderOption.TICKS, ticks);
     }
 
+    public List<Double> getTicksPositions() {
+        return getNumberArrayAttribute(SliderOption.TICKS_POSITIONS, Collections.<Double>emptyList());
+    }
+
+    /**
+     * Defines the positions of the tick values in percentages.<br>
+     * The first value should always be 0, the last value should always be 100 percent.
+     *
+     * @param ticksPositions
+     */
+    public void setTicksPositions(final List<Double> ticksPositions) {
+        updateSliderForNumberArray(SliderOption.TICKS_POSITIONS, ticksPositions);
+    }
+
     public List<String> getTicksLabels() {
         return getStringArrayAttribute(SliderOption.TICKS_LABELS, Collections.<String>emptyList());
     }
@@ -377,6 +426,20 @@ public abstract class SliderBase<T> extends Widget implements
 
     public ScaleType getScale() {
         return getEnumAttribute(SliderOption.SCALE, ScaleType.class, ScaleType.LINEAR);
+    }
+
+    /**
+     * Focus the appropriate slider handle after a value change.
+     * Defaults to false.
+     *
+     * @param focus
+     */
+    public void setFocusHandle(final boolean focus) {
+        updateSlider(SliderOption.FOCUS, focus);
+    }
+
+    public boolean getFocusHandle() {
+        return getBooleanAttribute(SliderOption.FOCUS, false);
     }
 
     /**
@@ -472,7 +535,7 @@ public abstract class SliderBase<T> extends Widget implements
     protected abstract T getValue(Element e);
 
     /**
-     * Converts the value of the {@link SliderOption.VALUE} attribute to the
+     * Converts the value of the {@link SliderOption#VALUE} attribute to the
      * slider value.
      *
      * @param value
@@ -813,24 +876,9 @@ public abstract class SliderBase<T> extends Widget implements
         return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::IS_ENABLED);
     }-*/;
 
-    private native void setFormatterOption(JavaScriptObject options) /*-{
-        var slider = this;
-        options.formatter = function(value) {
-            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(value);
-        };
-    }-*/;
-
-    private native void setFormatter(Element e) /*-{
-        var slider = this;
-        var attr = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::FORMATTER;
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, function(value) {
-            return slider.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::formatter(D)(value);
-        });
-    }-*/;
-
     /**
      * FIXME: This is a workaround for the refresh command, since it is buggy in
-     * the current version (4.5.6). After executing this command, the slider
+     * the current version (6.0.4). After executing this command, the slider
      * becomes consistently a range slider with 2 handles. This should be
      * removed once the bug is fixed in a future version.
      *

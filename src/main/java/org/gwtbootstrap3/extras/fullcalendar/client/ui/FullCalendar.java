@@ -217,11 +217,18 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
 
     public void addEvents(final List<Event> events) {
         if (loaded && events != null && !events.isEmpty()) {
+            JsArray<JavaScriptObject> jsEvents = JavaScriptObject.createArray(events.size()).cast();
+            int i = 0;
             for (final Event evt : events) {
-                addEvent(getElement().getId(), evt.toJavaScript());
+                jsEvents.set(i++, evt.toJavaScript());
             }
+            addEventSource(getElement().getId(), jsEvents);
         }
     }
+
+    private native void addEventSource(String id, JsArray<JavaScriptObject> events) /*-{
+        $wnd.jQuery('#' + id).fullCalendar('addEventSource', events);
+    }-*/;
 
     public ViewOption getCurrentView() {
         return currentView;
@@ -274,6 +281,14 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
             removeEvent(getElement().getId(), eventId);
         }
     }
+
+    public void removeAllEvents() {
+        removeAllEvents(getElement().getId());
+    }
+
+    private native void removeAllEvents(String id) /*-{
+        $wnd.jQuery('#' + id).fullCalendar('removeEvents');
+    }-*/;
 
     public native void removeEvent(String id, String eventId) /*-{
         $wnd.jQuery('#' + id).fullCalendar('removeEvents', eventId);

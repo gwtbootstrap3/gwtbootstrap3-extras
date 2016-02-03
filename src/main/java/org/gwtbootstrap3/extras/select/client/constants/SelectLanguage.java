@@ -25,6 +25,7 @@ import org.gwtbootstrap3.extras.select.client.SelectClientBundle;
 
 public enum SelectLanguage {
     CS("cs", SelectClientBundle.INSTANCE.cs()),
+    DA("da", SelectClientBundle.INSTANCE.da()),
     DE("de", SelectClientBundle.INSTANCE.de()),
     EN_US("en-US", SelectClientBundle.INSTANCE.en()),
     ES("es", SelectClientBundle.INSTANCE.es()),
@@ -32,11 +33,14 @@ public enum SelectLanguage {
     FR("fr", SelectClientBundle.INSTANCE.fr()),
     HU("hu", SelectClientBundle.INSTANCE.hu()),
     IT("it", SelectClientBundle.INSTANCE.it()),
+    KO("ko", SelectClientBundle.INSTANCE.ko()),
     NL("nl", SelectClientBundle.INSTANCE.nl()),
     PL("pl", SelectClientBundle.INSTANCE.pl()),
     PT_BR("pt-BR", SelectClientBundle.INSTANCE.pt_BR()),
+    PT_PT("pt-PT", SelectClientBundle.INSTANCE.pt_PT()),
     RO("ro", SelectClientBundle.INSTANCE.ro()),
     RU("ru", SelectClientBundle.INSTANCE.ru()),
+    SK("sk", SelectClientBundle.INSTANCE.sk()),
     SL("sl", SelectClientBundle.INSTANCE.sl()),
     SV("sv", SelectClientBundle.INSTANCE.sv()),
     TR("tr", SelectClientBundle.INSTANCE.tr()),
