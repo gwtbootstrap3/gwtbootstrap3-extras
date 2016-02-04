@@ -314,9 +314,6 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasReadOnl
     @Override
     public void onShow(final Event e) {
         if (!isReadOnly() && isEnabled()) {
-            // On show we put focus on the textbox
-            textBox.setFocus(true);
-    
             validatorMixin.setShowing(true);
             fireEvent(new ShowEvent(e));
         } else {
