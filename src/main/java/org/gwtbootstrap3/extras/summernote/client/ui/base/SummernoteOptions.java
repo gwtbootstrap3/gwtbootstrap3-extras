@@ -20,7 +20,7 @@ package org.gwtbootstrap3.extras.summernote.client.ui.base;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.summernote.client.ui.SummernoteLanguage;
+import org.gwtbootstrap3.extras.summernote.client.ui.base.constants.SummernoteLanguage;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayMixed;

@@ -313,8 +313,13 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasReadOnl
     /** {@inheritDoc} */
     @Override
     public void onShow(final Event e) {
-        validatorMixin.setShowing(true);
-        fireEvent(new ShowEvent(e));
+        if (!isReadOnly() && isEnabled()) {
+            validatorMixin.setShowing(true);
+            fireEvent(new ShowEvent(e));
+        } else {
+            // Don't show when it's readonly or disabled
+            hide();
+        }
     }
 
     /** {@inheritDoc} */

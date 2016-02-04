@@ -41,7 +41,8 @@ import org.gwtbootstrap3.extras.summernote.client.event.SummernoteKeyUpEvent;
 import org.gwtbootstrap3.extras.summernote.client.event.SummernoteKeyUpHandler;
 import org.gwtbootstrap3.extras.summernote.client.event.SummernotePasteEvent;
 import org.gwtbootstrap3.extras.summernote.client.event.SummernotePasteHandler;
-import org.gwtbootstrap3.extras.summernote.client.ui.SummernoteLanguage;
+import org.gwtbootstrap3.extras.summernote.client.ui.base.constants.HasLanguage;
+import org.gwtbootstrap3.extras.summernote.client.ui.base.constants.SummernoteLanguage;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -59,7 +60,7 @@ import com.google.gwt.user.client.ui.UIObject;
  *
  * @author Xiaodong Sun
  */
-public class SummernoteBase extends Div implements HasAllSummernoteHandlers, HasEnabled {
+public class SummernoteBase extends Div implements HasAllSummernoteHandlers, HasEnabled, HasLanguage {
 
     /**
      * Language; defaults to {@link SummernoteLanguage#EN_US}
