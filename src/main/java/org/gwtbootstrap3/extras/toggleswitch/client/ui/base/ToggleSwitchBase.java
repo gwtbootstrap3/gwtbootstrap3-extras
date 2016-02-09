@@ -2,6 +2,7 @@ package org.gwtbootstrap3.extras.toggleswitch.client.ui.base;
 
 import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.base.HasId;
+import org.gwtbootstrap3.client.ui.base.HasReadOnly;
 import org.gwtbootstrap3.client.ui.base.HasResponsiveness;
 import org.gwtbootstrap3.client.ui.base.HasSize;
 import org.gwtbootstrap3.client.ui.base.helper.StyleHelper;
@@ -55,7 +56,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Steven Jardine
  */
 public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasValue<Boolean>, HasValueChangeHandlers<Boolean>,
-        HasEnabled, HasVisibility, HasId, HasName, HasResponsiveness, IsEditor<LeafValueEditor<Boolean>> {
+        HasEnabled, HasVisibility, HasId, HasName, HasReadOnly, HasResponsiveness, IsEditor<LeafValueEditor<Boolean>> {
 
     private final InputElement element;
     private SizeType size = SizeType.REGULAR;
@@ -235,11 +236,13 @@ public class ToggleSwitchBase extends Widget implements HasSize<SizeType>, HasVa
         }
         return editor;
     }
-    
+
+    @Override
     public boolean isReadOnly() {
         return getBooleanAttribute(Option.READONLY);
     }
 
+    @Override
     public void setReadOnly(boolean readOnly) {
         updateSwitch(Option.READONLY, readOnly);
     }
