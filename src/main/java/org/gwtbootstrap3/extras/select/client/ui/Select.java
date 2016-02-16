@@ -326,19 +326,11 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
 
     /**
      * @return the selected value, if multiple it will return the first selected item see {@link #isItemSelected(int)}
-     * and {@link #getValue(int)} for getting all the values selected or {@link #getAllSelectedValues()}
-     */
-    public String getValue() {
-        int selectedIndex = getSelectElement().getSelectedIndex();
-        return selectedIndex == -1 ? null : getSelectElement().getOptions().getItem(selectedIndex).getValue();
-    }
-
-    /**
-     * @return the selected value, if multiple it will return the first selected item see {@link #isItemSelected(int)}
-     * and {@link #getValue(int)} for getting all the values selected or {@link #getAllSelectedValues()}
+     * and {@link #getValueByIndex(int)} for getting all the values selected or {@link #getAllSelectedValues()}
      */
     public String getSelectedValue() {
-        return getValue();
+        int selectedIndex = getSelectElement().getSelectedIndex();
+        return selectedIndex == -1 ? null : getSelectElement().getOptions().getItem(selectedIndex).getValue();
     }
 
     public List<String> getAllSelectedValues() {
@@ -346,7 +338,7 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
 
         for (int i = 0; i < getItemCount(); i++) {
             if (isItemSelected(i)) {
-                allSelected.add(getValue(i));
+                allSelected.add(getValueByIndex(i));
             }
         }
         return allSelected;
@@ -368,7 +360,7 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
         return getSelectElement().getOptions().getItem(index).isSelected();
     }
 
-    public String getValue(final int index) {
+    public String getValueByIndex(final int index) {
         checkIndex(index);
         return getSelectElement().getOptions().getItem(index).getValue();
     }
@@ -381,14 +373,22 @@ public class Select extends ComplexWidget implements Focusable, HasEnabled, HasL
     /**
      * Manually select list options by value.
      */
-    public void selectValues(String value, final String... values) {
-        List<String> selectedValues = getAllSelectedValues();
+    public void selectValues(final String... values) {
+        List<String> selectedValues = new ArrayList<String>();
 
-        selectedValues.add(value);
         if(values != null && values.length > 0) {
             selectedValues.addAll(Arrays.asList(values));
         }
-        setValues(selectedValues.toArray(new String[selectedValues.size()]));
+
+        if(selectedValues.size() > 0) {
+            if (isMultiple()) {
+                selectedValues.addAll(getAllSelectedValues());
+                setValues(selectedValues.toArray(new String[selectedValues.size()]));
+            } else {
+                // setValues won't work on a non-multiple Select
+                setValue(selectedValues.get(0));
+            }
+        }
     }
 
     public void selectAll() {
