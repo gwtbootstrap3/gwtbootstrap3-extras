@@ -41,7 +41,6 @@ import org.gwtbootstrap3.extras.summernote.client.event.SummernoteKeyUpEvent;
 import org.gwtbootstrap3.extras.summernote.client.event.SummernoteKeyUpHandler;
 import org.gwtbootstrap3.extras.summernote.client.event.SummernotePasteEvent;
 import org.gwtbootstrap3.extras.summernote.client.event.SummernotePasteHandler;
-import org.gwtbootstrap3.extras.summernote.client.ui.SummernoteLanguage;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;

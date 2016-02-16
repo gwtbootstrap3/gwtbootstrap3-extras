@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.summernote.client.ui;
+package org.gwtbootstrap3.extras.summernote.client.ui.base;
 
 /*
  * #%L
