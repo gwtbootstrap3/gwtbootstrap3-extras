@@ -20,8 +20,6 @@ package org.gwtbootstrap3.extras.summernote.client.ui.base;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.summernote.client.ui.SummernoteLanguage;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayMixed;
 import com.google.gwt.core.client.JsArrayString;
@@ -179,7 +177,7 @@ class SummernoteOptions extends JavaScriptObject {
      * @see {@link SummernoteBase#setLanguage(SummernoteLanguage)}
      */
     final native void setLanguage(SummernoteLanguage language) /*-{
-        this.lang = language.@org.gwtbootstrap3.extras.summernote.client.ui.SummernoteLanguage::getCode()();
+        this.lang = language.@org.gwtbootstrap3.extras.summernote.client.ui.base.SummernoteLanguage::getCode()();
     }-*/;
 
     /**

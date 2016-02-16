@@ -30,7 +30,7 @@ import com.google.gwt.resources.client.TextResource;
 public interface SummernoteClientBundle extends ClientBundle {
 
     public static final SummernoteClientBundle INSTANCE = GWT.create(SummernoteClientBundle.class);
-    static final String VERSION = "0.8.0";
+    static final String VERSION = "0.8.1";
     static final String LOCALE_DIR = "resources/js/locales.cache." + VERSION + "/";
 
     @Source("resources/js/summernote-" + VERSION + ".min.cache.js")
