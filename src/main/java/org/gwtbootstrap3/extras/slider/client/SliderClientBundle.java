@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.slider.client;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2015 GwtBootstrap3
+ * Copyright (C) 2013 - 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,6 @@ interface SliderClientBundle extends ClientBundle {
 
     static final SliderClientBundle INSTANCE = GWT.create(SliderClientBundle.class);
 
-    @Source("resource/js/bootstrap-slider-6.0.4.min.cache.js")
+    @Source("resource/js/bootstrap-slider-6.0.17.min.cache.js")
     TextResource slider();
 }
