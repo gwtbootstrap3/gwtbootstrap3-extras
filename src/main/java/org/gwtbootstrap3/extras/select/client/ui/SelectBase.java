@@ -41,8 +41,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
+import org.gwtbootstrap3.client.ui.base.HasSize;
+import org.gwtbootstrap3.client.ui.base.HasType;
 import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
 import org.gwtbootstrap3.client.ui.base.mixin.EnabledMixin;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.Styles;
 import org.gwtbootstrap3.extras.select.client.ui.constants.MenuSize;
@@ -90,10 +93,12 @@ import com.google.gwt.user.client.ui.impl.FocusImpl;
  * @see http://silviomoreto.github.io/bootstrap-select/
  * @author Xiaodong Sun
  */
-public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>,
-        HasEnabled, Focusable, IsEditor<LeafValueEditor<T>>, HasAllSelectHandlers<T> {
+public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>, HasEnabled, Focusable,
+        HasType<ButtonType>, HasSize<ButtonSize>, IsEditor<LeafValueEditor<T>>, HasAllSelectHandlers<T> {
 
     private LeafValueEditor<T> editor;
+    private ButtonType type;
+    private ButtonSize size;
 
     /**
      * Default language: {@link SelectLanguage#EN}
@@ -108,8 +113,8 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
     protected final SelectElement selectElement;
     protected final Map<OptionElement, Option> itemMap = new HashMap<>(0);
     protected final AttributeMixin<SelectBase<T>> attrMixin = new AttributeMixin<>(this);
-    protected final EnabledMixin<SelectBase<T>> enabledMixin = new EnabledMixin<>(this);
-    private static final FocusImpl focusImpl = FocusImpl.getFocusImplForWidget();
+    private final EnabledMixin<SelectBase<T>> enabledMixin = new EnabledMixin<>(this);
+    private final FocusImpl focusImpl = FocusImpl.getFocusImplForWidget();
 
     /**
      * Initialize options
@@ -122,6 +127,13 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
         setStyleName(SelectStyles.SELECT_PICKER);
         addStyleName(Styles.FORM_CONTROL);
     }
+
+    /**
+     * Returns <code>true</code> if multiple selection is allowed.
+     * 
+     * @return <code>true</code> if multiple selection is allowed
+     */
+    public abstract boolean isMultiple();
 
     @Override
     protected void onLoad() {
@@ -410,14 +422,78 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
     }
 
     /**
-     * Set the specified button type's style to the select.
-     *
-     * @param type
-     * @see #setCustomStyle(String)
-     * @see ButtonType
+     * Sets the {@link ButtonType} of the select.<br>
+     * <br>
+     * <b>IMPORTANT</b>: This method will override the style set by
+     * {@link #setStyle(String)}.
      */
-    public void setStyle(final ButtonType type) {
-        setCustomStyle((type != null) ? type.getCssName() : null);
+    @Override
+    public void setType(final ButtonType type) {
+        this.type = type;
+        updateStyle();
+    }
+
+    /**
+     * Returns the {@link ButtonType} of the select; may be <code>null</code>.
+     *
+     * @return the {@link ButtonType} of the select
+     */
+    @Override
+    public ButtonType getType() {
+        return type;
+    }
+
+    /**
+     * Sets the {@link ButtonSize} of the select.<br>
+     * <br>
+     * <b>IMPORTANT</b>: This method will override the style set by
+     * {@link #setStyle(String)}.
+     */
+    @Override
+    public void setSize(final ButtonSize size) {
+        this.size = size;
+        updateStyle();
+    }
+
+    /**
+     * Returns the {@link ButtonSize} of the select; may be <code>null</code>.
+     *
+     * @return the {@link ButtonSize} of the select
+     */
+    @Override
+    public ButtonSize getSize() {
+        return size;
+    }
+
+    private void updateStyle() {
+        StringBuilder sb = new StringBuilder();
+        if (type != null) {
+            sb.append(type.getCssName());
+        }
+        if (size != null) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(" ");
+            }
+            sb.append(size.getCssName());
+        }
+        setStyle(sb.toString());
+    }
+
+    /**
+     * Set the customized style name to the select.<br>
+     * <br>
+     * Defaults to <code>null</code>.<br>
+     * <br>
+     * <b>IMPORTANT</b>: This method will override the style set by
+     * {@link #setType(ButtonType)} and/or {@link #setSize(ButtonSize)}.
+     *
+     * @param styleName
+     */
+    public void setStyle(final String styleName) {
+        if (styleName != null)
+            attrMixin.setAttribute(STYLE, styleName);
+        else
+            attrMixin.removeAttribute(STYLE);
     }
 
     /**
@@ -427,20 +503,6 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
      */
     public String getStyle() {
         return attrMixin.getAttribute(STYLE);
-    }
-
-    /**
-     * Set the customized style name to the select.<br>
-     * <br>
-     * Defaults to <code>null</code>.
-     *
-     * @param styleName
-     */
-    public void setCustomStyle(final String styleName) {
-        if (styleName != null)
-            attrMixin.setAttribute(STYLE, styleName);
-        else
-            attrMixin.removeAttribute(STYLE);
     }
 
     /**
