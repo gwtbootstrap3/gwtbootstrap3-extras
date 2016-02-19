@@ -50,6 +50,11 @@ public class MultipleSelect extends SelectBase<List<String>> {
         attrMixin.setAttribute(MULTIPLE, "");
     }
 
+    @Override
+    public final boolean isMultiple() {
+        return true;
+    }
+    
     /**
      * When set to <code>true</code>, adds two buttons to the top of
      * the drop-down menu (<b>Select All</b> & <b>Deselect All</b>).<br>

@@ -37,6 +37,11 @@ public class Select extends SelectBase<String> {
     public Select() {
     }
 
+    @Override
+    public final boolean isMultiple() {
+        return false;
+    }
+
     /**
      * Set to <code>true</code> to show check mark icon on
      * standard select boxes.<br>
