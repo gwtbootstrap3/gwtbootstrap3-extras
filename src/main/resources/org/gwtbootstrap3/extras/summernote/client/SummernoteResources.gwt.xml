@@ -19,7 +19,7 @@
   #L%
   -->
 <module>
-    <public path="resources">
+    <public path="resource">
         <include name="css/summernote-0.8.1.min.cache.css"/>
         <include name="css/font/*"/>
     </public>
