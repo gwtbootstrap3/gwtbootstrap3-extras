@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.gallery.client;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,23 +21,22 @@ package org.gwtbootstrap3.extras.gallery.client;
  */
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.ScriptInjector;
-import com.google.gwt.resources.client.TextResource;
 
 /**
  * @author Ben Dol
-    */
+ */
 public class GalleryEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        inject(GalleryClientBundle.INSTANCE.blueimp());
-        inject(GalleryClientBundle.INSTANCE.gallery());
+        inject(GalleryClientBundle.BLUEIMP_JS);
+        inject(GalleryClientBundle.GALLERY_JS);
     }
 
-    private void inject(TextResource resource) {
-        ScriptInjector.fromString(resource.getText())
-            .setWindow(ScriptInjector.TOP_WINDOW)
-            .inject();
+    private void inject(String resource) {
+        ScriptInjector.fromUrl(GWT.getModuleBaseURL() + resource)
+            .setRemoveTag(true).setWindow(ScriptInjector.TOP_WINDOW).inject();
     }
 }

@@ -20,7 +20,9 @@
   -->
 <module>
     <public path="resource">
-        <include name="css/bootstrap-select-1.10.0.min.cache.css"/>
+        <include name="css/*.css"/>
+        <include name="js/*.js"/>
+        <include name="js/*.map"/>
     </public>
 
     <stylesheet src="css/bootstrap-select-1.10.0.min.cache.css"/>
