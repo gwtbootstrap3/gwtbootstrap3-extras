@@ -86,6 +86,20 @@ public class Select extends SelectBase<String> {
         }
     }
 
+    /**
+     * Returns the selected item or <code>null</code> if no item is selected.
+     *
+     * @return the selected items list
+     */
+    public Option getSelectedItem() {
+        for (Entry<OptionElement, Option> entry : itemMap.entrySet()) {
+            Option opt = entry.getValue();
+            if (opt.isSelected())
+                return opt;
+        }
+        return null;
+    }
+
     private native String getValue(Element e) /*-{
         return $wnd.jQuery(e).selectpicker('val');
     }-*/;
