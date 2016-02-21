@@ -31,99 +31,100 @@ public interface SelectClientBundle extends ClientBundle {
 
     static final SelectClientBundle INSTANCE = GWT.create(SelectClientBundle.class);
 
-    @Source("resource/js/bootstrap-select-1.10.0.min.cache.js")
-    TextResource selectJs();
+    static final String VERSION = "1.10.0";
+    static final String SELECT_JS = "js/bootstrap-select-" + VERSION + ".min.cache.js";
+    static final String LOCALE_DIR = "resource/js/locales.cache." + VERSION + "/";
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-ar_AR.min.js")
+    @Source(LOCALE_DIR + "defaults-ar_AR.min.js")
     TextResource ar();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-bg_BG.min.js")
+    @Source(LOCALE_DIR + "defaults-bg_BG.min.js")
     TextResource bg();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-cro_CRO.min.js")
+    @Source(LOCALE_DIR + "defaults-cro_CRO.min.js")
     TextResource cro();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-cs_CZ.min.js")
+    @Source(LOCALE_DIR + "defaults-cs_CZ.min.js")
     TextResource cs();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-da_DK.min.js")
+    @Source(LOCALE_DIR + "defaults-da_DK.min.js")
     TextResource da();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-de_DE.min.js")
+    @Source(LOCALE_DIR + "defaults-de_DE.min.js")
     TextResource de();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-en_US.min.js")
+    @Source(LOCALE_DIR + "defaults-en_US.min.js")
     TextResource en();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-es_CL.min.js")
+    @Source(LOCALE_DIR + "defaults-es_CL.min.js")
     TextResource es();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-eu.min.js")
+    @Source(LOCALE_DIR + "defaults-eu.min.js")
     TextResource eu();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-fa_IR.min.js")
+    @Source(LOCALE_DIR + "defaults-fa_IR.min.js")
     TextResource fa();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-fi_FI.min.js")
+    @Source(LOCALE_DIR + "defaults-fi_FI.min.js")
     TextResource fi();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-fr_FR.min.js")
+    @Source(LOCALE_DIR + "defaults-fr_FR.min.js")
     TextResource fr();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-hu_HU.min.js")
+    @Source(LOCALE_DIR + "defaults-hu_HU.min.js")
     TextResource hu();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-id_ID.min.js")
+    @Source(LOCALE_DIR + "defaults-id_ID.min.js")
     TextResource id();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-it_IT.min.js")
+    @Source(LOCALE_DIR + "defaults-it_IT.min.js")
     TextResource it();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-ko_KR.min.js")
+    @Source(LOCALE_DIR + "defaults-ko_KR.min.js")
     TextResource ko();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-lt_LT.min.js")
+    @Source(LOCALE_DIR + "defaults-lt_LT.min.js")
     TextResource lt();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-nb_NO.min.js")
+    @Source(LOCALE_DIR + "defaults-nb_NO.min.js")
     TextResource nb();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-nl_NL.min.js")
+    @Source(LOCALE_DIR + "defaults-nl_NL.min.js")
     TextResource nl();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-pl_PL.min.js")
+    @Source(LOCALE_DIR + "defaults-pl_PL.min.js")
     TextResource pl();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-pt_BR.min.js")
+    @Source(LOCALE_DIR + "defaults-pt_BR.min.js")
     TextResource pt_BR();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-pt_PT.min.js")
+    @Source(LOCALE_DIR + "defaults-pt_PT.min.js")
     TextResource pt_PT();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-ro_RO.min.js")
+    @Source(LOCALE_DIR + "defaults-ro_RO.min.js")
     TextResource ro();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-ru_RU.min.js")
+    @Source(LOCALE_DIR + "defaults-ru_RU.min.js")
     TextResource ru();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-sk_SK.min.js")
+    @Source(LOCALE_DIR + "defaults-sk_SK.min.js")
     TextResource sk();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-sl_SI.min.js")
+    @Source(LOCALE_DIR + "defaults-sl_SI.min.js")
     TextResource sl();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-sv_SE.min.js")
+    @Source(LOCALE_DIR + "defaults-sv_SE.min.js")
     TextResource sv();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-tr_TR.min.js")
+    @Source(LOCALE_DIR + "defaults-tr_TR.min.js")
     TextResource tr();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-ua_UA.min.js")
+    @Source(LOCALE_DIR + "defaults-ua_UA.min.js")
     TextResource ua();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-zh_CN.min.js")
+    @Source(LOCALE_DIR + "defaults-zh_CN.min.js")
     TextResource zh_CN();
 
-    @Source("resource/js/locales.cache.1.10.0/defaults-zh_TW.min.js")
+    @Source(LOCALE_DIR + "defaults-zh_TW.min.js")
     TextResource zh_TW();
 }

@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.select.client;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ package org.gwtbootstrap3.extras.select.client;
  */
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.ScriptInjector;
 
 /**
@@ -30,6 +31,7 @@ public class SelectEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(SelectClientBundle.INSTANCE.selectJs().getText()).setWindow(ScriptInjector.TOP_WINDOW).inject();
+        ScriptInjector.fromUrl(GWT.getModuleBaseURL() + SelectClientBundle.SELECT_JS)
+            .setWindow(ScriptInjector.TOP_WINDOW).setRemoveTag(true).inject();
     }
 }

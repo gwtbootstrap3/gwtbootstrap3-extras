@@ -31,9 +31,9 @@ public interface SummernoteClientBundle extends ClientBundle {
 
     public static final SummernoteClientBundle INSTANCE = GWT.create(SummernoteClientBundle.class);
     static final String VERSION = "0.8.1";
-    static final String LOCALE_DIR = "resources/js/locales.cache." + VERSION + "/";
+    static final String LOCALE_DIR = "resource/js/locales.cache." + VERSION + "/";
 
-    @Source("resources/js/summernote-" + VERSION + ".min.cache.js")
+    @Source("resource/js/summernote-" + VERSION + ".min.cache.js")
     TextResource summernote();
 
     @Source(LOCALE_DIR + "summernote-ar-AR.js")
