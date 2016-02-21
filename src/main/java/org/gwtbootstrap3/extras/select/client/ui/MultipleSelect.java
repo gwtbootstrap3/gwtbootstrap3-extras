@@ -54,7 +54,7 @@ public class MultipleSelect extends SelectBase<List<String>> {
     public final boolean isMultiple() {
         return true;
     }
-    
+
     /**
      * When set to <code>true</code>, adds two buttons to the top of
      * the drop-down menu (<b>Select All</b> & <b>Deselect All</b>).<br>
@@ -148,10 +148,10 @@ public class MultipleSelect extends SelectBase<List<String>> {
             }
             return result;
         }
-        return getAllSelectedValues();
+        return getSelectedValues();
     }
 
-    private List<String> getAllSelectedValues() {
+    private List<String> getSelectedValues() {
         final List<String> allSelected = new ArrayList<>(0);
         for (Entry<OptionElement, Option> entry : itemMap.entrySet()) {
             Option opt = entry.getValue();
@@ -176,6 +176,22 @@ public class MultipleSelect extends SelectBase<List<String>> {
                 opt.setSelected(selected);
             }
         }
+    }
+
+    /**
+     * Returns the selected items list. If no item is selected, this method
+     * returns an empty list.
+     *
+     * @return the selected items list
+     */
+    public List<Option> getSelectedItems() {
+        final List<Option> items = new ArrayList<>(0);
+        for (Entry<OptionElement, Option> entry : itemMap.entrySet()) {
+            Option opt = entry.getValue();
+            if (opt.isSelected())
+                items.add(opt);
+        }
+        return items;
     }
 
     /**

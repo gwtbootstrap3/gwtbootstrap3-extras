@@ -655,11 +655,11 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
     }
 
     /**
-     * Returns the selected item list.
+     * Returns the item list.
      *
-     * @return the selected item list
+     * @return the item list
      */
-    public List<Option> getSelectedItems() {
+    public List<Option> getItems() {
         List<Option> selectedItems = new ArrayList<>(0);
         NodeList<OptionElement> items = selectElement.getOptions();
         for (int i = 0; i < items.getLength(); i++) {
