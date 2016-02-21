@@ -557,10 +557,6 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
         }
     }
 
-//    public boolean isShowMenuArrow() {
-//        return StyleHelper.containsStyle(getStyleName(), SelectStyles.SHOW_MENU_ARROW);
-//    }
-
     @Override
     public LeafValueEditor<T> asEditor() {
         if (editor == null) {
