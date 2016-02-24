@@ -23,6 +23,7 @@
     <public path="resource">
         <include name="css/*.css"/>
         <include name="js/*.js"/>
+        <include name="js/*.map"/>
         <include name="img/*"/>
     </public>
 </module>

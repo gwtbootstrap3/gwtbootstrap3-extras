@@ -3,7 +3,7 @@
   #%L
   GwtBootstrap3
   %%
-  Copyright (C) 2013 GwtBootstrap3
+  Copyright (C) 2016 GwtBootstrap3
   %%
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -20,9 +20,10 @@
   -->
 <module>
     <public path="resource">
-        <include name="css/bootstrap-select-1.7.4.min.cache.css"/>
-        <include name="css/bootstrap-select-1.7.4.css.cache.map"/>
+        <include name="css/*.css"/>
+        <include name="js/*.js"/>
+        <include name="js/*.map"/>
     </public>
 
-    <stylesheet src="css/bootstrap-select-1.7.4.min.cache.css"/>
+    <stylesheet src="css/bootstrap-select-1.10.0.min.cache.css"/>
 </module>
