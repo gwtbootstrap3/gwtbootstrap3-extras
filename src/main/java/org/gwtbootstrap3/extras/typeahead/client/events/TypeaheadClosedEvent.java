@@ -59,8 +59,8 @@ public class TypeaheadClosedEvent<T> extends GwtEvent<TypeaheadClosedHandler<T>>
         return nativeEvent;
     }
 
-    @SuppressWarnings({"unchecked"})
     @Override
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Type<TypeaheadClosedHandler<T>> getAssociatedType() {
         return (Type) TYPE;
     }

@@ -66,8 +66,8 @@ public class TypeaheadAutoCompletedEvent<T> extends GwtEvent<TypeaheadAutoComple
         return nativeEvent;
     }
 
-    @SuppressWarnings({"unchecked"})
     @Override
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Type<TypeaheadAutoCompletedHandler<T>> getAssociatedType() {
         return (Type) TYPE;
     }
