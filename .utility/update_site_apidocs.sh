@@ -21,7 +21,9 @@ git clone --quiet --branch=gh-pages https://$GH_TOKEN@github.com/gwtbootstrap3/g
 cd gh-pages
 
 # remove the javadoc directories from git.
+if [[ -d ./snapshot/extras-apidocs ]]; then
 git rm -rf ./snapshot/extras-apidocs
+fi
 
 # copy the new javadoc to snapshot dir.
 cp -Rf $HOME/javadoc-latest ./snapshot/extras-apidocs
