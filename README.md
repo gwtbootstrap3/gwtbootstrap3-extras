@@ -17,7 +17,7 @@ You can easily add GWTBootstrap3-Extras to your project by including the library
 * 0.9.3 - Released on 24 February 2016. 
   * Based on GwtBootstrap v0.9.3
 * [Demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/) - The GWTBootstrap3 0.9.3 Demo.
-* [API Docs](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/extra-apidocs) - The GWTBootstrap3-Extras 0.9.3 API Javadoc.
+* [API Docs](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/extras-apidocs) - The GWTBootstrap3-Extras 0.9.3 API Javadoc.
 
 ###Current Snapshot
 * 1.0-SNAPSHOT
