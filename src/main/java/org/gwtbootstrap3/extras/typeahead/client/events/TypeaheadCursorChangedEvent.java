@@ -66,8 +66,8 @@ public class TypeaheadCursorChangedEvent<T> extends GwtEvent<TypeaheadCursorChan
         return nativeEvent;
     }
 
-    @SuppressWarnings({"unchecked"})
     @Override
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Type<TypeaheadCursorChangedHandler<T>> getAssociatedType() {
         return (Type) TYPE;
     }

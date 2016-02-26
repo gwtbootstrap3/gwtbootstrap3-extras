@@ -1,5 +1,25 @@
 package org.gwtbootstrap3.extras.typeahead.client.ui;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
+import org.gwtbootstrap3.extras.typeahead.client.base.Dataset;
+import org.gwtbootstrap3.extras.typeahead.client.base.Suggestion;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadAutoCompletedEvent;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadAutoCompletedHandler;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadClosedEvent;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadClosedHandler;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadCursorChangedEvent;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadCursorChangedHandler;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadOpenedEvent;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadOpenedHandler;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadSelectedEvent;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadSelectedHandler;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -25,15 +45,6 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
-import org.gwtbootstrap3.client.ui.TextBox;
-import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
-import org.gwtbootstrap3.extras.typeahead.client.base.Dataset;
-import org.gwtbootstrap3.extras.typeahead.client.base.Suggestion;
-import org.gwtbootstrap3.extras.typeahead.client.events.*;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Twitter typeahead.js
@@ -49,7 +60,8 @@ public class Typeahead<T> extends TextBox {
     private int minLength = 1;
 
     public Typeahead() {
-        setDatasets(new CollectionDataset(Collections.emptyList()));
+        List<T> empty = Collections.emptyList();
+        setDatasets(new CollectionDataset<T>(empty));
     }
 
     /**
