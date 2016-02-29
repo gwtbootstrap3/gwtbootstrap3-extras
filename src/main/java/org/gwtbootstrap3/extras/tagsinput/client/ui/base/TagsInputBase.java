@@ -20,8 +20,10 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
  * #L%
  */
 
-import java.util.ArrayList;
+import java.util.List;
+
 import org.gwtbootstrap3.client.ui.gwt.Widget;
+
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.InputElement;
@@ -125,7 +127,7 @@ public class TagsInputBase extends Widget {
         });
     }-*/;
     
-    public void setTypeahead(ArrayList<String> typeahead) {
+    public void setTypeahead(List<String> typeahead) {
         suggestions.setLength(0);
         for(String str : typeahead) {
             suggestions.push(str);
