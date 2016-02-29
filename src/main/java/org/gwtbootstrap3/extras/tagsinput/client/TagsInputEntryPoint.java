@@ -24,7 +24,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.ScriptInjector;
 
 /**
- * @author Marko Nikolić
+ * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
 public class TagsInputEntryPoint implements EntryPoint {
 

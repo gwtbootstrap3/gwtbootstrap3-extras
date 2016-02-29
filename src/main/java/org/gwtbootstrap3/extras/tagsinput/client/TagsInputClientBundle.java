@@ -26,7 +26,7 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * @author Marko Nikolić
+ * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
 public interface TagsInputClientBundle extends ClientBundle {
     public static final TagsInputClientBundle INSTANCE = GWT.create(TagsInputClientBundle.class);

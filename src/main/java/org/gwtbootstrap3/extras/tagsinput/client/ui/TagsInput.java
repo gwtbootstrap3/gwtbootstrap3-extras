@@ -25,7 +25,7 @@ import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
 /**
  * Wrapper for Bootstrap Tags Input component.
  *
- * @author Marko Nikolić
+ * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
 public class TagsInput extends TagsInputBase {
 

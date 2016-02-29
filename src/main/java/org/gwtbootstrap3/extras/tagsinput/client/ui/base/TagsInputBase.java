@@ -31,7 +31,7 @@ import com.google.gwt.dom.client.InputElement;
 /**
  * Wrapper for Bootstrap Tags Input component.
  *
- * @author Marko Nikolić
+ * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
 public class TagsInputBase extends Widget {
 
