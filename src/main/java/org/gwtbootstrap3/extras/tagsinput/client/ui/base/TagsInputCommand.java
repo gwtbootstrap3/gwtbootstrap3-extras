@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.tagsinput.client.ui;
+package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 
 /*
  * #%L
@@ -20,20 +20,19 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
-import org.gwtbootstrap3.extras.typeahead.client.base.StringDataset;
-
 /**
- * Wrapper for Bootstrap Tags Input component.
+ * TagsInput commands.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInput extends TagsInputBase<String> {
+interface TagsInputCommand {
 
-    public TagsInput() {
-    }
+    static final String ADD = "add";
+    static final String REMOVE = "remove";
+    static final String REMOVE_ALL = "removeAll";
+    static final String FOCUS = "focus";
+    static final String INPUT = "input";
+    static final String REFRESH = "refresh";
+    static final String DESTROY = "destroy";
 
-    public TagsInput(StringDataset dataset) {
-        super(dataset);
-    }
 }

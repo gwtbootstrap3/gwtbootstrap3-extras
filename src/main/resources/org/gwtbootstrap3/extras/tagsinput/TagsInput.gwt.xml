@@ -22,7 +22,8 @@
 <module rename-to='tagsinput'>
     <inherits name="org.gwtbootstrap3.GwtBootstrap3Base"/>
     <inherits name="com.google.gwt.resources.Resources"/>
-    <inherits name='org.gwtbootstrap3.extras.tagsinput.client.TagsInputResources'/>
+    <inherits name="org.gwtbootstrap3.extras.typeahead.Typeahead"/>
+    <inherits name="org.gwtbootstrap3.extras.tagsinput.client.TagsInputResources"/>
 
     <source path='client'/>
 
