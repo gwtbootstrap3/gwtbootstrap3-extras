@@ -27,6 +27,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.gwtbootstrap3.client.ui.gwt.Widget;
+import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent;
+import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddHandler;
+import org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent;
+import org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitHandler;
 import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
 import org.gwtbootstrap3.extras.typeahead.client.base.Dataset;
 import org.gwtbootstrap3.extras.typeahead.client.ui.Typeahead;
@@ -38,13 +42,14 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * Wrapper for Bootstrap Tags Input component.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInputBase<T> extends Widget {
+public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
     
     private TagsInputOptions options = TagsInputOptions.create();
     
@@ -58,6 +63,7 @@ public class TagsInputBase<T> extends Widget {
             typeahead.reconfigure();
         }
     };
+    
     
     public TagsInputBase() {
         this(new CollectionDataset<T>(Collections.<T>emptyList()));
@@ -156,6 +162,16 @@ public class TagsInputBase<T> extends Widget {
     public void setFocusClass(final String focusClass) {
         options.setFocusClass(focusClass);
     }
+
+    @Override
+    public HandlerRegistration addItemAddedOnInitHandler(final ItemAddedOnInitHandler handler) {
+        return addHandler(handler, ItemAddedOnInitEvent.getType());
+    }
+    
+    @Override
+    public HandlerRegistration addBeforeItemAddHandler(final BeforeItemAddHandler handler) {
+        return addHandler(handler, BeforeItemAddEvent.getType());
+    }
     
     public void reconfigure() {
         destroy();
@@ -173,8 +189,18 @@ public class TagsInputBase<T> extends Widget {
      * @param options tags input options
      */
     private native void initialize(Element e, JavaScriptObject options) /*-{
+        var tagsInput = this;
         $wnd.jQuery(e).tagsinput(options);
+        
+        $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_ON_INIT_EVENT, function(event) {
+            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemAddedOnInitHandlers;)(tagsInput);
+        });
+
+        $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_ADD_EVENT, function(event) {
+            @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemAddHandlers;)(tagsInput);
+        });
     }-*/;
+    
     
     @Override
     protected void onLoad() {

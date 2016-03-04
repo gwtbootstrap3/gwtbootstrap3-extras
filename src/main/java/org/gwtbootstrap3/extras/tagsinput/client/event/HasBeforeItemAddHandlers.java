@@ -1,10 +1,10 @@
-package org.gwtbootstrap3.extras.tagsinput.client.ui;
+package org.gwtbootstrap3.extras.tagsinput.client.event;
 
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2016 GwtBootstrap3
+ * Copyright (C) 2015 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,21 +20,20 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
-import org.gwtbootstrap3.extras.typeahead.client.base.StringDataset;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
- * Wrapper for Bootstrap Tags Input component.
- *
- * @author Marko Nikolić <marko.nikolic@iten.rs>
+ * A widget that implements this interface is a public source of
+ * {@link BeforeItemAddEvent} events.
  */
-public class TagsInput extends TagsInputBase<String> {
-    // TODO Added item objects, possibly with generics.
-    
-    public TagsInput() {
-    }
+public interface HasBeforeItemAddHandlers extends HasHandlers {
 
-    public TagsInput(StringDataset dataset) {
-        super(dataset);
-    }
+    /**
+     * Adds a {@link BeforeItemAddEvent} handler.
+     *
+     * @param handler the handler
+     * @return the registration for the event
+     */
+    HandlerRegistration addBeforeItemAddHandler(BeforeItemAddHandler handler);
 }
