@@ -1,9 +1,5 @@
 package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-
 /*
  * #%L
  * GwtBootstrap3
@@ -24,6 +20,10 @@ import java.util.Collections;
  * #L%
  */
 
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.gwtbootstrap3.client.ui.gwt.Widget;
@@ -46,36 +46,41 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * Wrapper for Bootstrap Tags Input component.
+ * 
+ * Type T represents type of the tags. Tags can be objects or in special case strings.
+ * If tags are strings, no special handling is necessary. However, if tags are objects,
+ * it is required to set in options 'itemValue' and 'itemText'. If 'itemText' is not
+ * set, 'itemValue' is used instead.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
+public class TagsInputBase<T, S> extends Widget implements HasAllTagsInputEvents {
     
     private TagsInputOptions options = TagsInputOptions.create();
     
-    private Collection<? extends Dataset<T>> datasets;
+    private Collection<? extends Dataset<S>> datasets;
     
-    private Typeahead<T> typeahead;
+    private Typeahead<S> typeahead;
     private ScheduledCommand attachTypeahead = new ScheduledCommand() {   
         @Override
         public void execute() {
-            typeahead = new Typeahead<T>(input(), datasets);
+            typeahead = new Typeahead<S>(input(), datasets);
             typeahead.reconfigure();
         }
     };
     
     
     public TagsInputBase() {
-        this(new CollectionDataset<T>(Collections.<T>emptyList()));
+        this(new CollectionDataset<S>(Collections.<S>emptyList()));
     }
 
-    public TagsInputBase(final Dataset<T> dataset) {
+    public TagsInputBase(final Dataset<S> dataset) {
         this(Arrays.asList(dataset));
         
         setDatasets(dataset);
     }
 
-    public TagsInputBase(final Collection<? extends Dataset<T>> datasets) {
+    public TagsInputBase(final Collection<? extends Dataset<S>> datasets) {
         InputElement tagsInput = Document.get().createTextInputElement();
         tagsInput.setAttribute("data-role", "tagsinput");
         
@@ -84,16 +89,16 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
         setDatasets(datasets);
     }
     
-    public void setDatasets(final Dataset<T> dataset) {
+    public void setDatasets(final Dataset<S> dataset) {
         this.datasets = Arrays.asList(dataset);
     }
 
-    public void setDatasets(final Collection<? extends Dataset<T>> datasets) {
+    public void setDatasets(final Collection<? extends Dataset<S>> datasets) {
         this.datasets = datasets;
     }
     
     /**
-     * Sets classname for the tags
+     * Sets classname for the tags.
      * 
      * @param tagClass Classname for the tags
      */
@@ -101,6 +106,25 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
         options.setTagClass(tagClass);
     }
 
+    /**
+     * Sets item value name that will be used if tags are objects other then String.
+     * 
+     * @param itemValue name of field used for the tag value
+     */
+    public void setItemValue(final String itemValue) {
+        options.setItemValue(itemValue);
+    }
+
+    /**
+     * Sets item text name that will be used if tags are objects other then String.
+     * If it item text name is not provided, item value will be used instead.
+     * 
+     * @param itemText name of field used for the tag text
+     */
+    public void setItemText(final String itemText) {
+        options.setItemText(itemText);
+    }
+    
     /**
      * Array of keycodes which will add a tag when typing in the input.
      * (default: [13, 188], which are ENTER and comma)
@@ -205,6 +229,8 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
     @Override
     protected void onLoad() {
         super.onLoad();
+        
+        initialize(getElement(), options);
 
         // Deferred to make sure the tagsinput component creates <input> field
         // on which typeahead should attach.
@@ -223,7 +249,7 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
      * 
      * @param tag tag to add
      */
-    public void add(String tag) {
+    public void add(T tag) {
         if (isAttached())
             add(getElement(), tag);
     }
@@ -233,7 +259,7 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
      * 
      * @param tag tag to remove
      */
-    public void remove(String tag) {
+    public void remove(T tag) {
         if (isAttached())
             remove(getElement(), tag);
     }
@@ -277,22 +303,29 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
      */
     public void destroy() {
         if (isAttached())
-            command(getElement(), TagsInputCommand.DESTROY);       
+            destroy(getElement());       
     }
     
     private native void command(Element e, String command)/*-{
         $wnd.jQuery(e).tagsinput(command);
     }-*/;
 
-    private native void add(Element e, String tag) /*-{
-        $wnd.jQuery(e).tagsinput('add', tag);
+    private native void add(Element e, T tag) /*-{
+        $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::ADD, tag);
     }-*/;
     
-    private native void remove(Element e, String tag) /*-{
-        $wnd.jQuery(e).tagsinput('remove', tag);
+    private native void remove(Element e, T tag) /*-{
+        $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::REMOVE, tag);
     }-*/;
     
     private native Element input(Element e) /*-{
-        return $wnd.jQuery(e).tagsinput('input');
+        return $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::INPUT);
+    }-*/;
+
+    private native void destroy(Element e) /*-{
+        $wnd.jQuery(e).off(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_ON_INIT_EVENT);
+        $wnd.jQuery(e).off(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_ADD_EVENT);
+        
+        return $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::DESTROY);
     }-*/;
 }
