@@ -1,7 +1,5 @@
 package org.gwtbootstrap3.extras.tagsinput.client.ui;
 
-import org.gwtbootstrap3.extras.tagsinput.client.ui.base.ComplexTag;
-
 /*
  * #%L
  * GwtBootstrap3
@@ -23,22 +21,23 @@ import org.gwtbootstrap3.extras.tagsinput.client.ui.base.ComplexTag;
  */
 
 import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
-import org.gwtbootstrap3.extras.typeahead.client.base.StringDataset;
 
 /**
- * Wrapper for Bootstrap Tags Input component.
+ * Tags input using objects for tags.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class ComplexTagsInput extends TagsInputBase<ComplexTag, String> {
-    // TODO Added item objects, possibly with generics.
+public class ComplexTagsInput extends TagsInputBase<ComplexTag> {
     
     public ComplexTagsInput() {
         setItemValue(ComplexTag.ITEM_VALUE_FIELD_NAME);
         setItemText(ComplexTag.ITEM_TEXT_FIELD_NAME);
     }
 
-    public ComplexTagsInput(StringDataset dataset) {
+    public ComplexTagsInput(ComplexDataset dataset) {
         super(dataset);
+
+        setItemValue(ComplexTag.ITEM_VALUE_FIELD_NAME);
+        setItemText(ComplexTag.ITEM_TEXT_FIELD_NAME);
     }
 }

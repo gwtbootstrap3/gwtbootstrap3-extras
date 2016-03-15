@@ -33,6 +33,8 @@ import org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent;
 import org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitHandler;
 import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
 import org.gwtbootstrap3.extras.typeahead.client.base.Dataset;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadSelectedEvent;
+import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadSelectedHandler;
 import org.gwtbootstrap3.extras.typeahead.client.ui.Typeahead;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -54,33 +56,39 @@ import com.google.gwt.event.shared.HandlerRegistration;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInputBase<T, S> extends Widget implements HasAllTagsInputEvents {
+public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
     
     private TagsInputOptions options = TagsInputOptions.create();
     
-    private Collection<? extends Dataset<S>> datasets;
+    private Collection<? extends Dataset<T>> datasets;
     
-    private Typeahead<S> typeahead;
+    private Typeahead<T> typeahead;
     private ScheduledCommand attachTypeahead = new ScheduledCommand() {   
         @Override
         public void execute() {
-            typeahead = new Typeahead<S>(input(), datasets);
+            typeahead = new Typeahead<T>(input(), datasets);
             typeahead.reconfigure();
+            typeahead.addTypeaheadSelectedHandler(new TypeaheadSelectedHandler<T>() {
+                @Override
+                public void onSelected(TypeaheadSelectedEvent<T> event) {
+                    add(event.getSuggestion().getData());
+                }
+            });
         }
     };
     
     
     public TagsInputBase() {
-        this(new CollectionDataset<S>(Collections.<S>emptyList()));
+        this(new CollectionDataset<T>(Collections.<T>emptyList()));
     }
 
-    public TagsInputBase(final Dataset<S> dataset) {
+    public TagsInputBase(final Dataset<T> dataset) {
         this(Arrays.asList(dataset));
         
         setDatasets(dataset);
     }
 
-    public TagsInputBase(final Collection<? extends Dataset<S>> datasets) {
+    public TagsInputBase(final Collection<? extends Dataset<T>> datasets) {
         InputElement tagsInput = Document.get().createTextInputElement();
         tagsInput.setAttribute("data-role", "tagsinput");
         
@@ -89,11 +97,11 @@ public class TagsInputBase<T, S> extends Widget implements HasAllTagsInputEvents
         setDatasets(datasets);
     }
     
-    public void setDatasets(final Dataset<S> dataset) {
+    public void setDatasets(final Dataset<T> dataset) {
         this.datasets = Arrays.asList(dataset);
     }
 
-    public void setDatasets(final Collection<? extends Dataset<S>> datasets) {
+    public void setDatasets(final Collection<? extends Dataset<T>> datasets) {
         this.datasets = datasets;
     }
     

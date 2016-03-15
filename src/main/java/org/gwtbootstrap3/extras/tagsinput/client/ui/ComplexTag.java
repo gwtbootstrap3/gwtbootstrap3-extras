@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
+package org.gwtbootstrap3.extras.tagsinput.client.ui;
 
 /*
  * #%L
@@ -23,11 +23,8 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * String Tags implementation used for TagsInput component
+ * ComplexTags implementation used for {@link ComplexTagsInput} component.
  * 
- * It is required to set name of the field which contains value in TagsInput component.
- * String objects are the only one pa
- *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
 public class ComplexTag extends JavaScriptObject {
@@ -50,10 +47,18 @@ public class ComplexTag extends JavaScriptObject {
         this.item_value = value;
     }-*/;
 
+    public final native String getValue() /*-{
+        return this.item_value;
+    }-*/;
+
     public final native void setText(String text) /*-{
         this.item_text = text;
     }-*/;
-    
+
+    public final native String getText() /*-{
+        return this.item_text;
+    }-*/;
+
     public final native void setPayload(String payload) /*-{
         this.payload = payload;
     }-*/;
