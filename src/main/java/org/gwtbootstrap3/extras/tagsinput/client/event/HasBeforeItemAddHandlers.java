@@ -27,7 +27,7 @@ import com.google.gwt.event.shared.HasHandlers;
  * A widget that implements this interface is a public source of
  * {@link BeforeItemAddEvent} events.
  */
-public interface HasBeforeItemAddHandlers extends HasHandlers {
+public interface HasBeforeItemAddHandlers<T> extends HasHandlers {
 
     /**
      * Adds a {@link BeforeItemAddEvent} handler.
@@ -35,5 +35,5 @@ public interface HasBeforeItemAddHandlers extends HasHandlers {
      * @param handler the handler
      * @return the registration for the event
      */
-    HandlerRegistration addBeforeItemAddHandler(BeforeItemAddHandler handler);
+    HandlerRegistration addBeforeItemAddHandler(BeforeItemAddHandler<T> handler);
 }

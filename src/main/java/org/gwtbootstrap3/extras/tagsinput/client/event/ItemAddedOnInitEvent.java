@@ -28,20 +28,32 @@ import com.google.gwt.event.shared.GwtEvent;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class ItemAddedOnInitEvent extends GwtEvent<ItemAddedOnInitHandler> {
-    // TODO Add Item as payload to event.
+public class ItemAddedOnInitEvent<T> extends GwtEvent<ItemAddedOnInitHandler<T>> {
     
-    private static Type<ItemAddedOnInitHandler> TYPE;
+    private static Type<ItemAddedOnInitHandler<?>> TYPE;
 
+    private final T item;
+    
+    /**
+     * Creates a tagsinput addItemOnInit event.
+     */
+    protected ItemAddedOnInitEvent(T item) {
+        this.item = item;
+    }
+    
+    public T getItem() {
+        return item;
+    }
+    
     /**
      * Fires a tagsinput itemAddedOnInit event on all registered handlers in the handler
      * manager. If no such handlers exist, this method will do nothing.
      *
      * @param source the source of the handlers
      */
-    public static void fire(final HasItemAddedOnInitHandlers source) {
+    public static <T> void fire(final HasItemAddedOnInitHandlers<T> source, T item) {
         if (TYPE != null) {
-            ItemAddedOnInitEvent event = new ItemAddedOnInitEvent();
+            ItemAddedOnInitEvent<T> event = new ItemAddedOnInitEvent<T>(item);
             source.fireEvent(event);
         }
     }
@@ -51,26 +63,22 @@ public class ItemAddedOnInitEvent extends GwtEvent<ItemAddedOnInitHandler> {
      *
      * @return returns the handler type
      */
-    public static Type<ItemAddedOnInitHandler> getType() {
+    public static Type<ItemAddedOnInitHandler<?>> getType() {
         if (TYPE == null) {
-            TYPE = new Type<ItemAddedOnInitHandler>();
+            TYPE = new Type<ItemAddedOnInitHandler<?>>();
         }
         return TYPE;
     }
 
 
     @Override
-    public Type<ItemAddedOnInitHandler> getAssociatedType() {
-        return TYPE;
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public Type<ItemAddedOnInitHandler<T>> getAssociatedType() {
+        return (Type) TYPE;
     }
 
     @Override
-    protected void dispatch(ItemAddedOnInitHandler handler) {
+    protected void dispatch(ItemAddedOnInitHandler<T> handler) {
         handler.onItemAddedOnInit(this);
     }
-
-    /**
-     * Creates a tagsinput addItemOnInit event.
-     */
-    protected ItemAddedOnInitEvent() {}
 }

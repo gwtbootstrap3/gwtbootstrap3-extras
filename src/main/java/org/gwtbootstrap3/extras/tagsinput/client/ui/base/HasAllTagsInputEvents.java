@@ -31,7 +31,7 @@ import org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public interface HasAllTagsInputEvents extends HasItemAddedOnInitHandlers, HasBeforeItemAddHandlers {
+public interface HasAllTagsInputEvents<T> extends HasItemAddedOnInitHandlers<T>, HasBeforeItemAddHandlers<T> {
 
     /**
      * The {@link ItemAddedOnInitEvent} name

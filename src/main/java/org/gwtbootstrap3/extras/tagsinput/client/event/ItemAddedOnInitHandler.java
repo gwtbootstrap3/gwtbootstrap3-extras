@@ -27,12 +27,12 @@ import com.google.gwt.event.shared.EventHandler;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public interface ItemAddedOnInitHandler extends EventHandler {
+public interface ItemAddedOnInitHandler<T> extends EventHandler {
 
     /**
      * Called when {@link ItemAddedOnInitEvent} is fired.
      *
      * @param event the {@link ItemAddedOnInitEvent} that was fired
      */
-    void onItemAddedOnInit(ItemAddedOnInitEvent event);
+    void onItemAddedOnInit(ItemAddedOnInitEvent<T> event);
 }

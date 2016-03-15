@@ -27,7 +27,7 @@ import com.google.gwt.event.shared.HasHandlers;
  * A widget that implements this interface is a public source of
  * {@link ItemAddedOnInitEvent} events.
  */
-public interface HasItemAddedOnInitHandlers extends HasHandlers {
+public interface HasItemAddedOnInitHandlers<T> extends HasHandlers {
 
     /**
      * Adds a {@link ItemAddedOnInitEvent} handler.
@@ -35,5 +35,5 @@ public interface HasItemAddedOnInitHandlers extends HasHandlers {
      * @param handler the handler
      * @return the registration for the event
      */
-    HandlerRegistration addItemAddedOnInitHandler(ItemAddedOnInitHandler handler);
+    HandlerRegistration addItemAddedOnInitHandler(ItemAddedOnInitHandler<T> handler);
 }

@@ -56,7 +56,10 @@ import com.google.gwt.event.shared.HandlerRegistration;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
+public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T> {
+    // TODO Add attributes mixin
+    // TODO Add firing of ItemAddOnInit event
+    
     
     private TagsInputOptions options = TagsInputOptions.create();
     
@@ -196,12 +199,12 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
     }
 
     @Override
-    public HandlerRegistration addItemAddedOnInitHandler(final ItemAddedOnInitHandler handler) {
+    public HandlerRegistration addItemAddedOnInitHandler(final ItemAddedOnInitHandler<T> handler) {
         return addHandler(handler, ItemAddedOnInitEvent.getType());
     }
     
     @Override
-    public HandlerRegistration addBeforeItemAddHandler(final BeforeItemAddHandler handler) {
+    public HandlerRegistration addBeforeItemAddHandler(final BeforeItemAddHandler<T> handler) {
         return addHandler(handler, BeforeItemAddEvent.getType());
     }
     
@@ -225,11 +228,11 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents {
         $wnd.jQuery(e).tagsinput(options);
         
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_ON_INIT_EVENT, function(event) {
-            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemAddedOnInitHandlers;)(tagsInput);
+            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemAddedOnInitHandlers;Ljava/lang/Object;)(tagsInput, event.item);
         });
 
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_ADD_EVENT, function(event) {
-            @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemAddHandlers;)(tagsInput);
+            @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemAddHandlers;Ljava/lang/Object;)(tagsInput, event.item);
         });
     }-*/;
     
