@@ -29,8 +29,14 @@ import java.util.List;
 import org.gwtbootstrap3.client.ui.gwt.Widget;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddHandler;
+import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemRemoveEvent;
+import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemRemoveHandler;
+import org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedEvent;
+import org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedHandler;
 import org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent;
 import org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitHandler;
+import org.gwtbootstrap3.extras.tagsinput.client.event.ItemRemovedEvent;
+import org.gwtbootstrap3.extras.tagsinput.client.event.ItemRemovedHandler;
 import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
 import org.gwtbootstrap3.extras.typeahead.client.base.Dataset;
 import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadSelectedEvent;
@@ -207,6 +213,21 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
     public HandlerRegistration addBeforeItemAddHandler(final BeforeItemAddHandler<T> handler) {
         return addHandler(handler, BeforeItemAddEvent.getType());
     }
+
+    @Override
+    public HandlerRegistration addItemAddedHandler(final ItemAddedHandler<T> handler) {
+        return addHandler(handler, ItemAddedEvent.getType());
+    }
+
+    @Override
+    public HandlerRegistration addBeforeItemRemoveHandler(final BeforeItemRemoveHandler<T> handler) {
+        return addHandler(handler, BeforeItemRemoveEvent.getType());
+    }
+
+    @Override
+    public HandlerRegistration addItemRemovedHandler(final ItemRemovedHandler<T> handler) {
+        return addHandler(handler, ItemRemovedEvent.getType());
+    }
     
     public void reconfigure() {
         destroy();
@@ -233,6 +254,18 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
 
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_ADD_EVENT, function(event) {
             @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemAddHandlers;Ljava/lang/Object;)(tagsInput, event.item);
+        });
+
+        $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_EVENT, function(event) {
+            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemAddedHandlers;Ljava/lang/Object;)(tagsInput, event.item);
+        });
+
+        $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_REMOVE_EVENT, function(event) {
+            @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemRemoveEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemRemoveHandlers;Ljava/lang/Object;)(tagsInput, event.item);
+        });
+
+        $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_REMOVED_EVENT, function(event) {
+            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemRemovedEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemRemovedHandlers;Ljava/lang/Object;)(tagsInput, event.item);
         });
     }-*/;
     
@@ -336,7 +369,10 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
     private native void destroy(Element e) /*-{
         $wnd.jQuery(e).off(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_ON_INIT_EVENT);
         $wnd.jQuery(e).off(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_ADD_EVENT);
-        
+        $wnd.jQuery(e).off(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_EVENT);
+        $wnd.jQuery(e).off(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_REMOVE_EVENT);
+        $wnd.jQuery(e).off(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_REMOVED_EVENT);
+                
         return $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::DESTROY);
     }-*/;
 }

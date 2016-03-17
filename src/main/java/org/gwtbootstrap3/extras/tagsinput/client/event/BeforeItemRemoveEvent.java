@@ -27,16 +27,16 @@ import com.google.gwt.event.shared.GwtEvent;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class BeforeItemAddEvent<T> extends GwtEvent<BeforeItemAddHandler<T>> {
+public class BeforeItemRemoveEvent<T> extends GwtEvent<BeforeItemRemoveHandler<T>> {
     
-    private static Type<BeforeItemAddHandler<?>> TYPE;
+    private static Type<BeforeItemRemoveHandler<?>> TYPE;
 
     private final T item;
     
     /**
-     * Creates a tagsinput beforeItemAdd event.
+     * Creates a tagsinput beforeItemRemove event.
      */
-    protected BeforeItemAddEvent(T item) {
+    protected BeforeItemRemoveEvent(T item) {
         this.item = item;
     }
     
@@ -45,14 +45,14 @@ public class BeforeItemAddEvent<T> extends GwtEvent<BeforeItemAddHandler<T>> {
     }
     
     /**
-     * Fires a tagsinput beforeItemAdd event on all registered handlers in the handler
+     * Fires a tagsinput beforeItemRemove event on all registered handlers in the handler
      * manager. If no such handlers exist, this method will do nothing.
      *
      * @param source the source of the handlers
      */
-    public static <T> void fire(final HasBeforeItemAddHandlers<T> source, T item) {
+    public static <T> void fire(final HasBeforeItemRemoveHandlers<T> source, T item) {
         if (TYPE != null) {
-            BeforeItemAddEvent<T> event = new BeforeItemAddEvent<T>(item);
+            BeforeItemRemoveEvent<T> event = new BeforeItemRemoveEvent<T>(item);
             source.fireEvent(event);
         }
     }
@@ -62,21 +62,21 @@ public class BeforeItemAddEvent<T> extends GwtEvent<BeforeItemAddHandler<T>> {
      *
      * @return returns the handler type
      */
-    public static Type<BeforeItemAddHandler<?>> getType() {
+    public static Type<BeforeItemRemoveHandler<?>> getType() {
         if (TYPE == null) {
-            TYPE = new Type<BeforeItemAddHandler<?>>();
+            TYPE = new Type<BeforeItemRemoveHandler<?>>();
         }
         return TYPE;
     }
 
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public Type<BeforeItemAddHandler<T>> getAssociatedType() {
+    public Type<BeforeItemRemoveHandler<T>> getAssociatedType() {
         return (Type) TYPE;
     }
 
     @Override
-    protected void dispatch(BeforeItemAddHandler<T> handler) {
-        handler.onBeforeItemAdd(this);
+    protected void dispatch(BeforeItemRemoveHandler<T> handler) {
+        handler.onBeforeItemRemove(this);
     }
 }
