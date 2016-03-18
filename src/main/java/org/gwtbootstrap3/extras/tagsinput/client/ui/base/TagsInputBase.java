@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
 import org.gwtbootstrap3.client.ui.gwt.Widget;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddHandler;
@@ -44,12 +45,16 @@ import org.gwtbootstrap3.extras.typeahead.client.events.TypeaheadSelectedHandler
 import org.gwtbootstrap3.extras.typeahead.client.ui.Typeahead;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
@@ -62,10 +67,12 @@ import com.google.gwt.event.shared.HandlerRegistration;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T> {
+public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasChangeHandlers {
     // TODO Add attributes mixin
     // TODO Add firing of ItemAddOnInit event
-    
+    // TODO Add HasValue interface
+    // TODO Add getItems()
+    // TODO Add toJSO() and fromJSO() methods
     
     private TagsInputOptions options = TagsInputOptions.create();
     
@@ -86,6 +93,7 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
         }
     };
     
+    private final AttributeMixin<TagsInputBase<T>> attributeMixin = new AttributeMixin<TagsInputBase<T>>(this);
     
     public TagsInputBase() {
         this(new CollectionDataset<T>(Collections.<T>emptyList()));
@@ -123,7 +131,7 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
         options.setTagClass(tagClass);
     }
 
-    /**
+     /**
      * Sets item value name that will be used if tags are objects other then String.
      * 
      * @param itemValue name of field used for the tag value
@@ -229,6 +237,11 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
         return addHandler(handler, ItemRemovedEvent.getType());
     }
     
+    @Override
+    public HandlerRegistration addChangeHandler(ChangeHandler handler) {
+        return addDomHandler(handler, ChangeEvent.getType());
+    }
+
     public void reconfigure() {
         destroy();
         initialize(getElement(), options);
@@ -267,13 +280,17 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_REMOVED_EVENT, function(event) {
             @org.gwtbootstrap3.extras.tagsinput.client.event.ItemRemovedEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemRemovedHandlers;Ljava/lang/Object;)(tagsInput, event.item);
         });
+
+        // Workaround to make triggering 'change' event from jQuery working with GWT. Probably related to the issue https://github.com/jquery/jquery/issues/1783.
+        $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_CHANGED_EVENT, function(event) {
+        });
     }-*/;
     
     
     @Override
     protected void onLoad() {
         super.onLoad();
-        
+
         initialize(getElement(), options);
 
         // Deferred to make sure the tagsinput component creates <input> field
@@ -286,6 +303,27 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
         super.onUnload();
         
         command(getElement(), TagsInputCommand.DESTROY);
+    }
+    
+    /**
+     * Returns comma delimited string with values from tags.
+     * 
+     * @return comma delimited string
+     */
+    public String getValue() {
+        // TODO return value from attributes mixin if not attached
+        if (isAttached())
+            return getValue(getElement());
+        else
+            return null;
+    }
+
+    /**
+     * Returns list of items contained in the 
+     * @return
+     */
+    public List<T> getItems() {
+        return null;
     }
     
     /**
@@ -366,6 +404,14 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
         return $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::INPUT);
     }-*/;
 
+    private native String getValue(Element e) /*-{
+        return $wnd.jQuery(e).val();
+    }-*/;
+
+    private native JsArray<JavaScriptObject> getItems(Element e) /*-{
+        return $wnd.jQuery(e).items();
+    }-*/;
+    
     private native void destroy(Element e) /*-{
         $wnd.jQuery(e).off(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_ON_INIT_EVENT);
         $wnd.jQuery(e).off(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_ADD_EVENT);

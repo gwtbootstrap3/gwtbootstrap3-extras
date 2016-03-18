@@ -61,4 +61,9 @@ public interface HasAllTagsInputEvents<T> extends HasItemAddedOnInitHandlers<T>,
      * The {@link ItemRemovedEvent} name
      */
     static final String ITEM_REMOVED_EVENT = "itemRemoved";
+
+    /**
+     * The {@link ItemChangedEvent} name
+     */
+    static final String ITEM_CHANGED_EVENT = "change";
 }

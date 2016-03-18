@@ -34,5 +34,7 @@ interface TagsInputCommand {
     static final String INPUT = "input";
     static final String REFRESH = "refresh";
     static final String DESTROY = "destroy";
+    
+    static final String VALUE = "val";
 
 }
