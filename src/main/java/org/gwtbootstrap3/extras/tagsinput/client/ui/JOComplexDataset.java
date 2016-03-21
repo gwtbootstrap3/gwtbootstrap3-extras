@@ -20,24 +20,23 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
+import java.util.Collection;
+
+import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
 
 /**
- * Tags input using objects for tags.
+ * JOComplex dataset, contains objects of class {@link JOComplexTag}
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class ComplexTagsInput extends TagsInputBase<ComplexTag> {
-    
-    public ComplexTagsInput() {
-        setItemValue(ComplexTag.ITEM_VALUE_FIELD_NAME);
-        setItemText(ComplexTag.ITEM_TEXT_FIELD_NAME);
+public class JOComplexDataset extends CollectionDataset<JOComplexTag> {
+
+    public JOComplexDataset(final Collection<JOComplexTag> data) {
+        super(data);
     }
 
-    public ComplexTagsInput(ComplexDataset dataset) {
-        super(dataset);
-
-        setItemValue(ComplexTag.ITEM_VALUE_FIELD_NAME);
-        setItemText(ComplexTag.ITEM_TEXT_FIELD_NAME);
+    @Override
+    public String getValue(JOComplexTag datum) {
+        return datum != null ? datum.getText() : "";
     }
 }

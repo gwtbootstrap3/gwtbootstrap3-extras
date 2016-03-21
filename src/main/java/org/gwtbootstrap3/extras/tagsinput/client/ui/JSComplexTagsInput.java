@@ -21,35 +21,38 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  */
 
 import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
-import org.gwtbootstrap3.extras.typeahead.client.base.StringDataset;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * Wrapper for Bootstrap Tags Input component.
+ * Tags input using objects for tags.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInput extends TagsInputBase<String> {
+public class JSComplexTagsInput extends TagsInputBase<JSComplexTag> {
     
-    public TagsInput() {
+    private static final String ITEM_VALUE_FIELD_NAME = "item_value";
+    private static final String ITEM_TEXT_FIELD_NAME = "item_text"; 
+    
+    public JSComplexTagsInput() {
+        setItemValue(ITEM_VALUE_FIELD_NAME);
+        setItemText(ITEM_TEXT_FIELD_NAME);
     }
 
-    public TagsInput(StringDataset dataset) {
+    public JSComplexTagsInput(JSComplexDataset dataset) {
         super(dataset);
+
+        setItemValue(ITEM_VALUE_FIELD_NAME);
+        setItemText(ITEM_TEXT_FIELD_NAME);
     }
 
     @Override
-    protected JavaScriptObject toJSO(String tag) {
-        return toJSO_native(tag);
-    }
-    
-    private native JavaScriptObject toJSO_native(String tag) /*-{
+    protected JavaScriptObject toJSO(JSComplexTag tag) {
         return tag;
-    }-*/;
+    }
 
     @Override
-    protected String toJO(JavaScriptObject tag) {
-        return tag.toString();
+    protected JSComplexTag toJO(JavaScriptObject tag) {
+        return tag.cast();
     }
 }

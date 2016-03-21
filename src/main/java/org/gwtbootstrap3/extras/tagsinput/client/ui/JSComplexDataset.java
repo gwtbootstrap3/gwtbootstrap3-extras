@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2016 GwtBootstrap3
+ * Copyright (C) 2013 - 2014 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,36 +20,24 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
-import org.gwtbootstrap3.extras.typeahead.client.base.StringDataset;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import java.util.Collection;
+
+import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
 
 /**
- * Wrapper for Bootstrap Tags Input component.
+ * Complex dataset, contains objects of class {@link JSComplexTag}
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInput extends TagsInputBase<String> {
-    
-    public TagsInput() {
-    }
+public class JSComplexDataset extends CollectionDataset<JSComplexTag> {
 
-    public TagsInput(StringDataset dataset) {
-        super(dataset);
+    public JSComplexDataset(final Collection<JSComplexTag> data) {
+        super(data);
     }
 
     @Override
-    protected JavaScriptObject toJSO(String tag) {
-        return toJSO_native(tag);
-    }
-    
-    private native JavaScriptObject toJSO_native(String tag) /*-{
-        return tag;
-    }-*/;
-
-    @Override
-    protected String toJO(JavaScriptObject tag) {
-        return tag.toString();
+    public String getValue(JSComplexTag datum) {
+        return datum != null ? datum.getText() : "";
     }
 }

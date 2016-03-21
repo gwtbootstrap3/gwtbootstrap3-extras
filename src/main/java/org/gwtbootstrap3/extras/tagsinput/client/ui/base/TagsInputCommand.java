@@ -36,5 +36,5 @@ interface TagsInputCommand {
     static final String DESTROY = "destroy";
     
     static final String VALUE = "val";
-
+    static final String ITEMS = "items";
 }

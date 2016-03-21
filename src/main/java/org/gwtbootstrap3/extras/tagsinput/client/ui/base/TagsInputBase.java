@@ -1,5 +1,7 @@
 package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 
+import java.util.ArrayList;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -67,12 +69,10 @@ import com.google.gwt.event.shared.HandlerRegistration;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasChangeHandlers {
+public abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasChangeHandlers {
     // TODO Add attributes mixin
     // TODO Add firing of ItemAddOnInit event
     // TODO Add HasValue interface
-    // TODO Add getItems()
-    // TODO Add toJSO() and fromJSO() methods
     
     private TagsInputOptions options = TagsInputOptions.create();
     
@@ -121,6 +121,22 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
     public void setDatasets(final Collection<? extends Dataset<T>> datasets) {
         this.datasets = datasets;
     }
+    
+    /**
+     * Converts tag object from Java to JavaScriptObject
+     * 
+     * @param tag tag to convert
+     * @return JavaScriptObject representation of tag
+     */
+    protected abstract JavaScriptObject toJSO(T tag);
+    
+    /**
+     * Converts tag object from JavaScriptObject to Java
+     * 
+     * @param tag to convert
+     * @return Java object representation of tag
+     */
+    protected abstract T toJO(JavaScriptObject tag);
     
     /**
      * Sets classname for the tags.
@@ -319,11 +335,19 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
     }
 
     /**
-     * Returns list of items contained in the 
-     * @return
+     * Returns list of items contained in the
+     *  
+     * @return List of items
      */
     public List<T> getItems() {
-        return null;
+        JsArray<JavaScriptObject> js_items = getItems(getElement());
+        List<T> items = new ArrayList<T>();
+        
+        for(int i=0; i<js_items.length(); i++) {
+            items.add(toJO(js_items.get(i)));
+        }
+        
+        return items;
     }
     
     /**
@@ -333,7 +357,7 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
      */
     public void add(T tag) {
         if (isAttached())
-            add(getElement(), tag);
+            add(getElement(), toJSO(tag));
     }
 
     /**
@@ -343,7 +367,7 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
      */
     public void remove(T tag) {
         if (isAttached())
-            remove(getElement(), tag);
+            remove(getElement(), toJSO(tag));
     }
     
     /**
@@ -392,11 +416,11 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
         $wnd.jQuery(e).tagsinput(command);
     }-*/;
 
-    private native void add(Element e, T tag) /*-{
+    private native void add(Element e, JavaScriptObject tag) /*-{
         $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::ADD, tag);
     }-*/;
     
-    private native void remove(Element e, T tag) /*-{
+    private native void remove(Element e, JavaScriptObject tag) /*-{
         $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::REMOVE, tag);
     }-*/;
     
@@ -409,7 +433,7 @@ public class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>
     }-*/;
 
     private native JsArray<JavaScriptObject> getItems(Element e) /*-{
-        return $wnd.jQuery(e).items();
+        return $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::ITEMS);
     }-*/;
     
     private native void destroy(Element e) /*-{

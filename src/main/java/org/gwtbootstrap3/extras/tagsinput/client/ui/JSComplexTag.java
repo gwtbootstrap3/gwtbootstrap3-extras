@@ -23,23 +23,20 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * ComplexTags implementation used for {@link ComplexTagsInput} component.
+ * ComplexTags implementation used for {@link JSComplexTagsInput} component.
  * 
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class ComplexTag extends JavaScriptObject {
+public class JSComplexTag extends JavaScriptObject {
 
-    protected ComplexTag() {}
-    
-    public static final String ITEM_VALUE_FIELD_NAME = "item_value";
-    public static final String ITEM_TEXT_FIELD_NAME = "item_text"; 
+    protected JSComplexTag() {}
     
     /**
-     * Creates a new instance of {@link ComplexTag}.
+     * Creates a new instance of {@link JSComplexTag}.
      *
-     * @return a new instance of {@link ComplexTag}.
+     * @return a new instance of {@link JSComplexTag}.
      */
-    public static ComplexTag create() {
+    public static JSComplexTag create() {
         return JavaScriptObject.createObject().cast();
     }
     

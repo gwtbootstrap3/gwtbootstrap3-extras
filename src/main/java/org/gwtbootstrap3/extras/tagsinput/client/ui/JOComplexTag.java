@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,24 +20,27 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-
-import java.util.Collection;
-
-import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
-
 /**
- * Complex dataset, contains objects of class {@link ComplexTag}
- *
+ * Java object ComplexTags implementation used for {@link JOComplexTagsInput} component.
+ * 
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class ComplexDataset extends CollectionDataset<ComplexTag> {
-
-    public ComplexDataset(final Collection<ComplexTag> data) {
-        super(data);
+public class JOComplexTag {
+    
+    private String text;
+    private Integer value;
+    
+    public String getText() {
+        return text;
+    }
+    public void setText(String text) {
+        this.text = text;
+    }
+    public Integer getValue() {
+        return value;
+    }
+    public void setValue(Integer value) {
+        this.value = value;
     }
 
-    @Override
-    public String getValue(ComplexTag datum) {
-        return datum != null ? datum.getText() : "";
-    }
 }
