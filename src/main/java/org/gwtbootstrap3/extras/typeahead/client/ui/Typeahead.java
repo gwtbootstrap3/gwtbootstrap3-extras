@@ -79,6 +79,16 @@ public class Typeahead<T> extends TextBox {
         setDatasets(datasets);
     }
 
+    public Typeahead(final Element e, final Dataset<T> dataset) {
+        super(e);
+        setDatasets(dataset);
+    }
+
+    public Typeahead(final Element e, final Collection<? extends Dataset<T>> datasets) {
+        super(e);
+        setDatasets(datasets);
+    }
+    
     public void setDatasets(final Dataset<T> dataset) {
         this.datasets = Arrays.asList(dataset);
     }
