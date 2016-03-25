@@ -20,7 +20,7 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
+import org.gwtbootstrap3.extras.tagsinput.client.ui.base.SingleValueTagsInput;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -29,7 +29,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class JSComplexTagsInput extends TagsInputBase<JSComplexTag> {
+public class JSComplexTagsInput extends SingleValueTagsInput<JSComplexTag> {
     
     private static final String ITEM_VALUE_FIELD_NAME = "item_value";
     private static final String ITEM_TEXT_FIELD_NAME = "item_text"; 

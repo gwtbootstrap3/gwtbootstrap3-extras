@@ -20,7 +20,7 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
+import org.gwtbootstrap3.extras.tagsinput.client.ui.base.SingleValueTagsInput;
 import org.gwtbootstrap3.extras.typeahead.client.base.StringDataset;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -30,7 +30,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInput extends TagsInputBase<String> {
+public class TagsInput extends SingleValueTagsInput<String> {
     
     public TagsInput() {
     }
