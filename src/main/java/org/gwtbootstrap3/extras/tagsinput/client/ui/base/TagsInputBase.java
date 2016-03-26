@@ -45,16 +45,14 @@ import org.gwtbootstrap3.extras.typeahead.client.ui.Typeahead;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayInteger;
+import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.HasValue;
 
 /**
  * Wrapper for Bootstrap Tags Input component.
@@ -66,11 +64,9 @@ import com.google.gwt.user.client.ui.HasValue;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasChangeHandlers, HasValue<String> {
+abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasChangeHandlers {
     // TODO Add attributes mixin
     // TODO Add firing of ItemAddOnInit event
-    // TODO Add HasValue interface
-    // TODO Add Multi Value
     // TODO Add callbacks in options
     
     private TagsInputOptions options = TagsInputOptions.create();
@@ -286,10 +282,27 @@ abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<
         // Even if firing of ValueChangeEvent is removed, there should remain empty function and 'change' event will be properly cached by GWT.
         ////////////////////
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_CHANGED_EVENT, function(event) {
-            @com.google.gwt.event.logical.shared.ValueChangeEvent::fire(Lcom/google/gwt/event/logical/shared/HasValueChangeHandlers;Ljava/lang/Object;)(tagsInput, $wnd.jQuery(e).val());
+            var currentValue = $wnd.jQuery(e).val();
+
+            if ($wnd.jQuery.isArray(currentValue)) {
+                @com.google.gwt.event.logical.shared.ValueChangeEvent::fire(Lcom/google/gwt/event/logical/shared/HasValueChangeHandlers;Ljava/lang/Object;)(tagsInput, @org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase::toMultiValue(Lcom/google/gwt/core/client/JavaScriptObject;)(currentValue));
+            }
+            else {
+                @com.google.gwt.event.logical.shared.ValueChangeEvent::fire(Lcom/google/gwt/event/logical/shared/HasValueChangeHandlers;Ljava/lang/Object;)(tagsInput, currentValue);
+            }
         });
     }-*/;
     
+    protected static List<String> toMultiValue(JavaScriptObject js_multi_value) {
+        List<String> retValue = new ArrayList<String>();
+        JsArrayString js_string_array = js_multi_value.cast();
+        
+        for(int i=0; i<js_string_array.length(); i++) {
+            retValue.add(js_string_array.get(i));
+        }
+        
+        return retValue;
+    }
     
     @Override
     protected void onLoad() {
@@ -307,13 +320,6 @@ abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<
         super.onUnload();
         
         command(getElement(), TagsInputCommand.DESTROY);
-    }
-    
-
-
-    @Override
-    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
-        return addHandler(handler, ValueChangeEvent.getType());
     }
     
     /**
@@ -410,7 +416,7 @@ abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<
         return $wnd.jQuery(e).tagsinput(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputCommand::INPUT);
     }-*/;
 
-    native String getValue(Element e) /*-{
+    native JavaScriptObject getValue(Element e) /*-{
         return $wnd.jQuery(e).val();
     }-*/;
 

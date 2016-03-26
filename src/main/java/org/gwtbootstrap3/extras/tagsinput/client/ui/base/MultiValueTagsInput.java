@@ -1,5 +1,7 @@
 package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 
+import java.util.ArrayList;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -23,39 +25,41 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
 import org.gwtbootstrap3.extras.typeahead.client.base.Dataset;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * Wrapper for Bootstrap Tags Input component implemented with input box as underlying component.
+ * Wrapper for Bootstrap Tags Input component implemented with <select> as underlying component.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public abstract class SingleValueTagsInput<T> extends TagsInputBase<T> implements HasValueChangeHandlers<String> {
+public abstract class MultiValueTagsInput<T> extends TagsInputBase<T> implements HasValueChangeHandlers<List<String>> {
 
-    public SingleValueTagsInput() {
+    public MultiValueTagsInput() {
         this(new CollectionDataset<T>(Collections.<T>emptyList()));
     }
 
-    public SingleValueTagsInput(final Dataset<T> dataset) {
+    public MultiValueTagsInput(final Dataset<T> dataset) {
         this(Arrays.asList(dataset));
         
         setDatasets(dataset);
     }
 
-    public SingleValueTagsInput(final Collection<? extends Dataset<T>> datasets) {
-        InputElement tagsInput = Document.get().createTextInputElement();
-        tagsInput.setAttribute("data-role", "tagsinput");
-        
-        setElement(tagsInput);        
+    public MultiValueTagsInput(final Collection<? extends Dataset<T>> datasets) {
+        SelectElement tagsSelect = Document.get().createSelectElement();
+        tagsSelect.setMultiple(true);
+        tagsSelect.setAttribute("data-role", "tagsinput");
+
+        setElement(tagsSelect);        
         
         setDatasets(datasets);
     }
@@ -65,16 +69,16 @@ public abstract class SingleValueTagsInput<T> extends TagsInputBase<T> implement
      * 
      * @return comma delimited string
      */
-    public String getValue() {
-        // TODO return value from attributes mixin if not attached
+    public List<String> getValue() {
         if (isAttached())
-            return getValue(getElement()).toString();
+            return toMultiValue(getValue(getElement()));
         else
-            return null;
+            // TODO return value from attributes mixin if not attached        
+            return new ArrayList<String>();
     }
 
     @Override
-    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
+    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<List<String>> handler) {
         return addHandler(handler, ValueChangeEvent.getType());
     }
 }
