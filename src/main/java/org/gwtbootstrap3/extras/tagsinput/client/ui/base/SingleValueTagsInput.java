@@ -59,7 +59,7 @@ public abstract class SingleValueTagsInput<T> extends TagsInputBase<T> implement
         
         setDatasets(datasets);
     }
-
+    
     /**
      * Returns comma delimited string with values from tags.
      * 

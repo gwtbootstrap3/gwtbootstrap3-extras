@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
 import org.gwtbootstrap3.client.ui.gwt.Widget;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddHandler;
@@ -65,7 +64,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
 abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasChangeHandlers {
-    // TODO Add attributes mixin
     // TODO Add firing of ItemAddOnInit event
     // TODO Add callbacks in options
     
@@ -87,8 +85,6 @@ abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<
             });
         }
     };
-    
-    private final AttributeMixin<TagsInputBase<T>> attributeMixin = new AttributeMixin<TagsInputBase<T>>(this);
     
     public void setDatasets(final Dataset<T> dataset) {
         this.datasets = Arrays.asList(dataset);
