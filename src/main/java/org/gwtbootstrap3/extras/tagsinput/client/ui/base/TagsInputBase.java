@@ -64,8 +64,8 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
 abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasChangeHandlers {
-    // TODO Add firing of ItemAddOnInit event
     // TODO Add callbacks in options
+    // TODO Add onTagExists
     
     private TagsInputOptions options = TagsInputOptions.create();
     
@@ -247,11 +247,12 @@ abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<
      */
     private native void initialize(Element e, JavaScriptObject options) /*-{
         var tagsInput = this;
-        $wnd.jQuery(e).tagsinput(options);
         
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_ON_INIT_EVENT, function(event) {
             @org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemAddedOnInitHandlers;Ljava/lang/Object;)(tagsInput, event.item);
         });
+        
+        $wnd.jQuery(e).tagsinput(options);
 
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_ADD_EVENT, function(event) {
             @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemAddHandlers;Ljava/lang/Object;)(tagsInput, event.item);
