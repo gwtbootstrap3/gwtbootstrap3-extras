@@ -28,6 +28,7 @@ import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
 import org.gwtbootstrap3.extras.typeahead.client.base.Dataset;
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -56,6 +57,28 @@ public abstract class SingleValueTagsInput<T> extends TagsInputBase<T> implement
         tagsInput.setAttribute("data-role", "tagsinput");
         
         setElement(tagsInput);        
+        
+        setDatasets(datasets);
+    }
+ 
+    public SingleValueTagsInput(final Element e) {
+        this(e, new CollectionDataset<T>(Collections.<T>emptyList()));
+    }
+
+    public SingleValueTagsInput(final Element e, final Dataset<T> dataset) {
+        this(e, Arrays.asList(dataset));
+        
+        setDatasets(dataset);
+    }
+
+    public SingleValueTagsInput(final Element e, final Collection<? extends Dataset<T>> datasets) {
+        e.setAttribute("data-role", "tagsinput");
+
+        setElement(e);
+        
+        // Wrapped elements are already attached to the DOM and the onAttach method will not be called automatically,
+        // so it is called manually to correctly set attached state.
+        onAttach();
         
         setDatasets(datasets);
     }

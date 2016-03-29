@@ -30,6 +30,7 @@ import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
 import org.gwtbootstrap3.extras.typeahead.client.base.Dataset;
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -58,11 +59,33 @@ public abstract class MultiValueTagsInput<T> extends TagsInputBase<T> implements
         tagsSelect.setMultiple(true);
         tagsSelect.setAttribute("data-role", "tagsinput");
 
-        setElement(tagsSelect);        
+        setElement(tagsSelect);
         
         setDatasets(datasets);
     }
 
+    public MultiValueTagsInput(Element e) {
+        this(e, new CollectionDataset<T>(Collections.<T>emptyList()));
+    }
+
+    public MultiValueTagsInput(Element e, final Dataset<T> dataset) {
+        this(e, Arrays.asList(dataset));
+        
+        setDatasets(dataset);
+    }
+
+    public MultiValueTagsInput(Element e, final Collection<? extends Dataset<T>> datasets) {
+        e.setAttribute("data-role", "tagsinput");
+
+        setElement(e);
+        
+        // Wrapped elements are already attached to the DOM and the onAttach method will not be called automatically,
+        // so it is called manually to correctly set attached state.
+        onAttach();
+        
+        setDatasets(datasets);
+    }
+    
     /**
      * Returns comma delimited string with values from tags.
      * 

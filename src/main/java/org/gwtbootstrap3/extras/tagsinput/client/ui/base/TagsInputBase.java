@@ -93,7 +93,7 @@ abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<
     public void setDatasets(final Collection<? extends Dataset<T>> datasets) {
         this.datasets = datasets;
     }
-    
+ 
     /**
      * Converts tag object from Java to JavaScriptObject
      * 

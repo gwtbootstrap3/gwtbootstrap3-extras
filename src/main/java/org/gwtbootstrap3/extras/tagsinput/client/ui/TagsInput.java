@@ -26,6 +26,7 @@ import org.gwtbootstrap3.extras.tagsinput.client.ui.base.SingleValueTagsInput;
 import org.gwtbootstrap3.extras.typeahead.client.base.StringDataset;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 
 /**
  * Wrapper for Bootstrap Tags Input component.
@@ -41,6 +42,14 @@ public class TagsInput extends SingleValueTagsInput<String> {
         super(dataset);
     }
 
+    public TagsInput(Element e) {
+        super(e);
+    }
+
+    public TagsInput(Element e, StringDataset dataset) {
+        super(e, dataset);
+    }
+    
     @Override
     protected JavaScriptObject toJSO(String tag) {
         return toJSO_native(tag);
