@@ -1,7 +1,5 @@
 package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 
-import java.util.ArrayList;
-
 /*
  * #%L
  * GwtBootstrap3
@@ -22,6 +20,7 @@ import java.util.ArrayList;
  * #L%
  */
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;

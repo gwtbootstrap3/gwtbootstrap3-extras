@@ -249,25 +249,25 @@ abstract class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<
         var tagsInput = this;
         
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_ON_INIT_EVENT, function(event) {
-            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemAddedOnInitHandlers;Ljava/lang/Object;)(tagsInput, event.item);
+            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedOnInitEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemAddedOnInitHandlers;Ljava/lang/Object;)(tagsInput, tagsInput.@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase::toJO(Lcom/google/gwt/core/client/JavaScriptObject;)(event.item));
         });
         
         $wnd.jQuery(e).tagsinput(options);
 
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_ADD_EVENT, function(event) {
-            @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemAddHandlers;Ljava/lang/Object;)(tagsInput, event.item);
+            @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemAddHandlers;Ljava/lang/Object;)(tagsInput, tagsInput.@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase::toJO(Lcom/google/gwt/core/client/JavaScriptObject;)(event.item));
         });
 
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_ADDED_EVENT, function(event) {
-            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemAddedHandlers;Ljava/lang/Object;)(tagsInput, event.item);
+            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemAddedEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemAddedHandlers;Ljava/lang/Object;)(tagsInput, tagsInput.@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase::toJO(Lcom/google/gwt/core/client/JavaScriptObject;)(event.item));
         });
 
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::BEFORE_ITEM_REMOVE_EVENT, function(event) {
-            @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemRemoveEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemRemoveHandlers;Ljava/lang/Object;)(tagsInput, event.item);
+            @org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemRemoveEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasBeforeItemRemoveHandlers;Ljava/lang/Object;)(tagsInput, tagsInput.@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase::toJO(Lcom/google/gwt/core/client/JavaScriptObject;)(event.item));
         });
 
         $wnd.jQuery(e).on(@org.gwtbootstrap3.extras.tagsinput.client.ui.base.HasAllTagsInputEvents::ITEM_REMOVED_EVENT, function(event) {
-            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemRemovedEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemRemovedHandlers;Ljava/lang/Object;)(tagsInput, event.item);
+            @org.gwtbootstrap3.extras.tagsinput.client.event.ItemRemovedEvent::fire(Lorg/gwtbootstrap3/extras/tagsinput/client/event/HasItemRemovedHandlers;Ljava/lang/Object;)(tagsInput, tagsInput.@org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase::toJO(Lcom/google/gwt/core/client/JavaScriptObject;)(event.item));
         });
 
         ////////////////////
