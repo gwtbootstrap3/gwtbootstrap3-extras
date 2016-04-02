@@ -30,6 +30,6 @@ public interface GalleryClientBundle extends ClientBundle {
 
     static final GalleryClientBundle INSTANCE = GWT.create(GalleryClientBundle.class);
 
-    static final String BLUEIMP_JS = "js/jquery.blueimp-gallery-2.17.0.min.cache.js";
-    static final String GALLERY_JS = "js/bootstrap-image-gallery-3.3.6.min.cache.js";
+    static final String BLUEIMP_JS = "js/jquery.blueimp-gallery-2.18.2.min.cache.js";
+    static final String GALLERY_JS = "js/bootstrap-image-gallery-3.4.2.min.cache.js";
 }
