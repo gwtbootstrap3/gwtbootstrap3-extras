@@ -1,5 +1,7 @@
 package org.gwtbootstrap3.extras.tagsinput.client.ui;
 
+import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -20,17 +22,18 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.tagsinput.client.ui.base.TagsInputBase;
+import org.gwtbootstrap3.extras.tagsinput.client.ui.base.SingleValueTagsInput;
 import org.gwtbootstrap3.extras.typeahead.client.base.StringDataset;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 
 /**
  * Wrapper for Bootstrap Tags Input component.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInput extends TagsInputBase<String> {
+public class TagsInput extends SingleValueTagsInput<String> {
     
     public TagsInput() {
     }
@@ -39,11 +42,40 @@ public class TagsInput extends TagsInputBase<String> {
         super(dataset);
     }
 
+    public TagsInput(Element e) {
+        super(e);
+    }
+
+    public TagsInput(Element e, StringDataset dataset) {
+        super(e, dataset);
+    }
+    
     @Override
     protected JavaScriptObject toJSO(String tag) {
         return toJSO_native(tag);
     }
     
+
+    private final AttributeMixin<TagsInput> attributeMixin = new AttributeMixin<TagsInput>(this);
+    
+    @Override
+    public void add(String tag) {
+        if (isAttached())
+            super.add(tag);
+        else {
+            String currentValue = attributeMixin.getAttribute("value");
+            attributeMixin.setAttribute("value", (currentValue.isEmpty() ? "" : currentValue+",") + tag);
+        }
+    }
+    
+    @Override
+    public String getValue() {
+        if (isAttached())
+            return super.getValue();
+        else
+            return attributeMixin.getAttribute("value");
+    }
+
     private native JavaScriptObject toJSO_native(String tag) /*-{
         return tag;
     }-*/;
