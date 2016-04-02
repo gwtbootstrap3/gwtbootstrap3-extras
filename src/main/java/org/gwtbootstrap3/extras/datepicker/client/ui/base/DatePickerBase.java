@@ -314,8 +314,6 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     @Override
     public void onShow(final Event e) {
         validatorMixin.setShowing(true);
-        // On show we put focus on the textbox
-        textBox.setFocus(true);
         fireEvent(new ShowEvent(e));
     }
 
@@ -330,8 +328,6 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     public void onHide(final Event e) {
         validatorMixin.setShowing(false);
         validate(getValidateOnBlur());
-        // On hide we remove focus from the textbox
-        textBox.setFocus(false);
         fireEvent(new HideEvent(e));
     }
 
