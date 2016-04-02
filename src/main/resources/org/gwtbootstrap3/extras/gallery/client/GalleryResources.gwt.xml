@@ -3,7 +3,7 @@
   #%L
   GwtBootstrap3
   %%
-  Copyright (C) 2013 - 2014 GwtBootstrap3
+  Copyright (C) 2013 - 2016 GwtBootstrap3
   %%
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 <module>
     <inherits name="org.gwtbootstrap3.extras.gallery.client.GalleryNoThemeResources"/>
 
-    <stylesheet src="css/blueimp-gallery-fix.cache.css"/>
-    <stylesheet src="css/blueimp-gallery-2.17.0.min.cache.css"/>
-    <stylesheet src="css/bootstrap-image-gallery-3.3.6.min.cache.css"/>
+    <stylesheet src="css/blueimp-gallery-2.18.2-fix.cache.css"/>
+    <stylesheet src="css/blueimp-gallery-2.18.2.min.cache.css"/>
+    <stylesheet src="css/bootstrap-image-gallery-3.4.2.min.cache.css"/>
 </module>
