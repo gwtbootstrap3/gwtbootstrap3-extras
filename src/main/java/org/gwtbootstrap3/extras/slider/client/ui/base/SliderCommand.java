@@ -4,7 +4,7 @@ package org.gwtbootstrap3.extras.slider.client.ui.base;
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2015 GwtBootstrap3
+ * Copyright (C) 2013 - 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ public interface SliderCommand {
 
     static final String GET_VALUE = "getValue";
     static final String SET_VALUE = "setValue";
+    static final String GET_ELEMENT = "getElement";
     static final String DESTROY = "destroy";
     static final String DISABLE = "disable";
     static final String ENABLE = "enable";
