@@ -455,22 +455,16 @@ public abstract class SliderBase<T> extends Widget implements
     @Override
     public void setVisible(final boolean visible) {
         if (isAttached()) {
-            Element elem = getElement().getPreviousSiblingElement();
-            if (elem != null) {
-                setVisible(elem, visible);
-                return;
-            }
+            setVisible(getElement(getElement()), visible);
+        } else {
+            super.setVisible(visible);
         }
-        super.setVisible(visible);
     }
 
     @Override
     public boolean isVisible() {
         if (isAttached()) {
-            Element elem = getElement().getPreviousSiblingElement();
-            if (elem != null) {
-                return isVisible(elem);
-            }
+            return isVisible(getElement(getElement()));
         }
         return isVisible();
     }
@@ -542,6 +536,15 @@ public abstract class SliderBase<T> extends Widget implements
      * @return
      */
     protected abstract T convertValue(String value);
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public com.google.gwt.user.client.Element getStyleElement() {
+        if (isAttached()) {
+            return (com.google.gwt.user.client.Element) getElement(getElement());
+        }
+        return super.getStyleElement();
+    }
 
     /**
      * Toggles the slider between enabled and disabled.
@@ -878,7 +881,7 @@ public abstract class SliderBase<T> extends Widget implements
 
     /**
      * FIXME: This is a workaround for the refresh command, since it is buggy in
-     * the current version (6.1.6). After executing this command, the slider
+     * the current version (6.1.8). After executing this command, the slider
      * becomes consistently a range slider with 2 handles. This should be
      * removed once the bug is fixed in a future version.
      *
@@ -895,6 +898,10 @@ public abstract class SliderBase<T> extends Widget implements
 
     private native void sliderCommand(Element e, String cmd) /*-{
         $wnd.jQuery(e).slider(cmd);
+    }-*/;
+
+    private native Element getElement(Element e) /*-{
+        return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ELEMENT);
     }-*/;
 
     private native void setAttribute(Element e, String attr, String value) /*-{
