@@ -881,7 +881,7 @@ public abstract class SliderBase<T> extends Widget implements
 
     /**
      * FIXME: This is a workaround for the refresh command, since it is buggy in
-     * the current version (6.1.8). After executing this command, the slider
+     * the current version (7.0.1). After executing this command, the slider
      * becomes consistently a range slider with 2 handles. This should be
      * removed once the bug is fixed in a future version.
      *
