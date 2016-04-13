@@ -21,12 +21,12 @@ package org.gwtbootstrap3.extras.tagsinput.client.callback;
  */
 
 /**
- * Callback used to get item text.
+ * Callback used to get class name for a item.
  * 
  * @author Marko Nikolić
  *
  * @param <T> type of item
  */
-public interface ItemTextCallback<T> {
-    public String getItemText(T item);
+public interface TagClassCallback<T> {
+    public String getTagClass(T item);
 }

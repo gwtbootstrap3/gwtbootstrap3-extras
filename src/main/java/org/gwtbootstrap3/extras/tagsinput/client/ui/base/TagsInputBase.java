@@ -28,6 +28,7 @@ import java.util.List;
 import org.gwtbootstrap3.client.ui.gwt.Widget;
 import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemTextCallback;
 import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemValueCallback;
+import org.gwtbootstrap3.extras.tagsinput.client.callback.TagClassCallback;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddHandler;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemRemoveEvent;
@@ -104,6 +105,10 @@ class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasCh
      */
     public void setTagClass(final String tagClass) {
         options.setTagClass(tagClass);
+    }
+    
+    public void setTagClass(final TagClassCallback<T> cb) {
+        options.setTagClass(cb);
     }
 
      /**

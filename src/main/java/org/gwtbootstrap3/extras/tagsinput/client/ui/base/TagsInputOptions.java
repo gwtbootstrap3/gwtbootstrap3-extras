@@ -2,6 +2,7 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 
 import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemTextCallback;
 import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemValueCallback;
+import org.gwtbootstrap3.extras.tagsinput.client.callback.TagClassCallback;
 
 /*
  * #%L
@@ -49,13 +50,19 @@ public class TagsInputOptions<T> extends JavaScriptObject {
         this.tagClass = className;
     }-*/;
 
+    public final native void setTagClass(final TagClassCallback<T> callback) /*-{
+        this.tagClass = function(item) {
+            return callback.@org.gwtbootstrap3.extras.tagsinput.client.callback.TagClassCallback::getTagClass(Ljava/lang/Object;)(item);
+        }
+    }-*/;
+    
     public final native void setItemValue(String itemValue) /*-{
         this.itemValue = itemValue;
     }-*/;
 
     public final native void setItemValue(final ItemValueCallback<T> callback) /*-{
         this.itemValue = function(item) {
-            return callback.@org.gwtbootstrap3.extras.tagsinput.client.ui.base.ItemValueCallback::getItemValue(Ljava/lang/Object;)(item);
+            return callback.@org.gwtbootstrap3.extras.tagsinput.client.callback.ItemValueCallback::getItemValue(Ljava/lang/Object;)(item);
         }
     }-*/;
     
@@ -65,7 +72,7 @@ public class TagsInputOptions<T> extends JavaScriptObject {
     
     public final native void setItemText(final ItemTextCallback<T> callback) /*-{
         this.itemText = function(item) {
-            return callback.@org.gwtbootstrap3.extras.tagsinput.client.ui.base.ItemTextCallback::getItemText(Ljava/lang/Object;)(item);
+            return callback.@org.gwtbootstrap3.extras.tagsinput.client.callback.ItemTextCallback::getItemText(Ljava/lang/Object;)(item);
         }
     }-*/;
 

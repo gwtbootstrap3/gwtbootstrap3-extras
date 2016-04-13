@@ -20,6 +20,13 @@ package org.gwtbootstrap3.extras.tagsinput.client.callback;
  * #L%
  */
 
+/**
+ * Callback used to get item value.
+ * 
+ * @author Marko Nikolić
+ *
+ * @param <T> type of item
+ */
 public interface ItemValueCallback<T> {
     public String getItemValue(T item);
 }
