@@ -1,5 +1,8 @@
 package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 
+import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemTextCallback;
+import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemValueCallback;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -28,7 +31,7 @@ import com.google.gwt.core.client.JsArrayInteger;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInputOptions extends JavaScriptObject {
+public class TagsInputOptions<T> extends JavaScriptObject {
 
     protected TagsInputOptions() {}
     
@@ -37,6 +40,7 @@ public class TagsInputOptions extends JavaScriptObject {
      *
      * @return a new instance of {@link TagsInputOptions}.
      */
+    @SuppressWarnings("rawtypes")
     static TagsInputOptions create() {
         return JavaScriptObject.createObject().cast();
     }
@@ -49,8 +53,20 @@ public class TagsInputOptions extends JavaScriptObject {
         this.itemValue = itemValue;
     }-*/;
 
+    public final native void setItemValue(final ItemValueCallback<T> callback) /*-{
+        this.itemValue = function(item) {
+            return callback.@org.gwtbootstrap3.extras.tagsinput.client.ui.base.ItemValueCallback::getItemValue(Ljava/lang/Object;)(item);
+        }
+    }-*/;
+    
     public final native void setItemText(String itemText) /*-{
         this.itemText = itemText;
+    }-*/;
+    
+    public final native void setItemText(final ItemTextCallback<T> callback) /*-{
+        this.itemText = function(item) {
+            return callback.@org.gwtbootstrap3.extras.tagsinput.client.ui.base.ItemTextCallback::getItemText(Ljava/lang/Object;)(item);
+        }
     }-*/;
 
     public final native void setConfirmKeys(JsArrayInteger keys) /*-{

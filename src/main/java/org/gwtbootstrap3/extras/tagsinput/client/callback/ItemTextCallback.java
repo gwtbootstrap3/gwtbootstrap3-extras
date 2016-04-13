@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.tagsinput.client.ui;
+package org.gwtbootstrap3.extras.tagsinput.client.callback;
 
 /*
  * #%L
@@ -20,27 +20,6 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-/**
- * Java object ComplexTags implementation used for {@link JOComplexTagsInput} component.
- * 
- * @author Marko Nikolić <marko.nikolic@iten.rs>
- */
-public class JOComplexTag {
-    
-    private String text;
-    private Integer value;
-    
-    public String getText() {
-        return text;
-    }
-    public void setText(String text) {
-        this.text = text;
-    }
-    public Integer getValue() {
-        return value;
-    }
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
+public interface ItemTextCallback<T> {
+    public String getItemText(T item);
 }

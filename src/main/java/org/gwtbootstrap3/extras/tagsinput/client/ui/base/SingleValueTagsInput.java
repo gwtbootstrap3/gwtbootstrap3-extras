@@ -36,11 +36,11 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * Wrapper for Bootstrap Tags Input component implemented with input box as underlying component.
+ * Wrapper for Bootstrap Tags Input component implemented with &lt;input&gt; box as underlying component.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public abstract class SingleValueTagsInput<T> extends TagsInputBase<T> implements HasValueChangeHandlers<String> {
+public class SingleValueTagsInput<T> extends TagsInputBase<T> implements HasValueChangeHandlers<String> {
 
     public SingleValueTagsInput() {
         this(new CollectionDataset<T>(Collections.<T>emptyList()));
@@ -89,7 +89,6 @@ public abstract class SingleValueTagsInput<T> extends TagsInputBase<T> implement
      * @return comma delimited string
      */
     public String getValue() {
-        // TODO return value from attributes mixin if not attached
         if (isAttached())
             return getValue(getElement()).toString();
         else

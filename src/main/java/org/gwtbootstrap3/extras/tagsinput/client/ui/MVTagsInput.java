@@ -1,8 +1,8 @@
 package org.gwtbootstrap3.extras.tagsinput.client.ui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-
-import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
+import java.util.List;
 
 /*
  * #%L
@@ -24,51 +24,58 @@ import org.gwtbootstrap3.client.ui.base.mixin.AttributeMixin;
  * #L%
  */
 
-import org.gwtbootstrap3.extras.tagsinput.client.ui.base.SingleValueTagsInput;
+import org.gwtbootstrap3.extras.tagsinput.client.ui.base.MultiValueTagsInput;
 import org.gwtbootstrap3.extras.typeahead.client.base.StringDataset;
 
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.OptionElement;
 
 /**
- * Wrapper for Bootstrap Tags Input component.
+ * Wrapper for Bootstrap Tags Input component with multi value support.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInput extends SingleValueTagsInput<String> {
-    
-    public TagsInput() {
+public class MVTagsInput extends MultiValueTagsInput<String> {
+
+    public MVTagsInput() {
     }
 
-    public TagsInput(StringDataset dataset) {
+    public MVTagsInput(StringDataset dataset) {
         super(dataset);
     }
 
-    public TagsInput(Element e) {
+    public MVTagsInput(Element e) {
         super(e);
     }
 
-    public TagsInput(Element e, StringDataset dataset) {
+    public MVTagsInput(Element e, StringDataset dataset) {
         super(e, dataset);
     }
-
-    private final AttributeMixin<TagsInput> attributeMixin = new AttributeMixin<TagsInput>(this);
     
     @Override
     public void add(String tag) {
         if (isAttached())
             super.add(tag);
         else {
-            String currentValue = attributeMixin.getAttribute("value");
-            attributeMixin.setAttribute("value", (currentValue.isEmpty() ? "" : currentValue+",") + tag);
+            OptionElement option = Document.get().createOptionElement();
+            option.setValue(tag);
+            option.setInnerText(tag);
+            getElement().appendChild(option);
         }
     }
     
     @Override
-    public String getValue() {
+    public List<String> getValue() {
         if (isAttached())
             return super.getValue();
-        else
-            return attributeMixin.getAttribute("value");
+        else {
+            List<String> value = new ArrayList<String>();
+            for(int i=0; i<getElement().getChildCount(); i++) {
+                value.add(getElement().getChild(i).getNodeValue());
+            }
+            return value;
+        }
     }
 
     public void setValue(String value) {
