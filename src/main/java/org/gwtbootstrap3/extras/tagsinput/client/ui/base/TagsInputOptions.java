@@ -2,6 +2,7 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 
 import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemTextCallback;
 import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemValueCallback;
+import org.gwtbootstrap3.extras.tagsinput.client.callback.OnTagExistsCallback;
 import org.gwtbootstrap3.extras.tagsinput.client.callback.TagClassCallback;
 
 /*
@@ -106,5 +107,11 @@ public class TagsInputOptions<T> extends JavaScriptObject {
     
     public final native void setCancelConfirmKeysOnEmpty(boolean cancelConfirmKeysOnEmpty) /*-{
         this.cancelConfirmKeysOnEmpty = cancelConfirmKeysOnEmpty;
+    }-*/;
+    
+    public final native void onTagExists(final OnTagExistsCallback<T> callback) /*-{
+        this.onTagExists = function(item, tag) {
+            callback.@org.gwtbootstrap3.extras.tagsinput.client.callback.OnTagExistsCallback::onTagExists(Ljava/lang/Object;Lcom/google/gwt/dom/client/Element;)(item, tag[0]);
+        }
     }-*/;
 }

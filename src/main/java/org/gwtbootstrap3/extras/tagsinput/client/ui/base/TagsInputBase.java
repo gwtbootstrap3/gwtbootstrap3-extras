@@ -28,6 +28,7 @@ import java.util.List;
 import org.gwtbootstrap3.client.ui.gwt.Widget;
 import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemTextCallback;
 import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemValueCallback;
+import org.gwtbootstrap3.extras.tagsinput.client.callback.OnTagExistsCallback;
 import org.gwtbootstrap3.extras.tagsinput.client.callback.TagClassCallback;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddEvent;
 import org.gwtbootstrap3.extras.tagsinput.client.event.BeforeItemAddHandler;
@@ -198,6 +199,15 @@ class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasCh
      */
     public void setFocusClass(final String focusClass) {
         options.setFocusClass(focusClass);
+    }
+    
+    /**
+     * Callback called when adding tag that already exists.
+     * 
+     * @param callback callback method.
+     */
+    public void onTagExists(final OnTagExistsCallback<T> callback) {
+        options.onTagExists(callback);
     }
     
     @Override
