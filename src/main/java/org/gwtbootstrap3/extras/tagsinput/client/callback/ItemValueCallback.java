@@ -1,4 +1,4 @@
-package org.gwtbootstrap3.extras.tagsinput.client.ui;
+package org.gwtbootstrap3.extras.tagsinput.client.callback;
 
 /*
  * #%L
@@ -20,23 +20,13 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-import java.util.Collection;
-
-import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
-
 /**
- * JOComplex dataset, contains objects of class {@link JOComplexTag}
+ * Callback used to get item value.
+ * 
+ * @author Marko Nikolić
  *
- * @author Marko Nikolić <marko.nikolic@iten.rs>
+ * @param <T> type of item
  */
-public class JOComplexDataset extends CollectionDataset<JOComplexTag> {
-
-    public JOComplexDataset(final Collection<JOComplexTag> data) {
-        super(data);
-    }
-
-    @Override
-    public String getValue(JOComplexTag datum) {
-        return datum != null ? datum.getText() : "";
-    }
+public interface ItemValueCallback<T> {
+    public String getItemValue(T item);
 }

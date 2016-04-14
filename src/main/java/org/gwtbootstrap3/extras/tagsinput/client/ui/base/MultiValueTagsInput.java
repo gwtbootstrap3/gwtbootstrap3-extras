@@ -38,11 +38,11 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * Wrapper for Bootstrap Tags Input component implemented with <select> as underlying component.
+ * Wrapper for Bootstrap Tags Input component implemented with &lt;select&gt; as underlying component.
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public abstract class MultiValueTagsInput<T> extends TagsInputBase<T> implements HasValueChangeHandlers<List<String>> {
+public class MultiValueTagsInput<T> extends TagsInputBase<T> implements HasValueChangeHandlers<List<String>> {
 
     public MultiValueTagsInput() {
         this(new CollectionDataset<T>(Collections.<T>emptyList()));
@@ -94,8 +94,7 @@ public abstract class MultiValueTagsInput<T> extends TagsInputBase<T> implements
     public List<String> getValue() {
         if (isAttached())
             return toMultiValue(getValue(getElement()));
-        else
-            // TODO return value from attributes mixin if not attached        
+        else    
             return new ArrayList<String>();
     }
 

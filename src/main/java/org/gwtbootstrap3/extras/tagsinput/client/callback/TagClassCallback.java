@@ -1,10 +1,10 @@
-package org.gwtbootstrap3.extras.tagsinput.client.ui;
+package org.gwtbootstrap3.extras.tagsinput.client.callback;
 
 /*
  * #%L
  * GwtBootstrap3
  * %%
- * Copyright (C) 2013 - 2014 GwtBootstrap3
+ * Copyright (C) 2013 - 2016 GwtBootstrap3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,24 +20,13 @@ package org.gwtbootstrap3.extras.tagsinput.client.ui;
  * #L%
  */
 
-
-import java.util.Collection;
-
-import org.gwtbootstrap3.extras.typeahead.client.base.CollectionDataset;
-
 /**
- * Complex dataset, contains objects of class {@link JSComplexTag}
+ * Callback used to get class name for a item.
+ * 
+ * @author Marko Nikolić
  *
- * @author Marko Nikolić <marko.nikolic@iten.rs>
+ * @param <T> type of item
  */
-public class JSComplexDataset extends CollectionDataset<JSComplexTag> {
-
-    public JSComplexDataset(final Collection<JSComplexTag> data) {
-        super(data);
-    }
-
-    @Override
-    public String getValue(JSComplexTag datum) {
-        return datum != null ? datum.getText() : "";
-    }
+public interface TagClassCallback<T> {
+    public String getTagClass(T item);
 }

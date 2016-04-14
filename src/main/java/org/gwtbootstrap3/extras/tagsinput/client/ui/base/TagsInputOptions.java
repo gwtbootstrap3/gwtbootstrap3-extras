@@ -1,5 +1,10 @@
 package org.gwtbootstrap3.extras.tagsinput.client.ui.base;
 
+import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemTextCallback;
+import org.gwtbootstrap3.extras.tagsinput.client.callback.ItemValueCallback;
+import org.gwtbootstrap3.extras.tagsinput.client.callback.OnTagExistsCallback;
+import org.gwtbootstrap3.extras.tagsinput.client.callback.TagClassCallback;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -28,7 +33,7 @@ import com.google.gwt.core.client.JsArrayInteger;
  *
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
-public class TagsInputOptions extends JavaScriptObject {
+public class TagsInputOptions<T> extends JavaScriptObject {
 
     protected TagsInputOptions() {}
     
@@ -37,6 +42,7 @@ public class TagsInputOptions extends JavaScriptObject {
      *
      * @return a new instance of {@link TagsInputOptions}.
      */
+    @SuppressWarnings("rawtypes")
     static TagsInputOptions create() {
         return JavaScriptObject.createObject().cast();
     }
@@ -45,12 +51,30 @@ public class TagsInputOptions extends JavaScriptObject {
         this.tagClass = className;
     }-*/;
 
+    public final native void setTagClass(final TagClassCallback<T> callback) /*-{
+        this.tagClass = function(item) {
+            return callback.@org.gwtbootstrap3.extras.tagsinput.client.callback.TagClassCallback::getTagClass(Ljava/lang/Object;)(item);
+        }
+    }-*/;
+    
     public final native void setItemValue(String itemValue) /*-{
         this.itemValue = itemValue;
     }-*/;
 
+    public final native void setItemValue(final ItemValueCallback<T> callback) /*-{
+        this.itemValue = function(item) {
+            return callback.@org.gwtbootstrap3.extras.tagsinput.client.callback.ItemValueCallback::getItemValue(Ljava/lang/Object;)(item);
+        }
+    }-*/;
+    
     public final native void setItemText(String itemText) /*-{
         this.itemText = itemText;
+    }-*/;
+    
+    public final native void setItemText(final ItemTextCallback<T> callback) /*-{
+        this.itemText = function(item) {
+            return callback.@org.gwtbootstrap3.extras.tagsinput.client.callback.ItemTextCallback::getItemText(Ljava/lang/Object;)(item);
+        }
     }-*/;
 
     public final native void setConfirmKeys(JsArrayInteger keys) /*-{
@@ -83,5 +107,11 @@ public class TagsInputOptions extends JavaScriptObject {
     
     public final native void setCancelConfirmKeysOnEmpty(boolean cancelConfirmKeysOnEmpty) /*-{
         this.cancelConfirmKeysOnEmpty = cancelConfirmKeysOnEmpty;
+    }-*/;
+    
+    public final native void onTagExists(final OnTagExistsCallback<T> callback) /*-{
+        this.onTagExists = function(item, tag) {
+            callback.@org.gwtbootstrap3.extras.tagsinput.client.callback.OnTagExistsCallback::onTagExists(Ljava/lang/Object;Lcom/google/gwt/dom/client/Element;)(item, tag[0]);
+        }
     }-*/;
 }
