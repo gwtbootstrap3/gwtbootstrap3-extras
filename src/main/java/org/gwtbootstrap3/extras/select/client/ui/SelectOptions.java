@@ -36,7 +36,7 @@ class SelectOptions extends JavaScriptObject {
     private static final String DATA_PREFIX = "data-";
 
     // Select (<select data-xx="xx">) options
-    static final String ACTION_BOX = DATA_PREFIX + "action-box";
+    static final String ACTIONS_BOX = DATA_PREFIX + "actions-box";
     static final String DROP_AUTO = DATA_PREFIX + "dropup-auto";
     static final String HEADER = DATA_PREFIX + "header";
     static final String HIDE_DISABLED = DATA_PREFIX + "hide-disabled";
