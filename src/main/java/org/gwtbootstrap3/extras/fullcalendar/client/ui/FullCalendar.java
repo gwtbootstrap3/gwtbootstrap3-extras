@@ -412,11 +412,6 @@ public class FullCalendar extends FlowPanel implements HasLoadHandlers {
         $wnd.jQuery('#' + id).fullCalendar('option', 'aspectRatio', ratio);
     }-*/;
 
-    @Deprecated
-    public native void excecuteFunction(JavaScriptObject revertFunction)/*-{
-        revertFunction();
-    }-*/;
-
     /**
      * Useful for callback cancel/revert functions
      *
