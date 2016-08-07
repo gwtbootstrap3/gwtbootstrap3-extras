@@ -32,8 +32,10 @@ public interface SelectClientBundle extends ClientBundle {
     static final SelectClientBundle INSTANCE = GWT.create(SelectClientBundle.class);
 
     static final String VERSION = "1.10.0";
-    static final String SELECT_JS = "js/bootstrap-select-" + VERSION + ".min.cache.js";
     static final String LOCALE_DIR = "resource/js/locales.cache." + VERSION + "/";
+
+    @Source("resource/js/bootstrap-select-" + VERSION + ".min.cache.js")
+    TextResource select();
 
     @Source(LOCALE_DIR + "defaults-ar_AR.min.js")
     TextResource ar();

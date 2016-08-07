@@ -21,7 +21,6 @@ package org.gwtbootstrap3.extras.select.client;
  */
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.ScriptInjector;
 
 /**
@@ -31,7 +30,7 @@ public class SelectEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromUrl(GWT.getModuleBaseURL() + SelectClientBundle.SELECT_JS)
-            .setWindow(ScriptInjector.TOP_WINDOW).setRemoveTag(true).inject();
+        ScriptInjector.fromString(SelectClientBundle.INSTANCE.select().getText())
+            .setWindow(ScriptInjector.TOP_WINDOW).inject();
     }
 }
