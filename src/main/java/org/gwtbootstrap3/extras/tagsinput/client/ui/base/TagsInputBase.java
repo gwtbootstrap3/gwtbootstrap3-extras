@@ -68,8 +68,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * @author Marko Nikolić <marko.nikolic@iten.rs>
  */
 class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasChangeHandlers {
-    // TODO Add callbacks in options
-    // TODO Add onTagExists
     
     @SuppressWarnings("unchecked")
     private TagsInputOptions<T> options = TagsInputOptions.create();
@@ -302,10 +300,13 @@ class TagsInputBase<T> extends Widget implements HasAllTagsInputEvents<T>, HasCh
     
     protected static List<String> toMultiValue(JavaScriptObject js_multi_value) {
         List<String> retValue = new ArrayList<String>();
-        JsArrayString js_string_array = js_multi_value.cast();
         
-        for(int i=0; i<js_string_array.length(); i++) {
-            retValue.add(js_string_array.get(i));
+        if (js_multi_value != null) {
+            JsArrayString js_string_array = js_multi_value.cast();
+            
+            for(int i=0; i<js_string_array.length(); i++) {
+                retValue.add(js_string_array.get(i));
+            }
         }
         
         return retValue;
