@@ -30,7 +30,7 @@ import com.google.gwt.resources.client.TextResource;
 public interface SummernoteClientBundle extends ClientBundle {
 
     public static final SummernoteClientBundle INSTANCE = GWT.create(SummernoteClientBundle.class);
-    static final String VERSION = "0.8.1";
+    static final String VERSION = "0.8.2";
     static final String LOCALE_DIR = "resource/js/locales.cache." + VERSION + "/";
 
     @Source("resource/js/summernote-" + VERSION + ".min.cache.js")
@@ -69,8 +69,14 @@ public interface SummernoteClientBundle extends ClientBundle {
     @Source(LOCALE_DIR + "summernote-fr-FR.js")
     TextResource fr_FR();
 
+    @Source(LOCALE_DIR + "summernote-gl-ES.js")
+    TextResource gl_ES();
+
     @Source(LOCALE_DIR + "summernote-he-IL.js")
     TextResource he_IL();
+
+    @Source(LOCALE_DIR + "summernote-hr-HR.js")
+    TextResource hr_HR();
 
     @Source(LOCALE_DIR + "summernote-hu-HU.js")
     TextResource hu_HU();
@@ -89,6 +95,9 @@ public interface SummernoteClientBundle extends ClientBundle {
 
     @Source(LOCALE_DIR + "summernote-lt-LT.js")
     TextResource lt_LT();
+
+    @Source(LOCALE_DIR + "summernote-lt-LV.js")
+    TextResource lt_LV();
 
     @Source(LOCALE_DIR + "summernote-nb-NO.js")
     TextResource nb_NO();
