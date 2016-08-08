@@ -20,7 +20,7 @@ package org.gwtbootstrap3.extras.select.client.ui;
  * #L%
  */
 
-import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.ACTION_BOX;
+import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.ACTIONS_BOX;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.MAX_OPTIONS;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.MULTIPLE_SEPARATOR;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.NONE_SELECTED_TEXT;
@@ -65,9 +65,9 @@ public class MultipleSelect extends SelectBase<List<String>> {
      */
     public void setShowActionsBox(final boolean showActionsBox) {
         if (showActionsBox)
-            attrMixin.setAttribute(ACTION_BOX, Boolean.toString(true));
+            attrMixin.setAttribute(ACTIONS_BOX, Boolean.toString(true));
         else
-            attrMixin.removeAttribute(ACTION_BOX);
+            attrMixin.removeAttribute(ACTIONS_BOX);
     }
 
     /**
