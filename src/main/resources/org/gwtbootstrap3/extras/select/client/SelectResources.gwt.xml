@@ -25,5 +25,5 @@
         <include name="js/*.map"/>
     </public>
 
-    <stylesheet src="css/bootstrap-select-1.10.0.min.cache.css"/>
+    <stylesheet src="css/bootstrap-select-1.11.0.min.cache.css"/>
 </module>

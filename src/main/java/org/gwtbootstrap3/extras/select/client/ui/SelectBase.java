@@ -19,12 +19,14 @@ package org.gwtbootstrap3.extras.select.client.ui;
  * limitations under the License.
  * #L%
  */
-
-import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.DROP_AUTO;
+import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.DROPDOWN_ALIGN_RIGHT;
+import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.DROPUP_AUTO;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.HEADER;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.HIDE_DISABLED;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.LIVE_SEARCH;
+import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.LIVE_SEARCH_NORMALIZE;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.LIVE_SEARCH_PLACEHOLDER;
+import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.LIVE_SEARCH_STYLE;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.MOBILE;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.SELECT_ON_TAB;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.SHOW_CONTENT;
@@ -48,6 +50,8 @@ import org.gwtbootstrap3.client.ui.base.mixin.EnabledMixin;
 import org.gwtbootstrap3.client.ui.constants.ButtonSize;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.Styles;
+import org.gwtbootstrap3.extras.select.client.ui.constants.DropdownAlignRight;
+import org.gwtbootstrap3.extras.select.client.ui.constants.LiveSearchStyle;
 import org.gwtbootstrap3.extras.select.client.ui.constants.MenuSize;
 import org.gwtbootstrap3.extras.select.client.ui.constants.SelectStyles;
 import org.gwtbootstrap3.extras.select.client.ui.constants.SelectWidth;
@@ -119,7 +123,7 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
     /**
      * Initialize options
      */
-    private SelectOptions options = SelectOptions.newOptions();
+    protected SelectOptions options = SelectOptions.newOptions();
 
     protected SelectBase() {
         this.selectElement = Document.get().createSelectElement();
@@ -130,7 +134,7 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
 
     /**
      * Returns <code>true</code> if multiple selection is allowed.
-     * 
+     *
      * @return <code>true</code> if multiple selection is allowed
      */
     public abstract boolean isMultiple();
@@ -226,6 +230,21 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
     }
 
     /**
+     * Sets the drop-down menu right alignment.<br>
+     * <br>
+     * Defaults to {@link DropdownAlignRight#FALSE}.
+     *
+     * @param dropdownAlignRight
+     * @see DropdownAlignRight
+     */
+    public void setDropdownAlignRight(final DropdownAlignRight dropdownAlignRight) {
+        if (dropdownAlignRight != null)
+            attrMixin.setAttribute(DROPDOWN_ALIGN_RIGHT, dropdownAlignRight.getValue());
+        else
+            attrMixin.removeAttribute(DROPDOWN_ALIGN_RIGHT);
+    }
+
+    /**
      * Checks to see which has more room, above or below.
      * If the drop-up has enough room to fully open normally,
      * but there is more room above, the drop-up still opens
@@ -239,9 +258,9 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
      */
     public void setDropupAuto(final boolean dropupAuto) {
         if (!dropupAuto)
-            attrMixin.setAttribute(DROP_AUTO, Boolean.toString(false));
+            attrMixin.setAttribute(DROPUP_AUTO, Boolean.toString(false));
         else
-            attrMixin.removeAttribute(DROP_AUTO);
+            attrMixin.removeAttribute(DROPUP_AUTO);
     }
 
     /**
@@ -301,6 +320,36 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
             attrMixin.setAttribute(LIVE_SEARCH, Boolean.toString(true));
         else
             attrMixin.removeAttribute(LIVE_SEARCH);
+    }
+
+    /**
+     * Setting liveSearchNormalize to <code>true</code> allows for
+     * accent-insensitive searching.<br>
+     * <br>
+     * Defaults to <code>false</code>.
+     *
+     * @param liveSearchNormalize
+     */
+    public void setLiveSearchNormalize(final boolean liveSearchNormalize) {
+        if (liveSearchNormalize)
+            attrMixin.setAttribute(LIVE_SEARCH_NORMALIZE, Boolean.toString(true));
+        else
+            attrMixin.removeAttribute(LIVE_SEARCH_NORMALIZE);
+    }
+
+    /**
+     * Set live search style.<br>
+     * <br>
+     * Defaults to {@link LiveSearchStyle#CONTAINS}.
+     *
+     * @param liveSearchStyle
+     * @see LiveSearchStyle
+     */
+    public void setLiveSearchStyle(final LiveSearchStyle liveSearchStyle) {
+        if (liveSearchStyle != null)
+            attrMixin.setAttribute(LIVE_SEARCH_STYLE, liveSearchStyle.getValue());
+        else
+            attrMixin.removeAttribute(LIVE_SEARCH_STYLE);
     }
 
     /**

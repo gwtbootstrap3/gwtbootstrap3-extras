@@ -9,9 +9,9 @@ package org.gwtbootstrap3.extras.select.client.ui;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,12 +19,13 @@ package org.gwtbootstrap3.extras.select.client.ui;
  * limitations under the License.
  * #L%
  */
-
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.ACTIONS_BOX;
+import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.DESELECT_ALL_TEXT;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.MAX_OPTIONS;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.MULTIPLE_SEPARATOR;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.NONE_SELECTED_TEXT;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.SELECTED_TEXT_FORMAT;
+import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.SELECT_ALL_TEXT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,36 @@ public class MultipleSelect extends SelectBase<List<String>> {
     }
 
     /**
+     * The text on the button that deselects all options when
+     * <b>actionsBox</> is enabled.<br>
+     * <br>
+     * Defaults to <code>Deselect All</code>.
+     *
+     * @param deselectAllText
+     */
+    public void setDeselectAllText(final String deselectAllText) {
+        if (deselectAllText != null)
+            attrMixin.setAttribute(DESELECT_ALL_TEXT, deselectAllText);
+        else
+            attrMixin.removeAttribute(DESELECT_ALL_TEXT);
+    }
+
+    /**
+     * The text on the button that selects all options when
+     * <b>actionsBox</> is enabled.<br>
+     * <br>
+     * Defaults to <code>Select All</code>.
+     *
+     * @param selectAllText
+     */
+    public void setSelectAllText(final String selectAllText) {
+        if (selectAllText != null)
+            attrMixin.setAttribute(SELECT_ALL_TEXT, selectAllText);
+        else
+            attrMixin.removeAttribute(SELECT_ALL_TEXT);
+    }
+
+    /**
      * When set to a positive value and in a multi-select, the
      * number of selected options cannot exceed the given value.
      * When set to a strict negative value (less than zero), this
@@ -80,6 +111,18 @@ public class MultipleSelect extends SelectBase<List<String>> {
      */
     public void setMaxOptions(final int maxOptions) {
         attrMixin.setAttribute(MAX_OPTIONS, Integer.toString(maxOptions));
+    }
+
+    /**
+     * Sets the handler to get texts displayed when {@link SelectOptions#MAX_OPTIONS}
+     * is enabled and the maximum number of options within the entire select or an
+     * option group have been selected.
+     *
+     * @param handler
+     * @see #setMaxOptions(int)
+     */
+    public void setMaxOptionsTextHandler(final MaxOptionsTextHandler handler) {
+        options.setMaxOptionsTextHandler(handler);
     }
 
     /**
