@@ -92,7 +92,7 @@ class SelectOptions extends JavaScriptObject {
     }-*/;
 
     /**
-     * @see {@link SelectBase#setCoundSelectedTextHandler(CountSelectedTextHandler)}
+     * @see {@link SelectBase#setCountSelectedTextHandler(CountSelectedTextHandler)}
      */
     final native void setCountSelectedTextHandler(CountSelectedTextHandler handler) /*-{
         if (handler) {
