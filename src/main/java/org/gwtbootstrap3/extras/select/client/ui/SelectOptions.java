@@ -111,8 +111,8 @@ class SelectOptions extends JavaScriptObject {
         if (handler) {
             this.maxOptionsText = function(numAll, numGroup) {
                 return [
-                	handler.@org.gwtbootstrap3.extras.select.client.ui.MaxOptionsTextHandler::getMaxSelectOptionsText(I)(numAll),
-                	handler.@org.gwtbootstrap3.extras.select.client.ui.MaxOptionsTextHandler::getMaxGroupOptionsText(I)(numGroup)
+                    handler.@org.gwtbootstrap3.extras.select.client.ui.MaxOptionsTextHandler::getMaxSelectOptionsText(I)(numAll),
+                    handler.@org.gwtbootstrap3.extras.select.client.ui.MaxOptionsTextHandler::getMaxGroupOptionsText(I)(numGroup)
                 ];
             }
         } else if (this.maxOptionsText) {

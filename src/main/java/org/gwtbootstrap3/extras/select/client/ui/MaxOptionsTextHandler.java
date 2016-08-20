@@ -38,7 +38,7 @@ public interface MaxOptionsTextHandler {
      *
      * @param maxOptions maximum number of the select
      * @return the text displayed when the maximum number of
-     * 	   options within the select have been selected
+     *     options within the select have been selected
      */
     String getMaxSelectOptionsText(int maxSelectOptions);
 
