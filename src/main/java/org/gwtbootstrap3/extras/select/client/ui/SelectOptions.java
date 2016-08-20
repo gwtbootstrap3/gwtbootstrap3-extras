@@ -37,15 +37,20 @@ class SelectOptions extends JavaScriptObject {
 
     // Select (<select data-xx="xx">) options
     static final String ACTIONS_BOX = DATA_PREFIX + "actions-box";
-    static final String DROP_AUTO = DATA_PREFIX + "dropup-auto";
+    static final String DESELECT_ALL_TEXT = DATA_PREFIX + "deselect-all-text";
+    static final String DROPDOWN_ALIGN_RIGHT = DATA_PREFIX + "dropdown-align-right";
+    static final String DROPUP_AUTO = DATA_PREFIX + "dropup-auto";
     static final String HEADER = DATA_PREFIX + "header";
     static final String HIDE_DISABLED = DATA_PREFIX + "hide-disabled";
     static final String LIVE_SEARCH = DATA_PREFIX + "live-search";
+    static final String LIVE_SEARCH_NORMALIZE = DATA_PREFIX + "live-search-normalize";
     static final String LIVE_SEARCH_PLACEHOLDER = DATA_PREFIX + "live-search-placeholder";
+    static final String LIVE_SEARCH_STYLE = DATA_PREFIX + "live-search-style";
     static final String MAX_OPTIONS = DATA_PREFIX + "max-options";
     static final String MOBILE = DATA_PREFIX + "mobile";
     static final String MULTIPLE_SEPARATOR = DATA_PREFIX + "multiple-separator";
     static final String NONE_SELECTED_TEXT = DATA_PREFIX + "none-selected-text";
+    static final String SELECT_ALL_TEXT = DATA_PREFIX + "select-all-text";
     static final String SELECTED_TEXT_FORMAT = DATA_PREFIX + "selected-text-format";
     static final String SELECT_ON_TAB = DATA_PREFIX + "select-on-tab";
     static final String SHOW_CONTENT = DATA_PREFIX + "show-content";
@@ -99,4 +104,19 @@ class SelectOptions extends JavaScriptObject {
         }
     }-*/;
 
+    /**
+     * @see {@link MultipleSelect#setMaxOptionsTextHandler(MaxOptionsTextHandler)}
+     */
+    final native void setMaxOptionsTextHandler(MaxOptionsTextHandler handler) /*-{
+        if (handler) {
+            this.maxOptionsText = function(numAll, numGroup) {
+                return [
+                    handler.@org.gwtbootstrap3.extras.select.client.ui.MaxOptionsTextHandler::getMaxSelectOptionsText(I)(numAll),
+                    handler.@org.gwtbootstrap3.extras.select.client.ui.MaxOptionsTextHandler::getMaxGroupOptionsText(I)(numGroup)
+                ];
+            }
+        } else if (this.maxOptionsText) {
+            delete this.maxOptionsText;
+        }
+    }-*/;
 }
