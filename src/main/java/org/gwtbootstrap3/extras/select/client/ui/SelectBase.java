@@ -225,7 +225,7 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
      *
      * @param handler
      */
-    public void setCoundSelectedTextHandler(final CountSelectedTextHandler handler) {
+    public void setCountSelectedTextHandler(final CountSelectedTextHandler handler) {
         options.setCountSelectedTextHandler(handler);
     }
 
