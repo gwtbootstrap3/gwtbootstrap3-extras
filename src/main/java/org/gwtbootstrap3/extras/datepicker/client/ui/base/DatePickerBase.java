@@ -341,7 +341,6 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     @Override
     public void onChangeDate(final Event e) {
         fireEvent(new ChangeDateEvent(e));
-        ValueChangeEvent.fire(DatePickerBase.this, getValue());
     }
 
     /** {@inheritDoc} */
