@@ -563,7 +563,6 @@ public abstract class SliderBase<T> extends Widget implements
      */
     public void refresh() {
         if (isAttached()) {
-            refreshWorkaround(getElement());
             sliderCommand(getElement(), SliderCommand.REFEESH);
         }
     }
@@ -877,23 +876,6 @@ public abstract class SliderBase<T> extends Widget implements
 
     private native boolean isEnabled(Element e) /*-{
         return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::IS_ENABLED);
-    }-*/;
-
-    /**
-     * FIXME: This is a workaround for the refresh command, since it is buggy in
-     * the current version (7.1.1). After executing this command, the slider
-     * becomes consistently a range slider with 2 handles. This should be
-     * removed once the bug is fixed in a future version.
-     *
-     * @see https://github.com/seiyria/bootstrap-slider/issues/306
-     *
-     * @param e
-     */
-    private native void refreshWorkaround(Element e) /*-{
-        var value = $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
-        var option = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::VALUE;
-        var attr = option.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::getName()();
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
     }-*/;
 
     private native void sliderCommand(Element e, String cmd) /*-{
