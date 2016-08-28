@@ -59,12 +59,19 @@ public class Slider extends SliderBase<Double> {
     @Override
     protected native void setValue(Element e, Double value) /*-{
         var doubleValue = value.@java.lang.Double::doubleValue()();
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_VALUE, doubleValue);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_VALUE, doubleValue);
+        else
+            $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_VALUE, doubleValue);
     }-*/;
 
     @Override
     protected native Double getValue(Element e) /*-{
-        var value = $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
+        var value;
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::isSliderNamespaceAvailable()())
+            value = $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
+        else
+            value = $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
         return @java.lang.Double::new(D)(value);
     }-*/;
 
@@ -81,10 +88,14 @@ public class Slider extends SliderBase<Double> {
     protected native void setFormatter(Element e) /*-{
         var slider = this;
         var attr = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::FORMATTER;
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, function(value) {
+        var formatter = function(value) {
             var val = @java.lang.Double::new(D)(value);
             return slider.@org.gwtbootstrap3.extras.slider.client.ui.Slider::formatTooltip(Ljava/lang/Double;)(val);
-        });
+        };
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.Slider::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, formatter);
+        else
+            $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, formatter);
     }-*/;
 
     @Override

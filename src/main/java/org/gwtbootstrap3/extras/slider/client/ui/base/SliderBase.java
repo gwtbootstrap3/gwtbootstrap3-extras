@@ -78,6 +78,7 @@ public abstract class SliderBase<T> extends Widget implements
 
     private FormatterCallback<T> formatterCallback;
     private LeafValueEditor<T> editor;
+    private boolean sliderNamespaceAvailable = true;
 
     private final AttributeMixin<SliderBase<T>> attributeMixin = new AttributeMixin<SliderBase<T>>(this);
 
@@ -92,6 +93,7 @@ public abstract class SliderBase<T> extends Widget implements
         if (formatterCallback != null) {
             setFormatterOption(options);
         }
+        sliderNamespaceAvailable = isSliderNamespaceAvailable();
         initSlider(getElement(), options);
         bindSliderEvents(getElement());
     }
@@ -765,8 +767,19 @@ public abstract class SliderBase<T> extends Widget implements
         return list;
     }
 
+    protected boolean isSliderNamespaceAvailable() {
+        return sliderNamespaceAvailable;
+    }
+
+    private native boolean isSliderNamespaceBound() /*-{
+        return ($wnd.jQuery.fn.slider === 'undefined');
+    }-*/;
+
     private native void initSlider(Element e, JavaScriptObject options) /*-{
-        $wnd.jQuery(e).slider(options);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(options);
+        else
+            $wnd.jQuery(e).bootstrapSlider(options);
     }-*/;
 
     /**
@@ -875,55 +888,87 @@ public abstract class SliderBase<T> extends Widget implements
     }-*/;
 
     private native boolean isEnabled(Element e) /*-{
-        return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::IS_ENABLED);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::IS_ENABLED);
+        return $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::IS_ENABLED);
     }-*/;
 
     private native void sliderCommand(Element e, String cmd) /*-{
-        $wnd.jQuery(e).slider(cmd);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(cmd);
+        else
+            $wnd.jQuery(e).bootstrapSlider(cmd);
     }-*/;
 
     private native Element getElement(Element e) /*-{
-        return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ELEMENT);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ELEMENT);
+        return $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ELEMENT);
     }-*/;
 
     private native void setAttribute(Element e, String attr, String value) /*-{
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        else
+            $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
     }-*/;
 
     private native void setAttribute(Element e, String attr, boolean value) /*-{
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        else
+            $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
     }-*/;
 
     private native void setAttribute(Element e, String attr, double value) /*-{
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        else
+            $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
     }-*/;
 
     private native void setAttribute(Element e, String attr, JsArrayNumber value) /*-{
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        else
+            $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
     }-*/;
 
     private native void setAttribute(Element e, String attr, JsArrayString value) /*-{
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
+        else
+            $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, value);
     }-*/;
 
     private native String getStringAttribute(Element e, String attr) /*-{
-        return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        return $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
     }-*/;
 
     private native boolean getBooleanAttribute(Element e, String attr) /*-{
-        return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        return $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
     }-*/;
 
     private native double getDoubleAttribute(Element e, String attr) /*-{
-        return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        return $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
     }-*/;
 
     private native JsArrayNumber getNumberArrayAttribute(Element e, String attr) /*-{
-        return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        return $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
     }-*/;
 
     private native JsArrayString getStringArrayAttribute(Element e, String attr) /*-{
-        return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.base.SliderBase::isSliderNamespaceAvailable()())
+            return $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
+        return $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_ATTRIBUTE, attr);
     }-*/;
 
 }
