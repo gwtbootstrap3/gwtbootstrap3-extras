@@ -72,12 +72,19 @@ public class RangeSlider extends SliderBase<Range> {
     @Override
     protected native void setValue(Element e, Range value) /*-{
         var range = value.@org.gwtbootstrap3.extras.slider.client.ui.Range::toJsArray()();
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_VALUE, range);
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.RangeSlider::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_VALUE, range);
+        else
+            $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_VALUE, range);
     }-*/;
 
     @Override
     protected native Range getValue(Element e) /*-{
-        var range = $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
+        var range;
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.RangeSlider::isSliderNamespaceAvailable()())
+            range = $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
+        else
+            range = $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::GET_VALUE);
         return @org.gwtbootstrap3.extras.slider.client.ui.Range::new(Lcom/google/gwt/core/client/JsArrayNumber;)(range);
     }-*/;
 
@@ -94,10 +101,14 @@ public class RangeSlider extends SliderBase<Range> {
     protected native void setFormatter(Element e) /*-{
         var slider = this;
         var attr = @org.gwtbootstrap3.extras.slider.client.ui.base.SliderOption::FORMATTER;
-        $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, function(value) {
+        var formatter = function(value) {
             var range = @org.gwtbootstrap3.extras.slider.client.ui.Range::new(Lcom/google/gwt/core/client/JsArrayNumber;)(value);
             return slider.@org.gwtbootstrap3.extras.slider.client.ui.RangeSlider::formatTooltip(Lorg/gwtbootstrap3/extras/slider/client/ui/Range;)(range);
-        });
+        };
+        if (this.@org.gwtbootstrap3.extras.slider.client.ui.RangeSlider::isSliderNamespaceAvailable()())
+            $wnd.jQuery(e).slider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, formatter);
+        else
+            $wnd.jQuery(e).bootstrapSlider(@org.gwtbootstrap3.extras.slider.client.ui.base.SliderCommand::SET_ATTRIBUTE, attr, formatter);
     }-*/;
 
     @Override
