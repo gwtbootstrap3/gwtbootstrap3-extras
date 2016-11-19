@@ -19,6 +19,7 @@ package org.gwtbootstrap3.extras.select.client.ui;
  * limitations under the License.
  * #L%
  */
+import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.CONTAINER;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.DROPDOWN_ALIGN_RIGHT;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.DROPUP_AUTO;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.HEADER;
@@ -216,6 +217,18 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
      */
     public SelectLanguage getLanguage() {
         return language;
+    }
+
+    /**
+     * Set a container to which the select will be appended
+     *
+     * @param container specific element or selector, e.g., "body", ".my-container"
+     */
+    public void setContainer(final String container) {
+        if (container != null)
+            attrMixin.setAttribute(CONTAINER, container);
+        else
+            attrMixin.removeAttribute(CONTAINER);
     }
 
     /**
