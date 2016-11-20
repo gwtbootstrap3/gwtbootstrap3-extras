@@ -47,6 +47,7 @@ import org.gwtbootstrap3.client.ui.form.validator.HasValidators;
 import org.gwtbootstrap3.client.ui.form.validator.ValidationChangedEvent.ValidationChangedHandler;
 import org.gwtbootstrap3.client.ui.form.validator.Validator;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerDayOfWeek;
+import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerFormatViewType;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerLanguage;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerPosition;
 import org.gwtbootstrap3.extras.datetimepicker.client.ui.base.constants.DateTimePickerView;
@@ -154,6 +155,7 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasReadOnl
      * DEFAULT values
      */
     private String format = "mm/dd/yyyy hh:ii";
+    private DateTimePickerFormatViewType formatViewType = DateTimePickerFormatViewType.DATE_TIME;
     private DateTimePickerDayOfWeek weekStart = DateTimePickerDayOfWeek.SUNDAY;
     private DateTimePickerDayOfWeek[] daysOfWeekDisabled = {};
     private boolean autoClose = false;
@@ -598,6 +600,17 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasReadOnl
         this.dateTimeFormat = DateTimeFormat.getFormat(fb.toString());
     }
 
+    /**
+     * Sets the format view type.
+     * 
+     * @param formatViewType
+     * @see DateTimePickerFormatViewType
+     */
+    public void setFormatViewType(DateTimePickerFormatViewType formatViewType) {
+        if (formatViewType != null)
+            this.formatViewType = formatViewType;
+    }
+
     /** {@inheritDoc} */
     @Override
     public Date getValue() {
@@ -662,8 +675,8 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasReadOnl
         // If configuring not for the first time, datetimepicker must be removed first.
         this.remove(getElement());
 
-        configure(getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
-                startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
+        configure(getElement(), format, formatViewType.getValue(), weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled),
+                autoClose, startView.getValue(), minView.getValue(), maxView.getValue(), showTodayButton, highlightToday,
                 keyboardNavigation, forceParse, minuteStep, viewSelect.getValue(), showMeridian, language.getCode(), position.getPosition());
     }
 
@@ -703,13 +716,14 @@ public class DateTimePickerBase extends Widget implements HasEnabled, HasReadOnl
         $wnd.jQuery(e).datetimepicker('setDaysOfWeekDisabled', daysOfWeekDisabled);
     }-*/;
 
-    protected native void configure(Element e, String format, int weekStart, String daysOfWeekDisabled,
-         boolean autoClose, int startView, int minView, int maxView, boolean todayBtn, boolean highlightToday,
-         boolean keyboardNavigation, boolean forceParse, int minuteStep, int viewSelect, boolean showMeridian,
-         String language, String position) /*-{
+    protected native void configure(Element e, String format, String formatViewType, int weekStart,
+            String daysOfWeekDisabled, boolean autoClose, int startView, int minView, int maxView, boolean todayBtn, 
+            boolean highlightToday, boolean keyboardNavigation, boolean forceParse, int minuteStep, int viewSelect,
+            boolean showMeridian, String language, String position) /*-{
         var that = this;
         $wnd.jQuery(e).datetimepicker({
             format: format,
+            formatViewType: formatViewType,
             language: language,
             weekStart: weekStart,
             daysOfWeekDisabled: daysOfWeekDisabled,
