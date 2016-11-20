@@ -36,6 +36,7 @@ import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.SHOW_SUBTE
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.SIZE;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.STYLE;
 import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.WIDTH;
+import static org.gwtbootstrap3.extras.select.client.ui.SelectOptions.WINDOW_PADDING;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,6 +73,9 @@ import org.gwtbootstrap3.extras.select.client.ui.event.ShowHandler;
 import org.gwtbootstrap3.extras.select.client.ui.event.ShownEvent;
 import org.gwtbootstrap3.extras.select.client.ui.event.ShownHandler;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayNumber;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -220,7 +224,7 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
     }
 
     /**
-     * Set a container to which the select will be appended
+     * Sets a container to which the select will be appended.
      *
      * @param container specific element or selector, e.g., "body", ".my-container"
      */
@@ -604,6 +608,37 @@ public abstract class SelectBase<T> extends ComplexWidget implements HasValue<T>
             attrMixin.setAttribute(WIDTH, cssWidth);
         else
             attrMixin.removeAttribute(WIDTH);
+    }
+
+    /**
+     * Sets the window padding to all sides. This is useful in cases where
+     * the window has areas that the drop-down menu should not cover - for
+     * instance a fixed header.
+     *
+     * @param padding
+     */
+    public void setWindowPadding(final int padding) {
+        attrMixin.setAttribute(WINDOW_PADDING, Integer.toString(padding));
+    }
+
+    /**
+     * Sets the window padding to top, right, bottom, and right sides. This
+     * is useful in cases where the window has areas that the drop-down menu
+     * should not cover - for instance a fixed header.
+     *
+     * @param top
+     * @param right
+     * @param bottom
+     * @param left
+     */
+    public void setWindowPaddingTopRightBottomLeft(final int top, final int right,
+            final int bottom, final int left) {
+        JsArrayNumber array = JavaScriptObject.createArray(4).cast();
+        array.push(top);
+        array.push(right);
+        array.push(bottom);
+        array.push(left);
+        attrMixin.setAttribute(WINDOW_PADDING, JsonUtils.stringify(array));
     }
 
     /**

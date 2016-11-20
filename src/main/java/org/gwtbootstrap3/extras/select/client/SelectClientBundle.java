@@ -31,7 +31,7 @@ public interface SelectClientBundle extends ClientBundle {
 
     static final SelectClientBundle INSTANCE = GWT.create(SelectClientBundle.class);
 
-    static final String VERSION = "1.11.0";
+    static final String VERSION = "1.12.0";
     static final String I18N_DIR = "resource/js/i18n.cache." + VERSION + "/";
 
     @Source("resource/js/bootstrap-select-" + VERSION + ".min.cache.js")
@@ -59,7 +59,10 @@ public interface SelectClientBundle extends ClientBundle {
     TextResource en();
 
     @Source(I18N_DIR + "defaults-es_CL.min.js")
-    TextResource es();
+    TextResource es_CL();
+
+    @Source(I18N_DIR + "defaults-es_ES.min.js")
+    TextResource es_ES();
 
     @Source(I18N_DIR + "defaults-eu.min.js")
     TextResource eu();
