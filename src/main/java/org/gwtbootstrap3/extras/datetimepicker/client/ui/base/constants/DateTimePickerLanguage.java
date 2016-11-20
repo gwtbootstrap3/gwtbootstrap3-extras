@@ -28,7 +28,9 @@ import org.gwtbootstrap3.extras.datetimepicker.client.DateTimePickerClientBundle
  */
 public enum DateTimePickerLanguage {
     AR("ar", DateTimePickerClientBundle.INSTANCE.ar()),
+    AZ("az", DateTimePickerClientBundle.INSTANCE.az()),
     BG("bg", DateTimePickerClientBundle.INSTANCE.bg()),
+    BN("bn", DateTimePickerClientBundle.INSTANCE.bn()),
     CA("ca", DateTimePickerClientBundle.INSTANCE.ca()),
     CS("cs", DateTimePickerClientBundle.INSTANCE.cs()),
     DA("da", DateTimePickerClientBundle.INSTANCE.da()),
