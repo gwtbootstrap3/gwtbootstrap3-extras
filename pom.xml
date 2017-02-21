@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>gwtbootstrap3-extras</artifactId>
-  <version>0.9.4</version>
+  <version>1.0-SNAPSHOT</version>
     <name>GwtBootstrap3 Extras</name>
     <description>Extra, third-party widgets/components for GwtBootstrap3</description>
     <url>http://gwtbootstrap3.org</url>
@@ -18,7 +18,7 @@
         <connection>scm:git:git@github.com:gwtbootstrap3/gwtbootstrap3-extras.git</connection>
         <developerConnection>scm:git:git@github.com:gwtbootstrap3/gwtbootstrap3-extras.git</developerConnection>
         <url>git@github.com:gwtbootstrap3/gwtbootstrap3-extras.git</url>
-      <tag>0.9.4</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <licenses>
