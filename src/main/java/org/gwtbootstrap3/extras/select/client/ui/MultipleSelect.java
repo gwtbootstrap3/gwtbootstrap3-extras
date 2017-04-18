@@ -204,6 +204,16 @@ public class MultipleSelect extends SelectBase<List<String>> {
         return allSelected;
     }
 
+    private List<Option> getAllSelectedOptions() {
+        final List<Option> allSelectedOptions = new ArrayList<>(0);
+        for (Entry<OptionElement, Option> entry : itemMap.entrySet()) {
+            Option opt = entry.getValue();
+            if (opt.isSelected())
+                allSelectedOptions.add(opt);
+        }
+        return allSelectedOptions;
+    }
+
     @Override
     protected void setSelectedValue(List<String> value) {
         if (isAttached()) {
