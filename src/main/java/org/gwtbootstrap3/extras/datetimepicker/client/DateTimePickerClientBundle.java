@@ -31,7 +31,7 @@ public interface DateTimePickerClientBundle extends ClientBundle {
 
     static final DateTimePickerClientBundle INSTANCE = GWT.create(DateTimePickerClientBundle.class);
 
-    static final String VERSION = "2.3.11";
+    static final String VERSION = "2.4.4";
     static final String I18N_DIR = "resource/js/locales-" + VERSION + "/";
 
     @Source("resource/js/bootstrap-datetimepicker-" + VERSION + ".min.cache.js")
