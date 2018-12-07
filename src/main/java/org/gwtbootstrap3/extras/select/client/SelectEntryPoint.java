@@ -28,9 +28,25 @@ import com.google.gwt.core.client.ScriptInjector;
  */
 public class SelectEntryPoint implements EntryPoint {
 
+    //modified DMR/germany
     @Override
     public void onModuleLoad() {
-        ScriptInjector.fromString(SelectClientBundle.INSTANCE.select().getText())
-            .setWindow(ScriptInjector.TOP_WINDOW).inject();
+        //set a own flag
+        //we check if this code is allready loaded for the selector
+        if (getProp("booleanKey")!=true) {
+            ScriptInjector.fromString(SelectClientBundle.INSTANCE.select().getText())
+                    .setWindow(ScriptInjector.TOP_WINDOW).inject();
+        }
+        boolean moduleLoad =true;
+        setProp("booleanKey",moduleLoad);
     }
+
+    //JSNI
+    private native void setProp(String key, boolean moduleLoad) /*-{
+        $wnd.key = moduleLoad;
+    }-*/;
+    private native boolean getProp(String key) /*-{
+        return $wnd.key;
+    }-*/;
+
 }
