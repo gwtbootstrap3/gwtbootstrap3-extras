@@ -61,6 +61,7 @@ import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.HasLanguage;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.HasMinView;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.HasPosition;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.HasShowTodayButton;
+import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.HasShowClearButton;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.HasStartDate;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.HasStartView;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.HasViewSelect;
@@ -99,7 +100,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResponsiveness, HasVisibility, HasPlaceholder,
         HasAutoClose, HasDaysOfWeekDisabled, HasEndDate, HasForceParse, HasFormat, HasHighlightToday, HasKeyboardNavigation,
-        HasMinView, HasShowTodayButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart, HasDateTimePickerHandlers,
+        HasMinView, HasShowTodayButton, HasShowClearButton, HasStartDate, HasStartView, HasViewSelect, HasWeekStart, HasDateTimePickerHandlers,
         HasLanguage, HasName, HasValue<Date>, HasPosition, LeafValueEditor<Date>, HasEditorErrors<Date>, HasErrorHandler,
         HasValidators<Date>, HasBlankValidator<Date> {
 
@@ -154,6 +155,8 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     private DatePickerMinView minView = DatePickerMinView.DAY;
 
     private boolean showTodayButton = false;
+    private boolean showClearButton = false;
+
     private boolean highlightToday = false;
     private boolean keyboardNavigation = true;
     private boolean forceParse = true;
@@ -448,6 +451,12 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
 
     /** {@inheritDoc} */
     @Override
+    public void setShowClearButton(boolean showClearbutton) {
+        this.showClearButton = showClearbutton;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public void setStartDate(final Date startDate) {
         // Has to be in the format DD-MM-YYYY
         setStartDate(startEndDateFormat.format(startDate));
@@ -649,7 +658,7 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
         this.remove(w.getElement());
 
         configure(w.getElement(), container.getElement(), format, weekStart.getValue(), toDaysOfWeekDisabledString(daysOfWeekDisabled), autoClose,
-                startView.getValue(), minView.getValue(), showTodayButton, highlightToday, keyboardNavigation, forceParse, viewSelect.getValue(),
+                startView.getValue(), minView.getValue(), showTodayButton, showClearButton, highlightToday, keyboardNavigation, forceParse, viewSelect.getValue(),
                 language.getCode(), position.getPosition());
     }
 
@@ -696,7 +705,7 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
     }-*/;
 
     protected native void configure(Element e, Element p, String format, int weekStart, String daysOfWeekDisabled, boolean autoClose, int startView,
-                                    int minViewMode, boolean todayBtn, boolean highlightToday, boolean keyboardNavigation, boolean forceParse, int viewSelect, String language,
+                                    int minViewMode, boolean todayBtn, boolean clearBtn, boolean highlightToday, boolean keyboardNavigation, boolean forceParse, int viewSelect, String language,
                                     String orientation) /*-{
 
         if (todayBtn) {
@@ -713,6 +722,7 @@ public class DatePickerBase extends Widget implements HasEnabled, HasId, HasResp
             startView: startView,
             minViewMode: minViewMode,
             todayBtn: todayBtn,
+            clearBtn: clearBtn,
             todayHighlight: highlightToday,
             keyboardNavigation: keyboardNavigation,
             forceParse: forceParse,
