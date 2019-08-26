@@ -1,4 +1,4 @@
-#GwtBootstrap3-Extras [![Build Status](https://travis-ci.org/gwtbootstrap3/gwtbootstrap3-extras.svg?branch=master)](https://travis-ci.org/gwtbootstrap3/gwtbootstrap3-extras) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.gwtbootstrap3/gwtbootstrap3-extras/badge.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/org.gwtbootstrap3/gwtbootstrap3-extras/)
+# GwtBootstrap3-Extras [![Build Status](https://travis-ci.org/gwtbootstrap3/gwtbootstrap3-extras.svg?branch=master)](https://travis-ci.org/gwtbootstrap3/gwtbootstrap3-extras) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.gwtbootstrap3/gwtbootstrap3-extras/badge.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/org.gwtbootstrap3/gwtbootstrap3-extras/)
 
 ## Note: This project is inactive.
 
