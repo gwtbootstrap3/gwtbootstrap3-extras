@@ -2,9 +2,11 @@
 
 ## Note: This project is inactive.
 
+=======
+
 GWTBootstrap3-Extras is a collection of wrappers based on the [GwtBootstrap3](https://github.com/gwtbootstrap3/gwtbootstrap3) for 3rd party extensions of [Twitter Bootstrap](http://getbootstrap.com/), which helps you develop responsive, mobile first HTML, CSS, and JS projects on the web using Java and Google Web Toolkit (GWT). 
 
-###Add GWTBootstrap3-Extras to your project
+### Add GWTBootstrap3-Extras to your project
 You can easily add GWTBootstrap3-Extras to your project by including the library as a Maven dependency.
 
 ```xml
