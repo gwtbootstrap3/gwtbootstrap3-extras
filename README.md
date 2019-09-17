@@ -17,16 +17,11 @@ You can easily add GWTBootstrap3-Extras to your project by including the library
     <scope>provided</scope>
 </dependency>
 ```
-### Current Release
-* 0.9.3 - Released on 24 February 2016. 
-  * Based on GwtBootstrap v0.9.3
-* [Demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/) - The GWTBootstrap3 0.9.3 Demo.
-* [API Docs](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/extras-apidocs) - The GWTBootstrap3-Extras 0.9.3 API Javadoc.
-
-### Current Snapshot
-* 1.0-SNAPSHOT
-* [Snapshot Demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/snapshot) - GWTBootstrap3 v1.0-SNAPSHOT Demo. (Updated after every commit)
-* [API Docs](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/snapshot/extras-apidocs) - GWTBootstrap3-Extras v1.0-SNAPSHOT Javadoc. (Updated after every commit)
+### Final Release
+* 1.0.0 - Released on 24 February 2016. 
+  * Based on GwtBootstrap3 v1.0.0
+* [Demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/) - The GWTBootstrap3 1.0.0 Demo.
+* [API Docs](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/extras-apidocs) - The GWTBootstrap3-Extras 1.0.0 API Javadoc.
 
 ### Resources
 * [Project Wiki](https://github.com/gwtbootstrap3/gwtbootstrap3-extras/wiki) - Help with getting started and other useful project help.
