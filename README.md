@@ -18,7 +18,7 @@ You can easily add GWTBootstrap3-Extras to your project by including the library
 </dependency>
 ```
 ### Final Release
-* 1.0.0 - Released on 24 February 2016. 
+* 1.0.0 - Released on 19 September 2019. 
   * Based on GwtBootstrap3 v1.0.0
 * [Demo](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/) - The GWTBootstrap3 1.0.0 Demo.
 * [API Docs](http://gwtbootstrap3.github.io/gwtbootstrap3-demo/extras-apidocs) - The GWTBootstrap3-Extras 1.0.0 API Javadoc.
