@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.gwtbootstrap3</groupId>
         <artifactId>gwtbootstrap3-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
     <artifactId>gwtbootstrap3-extras</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>GwtBootstrap3 Extras</name>
     <description>Extra, third-party widgets/components for GwtBootstrap3</description>
     <url>http://gwtbootstrap3.org</url>
